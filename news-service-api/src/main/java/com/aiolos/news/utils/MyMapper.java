@@ -1,0 +1,11 @@
+package com.aiolos.news.utils;
+
+import tk.mybatis.mapper.common.Mapper;
+import tk.mybatis.mapper.common.MySqlMapper;
+
+/**
+ * @author Aiolos
+ * @date 2020/9/24 5:12 下午
+ */
+public interface MyMapper<T> extends Mapper<T>, MySqlMapper<T> {
+}

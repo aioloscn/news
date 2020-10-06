@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+    <!-- 引入配置文件 -->
+    <properties resource="jdbc.properties"/>
+
+<!--    <classPathEntry location="/Users/Aiolos/.m2/repository/mysql/mysql-connector-java/8.0.19/mysql-connection-java-8.0.19.jar"/>-->
+
+    <context id="DB2Tables" targetRuntime="com.aiolos.news.utils.TkMyBatis3Impl" defaultModelType="flat">
+        <!-- 生成的 Java 文件的编码 -->
+        <property name="javaFileEncoding" value="UTF-8"/>
+        <!-- 格式化 Java 代码 -->
+        <property name="javaFormatter" value="org.mybatis.generator.api.dom.DefaultJavaFormatter"/>
+        <!-- 格式化 XML 代码 -->
+        <property name="xmlFormatter" value="org.mybatis.generator.api.dom.DefaultXmlFormatter"/>
+
+        <!-- 通用mapper所在目录，tk主要用在TkMyBatis3Impl将默认的mapper后缀改成dao -->
+        <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+            <!-- 这里一定要是mappers，不然会提示缺少必要的mappers属性 -->
+            <property name="mappers" value="com.aiolos.news.utils.MyMapper"/>
+        </plugin>
+
+        <!-- 自定义注释生成器 -->
+        <commentGenerator type="com.aiolos.news.utils.MyCommentGenerator">
+            <property name="author" value="mdh"/>
+            <property name="dateFormat" value="yyyy/MM/dd"/>
+            <property name="suppressAllComments" value="false"/>
+        </commentGenerator>
+
+        <jdbcConnection driverClass="${driverClassName}"
+                        connectionURL="${url}"
+                        userId="${username}"
+                        password="${password}">
+        </jdbcConnection>
+
+        <!-- 对应生成的pojo所在包 -->
+        <javaModelGenerator targetPackage="com.aiolos.news.pojo" targetProject="mybatis-generator-database/src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <!-- 对应生成的mapper所在目录 -->
+        <sqlMapGenerator targetPackage="mapper" targetProject="mybatis-generator-database/src/main/resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <!-- 配置mapper对应的java映射 -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.aiolos.news.dao" targetProject="mybatis-generator-database/src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <!-- 数据库表 -->
+        <table tableName="admin_user" domainObjectName="AdminUser" mapperName="{0}Dao" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="id" sqlStatement="Mysql" />
+        </table>
+        <table tableName="app_user" domainObjectName="AppUser" mapperName="{0}Dao" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="id" sqlStatement="Mysql" />
+        </table>
+        <table tableName="article" domainObjectName="Article" mapperName="{0}Dao" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="id" sqlStatement="Mysql" />
+        </table>
+        <table tableName="category" domainObjectName="Category" mapperName="{0}Dao" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="id" sqlStatement="Mysql" />
+        </table>
+        <table tableName="comments" domainObjectName="Comments" mapperName="{0}Dao" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="id" sqlStatement="Mysql" />
+        </table>
+        <table tableName="fans" domainObjectName="Fans" mapperName="{0}Dao" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="id" sqlStatement="Mysql" />
+        </table>
+    </context>
+</generatorConfiguration>

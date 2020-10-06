@@ -1,0 +1,23 @@
+server:
+  tomcat:
+    uri-encoding: UTF-8
+    max-swallow-size: -1
+spring:
+  application:
+    name: news-user
+  profiles:
+    active: dev
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+mybatis:
+  type-aliases-package: com.aiolos.news.pojo
+  mapper-locations: classpath:mapper/*.xml
+mapper:
+  mappers: com.aiolos.news.utils.MyMapper
+  not-empty: false        # 在进行数据库操作的时候，判断表达式 username != null, 是否追加 username != ''
+  identity: MYSQL
+# 分页插件配置
+pagehelper:
+  helper-dialect: mysql
+  support-methods-arguments: true
