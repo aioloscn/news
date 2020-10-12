@@ -1,5 +1,7 @@
 package com.aiolos.news.common;
 
+import com.aiolos.news.common.exception.ErrorEnum;
+
 import java.io.Serializable;
 
 /**
@@ -19,9 +21,7 @@ public class CommonResponse<T> implements Serializable {
     // 响应中的数据
     private T data;
 
-    private CommonResponse() {
-
-    }
+    private CommonResponse() {}
 
     private CommonResponse(String msg) {
         this.code = 200;
@@ -52,26 +52,57 @@ public class CommonResponse<T> implements Serializable {
         return new CommonResponse(msg, data);
     }
 
-    public static CommonResponse error(String msg) {
+    public static CommonResponse error(Integer errCode, String errMsg) {
         CommonResponse res = new CommonResponse();
-        res.code = 500;
-        res.msg = msg;
+        res.code = errCode;
+        res.msg = errMsg;
         return res;
     }
 
-    public static CommonResponse error(String msg, Object data) {
+    public static CommonResponse error(String errMsg, Object data) {
         CommonResponse res = new CommonResponse();
         res.code = 500;
-        res.msg = msg;
+        res.msg = errMsg;
         res.data = data;
         return res;
     }
 
-    public static CommonResponse error(Integer code, String msg, Object data) {
+    public static CommonResponse error(Integer errCode, String errMsg, Object data) {
         CommonResponse res = new CommonResponse();
-        res.code = code;
-        res.msg = msg;
+        res.code = errCode;
+        res.msg = errMsg;
         res.data = data;
         return res;
+    }
+
+    public static CommonResponse error(ErrorEnum errorEnum) {
+        CommonResponse res = new CommonResponse();
+        res.code = errorEnum.getErrCode();
+        res.msg = errorEnum.getErrMsg();
+        return res;
+    }
+
+    public Integer getCode() {
+        return code;
+    }
+
+    public void setCode(Integer code) {
+        this.code = code;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+
+    public T getData() {
+        return data;
+    }
+
+    public void setData(T data) {
+        this.data = data;
     }
 }

@@ -1,4 +1,4 @@
-package com.aiolos.news.common;
+package com.aiolos.news.common.exception;
 
 /**
  *

@@ -33,8 +33,13 @@ public class PassportInterceptor implements HandlerInterceptor {
 
         // 获得用户IP
         String userIp = IPUtils.getRequestIp(request);
-        redis.keyIsExist(MOBILE_SMSCODE + ":" + userIp);
-        return false;
+
+        // true: 用户60秒内发送过请求
+        boolean keyIsExist = redis.keyIsExist(MOBILE_SMSCODE + ":" + userIp);
+        if (keyIsExist)
+            return false;
+
+        return true;
     }
 
     /**
