@@ -31,6 +31,7 @@ build/
 .vscode/
 
 mybatis-generator-database/src/main/resources/jdbc.properties
+news-common/src/main/resources/aliyun.properties
 news-user/src/main/resources/application-dev-jdbc.yml
 news-user/src/main/resources/application-prod1.yml
 
