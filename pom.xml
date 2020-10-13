@@ -47,8 +47,8 @@
         <commons-fileupload.version>1.4</commons-fileupload.version>
         <google-guava.version>28.2-jre</google-guava.version>
 
-        <springfox-swagger2.version>2.4.0</springfox-swagger2.version>
-        <swagger-bootstrap-ui.version>1.6</swagger-bootstrap-ui.version>
+        <springfox-swagger2.version>2.9.2</springfox-swagger2.version>
+        <swagger-bootstrap-ui.version>1.8.5</swagger-bootstrap-ui.version>
         <fastdfs.version>1.27.2</fastdfs.version>
 
         <slf4j.version>1.7.21</slf4j.version>

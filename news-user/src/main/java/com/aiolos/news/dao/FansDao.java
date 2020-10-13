@@ -1,9 +1,9 @@
 package com.aiolos.news.dao;
 
 import com.aiolos.news.pojo.Fans;
-import com.aiolos.news.utils.MyMapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface FansDao extends MyMapper<Fans> {
+public interface FansDao extends BaseMapper<Fans> {
 }

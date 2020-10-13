@@ -1,5 +1,7 @@
 package com.aiolos.news.common.utils;
 
+import com.aiolos.news.common.exception.CustomizeException;
+import com.aiolos.news.common.exception.ErrorEnum;
 import com.aliyuncs.CommonRequest;
 import com.aliyuncs.CommonResponse;
 import com.aliyuncs.DefaultAcsClient;
@@ -10,6 +12,8 @@ import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.exceptions.ServerException;
 import com.aliyuncs.http.MethodType;
 import com.aliyuncs.profile.DefaultProfile;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,13 +21,19 @@ import org.springframework.stereotype.Component;
  * @author Aiolos
  * @date 2020/9/28 8:20 下午
  */
+@Slf4j
 @Component
 public class SMSUtils {
 
     @Autowired
     public AliyunResource aliyunResource;
 
-    public void sendSMS(String mobile, String code) {
+    public void sendSMS(String mobile, String code) throws CustomizeException {
+
+        log.info("Enter function sendSMS, parameter mobile: {}, code: {}", mobile, code);
+
+        if (StringUtils.isBlank(mobile))
+            throw new CustomizeException(ErrorEnum.PHONE_INCORRECT);
 
         DefaultProfile profile = DefaultProfile.getProfile("cn-hangzhou",
                 aliyunResource.getAccessKeyID(),

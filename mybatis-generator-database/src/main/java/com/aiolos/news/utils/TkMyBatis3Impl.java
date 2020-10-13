@@ -22,8 +22,12 @@ public class TkMyBatis3Impl extends IntrospectedTableMyBatis3SimpleImpl {
                 mapperName = mapperName.substring(ind + 1);
             }
             //支持mapperName = "{0}Dao" 等用法
-            sb.append(MessageFormat.format(mapperName, fullyQualifiedTable.getDomainObjectName()));
-            sb.append(".xml"); //$NON-NLS-1$
+//            sb.append(MessageFormat.format(mapperName, fullyQualifiedTable.getDomainObjectName()));
+//            sb.append(".xml"); //$NON-NLS-1$
+
+            // xml文件用Mapper结尾不用Dao
+            sb.append(fullyQualifiedTable.getDomainObjectName());
+            sb.append("Mapper.xml"); //$NON-NLS-1$
         } else {
             sb.append(fullyQualifiedTable.getDomainObjectName());
             sb.append("Mapper.xml"); //$NON-NLS-1$

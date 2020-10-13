@@ -10,6 +10,7 @@
 
 <!--    <classPathEntry location="/Users/Aiolos/.m2/repository/mysql/mysql-connector-java/8.0.19/mysql-connection-java-8.0.19.jar"/>-->
 
+    <!-- tk主要用在TkMyBatis3Impl将默认的mapper后缀改成dao -->
     <context id="DB2Tables" targetRuntime="com.aiolos.news.utils.TkMyBatis3Impl" defaultModelType="flat">
         <!-- 生成的 Java 文件的编码 -->
         <property name="javaFileEncoding" value="UTF-8"/>
@@ -18,10 +19,10 @@
         <!-- 格式化 XML 代码 -->
         <property name="xmlFormatter" value="org.mybatis.generator.api.dom.DefaultXmlFormatter"/>
 
-        <!-- 通用mapper所在目录，tk主要用在TkMyBatis3Impl将默认的mapper后缀改成dao -->
+        <!-- 通用mapper所在目录 -->
         <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
             <!-- 这里一定要是mappers，不然会提示缺少必要的mappers属性 -->
-            <property name="mappers" value="com.aiolos.news.utils.MyMapper"/>
+            <property name="mappers" value="com.baomidou.mybatisplus.core.mapper.BaseMapper"/>
         </plugin>
 
         <!-- 自定义注释生成器 -->

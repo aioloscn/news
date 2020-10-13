@@ -2,6 +2,7 @@ package com.aiolos.news.interceptors;
 
 import com.aiolos.news.common.utils.IPUtils;
 import com.aiolos.news.common.utils.RedisOperator;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -10,9 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
+ * 在InterceptorConfig中调用
  * @author Aiolos
  * @date 2020/10/2 8:26 上午
  */
+@Slf4j
 public class PassportInterceptor implements HandlerInterceptor {
 
     @Autowired
@@ -30,6 +33,8 @@ public class PassportInterceptor implements HandlerInterceptor {
      */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+
+        log.info("Enter class PassportInterceptor function preHandle");
 
         // 获得用户IP
         String userIp = IPUtils.getRequestIp(request);

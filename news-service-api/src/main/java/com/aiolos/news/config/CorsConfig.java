@@ -7,6 +7,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
 /**
+ * 解决跨域问题
  * @author Aiolos
  * @date 2020/9/30 8:42 下午
  */

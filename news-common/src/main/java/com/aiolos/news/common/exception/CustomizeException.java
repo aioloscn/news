@@ -13,7 +13,7 @@ public class CustomizeException extends Exception implements CommonError {
         this.commonError = commonError;
     }
 
-    // 因为ErrorEnum实现了CommonError，所以在抛出异常的时候可以传CommonError进来，在ErrorEnum中setErrMsg()
+    // 因为ErrorEnum实现了CommonError，所以在抛出异常的时候可以传CommonError的实现类ErrorEnum进来，在ErrorEnum中setErrMsg()
     public CustomizeException(CommonError commonError, String errMsg) {
         super();
         this.commonError = commonError;

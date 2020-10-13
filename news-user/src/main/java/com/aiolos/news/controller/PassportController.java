@@ -11,6 +11,7 @@ import com.aiolos.news.controller.user.PassportControllerApi;
 import com.aiolos.news.pojo.bo.RegisterLoginBO;
 import com.aiolos.news.service.AdminUserService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,7 +37,12 @@ public class PassportController extends BaseController implements PassportContro
     }
 
     @Override
-    public CommonResponse getSMSCode(String mobile, HttpServletRequest request) {
+    public CommonResponse getSMSCode(String mobile, HttpServletRequest request) throws CustomizeException {
+
+        log.info("Enter function getSMSCode, parameter mobile: {}", mobile);
+
+        if (StringUtils.isBlank(mobile))
+            return CommonResponse.error(ErrorEnum.PHONE_INCORRECT);
 
         adminUserService.testJDBC();
 
@@ -56,9 +62,20 @@ public class PassportController extends BaseController implements PassportContro
     public CommonResponse login(@Valid @RequestBody RegisterLoginBO registerLoginBO, BindingResult bindingResult) throws CustomizeException {
 
         log.info("Enter function login, parameter registerLoginBO: {}", registerLoginBO.toString());
+        // 0.判断BindingResult是否有错误信息
         if (bindingResult.hasErrors()) {
             throw new CustomizeException(ErrorEnum.PARAMETER_VALIDATION_ERROR, CommonUtils.processErrorString(bindingResult));
         }
+
+        String mobile = registerLoginBO.getMobile();
+        String smsCode = registerLoginBO.getSmsCode();
+
+        // 1.校验验证码是否匹配
+        String redisSMSCode = redis.get(MOBILE_SMSCODE + ":" + mobile);
+        if (StringUtils.isBlank(redisSMSCode))
+            return CommonResponse.error(ErrorEnum.SMS_CODE_EXPIRED);
+        if (!redisSMSCode.equalsIgnoreCase(smsCode))
+            return CommonResponse.error(ErrorEnum.SMS_CODE_INCORRECT);
 
 
         return null;

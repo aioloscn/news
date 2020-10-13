@@ -1,7 +1,7 @@
 package com.aiolos.news.dao;
 
 import com.aiolos.news.pojo.AdminUser;
-import com.aiolos.news.utils.MyMapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
-public interface AdminUserDao extends MyMapper<AdminUser> {
+public interface AdminUserDao extends BaseMapper<AdminUser> {
 }

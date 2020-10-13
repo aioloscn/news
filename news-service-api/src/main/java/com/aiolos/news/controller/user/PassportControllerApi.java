@@ -24,7 +24,7 @@ public interface PassportControllerApi {
 
     @ApiOperation(value = "获得短信验证码接口", notes = "获得短信验证码接口", httpMethod = "GET")
     @GetMapping("/getSMSCode")
-    CommonResponse getSMSCode(String mobile, HttpServletRequest request);
+    CommonResponse getSMSCode(String mobile, HttpServletRequest request) throws CustomizeException;
 
     @ApiOperation(value = "一键注册登录接口", notes = "一键注册登录接口", httpMethod = "POST")
     @PostMapping("/login")
