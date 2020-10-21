@@ -1,11 +1,8 @@
 package com.aiolos.news.service.impl;
 
 import com.aiolos.news.dao.AdminUserDao;
-import com.aiolos.news.pojo.AdminUser;
 import com.aiolos.news.service.AdminUserService;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  * @author Aiolos
@@ -20,8 +17,4 @@ public class AdminUserServiceImpl implements AdminUserService {
         this.adminUserDao = adminUserDao;
     }
 
-    @Override
-    public void testJDBC() {
-//        List<AdminUser> result =  adminUserDao.selectAll();
-    }
 }

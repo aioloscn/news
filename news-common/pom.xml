@@ -113,6 +113,12 @@
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
         </dependency>
+        <!--hutool 测试雪花算法-->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-captcha</artifactId>
+            <version>5.2.0</version>
+        </dependency>
     </dependencies>
 
 </project>

@@ -1,4 +1,6 @@
-package com.aiolos.news.common.exception;
+package com.aiolos.news.common.enums;
+
+import com.aiolos.news.common.exception.CommonError;
 
 /**
  *
@@ -19,6 +21,7 @@ public enum ErrorEnum implements CommonError {
     REDIS_ERROR(10008, "服务器缓存出现异常"),
     ES_SEARCH_ERROR(10009, "ES查询出错"),
     BEAN_ERROR(10010, "bean验证错误"),
+    REPEAT_SENDING_SMS_CODE(10011, "短信验证码60s内不能重复发送"),
 
     // 用户服务相关错误类型
     USER_NOT_LOGGED_IN(20000, "用户尚未登录"),
@@ -35,6 +38,8 @@ public enum ErrorEnum implements CommonError {
     DUPLICATION_OPERATION(20011, "重复操作"),
     TOKEN_ERROR(20012, "会话失效，请重新登录"),
     VERIFY_QQ_ERROR(20013, "用户QQ校验异常"),
+    ACCOUNT_FROZEN(20014, "账号已被冻结，请联系管理员"),
+    REGISTER_FAIL(20015, "注册失败"),
 
 
     // 业务相关错误类型

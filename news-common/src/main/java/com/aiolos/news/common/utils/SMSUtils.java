@@ -1,13 +1,11 @@
 package com.aiolos.news.common.utils;
 
 import com.aiolos.news.common.exception.CustomizeException;
-import com.aiolos.news.common.exception.ErrorEnum;
+import com.aiolos.news.common.enums.ErrorEnum;
 import com.aliyuncs.CommonRequest;
 import com.aliyuncs.CommonResponse;
 import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.IAcsClient;
-import com.aliyuncs.dysmsapi.model.v20170525.SendSmsRequest;
-import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
 import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.exceptions.ServerException;
 import com.aliyuncs.http.MethodType;
@@ -63,7 +61,7 @@ public class SMSUtils {
         try {
             CommonResponse response = client.getCommonResponse(request);
 //            SendSmsResponse response = client.getAcsResponse(request);
-            System.out.println(response.getData());
+            System.out.println("aliyun sms response: " + response.getData());
         } catch (ServerException e) {
             e.printStackTrace();
         } catch (ClientException e) {

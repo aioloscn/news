@@ -4,3 +4,5 @@ spring:
   profiles:
     include:
     - dev-jdbc
+website:
+  domain-name: aiolos.com

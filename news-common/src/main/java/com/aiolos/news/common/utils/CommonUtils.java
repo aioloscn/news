@@ -27,4 +27,25 @@ public class CommonUtils {
         }
         return sb.substring(0, sb.length() - 1);
     }
+
+    /**
+     * 隐藏手机号中间4位改为*
+     * @param phoneNo
+     * @return
+     */
+    public static String hidePhoneNo(String phoneNo) {
+
+        return StringUtils.replacePattern(phoneNo, "(\\d{3})\\d{4}(\\d{4})", "$1****$2");
+    }
+
+    /**
+     * TODO
+     * 银行银行卡号，不同银行卡位数不一样，待重做
+     * @param cardNo
+     * @return
+     */
+    public static String hideCardNo(String cardNo) {
+
+        return StringUtils.replacePattern(cardNo, "(\\d{4})\\d{4}(\\d{4})\\d{4}(\\d{3})", "$1****$2****$3");
+    }
 }

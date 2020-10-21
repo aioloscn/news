@@ -6,5 +6,4 @@ package com.aiolos.news.service;
  */
 public interface AdminUserService {
 
-    public void testJDBC();
 }

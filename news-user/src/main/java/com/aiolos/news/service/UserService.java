@@ -1,5 +1,6 @@
 package com.aiolos.news.service;
 
+import com.aiolos.news.common.exception.CustomizeException;
 import com.aiolos.news.pojo.AppUser;
 
 /**
@@ -20,5 +21,5 @@ public interface UserService {
      * @param mobile
      * @return
      */
-    AppUser creatUser(String mobile);
+    AppUser creatUser(String mobile) throws CustomizeException;
 }

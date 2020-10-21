@@ -1,6 +1,6 @@
 package com.aiolos.news.common;
 
-import com.aiolos.news.common.exception.ErrorEnum;
+import com.aiolos.news.common.enums.ErrorEnum;
 
 import java.io.Serializable;
 
@@ -21,7 +21,10 @@ public class CommonResponse<T> implements Serializable {
     // 响应中的数据
     private T data;
 
-    private CommonResponse() {}
+    private CommonResponse() {
+        this.code = 200;
+        this.msg = "SUCCESS";
+    }
 
     private CommonResponse(String msg) {
         this.code = 200;
@@ -30,7 +33,7 @@ public class CommonResponse<T> implements Serializable {
 
     private CommonResponse(T data) {
         this.code = 200;
-        this.msg = "OK";
+        this.msg = "SUCCESS";
         this.data = data;
     }
 
@@ -38,6 +41,10 @@ public class CommonResponse<T> implements Serializable {
         this.code = 200;
         this.msg = msg;
         this.data = data;
+    }
+
+    public static CommonResponse ok() {
+        return new CommonResponse();
     }
 
     public static CommonResponse ok(String msg) {

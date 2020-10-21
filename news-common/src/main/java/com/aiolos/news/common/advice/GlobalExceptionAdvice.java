@@ -2,7 +2,7 @@ package com.aiolos.news.common.advice;
 
 import com.aiolos.news.common.CommonResponse;
 import com.aiolos.news.common.exception.CustomizeException;
-import com.aiolos.news.common.exception.ErrorEnum;
+import com.aiolos.news.common.enums.ErrorEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.ServletRequestBindingException;
@@ -29,7 +29,7 @@ public class GlobalExceptionAdvice {
     @ResponseBody
     public CommonResponse handlerCustomizeException(HttpServletRequest req, HttpServletResponse res, Exception e) {
 
-        log.info("全局异常捕获，异常信息：{}", e);
+        log.info("全局异常捕获，异常信息：", e);
         log.info("##########################The above is the exception message.##########################");
         if (e instanceof CustomizeException) {
             return CommonResponse.error(((CustomizeException) e).getErrCode(), ((CustomizeException) e).getErrMsg());
