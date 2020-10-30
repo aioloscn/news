@@ -7,10 +7,14 @@ import com.aiolos.news.common.enums.UserStatus;
 import com.aiolos.news.common.exception.CustomizeException;
 import com.aiolos.news.common.utils.CommonUtils;
 import com.aiolos.news.common.utils.DateUtils;
+import com.aiolos.news.common.utils.JsonUtils;
+import com.aiolos.news.common.utils.RedisOperator;
 import com.aiolos.news.dao.AppUserDao;
 import com.aiolos.news.pojo.AppUser;
+import com.aiolos.news.pojo.bo.UpdateUserInfoBO;
 import com.aiolos.news.service.UserService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,13 +27,18 @@ import java.util.Date;
 @Service
 public class UserServiceImpl implements UserService {
 
+    public static final String REDIS_USER_INFO = "redis_user_info";
+
     private final AppUserDao appUserDao;
 
     private final IdGeneratorSnowflake snowflake;
 
-    public UserServiceImpl(AppUserDao appUserDao, IdGeneratorSnowflake snowflake) {
+    private final RedisOperator redis;
+
+    public UserServiceImpl(AppUserDao appUserDao, IdGeneratorSnowflake snowflake, RedisOperator redis) {
         this.appUserDao = appUserDao;
         this.snowflake = snowflake;
+        this.redis = redis;
     }
 
     @Override
@@ -68,5 +77,41 @@ public class UserServiceImpl implements UserService {
         if (resultCount != 1)
             throw new CustomizeException(ErrorEnum.REGISTER_FAIL);
         return user;
+    }
+
+    @Override
+    public AppUser getUser(String userId) {
+        return appUserDao.selectById(userId);
+    }
+
+    @Override
+    public void updateAccountInfo(UpdateUserInfoBO updateUserInfoBO) throws CustomizeException {
+
+        String userId = updateUserInfoBO.getId();
+
+        // 保证双写一致，先删除redis中的数据，再更新数据库
+        redis.del(REDIS_USER_INFO + ":" + userId);
+
+        AppUser user = new AppUser();
+        BeanUtils.copyProperties(updateUserInfoBO, user);
+        user.setUpdatedTime(new Date());
+        user.setActiveStatus(UserStatus.ACTIVE.type);
+
+        int affected = appUserDao.updateById(user);
+        if (affected != 1) {
+            throw new CustomizeException(ErrorEnum.USER_UPDATE_FAIL);
+        }
+
+        // 更新用户信息后，必须修改redis中保存的用户信息
+        AppUser appUser = getUser(userId);
+        redis.set(REDIS_USER_INFO + ":" + userId, JsonUtils.objectToJson(user));
+
+        // 缓存双删策略
+        try {
+            Thread.sleep(100);
+            redis.del(REDIS_USER_INFO + ":" + userId);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

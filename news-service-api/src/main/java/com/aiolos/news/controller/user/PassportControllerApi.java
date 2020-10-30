@@ -26,6 +26,6 @@ public interface PassportControllerApi {
 
     @ApiOperation(value = "一键注册登录接口", notes = "一键注册登录接口", httpMethod = "POST")
     @PostMapping("/login")
-    CommonResponse login(@Valid @RequestBody RegisterLoginBO registerLoginBO, BindingResult result,
+    CommonResponse login(@Valid @RequestBody RegisterLoginBO registerLoginBO, BindingResult bindingResult,
                          HttpServletRequest request, HttpServletResponse response) throws CustomizeException;
 }

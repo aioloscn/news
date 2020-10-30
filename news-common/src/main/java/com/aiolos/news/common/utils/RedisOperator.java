@@ -20,8 +20,11 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class RedisOperator {
 
-    @Autowired
-    private StringRedisTemplate redisTemplate;
+    private final StringRedisTemplate redisTemplate;
+
+    public RedisOperator(StringRedisTemplate redisTemplate) {
+        this.redisTemplate = redisTemplate;
+    }
 
     // Key（键），简单的key-value操作
 

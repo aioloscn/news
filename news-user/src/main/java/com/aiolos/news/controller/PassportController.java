@@ -1,12 +1,12 @@
 package com.aiolos.news.controller;
 
-import com.aiolos.news.BaseController;
 import com.aiolos.news.common.CommonResponse;
 import com.aiolos.news.common.enums.UserStatus;
 import com.aiolos.news.common.exception.CustomizeException;
 import com.aiolos.news.common.enums.ErrorEnum;
 import com.aiolos.news.common.utils.CommonUtils;
 import com.aiolos.news.common.utils.IPUtils;
+import com.aiolos.news.common.utils.JsonUtils;
 import com.aiolos.news.common.utils.SMSUtils;
 import com.aiolos.news.controller.user.PassportControllerApi;
 import com.aiolos.news.pojo.AppUser;
@@ -55,6 +55,7 @@ public class PassportController extends BaseController implements PassportContro
         redis.setnx60s(MOBILE_SMSCODE + ":" + userIp, userIp);
 
         String code = String.valueOf((int) ((1 + Math.random()) * 1000000)).substring(1);
+        System.out.printf("code: " + code);
 //        smsUtils.sendSMS(mobile, code);
         redis.set(MOBILE_SMSCODE + ":" + mobile, code, 30 * 60);
         return CommonResponse.ok();
@@ -65,7 +66,7 @@ public class PassportController extends BaseController implements PassportContro
                                 HttpServletRequest request, HttpServletResponse response) throws CustomizeException {
 
         log.info("Enter function login, parameter registerLoginBO: {}", registerLoginBO.toString());
-        // 0.判断BindingResult是否有错误信息
+        // 0. 判断BindingResult是否有错误信息
         if (bindingResult.hasErrors()) {
             throw new CustomizeException(ErrorEnum.PARAMETER_VALIDATION_ERROR, CommonUtils.processErrorString(bindingResult));
         }
@@ -73,14 +74,14 @@ public class PassportController extends BaseController implements PassportContro
         String mobile = registerLoginBO.getMobile();
         String smsCode = registerLoginBO.getSmsCode();
 
-        // 1.校验验证码是否匹配
+        // 1. 校验验证码是否匹配
         String redisSMSCode = redis.get(MOBILE_SMSCODE + ":" + mobile);
         if (StringUtils.isBlank(redisSMSCode))
             return CommonResponse.error(ErrorEnum.SMS_CODE_EXPIRED);
         if (!redisSMSCode.equalsIgnoreCase(smsCode))
             return CommonResponse.error(ErrorEnum.SMS_CODE_INCORRECT);
 
-        // 2.查询数据库，判断该用户是否已注册
+        // 2. 查询数据库，判断该用户是否已注册
         AppUser user = userService.queryMobileIsExist(mobile);
         if (user != null && user.getActiveStatus() == UserStatus.FROZEN.type) {
             // 如果用户已注册并且状态为冻结，则直接抛出异常，禁止登录
@@ -90,22 +91,25 @@ public class PassportController extends BaseController implements PassportContro
             user = userService.creatUser(mobile);
         }
 
-        // 3.保存用户分布式会话的相关操作
+        // 3. 保存用户分布式会话的相关操作
         int userActiveStatus = user.getActiveStatus();
         if (userActiveStatus != UserStatus.FROZEN.type) {
 
-            String uniqueToken = UUID.randomUUID().toString();
-            redis.set(REDIS_USER_TOKEN + ":" + user.getId(), uniqueToken);
+            String utoken = UUID.randomUUID().toString();
+            // 保存用户的会话信息
+            redis.set(REDIS_USER_TOKEN + ":" + user.getId(), utoken);
+            // 保存用户账号信息
+            redis.set(REDIS_USER_INFO + ":" + user.getId(), JsonUtils.objectToJson(user));
 
             // 保存用户的ID和token到cookie中
             setCookie("uid", user.getId(), COOKIE_EXPIRE_TIME, request, response);
-            setCookie("uniqueToken", uniqueToken, COOKIE_EXPIRE_TIME, request, response);
+            setCookie("utoken", utoken, COOKIE_EXPIRE_TIME, request, response);
         }
 
-        // 4.用户登录或注册成功以后，需要删除redis中的短信验证码，验证码只能使用一次
+        // 4. 用户登录或注册成功以后，需要删除redis中的短信验证码，验证码只能使用一次
         redis.del(MOBILE_SMSCODE + ":" + mobile);
 
-        // 5.返回用户状态
+        // 5. 返回用户状态
         return CommonResponse.ok(userActiveStatus);
     }
 }

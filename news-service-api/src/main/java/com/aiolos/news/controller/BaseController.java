@@ -1,4 +1,4 @@
-package com.aiolos.news;
+package com.aiolos.news.controller;
 
 import com.aiolos.news.common.utils.RedisOperator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +25,8 @@ public class BaseController {
     public static final String MOBILE_SMSCODE = "mobile:smscode";
 
     public static final String REDIS_USER_TOKEN = "redis_user_token";
+
+    public static final String REDIS_USER_INFO = "redis_user_info";
 
     public static final Integer COOKIE_EXPIRE_TIME = 7 * 24 * 60 * 60;
 

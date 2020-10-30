@@ -36,10 +36,12 @@ public enum ErrorEnum implements CommonError {
     CANCEL_FOLLOW_FAIL(20009, "取消关注失败"),
     CONSTRAINT_VIOLATION(20010, "违反唯一约束"),
     DUPLICATION_OPERATION(20011, "重复操作"),
-    TOKEN_ERROR(20012, "会话失效，请重新登录"),
+    TOKEN_INVALID(20012, "会话失效，请重新登录"),
     VERIFY_QQ_ERROR(20013, "用户QQ校验异常"),
     ACCOUNT_FROZEN(20014, "账号已被冻结，请联系管理员"),
     REGISTER_FAIL(20015, "注册失败"),
+    USER_UPDATE_FAIL(20016, "用户信息更新失败，请联系管理员"),
+    USER_INACTIVE_ERROR(20017, "请前往[账号设置]修改信息激活后再进行操作"),
 
 
     // 业务相关错误类型

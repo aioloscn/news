@@ -29,18 +29,20 @@ public class GlobalExceptionAdvice {
     @ResponseBody
     public CommonResponse handlerCustomizeException(HttpServletRequest req, HttpServletResponse res, Exception e) {
 
-        log.info("全局异常捕获，异常信息：", e);
-        log.info("##########################The above is the exception message.##########################");
         if (e instanceof CustomizeException) {
+            log.info("全局异常捕获，异常信息：{}", ((CustomizeException) e).getErrMsg());
             return CommonResponse.error(((CustomizeException) e).getErrCode(), ((CustomizeException) e).getErrMsg());
-        } else if (e instanceof NoHandlerFoundException) {
-            return CommonResponse.error(ErrorEnum.NO_HANDLER_FOUND);
-        } else if (e instanceof ServletRequestBindingException) {
-            return CommonResponse.error(ErrorEnum.BIND_EXCEPTION_ERROR);
-        } else if (e instanceof NullPointerException) {
-            return CommonResponse.error(ErrorEnum.NULL_POINT_ERROR);
         } else {
-            return CommonResponse.error(ErrorEnum.UNKNOWN_ERROR);
+            log.info(e.getMessage());
+            if (e instanceof NoHandlerFoundException) {
+                return CommonResponse.error(ErrorEnum.NO_HANDLER_FOUND);
+            } else if (e instanceof ServletRequestBindingException) {
+                return CommonResponse.error(ErrorEnum.BIND_EXCEPTION_ERROR);
+            } else if (e instanceof NullPointerException) {
+                return CommonResponse.error(ErrorEnum.NULL_POINT_ERROR);
+            } else {
+                return CommonResponse.error(ErrorEnum.UNKNOWN_ERROR);
+            }
         }
     }
 }
