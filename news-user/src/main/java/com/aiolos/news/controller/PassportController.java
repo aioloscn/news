@@ -112,4 +112,14 @@ public class PassportController extends BaseController implements PassportContro
         // 5. 返回用户状态
         return CommonResponse.ok(userActiveStatus);
     }
+
+    @Override
+    public CommonResponse logout(String userId, HttpServletRequest request, HttpServletResponse response) {
+
+        log.info("Enter function logout, parameter userId: {}", userId);
+        redis.del(REDIS_USER_TOKEN + ":" + userId);
+        setCookie("uid", "", 0, request, response);
+        setCookie("utoken", "", 0, request, response);
+        return CommonResponse.ok();
+    }
 }

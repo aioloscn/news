@@ -23,11 +23,11 @@ public class IdGeneratorSnowflake {
     public void init() {
         try {
             workerId = NetUtil.ipv4ToLong(NetUtil.getLocalhostStr());
-            System.out.println("当前机器的workerId:{}" + workerId);
+            System.out.println("当前机器的workerId: " + workerId);
         } catch (Exception e) {
             System.out.println("当前机器的workerId获取失败" + e);
             workerId = NetUtil.getLocalhostStr().hashCode();
-            System.out.println("当前机器 workId:{}" + workerId);
+            System.out.println("当前机器 workId:" + workerId);
         }
 
     }

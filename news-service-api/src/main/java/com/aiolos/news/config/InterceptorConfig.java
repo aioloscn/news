@@ -40,7 +40,8 @@ public class InterceptorConfig implements WebMvcConfigurer {
         // 登录后才能获取完整账号信息和修改账号信息
         registry.addInterceptor(userTokenInterceptor())
                 .addPathPatterns("/user/getAccountInfo")
-                .addPathPatterns("/user/updateAccountInfo");
+                .addPathPatterns("/user/updateAccountInfo")
+                .addPathPatterns("/file/uploadFace");
         // 发表/修改/删除文章、发表/查看评论等等这些接口都是需要在用户激活以后才能进行
 //        registry.addInterceptor(userActiveInterceptor())
 //                .addPathPatterns("");

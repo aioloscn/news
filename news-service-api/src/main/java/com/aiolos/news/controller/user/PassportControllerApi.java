@@ -28,4 +28,8 @@ public interface PassportControllerApi {
     @PostMapping("/login")
     CommonResponse login(@Valid @RequestBody RegisterLoginBO registerLoginBO, BindingResult bindingResult,
                          HttpServletRequest request, HttpServletResponse response) throws CustomizeException;
+
+    @ApiOperation(value = "用户退出登录", notes = "用户退出登录", httpMethod = "POST")
+    @PostMapping("logout")
+    CommonResponse logout(@RequestParam String userId, HttpServletRequest request, HttpServletResponse response);
 }

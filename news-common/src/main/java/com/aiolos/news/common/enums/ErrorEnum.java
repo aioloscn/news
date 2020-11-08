@@ -43,7 +43,6 @@ public enum ErrorEnum implements CommonError {
     USER_UPDATE_FAIL(20016, "用户信息更新失败，请联系管理员"),
     USER_INACTIVE_ERROR(20017, "请前往[账号设置]修改信息激活后再进行操作"),
 
-
     // 业务相关错误类型
     INFORMATION_RELEASE_FAIL(30000, "短消息提交失败"),
     INFORMATION_IMAGE_RELEASE_FAIL(30001, "短消息的图片提交失败"),
@@ -55,6 +54,9 @@ public enum ErrorEnum implements CommonError {
     RELEASE_FAIL(30007, "发布失败"),
     ACTIVITY_RELEASE_FAIL(30008, "活动发布失败"),
     ACTIVITY_IMAGE_RELEASE_FAIL(30009, "活动的图片提交失败"),
+    FILE_UPLOAD_NULL_ERROR(30010, "文件不能为空"),
+    FILE_FORMAT_ERROR(30011, "图片格式不支持"),
+    FILE_UPLOAD_FAIL(30012, "上传失败"),
     ;
 
     ErrorEnum(int errCode, String errMsg) {

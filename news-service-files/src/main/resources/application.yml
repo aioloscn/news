@@ -1,0 +1,26 @@
+# 文件微服务
+server:
+  tomcat:
+    uri-encoding: UTF-8
+    max-swallow-size: -1
+spring:
+  application:
+    name: news-files
+  profiles:
+    active: dev
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  servlet:
+    multipart:
+      max-file-size: 10MB    # 上传文件大小限制为1MB，默认1MB
+      max-request-size: 100MB # 上传多个文件大小限制为5MB，默认10MB
+# FastDFS配置信息
+fdfs:
+  connect-timeout: 15000 # 连接超时时间
+  so-timeout: 15000  # 读取时间
+  tracker-list: 120.26.73.8:22122
+  pool:
+    max-total: 200  # 连接池最大数量
+    max-total-per-key: 50 # 每个tracker地址的连接数
+    max-wait-millis: 5000 # 连接耗尽时等待获取连接的最大毫秒数
