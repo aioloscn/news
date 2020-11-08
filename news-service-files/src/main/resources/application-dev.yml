@@ -1,2 +1,6 @@
 server:
   port: 8004
+spring:
+  profiles:
+    include:
+    - file-dev  # fdfs.tracker-list

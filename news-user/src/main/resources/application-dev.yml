@@ -3,6 +3,6 @@ server:
 spring:
   profiles:
     include:
-    - dev-jdbc
+    - dev-jdbc  # spring.datasource, redis
 website:
   domain-name: aiolos.com

@@ -19,7 +19,6 @@ spring:
 fdfs:
   connect-timeout: 15000 # 连接超时时间
   so-timeout: 15000  # 读取时间
-  tracker-list: 120.26.73.8:22122
   pool:
     max-total: 200  # 连接池最大数量
     max-total-per-key: 50 # 每个tracker地址的连接数
