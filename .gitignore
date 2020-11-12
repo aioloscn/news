@@ -35,5 +35,8 @@ news-common/src/main/resources/aliyun.properties
 news-user/src/main/resources/application-dev-jdbc.yml
 news-user/src/main/resources/application-prod1.yml
 news-service-files/src/main/resources/application-file-dev.yml
+news-service-files/src/main/resources/application-file-prod.yml
+news-service-files/src/main/resources/file-dev.properties
+news-service-files/src/main/resources/file-prod.properties
 
 news-user.*
