@@ -1,4 +1,4 @@
-package com.aiolos.news;
+package com.aiolos.news.resources;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -18,4 +18,12 @@ import org.springframework.stereotype.Component;
 public class FileResource {
 
     private String host;
+
+    private String ossHost;
+
+    private String endpoint;
+
+    private String bucketName;
+
+    private String objectName;
 }

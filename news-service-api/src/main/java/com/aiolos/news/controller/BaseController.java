@@ -48,8 +48,9 @@ public class BaseController {
         cookie.setMaxAge(expireTime);
         // 只要是在这个域名下都可以拿到这个cookie
         cookie.setDomain(DOMAIN_NAME);
-        // 设置域名后面所有path都可以拿到这个cookie，比如aiolosxhx.com/login
+        // 设置一级域名后面所有path都可以拿到这个cookie，比如aiolosxhx.com/login
         cookie.setPath("/");
+        cookie.setHttpOnly(false);
         response.addCookie(cookie);
     }
 }

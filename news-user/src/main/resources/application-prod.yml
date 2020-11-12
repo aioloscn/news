@@ -1,8 +1,8 @@
 server:
   port: 8013
 spring:
-  redis:
-    database: 1
-    host: 127.0.0.1
-    port: 6379
-#    password:
+  profiles:
+    include:
+      - prod-jdbc  # spring.datasource, redis
+website:
+  domain-name: aiolosxhx.com

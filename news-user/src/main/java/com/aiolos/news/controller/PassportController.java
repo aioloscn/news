@@ -55,7 +55,7 @@ public class PassportController extends BaseController implements PassportContro
         redis.setnx60s(MOBILE_SMSCODE + ":" + userIp, userIp);
 
         String code = String.valueOf((int) ((1 + Math.random()) * 1000000)).substring(1);
-        System.out.printf("code: " + code);
+        log.info("code: {}", code);
 //        smsUtils.sendSMS(mobile, code);
         redis.set(MOBILE_SMSCODE + ":" + mobile, code, 30 * 60);
         return CommonResponse.ok();
@@ -96,6 +96,7 @@ public class PassportController extends BaseController implements PassportContro
         if (userActiveStatus != UserStatus.FROZEN.type) {
 
             String utoken = UUID.randomUUID().toString();
+            log.info("token: {}", utoken);
             // 保存用户的会话信息
             redis.set(REDIS_USER_TOKEN + ":" + user.getId(), utoken);
             // 保存用户账号信息

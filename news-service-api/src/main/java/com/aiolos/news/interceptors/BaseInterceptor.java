@@ -25,6 +25,9 @@ public class BaseInterceptor {
 
             String redisToken = redis.get(redisKeyPrefix + ":" + id);
             if (StringUtils.isBlank(redisToken) || !redisToken.equalsIgnoreCase(token)) {
+                // token不一致，redis删除token，前端也会删除
+                redis.del(REDIS_USER_TOKEN + ":" + id);
+                redis.del(REDIS_USER_INFO + ":" + id);
                 throw new CustomizeException(ErrorEnum.TOKEN_INVALID);
             }
         } else {

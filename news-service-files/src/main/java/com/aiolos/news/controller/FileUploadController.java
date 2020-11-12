@@ -1,6 +1,6 @@
 package com.aiolos.news.controller;
 
-import com.aiolos.news.FileResource;
+import com.aiolos.news.resources.FileResource;
 import com.aiolos.news.common.CommonResponse;
 import com.aiolos.news.common.enums.ErrorEnum;
 import com.aiolos.news.controller.files.FileUploadControllerApi;
@@ -30,6 +30,8 @@ public class FileUploadController implements FileUploadControllerApi {
     @Override
     public CommonResponse uploadFace(String userId, MultipartFile file) throws Exception {
 
+        log.info("Enter function uploadFace, parameters userId: {}", userId);
+
         String path = null;
 
         if (file != null) {
@@ -47,8 +49,10 @@ public class FileUploadController implements FileUploadControllerApi {
                     return CommonResponse.error(ErrorEnum.FILE_FORMAT_ERROR);
                 }
 
-                // 执行上传
-                path = uploadService.uploadFastDFS(file, suffix);
+                // 上传到FastDFS
+//                path = uploadService.uploadFastDFS(file, suffix);
+                // 上传到OSS
+                path = uploadService.uploadOSS(file, userId, suffix);
             } else {
                 return CommonResponse.error(ErrorEnum.FILE_UPLOAD_NULL_ERROR);
             }
@@ -57,7 +61,8 @@ public class FileUploadController implements FileUploadControllerApi {
         }
 
         if (StringUtils.isNotBlank(path))
-            path = fileResource.getHost() + path;
+//            path = fileResource.getHost() + path;
+            path = fileResource.getOssHost() + path;
         else
             return CommonResponse.error(ErrorEnum.FILE_UPLOAD_FAIL);
 

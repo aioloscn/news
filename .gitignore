@@ -40,3 +40,4 @@ news-service-files/src/main/resources/file-dev.properties
 news-service-files/src/main/resources/file-prod.properties
 
 news-user.*
+news-files.*

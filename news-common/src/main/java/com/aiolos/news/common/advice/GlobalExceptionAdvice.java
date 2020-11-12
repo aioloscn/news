@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
 import javax.servlet.http.HttpServletRequest;
@@ -40,6 +41,8 @@ public class GlobalExceptionAdvice {
                 return CommonResponse.error(ErrorEnum.BIND_EXCEPTION_ERROR);
             } else if (e instanceof NullPointerException) {
                 return CommonResponse.error(ErrorEnum.NULL_POINT_ERROR);
+            } else if (e instanceof MaxUploadSizeExceededException) {
+                return CommonResponse.error(ErrorEnum.FILE_MAX_SIZE_ERROR);
             } else {
                 return CommonResponse.error(ErrorEnum.UNKNOWN_ERROR);
             }

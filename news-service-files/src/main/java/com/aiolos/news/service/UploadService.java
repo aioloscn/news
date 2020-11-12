@@ -8,5 +8,22 @@ import org.springframework.web.multipart.MultipartFile;
  */
 public interface UploadService {
 
+    /**
+     * 使用FastDFS上传文件
+     * @param file          文件
+     * @param fileExtName   后缀名
+     * @return
+     * @throws Exception
+     */
     String uploadFastDFS(MultipartFile file, String fileExtName) throws Exception;
+
+    /**
+     * 使用OSS上传文件
+     * @param file          文件
+     * @param userId        用户ID
+     * @param fileExtName   后缀名
+     * @return
+     * @throws Exception
+     */
+    String uploadOSS(MultipartFile file, String userId, String fileExtName) throws Exception;
 }

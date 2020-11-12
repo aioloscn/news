@@ -57,6 +57,7 @@ public enum ErrorEnum implements CommonError {
     FILE_UPLOAD_NULL_ERROR(30010, "文件不能为空"),
     FILE_FORMAT_ERROR(30011, "图片格式不支持"),
     FILE_UPLOAD_FAIL(30012, "上传失败"),
+    FILE_MAX_SIZE_ERROR(30013, "图片过大，仅支持上传10MB以下的图片"),
     ;
 
     ErrorEnum(int errCode, String errMsg) {
