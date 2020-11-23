@@ -1,6 +1,0 @@
-server:
-  port: 8014
-spring:
-  profiles:
-    include:
-    - file-prod  # fdfs.tracker-list
