@@ -1,4 +1,4 @@
-package com.aiolos.news.common.utils;
+package com.aiolos.news.common.resources;
 
 import lombok.Getter;
 import lombok.Setter;

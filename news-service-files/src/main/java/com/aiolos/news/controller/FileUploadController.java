@@ -61,10 +61,11 @@ public class FileUploadController implements FileUploadControllerApi {
         }
 
         if (StringUtils.isNotBlank(path))
+            // 返回到前端展示图片的路径
 //            path = fileResource.getHost() + path;
             path = fileResource.getOssHost() + path;
         else
-            return CommonResponse.error(ErrorEnum.FILE_UPLOAD_FAIL);
+            return CommonResponse.error(ErrorEnum.FILE_UPLOAD_FAILED);
 
         log.info("path: {}", path);
         return CommonResponse.ok((Object)path);

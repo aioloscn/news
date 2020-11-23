@@ -9,7 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
  * @author Aiolos
  * @date 2020/11/6 2:56 上午
  */
-@SpringBootApplication(exclude= DataSourceAutoConfiguration.class)
+@SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
 @ComponentScan(basePackages = "com.aiolos")
 public class FilesApplication {
 

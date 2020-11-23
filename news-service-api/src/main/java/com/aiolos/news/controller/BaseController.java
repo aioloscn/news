@@ -28,6 +28,8 @@ public class BaseController {
 
     public static final String REDIS_USER_INFO = "redis_user_info";
 
+    public static final String REDIS_ADMIN_TOKEN = "redis_admin_token";
+
     public static final Integer COOKIE_EXPIRE_TIME = 7 * 24 * 60 * 60;
 
     public void setCookie(String cookieName, String cookieValue, Integer expireTime,

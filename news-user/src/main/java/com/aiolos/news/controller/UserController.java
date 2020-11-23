@@ -17,8 +17,6 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
-
 /**
  * @author Aiolos
  * @date 2020/9/20 1:04 下午
@@ -73,7 +71,7 @@ public class UserController extends BaseController implements UserControllerApi 
     }
 
     @Override
-    public CommonResponse updateAccountInfo(@Valid UpdateUserInfoBO updateUserInfoBO, BindingResult bindingResult) throws CustomizeException {
+    public CommonResponse updateAccountInfo(UpdateUserInfoBO updateUserInfoBO, BindingResult bindingResult) throws CustomizeException {
 
         log.info("Enter function updateAccountInfo, parameter updateUserInfoBO: {}", JsonUtils.objectToJson(updateUserInfoBO));
 

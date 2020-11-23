@@ -1,5 +1,5 @@
 server:
-  port: 8013
+  port: 8015
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -7,12 +7,12 @@ spring:
     url: jdbc:mysql://127.0.0.1:3306/news?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
     username: root
     password: aiolosSQL1204285.
-redis:
-  database: 1
-  host: 172.16.144.67
-  port: 11204
-  password: aiolosREDIS1204285.
-  # password:
+  redis:
+    database: 1
+    host: 172.16.144.67
+    port: 11204
+    password: aiolosREDIS1204285.
+    # password:
 # 设置域名，在java代码中会获取
 website:
   domain-name: aiolosxhx.com

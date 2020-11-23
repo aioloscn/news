@@ -15,12 +15,10 @@ import com.aiolos.news.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
 import java.util.UUID;
 
 /**
@@ -62,7 +60,7 @@ public class PassportController extends BaseController implements PassportContro
     }
 
     @Override
-    public CommonResponse login(@Valid @RequestBody RegisterLoginBO registerLoginBO, BindingResult bindingResult,
+    public CommonResponse login(RegisterLoginBO registerLoginBO, BindingResult bindingResult,
                                 HttpServletRequest request, HttpServletResponse response) throws CustomizeException {
 
         log.info("Enter function login, parameter registerLoginBO: {}", registerLoginBO.toString());

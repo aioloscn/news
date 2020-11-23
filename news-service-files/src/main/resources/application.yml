@@ -3,6 +3,8 @@ server:
   tomcat:
     uri-encoding: UTF-8
     max-swallow-size: -1
+  servlet:
+    context-path: /news/files
 spring:
   application:
     name: news-files

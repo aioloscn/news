@@ -1,7 +1,7 @@
 package com.aiolos.news.service.impl;
 
 import com.aiolos.news.common.config.IdGeneratorSnowflake;
-import com.aiolos.news.common.utils.AliyunResource;
+import com.aiolos.news.common.resources.AliyunResource;
 import com.aiolos.news.resources.FileResource;
 import com.aiolos.news.service.UploadService;
 import com.aliyun.oss.OSS;

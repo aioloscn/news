@@ -1,9 +1,11 @@
 package com.aiolos.news.common.utils;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -247,5 +249,11 @@ public class DateUtils {
 //        System.out.println(DateUtils.getDate());
 
         System.out.println(DateUtils.strToDate("1970-01-01 00:00:00"));
+
+        String pwd = DigestUtils.md5Hex("test");
+        System.out.println(pwd);
+        System.out.println(BCrypt.hashpw(pwd, BCrypt.gensalt(12)));
+
+        System.out.println(BCrypt.checkpw(DigestUtils.md5Hex("test"), "$2a$12$M1Zv35liorVZ7Q0uTUDQ/.Ba/Ix/8cRdmDDKPDLnPzpSYHClSam5a"));
     }
 }

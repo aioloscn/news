@@ -90,7 +90,7 @@ public class RedisOperator {
      * @param key
      */
     public void del(String key) {
-        redisTemplate.delete(key);
+        boolean deleted = redisTemplate.delete(key);
     }
 
     // String（字符串）

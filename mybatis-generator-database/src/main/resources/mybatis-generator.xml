@@ -10,8 +10,8 @@
 
 <!--    <classPathEntry location="/Users/Aiolos/.m2/repository/mysql/mysql-connector-java/8.0.19/mysql-connection-java-8.0.19.jar"/>-->
 
-    <!-- tk主要用在TkMyBatis3Impl将默认的mapper后缀改成dao -->
-    <context id="DB2Tables" targetRuntime="com.aiolos.news.utils.TkMyBatis3Impl" defaultModelType="flat">
+    <!-- 自定义MyBatis3Impl将默认的mapper后缀改成dao -->
+    <context id="DB2Tables" targetRuntime="com.aiolos.news.utils.MyBatis3Impl" defaultModelType="flat">
         <!-- 生成的 Java 文件的编码 -->
         <property name="javaFileEncoding" value="UTF-8"/>
         <!-- 格式化 Java 代码 -->
@@ -55,21 +55,21 @@
         </javaClientGenerator>
 
         <!-- 数据库表 -->
-        <table tableName="admin_user" domainObjectName="AdminUser" mapperName="{0}Dao" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
-            <generatedKey column="id" sqlStatement="Mysql" />
-        </table>
-        <table tableName="app_user" domainObjectName="AppUser" mapperName="{0}Dao" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
-            <generatedKey column="id" sqlStatement="Mysql" />
-        </table>
-        <table tableName="article" domainObjectName="Article" mapperName="{0}Dao" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
-            <generatedKey column="id" sqlStatement="Mysql" />
-        </table>
-        <table tableName="category" domainObjectName="Category" mapperName="{0}Dao" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
-            <generatedKey column="id" sqlStatement="Mysql" />
-        </table>
-        <table tableName="comments" domainObjectName="Comments" mapperName="{0}Dao" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
-            <generatedKey column="id" sqlStatement="Mysql" />
-        </table>
+<!--        <table tableName="admin_user" domainObjectName="AdminUser" mapperName="{0}Dao" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">-->
+<!--            <generatedKey column="id" sqlStatement="Mysql" />-->
+<!--        </table>-->
+<!--        <table tableName="app_user" domainObjectName="AppUser" mapperName="{0}Dao" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">-->
+<!--            <generatedKey column="id" sqlStatement="Mysql" />-->
+<!--        </table>-->
+<!--        <table tableName="article" domainObjectName="Article" mapperName="{0}Dao" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">-->
+<!--            <generatedKey column="id" sqlStatement="Mysql" />-->
+<!--        </table>-->
+<!--        <table tableName="category" domainObjectName="Category" mapperName="{0}Dao" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">-->
+<!--            <generatedKey column="id" sqlStatement="Mysql" />-->
+<!--        </table>-->
+<!--        <table tableName="comments" domainObjectName="Comments" mapperName="{0}Dao" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">-->
+<!--            <generatedKey column="id" sqlStatement="Mysql" />-->
+<!--        </table>-->
         <table tableName="fans" domainObjectName="Fans" mapperName="{0}Dao" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
             <generatedKey column="id" sqlStatement="Mysql" />
         </table>

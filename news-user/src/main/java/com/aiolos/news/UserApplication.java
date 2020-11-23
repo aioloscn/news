@@ -12,7 +12,7 @@ import tk.mybatis.spring.annotation.MapperScan;
  */
 @SpringBootApplication
 @MapperScan(basePackages = "com.aiolos.news.dao")
-@ComponentScan("com.aiolos")    // 容器会扫描这个包下所有的@Component、@Configuration、@Bean、@Service等
+@ComponentScan(basePackages = "com.aiolos")    // 容器会扫描这个包下所有的@Component、@Configuration、@Bean、@Service等
 @EnableAspectJAutoProxy(proxyTargetClass = true)
 public class UserApplication {
     public static void main(String[] args) {

@@ -10,7 +10,7 @@ import static org.mybatis.generator.internal.util.StringUtility.stringHasValue;
  * @author Aiolos
  * @date 2020/9/24 3:52 下午
  */
-public class TkMyBatis3Impl extends IntrospectedTableMyBatis3SimpleImpl {
+public class MyBatis3Impl extends IntrospectedTableMyBatis3SimpleImpl {
 
     @Override
     protected String calculateMyBatis3XmlMapperFileName() {

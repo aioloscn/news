@@ -2,6 +2,7 @@ package com.aiolos.news.common.utils;
 
 import com.aiolos.news.common.exception.CustomizeException;
 import com.aiolos.news.common.enums.ErrorEnum;
+import com.aiolos.news.common.resources.AliyunResource;
 import com.aliyuncs.CommonRequest;
 import com.aliyuncs.CommonResponse;
 import com.aliyuncs.DefaultAcsClient;
@@ -12,7 +13,6 @@ import com.aliyuncs.http.MethodType;
 import com.aliyuncs.profile.DefaultProfile;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -23,8 +23,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class SMSUtils {
 
-    @Autowired
-    public AliyunResource aliyunResource;
+    public final AliyunResource aliyunResource;
+
+    public SMSUtils(AliyunResource aliyunResource) {
+        this.aliyunResource = aliyunResource;
+    }
 
     public void sendSMS(String mobile, String code) throws CustomizeException {
 

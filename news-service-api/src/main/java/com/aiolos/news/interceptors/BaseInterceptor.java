@@ -19,10 +19,13 @@ public class BaseInterceptor {
 
     public static final String REDIS_USER_INFO = "redis_user_info";
 
+    public static final String REDIS_ADMIN_TOKEN = "redis_admin_token";
+
     public boolean verifyUserIdToken(String id, String token, String redisKeyPrefix) throws CustomizeException {
 
         if (StringUtils.isNotBlank(id) && StringUtils.isNotBlank(token)) {
 
+            System.out.println(redisKeyPrefix + ":" + id);
             String redisToken = redis.get(redisKeyPrefix + ":" + id);
             if (StringUtils.isBlank(redisToken) || !redisToken.equalsIgnoreCase(token)) {
                 // token不一致，redis删除token，前端也会删除

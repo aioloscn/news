@@ -1,5 +1,6 @@
 package com.aiolos.news.config;
 
+import com.aiolos.news.interceptors.AdminTokenInterceptor;
 import com.aiolos.news.interceptors.PassportInterceptor;
 import com.aiolos.news.interceptors.UserActiveInterceptor;
 import com.aiolos.news.interceptors.UserTokenInterceptor;
@@ -30,6 +31,10 @@ public class InterceptorConfig implements WebMvcConfigurer {
         return new UserActiveInterceptor();
     }
 
+    @Bean
+    public AdminTokenInterceptor adminTokenInterceptor() {
+        return new AdminTokenInterceptor();
+    }
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
 
@@ -42,6 +47,8 @@ public class InterceptorConfig implements WebMvcConfigurer {
                 .addPathPatterns("/user/getAccountInfo")
                 .addPathPatterns("/user/updateAccountInfo")
                 .addPathPatterns("/file/uploadFace");
+        registry.addInterceptor(adminTokenInterceptor())
+                .addPathPatterns("/admin/adminIsExist");
         // 发表/修改/删除文章、发表/查看评论等等这些接口都是需要在用户激活以后才能进行
 //        registry.addInterceptor(userActiveInterceptor())
 //                .addPathPatterns("");

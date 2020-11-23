@@ -75,7 +75,7 @@ public class UserServiceImpl implements UserService {
 
         int resultCount = appUserDao.insert(user);
         if (resultCount != 1)
-            throw new CustomizeException(ErrorEnum.REGISTER_FAIL);
+            throw new CustomizeException(ErrorEnum.REGISTER_FAILED);
         return user;
     }
 
@@ -99,7 +99,7 @@ public class UserServiceImpl implements UserService {
 
         int affected = appUserDao.updateById(user);
         if (affected != 1) {
-            throw new CustomizeException(ErrorEnum.USER_UPDATE_FAIL);
+            throw new CustomizeException(ErrorEnum.USER_UPDATE_FAILED);
         }
 
         // 更新用户信息后，必须修改redis中保存的用户信息
