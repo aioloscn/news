@@ -46,11 +46,15 @@ public class InterceptorConfig implements WebMvcConfigurer {
         registry.addInterceptor(userTokenInterceptor())
                 .addPathPatterns("/user/getAccountInfo")
                 .addPathPatterns("/user/updateAccountInfo")
-                .addPathPatterns("/file/uploadFace");
+                .addPathPatterns("/file/uploadFace")
+                .addPathPatterns("/file/uploadSomeFiles");
+
         registry.addInterceptor(adminTokenInterceptor())
-                .addPathPatterns("/admin/adminIsExist");
+                .addPathPatterns("/admin/adminIsExist")
+                .addPathPatterns("/admin/addNewAdmin")
+                .addPathPatterns("/admin/getAdminList");
         // 发表/修改/删除文章、发表/查看评论等等这些接口都是需要在用户激活以后才能进行
-//        registry.addInterceptor(userActiveInterceptor())
-//                .addPathPatterns("");
+        registry.addInterceptor(userActiveInterceptor())
+                .addPathPatterns("/file/uploadSomeFiles");
     }
 }

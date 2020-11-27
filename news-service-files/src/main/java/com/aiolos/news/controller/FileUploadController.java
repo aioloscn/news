@@ -1,5 +1,6 @@
 package com.aiolos.news.controller;
 
+import com.aiolos.news.pojo.bo.NewAdminBO;
 import com.aiolos.news.resources.FileResource;
 import com.aiolos.news.common.CommonResponse;
 import com.aiolos.news.common.enums.ErrorEnum;
@@ -9,6 +10,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Aiolos
@@ -69,5 +73,52 @@ public class FileUploadController implements FileUploadControllerApi {
 
         log.info("path: {}", path);
         return CommonResponse.ok((Object)path);
+    }
+
+    @Override
+    public CommonResponse uploadSomeFiles(String userId, MultipartFile[] files) throws Exception {
+
+        // 声明list，用于存放多个图片路径，返回到前端
+        List<String> imageUrlList = new ArrayList<>();
+        if (files != null && files.length > 0) {
+            for (MultipartFile file : files) {
+
+                String path = "";
+                if (file != null) {
+                    // 获得文件上传的名称
+                    String fileName = file.getOriginalFilename();
+                    // 判断文件名不能为空
+                    if (StringUtils.isNotBlank(fileName)) {
+
+                        String suffix = fileName.substring(fileName.lastIndexOf(".") + 1);
+                        // 判断后缀是否符合预定义规范
+                        if (!suffix.equalsIgnoreCase("png") && !suffix.equalsIgnoreCase("jpg")
+                                && !suffix.equalsIgnoreCase("jpeg")) {
+                            continue;
+                        }
+
+                        // 执行上传
+                        path = uploadService.uploadOSS(file, userId, suffix);
+                    } else {
+                        continue;
+                    }
+                } else {
+                    continue;
+                }
+
+                if (StringUtils.isNotBlank(path)) {
+                    // TODO 对图片进行审核
+                    imageUrlList.add(fileResource.getOssHost() + path);
+                } else {
+                    continue;
+                }
+            }
+        }
+        return CommonResponse.ok(imageUrlList);
+    }
+
+    @Override
+    public CommonResponse uploadToGridFS(NewAdminBO newAdminBO) {
+        return null;
     }
 }

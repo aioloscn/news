@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService {
 
         AppUser user = new AppUser();
         user.setMobile(mobile);
-        QueryWrapper queryWrapper = new QueryWrapper(user);
+        QueryWrapper<AppUser> queryWrapper = new QueryWrapper(user);
         user = appUserDao.selectOne(queryWrapper);
 
         return user;

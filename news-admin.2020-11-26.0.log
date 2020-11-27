@@ -1,0 +1,174 @@
+2020-11-26 06:06:48.021 [main] INFO  com.aiolos.news.AdminApplication - The following profiles are active: dev
+2020-11-26 06:06:48.932 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2020-11-26 06:06:48.935 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2020-11-26 06:06:48.970 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 18ms. Found 0 Redis repository interfaces.
+2020-11-26 06:06:49.130 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'adminUserDao' and 'com.aiolos.news.dao.AdminUserDao' mapperInterface. Bean already defined with the same name!
+2020-11-26 06:06:49.130 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'appUserDao' and 'com.aiolos.news.dao.AppUserDao' mapperInterface. Bean already defined with the same name!
+2020-11-26 06:06:49.130 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'articleDao' and 'com.aiolos.news.dao.ArticleDao' mapperInterface. Bean already defined with the same name!
+2020-11-26 06:06:49.130 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'categoryDao' and 'com.aiolos.news.dao.CategoryDao' mapperInterface. Bean already defined with the same name!
+2020-11-26 06:06:49.131 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'commentsDao' and 'com.aiolos.news.dao.CommentsDao' mapperInterface. Bean already defined with the same name!
+2020-11-26 06:06:49.131 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'fansDao' and 'com.aiolos.news.dao.FansDao' mapperInterface. Bean already defined with the same name!
+2020-11-26 06:06:49.131 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - No MyBatis mapper was found in '[com.aiolos.news.dao]' package. Please check your configuration.
+2020-11-26 06:06:49.222 [main] INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=c79f278e-4300-3122-86e4-d7f49d809ddd
+2020-11-26 06:06:49.836 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8005 (http)
+2020-11-26 06:06:49.847 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8005"]
+2020-11-26 06:06:49.848 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2020-11-26 06:06:49.848 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.31]
+2020-11-26 06:06:49.957 [main] INFO  o.a.c.c.C.[.[.[/news/admin] - Initializing Spring embedded WebApplicationContext
+2020-11-26 06:06:49.957 [main] INFO  o.s.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 1914 ms
+2020-11-26 06:06:50.039 [main] INFO  c.a.d.s.b.a.DruidDataSourceAutoConfigure - Init DruidDataSource
+2020-11-26 06:06:50.172 [main] INFO  c.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2020-11-26 06:07:16.290 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2020-11-26 06:07:16.416 [main] WARN  c.n.c.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+2020-11-26 06:07:16.417 [main] INFO  c.n.c.sources.URLConfigurationSource - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2020-11-26 06:07:16.423 [main] WARN  c.n.c.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+2020-11-26 06:07:16.423 [main] INFO  c.n.c.sources.URLConfigurationSource - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2020-11-26 06:07:16.592 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2020-11-26 06:07:17.088 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear tk.mybatis.mapper.util.MsUtil CLASS_CACHE cache.
+2020-11-26 06:07:17.089 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear tk.mybatis.mapper.genid.GenIdUtil CACHE cache.
+2020-11-26 06:07:17.090 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear tk.mybatis.mapper.version.VersionUtil CACHE cache.
+2020-11-26 06:07:17.092 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear EntityHelper entityTableMap cache.
+2020-11-26 06:07:17.168 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Context refreshed
+2020-11-26 06:07:17.187 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2020-11-26 06:07:17.232 [main] INFO  s.d.s.w.s.ApiListingReferenceScanner - Scanning for api listing references
+2020-11-26 06:07:17.449 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8005"]
+2020-11-26 06:07:17.483 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8005 (http) with context path '/news/admin'
+2020-11-26 06:07:17.488 [main] INFO  com.aiolos.news.AdminApplication - Started AdminApplication in 51.396 seconds (JVM running for 57.475)
+2020-11-26 06:09:25.634 [http-nio-8005-exec-1] INFO  o.a.c.c.C.[.[.[/news/admin] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-11-26 06:09:25.635 [http-nio-8005-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2020-11-26 06:09:25.651 [http-nio-8005-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 16 ms
+2020-11-26 06:09:25.699 [http-nio-8005-exec-1] INFO  c.a.n.c.CategoryMngController - Enter function getCats
+2020-11-26 06:09:25.840 [http-nio-8005-exec-1] INFO  io.lettuce.core.EpollProvider - Starting without optional epoll library
+2020-11-26 06:09:25.842 [http-nio-8005-exec-1] INFO  io.lettuce.core.KqueueProvider - Starting without optional kqueue library
+2020-11-26 06:09:31.152 [http-nio-8005-exec-1] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.CategoryServiceImpl.queryCategoryList ============
+2020-11-26 06:09:31.713 [http-nio-8005-exec-1] INFO  c.a.news.aspect.ServiceLogAspect - 当前执行耗时：561
+2020-11-26 06:09:32.049 [http-nio-8005-exec-2] INFO  c.a.n.c.CategoryMngController - Enter function getCats
+2020-11-26 06:11:57.226 [http-nio-8005-exec-4] INFO  c.a.n.c.CategoryMngController - Enter function getCats
+2020-11-26 08:54:03.370 [SpringContextShutdownHook] INFO  o.s.s.c.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+2020-11-26 08:54:03.908 [SpringContextShutdownHook] INFO  c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2020-11-26 21:54:14.060 [main] INFO  com.aiolos.news.AdminApplication - The following profiles are active: dev
+2020-11-26 21:54:14.898 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2020-11-26 21:54:14.900 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2020-11-26 21:54:14.940 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 20ms. Found 0 Redis repository interfaces.
+2020-11-26 21:54:15.084 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'adminUserDao' and 'com.aiolos.news.dao.AdminUserDao' mapperInterface. Bean already defined with the same name!
+2020-11-26 21:54:15.084 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'categoryDao' and 'com.aiolos.news.dao.CategoryDao' mapperInterface. Bean already defined with the same name!
+2020-11-26 21:54:15.084 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - No MyBatis mapper was found in '[com.aiolos.news.dao]' package. Please check your configuration.
+2020-11-26 21:54:15.182 [main] INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=a48aa483-8181-3fe5-954d-67041e743b42
+2020-11-26 21:54:15.855 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8005 (http)
+2020-11-26 21:54:15.873 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8005"]
+2020-11-26 21:54:15.874 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2020-11-26 21:54:15.874 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.31]
+2020-11-26 21:54:15.996 [main] INFO  o.a.c.c.C.[.[.[/news/admin] - Initializing Spring embedded WebApplicationContext
+2020-11-26 21:54:15.996 [main] INFO  o.s.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 1915 ms
+2020-11-26 21:54:16.097 [main] INFO  c.a.d.s.b.a.DruidDataSourceAutoConfigure - Init DruidDataSource
+2020-11-26 21:54:16.206 [main] INFO  c.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2020-11-26 21:54:42.300 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2020-11-26 21:54:42.324 [main] WARN  c.n.c.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+2020-11-26 21:54:42.324 [main] INFO  c.n.c.sources.URLConfigurationSource - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2020-11-26 21:54:42.329 [main] WARN  c.n.c.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+2020-11-26 21:54:42.329 [main] INFO  c.n.c.sources.URLConfigurationSource - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2020-11-26 21:54:42.465 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2020-11-26 21:54:42.972 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear tk.mybatis.mapper.util.MsUtil CLASS_CACHE cache.
+2020-11-26 21:54:42.972 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear tk.mybatis.mapper.genid.GenIdUtil CACHE cache.
+2020-11-26 21:54:42.973 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear tk.mybatis.mapper.version.VersionUtil CACHE cache.
+2020-11-26 21:54:42.974 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear EntityHelper entityTableMap cache.
+2020-11-26 21:54:43.046 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Context refreshed
+2020-11-26 21:54:43.059 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2020-11-26 21:54:43.111 [main] INFO  s.d.s.w.s.ApiListingReferenceScanner - Scanning for api listing references
+2020-11-26 21:54:43.354 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8005"]
+2020-11-26 21:54:43.399 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8005 (http) with context path '/news/admin'
+2020-11-26 21:54:43.406 [main] INFO  com.aiolos.news.AdminApplication - Started AdminApplication in 51.274 seconds (JVM running for 57.142)
+2020-11-26 22:20:57.569 [http-nio-8005-exec-3] INFO  o.a.c.c.C.[.[.[/news/admin] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-11-26 22:20:57.573 [http-nio-8005-exec-3] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2020-11-26 22:20:57.620 [http-nio-8005-exec-3] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 47 ms
+2020-11-26 22:20:57.672 [http-nio-8005-exec-4] WARN  o.s.web.servlet.PageNotFound - No mapping for GET /news/admin/friendLinkMng/portal/list
+2020-11-26 22:20:57.683 [http-nio-8005-exec-4] INFO  c.a.n.c.advice.GlobalExceptionAdvice - No handler found for GET /news/admin/friendLinkMng/portal/list
+2020-11-26 22:20:57.686 [http-nio-8005-exec-3] INFO  c.a.n.c.CategoryMngController - Enter function getCats
+2020-11-26 22:20:58.111 [http-nio-8005-exec-3] INFO  io.lettuce.core.EpollProvider - Starting without optional epoll library
+2020-11-26 22:20:58.115 [http-nio-8005-exec-3] INFO  io.lettuce.core.KqueueProvider - Starting without optional kqueue library
+2020-11-26 22:21:03.551 [http-nio-8005-exec-5] INFO  c.a.n.c.CategoryMngController - Enter function getCats
+2020-11-26 22:22:48.916 [http-nio-8005-exec-9] INFO  c.a.n.c.CategoryMngController - Enter function getCats
+2020-11-26 22:22:49.123 [http-nio-8005-exec-10] INFO  c.a.n.c.CategoryMngController - Enter function getCats
+2020-11-26 22:22:49.130 [http-nio-8005-exec-1] WARN  o.s.web.servlet.PageNotFound - No mapping for GET /news/admin/friendLinkMng/portal/list
+2020-11-26 22:22:49.130 [http-nio-8005-exec-1] INFO  c.a.n.c.advice.GlobalExceptionAdvice - No handler found for GET /news/admin/friendLinkMng/portal/list
+2020-11-26 22:22:54.824 [http-nio-8005-exec-2] INFO  c.a.n.c.CategoryMngController - Enter function getCats
+2020-11-26 22:24:17.530 [http-nio-8005-exec-3] INFO  c.a.n.c.CategoryMngController - Enter function getCats
+2020-11-26 22:24:17.910 [http-nio-8005-exec-5] INFO  c.a.n.c.CategoryMngController - Enter function getCats
+2020-11-26 22:24:17.913 [http-nio-8005-exec-6] WARN  o.s.web.servlet.PageNotFound - No mapping for GET /news/admin/friendLinkMng/portal/list
+2020-11-26 22:24:17.923 [http-nio-8005-exec-6] INFO  c.a.n.c.advice.GlobalExceptionAdvice - No handler found for GET /news/admin/friendLinkMng/portal/list
+2020-11-26 22:26:56.678 [http-nio-8005-exec-9] INFO  c.a.n.c.CategoryMngController - Enter function getCats
+2020-11-26 22:28:59.087 [http-nio-8005-exec-1] INFO  c.a.n.c.CategoryMngController - Enter function getCats
+2020-11-26 22:29:57.344 [SpringContextShutdownHook] INFO  o.s.s.c.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+2020-11-26 22:29:57.495 [SpringContextShutdownHook] INFO  c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2020-11-26 22:30:32.482 [main] INFO  com.aiolos.news.AdminApplication - The following profiles are active: dev
+2020-11-26 22:30:33.325 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2020-11-26 22:30:33.327 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2020-11-26 22:30:33.368 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 28ms. Found 0 Redis repository interfaces.
+2020-11-26 22:30:33.509 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'adminUserDao' and 'com.aiolos.news.dao.AdminUserDao' mapperInterface. Bean already defined with the same name!
+2020-11-26 22:30:33.509 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'categoryDao' and 'com.aiolos.news.dao.CategoryDao' mapperInterface. Bean already defined with the same name!
+2020-11-26 22:30:33.509 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - No MyBatis mapper was found in '[com.aiolos.news.dao]' package. Please check your configuration.
+2020-11-26 22:30:33.600 [main] INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=a48aa483-8181-3fe5-954d-67041e743b42
+2020-11-26 22:30:34.210 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8005 (http)
+2020-11-26 22:30:34.220 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8005"]
+2020-11-26 22:30:34.221 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2020-11-26 22:30:34.221 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.31]
+2020-11-26 22:30:34.322 [main] INFO  o.a.c.c.C.[.[.[/news/admin] - Initializing Spring embedded WebApplicationContext
+2020-11-26 22:30:34.322 [main] INFO  o.s.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 1820 ms
+2020-11-26 22:30:34.406 [main] INFO  c.a.d.s.b.a.DruidDataSourceAutoConfigure - Init DruidDataSource
+2020-11-26 22:30:34.519 [main] INFO  c.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2020-11-26 22:31:00.614 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2020-11-26 22:31:00.639 [main] WARN  c.n.c.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+2020-11-26 22:31:00.639 [main] INFO  c.n.c.sources.URLConfigurationSource - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2020-11-26 22:31:00.644 [main] WARN  c.n.c.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+2020-11-26 22:31:00.644 [main] INFO  c.n.c.sources.URLConfigurationSource - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2020-11-26 22:31:00.784 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2020-11-26 22:31:01.301 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear tk.mybatis.mapper.util.MsUtil CLASS_CACHE cache.
+2020-11-26 22:31:01.302 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear tk.mybatis.mapper.genid.GenIdUtil CACHE cache.
+2020-11-26 22:31:01.302 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear tk.mybatis.mapper.version.VersionUtil CACHE cache.
+2020-11-26 22:31:01.303 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear EntityHelper entityTableMap cache.
+2020-11-26 22:31:01.374 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Context refreshed
+2020-11-26 22:31:01.391 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2020-11-26 22:31:01.434 [main] INFO  s.d.s.w.s.ApiListingReferenceScanner - Scanning for api listing references
+2020-11-26 22:31:01.652 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8005"]
+2020-11-26 22:31:01.689 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8005 (http) with context path '/news/admin'
+2020-11-26 22:31:01.694 [main] INFO  com.aiolos.news.AdminApplication - Started AdminApplication in 51.153 seconds (JVM running for 56.954)
+2020-11-26 22:42:18.383 [http-nio-8005-exec-2] INFO  o.a.c.c.C.[.[.[/news/admin] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-11-26 22:42:18.386 [http-nio-8005-exec-2] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2020-11-26 22:42:18.430 [http-nio-8005-exec-2] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 44 ms
+2020-11-26 22:42:18.486 [http-nio-8005-exec-1] WARN  o.s.web.servlet.PageNotFound - No mapping for GET /news/admin/friendLinkMng/portal/list
+2020-11-26 22:42:18.497 [http-nio-8005-exec-1] INFO  c.a.n.c.advice.GlobalExceptionAdvice - No handler found for GET /news/admin/friendLinkMng/portal/list
+2020-11-26 22:42:18.499 [http-nio-8005-exec-2] INFO  c.a.n.c.CategoryMngController - Enter function getCats
+2020-11-26 22:42:18.842 [http-nio-8005-exec-2] INFO  io.lettuce.core.EpollProvider - Starting without optional epoll library
+2020-11-26 22:42:18.844 [http-nio-8005-exec-2] INFO  io.lettuce.core.KqueueProvider - Starting without optional kqueue library
+2020-11-26 22:42:19.129 [http-nio-8005-exec-3] INFO  c.a.n.c.CategoryMngController - Enter function getCats
+2020-11-26 22:42:19.130 [http-nio-8005-exec-4] WARN  o.s.web.servlet.PageNotFound - No mapping for GET /news/admin/friendLinkMng/portal/list
+2020-11-26 22:42:19.131 [http-nio-8005-exec-4] INFO  c.a.n.c.advice.GlobalExceptionAdvice - No handler found for GET /news/admin/friendLinkMng/portal/list
+2020-11-26 22:42:33.390 [http-nio-8005-exec-5] INFO  c.a.n.c.CategoryMngController - Enter function getCats
+2020-11-26 22:42:33.391 [http-nio-8005-exec-6] WARN  o.s.web.servlet.PageNotFound - No mapping for GET /news/admin/friendLinkMng/portal/list
+2020-11-26 22:42:33.392 [http-nio-8005-exec-6] INFO  c.a.n.c.advice.GlobalExceptionAdvice - No handler found for GET /news/admin/friendLinkMng/portal/list
+2020-11-26 22:42:41.096 [http-nio-8005-exec-7] INFO  c.a.n.c.CategoryMngController - Enter function getCats
+2020-11-26 22:42:41.118 [http-nio-8005-exec-8] WARN  o.s.web.servlet.PageNotFound - No mapping for GET /news/admin/friendLinkMng/portal/list
+2020-11-26 22:42:41.123 [http-nio-8005-exec-8] INFO  c.a.n.c.advice.GlobalExceptionAdvice - No handler found for GET /news/admin/friendLinkMng/portal/list
+2020-11-26 22:46:10.396 [http-nio-8005-exec-1] INFO  c.a.n.c.CategoryMngController - Enter function getCats
+2020-11-26 22:46:37.578 [http-nio-8005-exec-4] INFO  c.a.n.c.CategoryMngController - Enter function getCats
+2020-11-26 22:53:25.486 [http-nio-8005-exec-2] INFO  c.a.n.c.CategoryMngController - Enter function getCats
+2020-11-26 22:59:29.393 [http-nio-8005-exec-5] INFO  c.a.n.c.CategoryMngController - Enter function getCats
+2020-11-26 22:59:29.394 [http-nio-8005-exec-7] WARN  o.s.web.servlet.PageNotFound - No mapping for GET /news/admin/friendLinkMng/portal/list
+2020-11-26 22:59:29.413 [http-nio-8005-exec-7] INFO  c.a.n.c.advice.GlobalExceptionAdvice - No handler found for GET /news/admin/friendLinkMng/portal/list
+2020-11-26 23:00:13.144 [http-nio-8005-exec-8] INFO  c.a.n.c.CategoryMngController - Enter function getCats
+2020-11-26 23:37:09.186 [http-nio-8005-exec-1] INFO  c.a.n.c.CategoryMngController - Enter function getCats
+2020-11-26 23:37:09.192 [http-nio-8005-exec-4] WARN  o.s.web.servlet.PageNotFound - No mapping for GET /news/admin/friendLinkMng/portal/list
+2020-11-26 23:37:09.219 [http-nio-8005-exec-4] INFO  c.a.n.c.advice.GlobalExceptionAdvice - No handler found for GET /news/admin/friendLinkMng/portal/list
+2020-11-26 23:40:53.601 [http-nio-8005-exec-6] INFO  c.a.n.c.CategoryMngController - Enter function getCats
+2020-11-26 23:55:31.959 [http-nio-8005-exec-5] INFO  c.a.n.c.CategoryMngController - Enter function getCats
+2020-11-26 23:55:32.057 [http-nio-8005-exec-8] WARN  o.s.web.servlet.PageNotFound - No mapping for GET /news/admin/friendLinkMng/portal/list
+2020-11-26 23:55:32.072 [http-nio-8005-exec-8] INFO  c.a.n.c.advice.GlobalExceptionAdvice - No handler found for GET /news/admin/friendLinkMng/portal/list
+2020-11-26 23:55:32.073 [http-nio-8005-exec-9] INFO  c.a.n.c.CategoryMngController - Enter function getCats
+2020-11-26 23:56:42.767 [http-nio-8005-exec-3] INFO  c.a.n.c.CategoryMngController - Enter function getCats
+2020-11-26 23:56:42.772 [http-nio-8005-exec-2] WARN  o.s.web.servlet.PageNotFound - No mapping for GET /news/admin/friendLinkMng/portal/list
+2020-11-26 23:56:42.777 [http-nio-8005-exec-2] INFO  c.a.n.c.advice.GlobalExceptionAdvice - No handler found for GET /news/admin/friendLinkMng/portal/list
+2020-11-26 23:56:43.061 [http-nio-8005-exec-6] INFO  c.a.n.c.CategoryMngController - Enter function getCats
+2020-11-26 23:56:53.665 [http-nio-8005-exec-7] INFO  c.a.n.c.CategoryMngController - Enter function getCats
+2020-11-26 23:56:53.903 [http-nio-8005-exec-8] WARN  o.s.web.servlet.PageNotFound - No mapping for GET /news/admin/friendLinkMng/portal/list
+2020-11-26 23:56:53.904 [http-nio-8005-exec-5] INFO  c.a.n.c.CategoryMngController - Enter function getCats
+2020-11-26 23:56:53.904 [http-nio-8005-exec-8] INFO  c.a.n.c.advice.GlobalExceptionAdvice - No handler found for GET /news/admin/friendLinkMng/portal/list

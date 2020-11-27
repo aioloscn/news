@@ -1,0 +1,193 @@
+2020-11-27 03:02:31.466 [http-nio-8001-exec-10] WARN  o.s.web.servlet.PageNotFound - No mapping for POST /news/article/article/queryMyList
+2020-11-27 03:02:31.549 [http-nio-8001-exec-10] INFO  c.a.n.c.advice.GlobalExceptionAdvice - No handler found for POST /news/article/article/queryMyList
+2020-11-27 04:22:23.954 [http-nio-8001-exec-7] WARN  o.s.web.servlet.PageNotFound - No mapping for POST /news/article/article/queryMyArticleList
+2020-11-27 04:22:23.981 [http-nio-8001-exec-7] INFO  c.a.n.c.advice.GlobalExceptionAdvice - No handler found for POST /news/article/article/queryMyArticleList
+2020-11-27 04:23:21.046 [http-nio-8001-exec-9] WARN  o.s.web.servlet.PageNotFound - No mapping for POST /news/article/article/queryMyArticleList
+2020-11-27 04:23:21.073 [http-nio-8001-exec-9] INFO  c.a.n.c.advice.GlobalExceptionAdvice - No handler found for POST /news/article/article/queryMyArticleList
+2020-11-27 06:53:22.980 [http-nio-8001-exec-3] WARN  o.s.web.servlet.PageNotFound - No mapping for POST /news/article/article/queryMyArticleList
+2020-11-27 06:53:22.987 [http-nio-8001-exec-3] INFO  c.a.n.c.advice.GlobalExceptionAdvice - No handler found for POST /news/article/article/queryMyArticleList
+2020-11-27 06:53:49.339 [SpringContextShutdownHook] INFO  o.s.s.c.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+2020-11-27 06:53:49.645 [SpringContextShutdownHook] INFO  c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2020-11-27 06:54:29.241 [main] INFO  com.aiolos.news.ArticleApplication - The following profiles are active: dev
+2020-11-27 06:54:30.186 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2020-11-27 06:54:30.189 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2020-11-27 06:54:30.225 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 19ms. Found 0 Redis repository interfaces.
+2020-11-27 06:54:30.399 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'articleDao' and 'com.aiolos.news.dao.ArticleDao' mapperInterface. Bean already defined with the same name!
+2020-11-27 06:54:30.399 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'commentsDao' and 'com.aiolos.news.dao.CommentsDao' mapperInterface. Bean already defined with the same name!
+2020-11-27 06:54:30.400 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - No MyBatis mapper was found in '[com.aiolos.news.dao]' package. Please check your configuration.
+2020-11-27 06:54:30.486 [main] INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=89ff2177-cc7e-3213-8a73-43fa88c0c50e
+2020-11-27 06:54:31.157 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8001 (http)
+2020-11-27 06:54:31.168 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8001"]
+2020-11-27 06:54:31.168 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2020-11-27 06:54:31.168 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.31]
+2020-11-27 06:54:31.280 [main] INFO  o.a.c.c.C.[.[.[/news/article] - Initializing Spring embedded WebApplicationContext
+2020-11-27 06:54:31.280 [main] INFO  o.s.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 2015 ms
+2020-11-27 06:54:31.369 [main] INFO  c.a.d.s.b.a.DruidDataSourceAutoConfigure - Init DruidDataSource
+2020-11-27 06:54:31.488 [main] INFO  c.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2020-11-27 06:54:57.640 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2020-11-27 06:54:57.693 [main] WARN  c.n.c.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+2020-11-27 06:54:57.694 [main] INFO  c.n.c.sources.URLConfigurationSource - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2020-11-27 06:54:57.698 [main] WARN  c.n.c.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+2020-11-27 06:54:57.698 [main] INFO  c.n.c.sources.URLConfigurationSource - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2020-11-27 06:54:57.867 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2020-11-27 06:54:58.416 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear tk.mybatis.mapper.util.MsUtil CLASS_CACHE cache.
+2020-11-27 06:54:58.417 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear tk.mybatis.mapper.genid.GenIdUtil CACHE cache.
+2020-11-27 06:54:58.417 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear tk.mybatis.mapper.version.VersionUtil CACHE cache.
+2020-11-27 06:54:58.419 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear EntityHelper entityTableMap cache.
+2020-11-27 06:54:58.496 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Context refreshed
+2020-11-27 06:54:58.520 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2020-11-27 06:54:58.573 [main] INFO  s.d.s.w.s.ApiListingReferenceScanner - Scanning for api listing references
+2020-11-27 06:54:58.796 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8001"]
+2020-11-27 06:54:58.837 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8001 (http) with context path '/news/article'
+2020-11-27 06:54:58.842 [main] INFO  com.aiolos.news.ArticleApplication - Started ArticleApplication in 51.73 seconds (JVM running for 57.909)
+2020-11-27 06:55:23.868 [http-nio-8001-exec-1] INFO  o.a.c.c.C.[.[.[/news/article] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-11-27 06:55:23.869 [http-nio-8001-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2020-11-27 06:55:23.881 [http-nio-8001-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 12 ms
+2020-11-27 06:55:23.979 [http-nio-8001-exec-2] INFO  c.a.n.c.advice.GlobalExceptionAdvice - Failed to convert value of type 'java.lang.String' to required type 'java.util.Date'; nested exception is org.springframework.core.convert.ConversionFailedException: Failed to convert from type [java.lang.String] to type [@org.springframework.web.bind.annotation.RequestParam java.util.Date] for value ''; nested exception is java.lang.IllegalArgumentException
+2020-11-27 06:55:33.689 [http-nio-8001-exec-4] INFO  c.a.n.c.advice.GlobalExceptionAdvice - Failed to convert value of type 'java.lang.String' to required type 'java.util.Date'; nested exception is org.springframework.core.convert.ConversionFailedException: Failed to convert from type [java.lang.String] to type [@org.springframework.web.bind.annotation.RequestParam java.util.Date] for value ''; nested exception is java.lang.IllegalArgumentException
+2020-11-27 06:58:22.362 [SpringContextShutdownHook] INFO  o.s.s.c.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+2020-11-27 06:58:22.385 [SpringContextShutdownHook] INFO  c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2020-11-27 06:58:59.308 [main] INFO  com.aiolos.news.ArticleApplication - The following profiles are active: dev
+2020-11-27 06:59:00.079 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2020-11-27 06:59:00.081 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2020-11-27 06:59:00.111 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 17ms. Found 0 Redis repository interfaces.
+2020-11-27 06:59:00.252 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'articleDao' and 'com.aiolos.news.dao.ArticleDao' mapperInterface. Bean already defined with the same name!
+2020-11-27 06:59:00.253 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'commentsDao' and 'com.aiolos.news.dao.CommentsDao' mapperInterface. Bean already defined with the same name!
+2020-11-27 06:59:00.253 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - No MyBatis mapper was found in '[com.aiolos.news.dao]' package. Please check your configuration.
+2020-11-27 06:59:00.346 [main] INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=89ff2177-cc7e-3213-8a73-43fa88c0c50e
+2020-11-27 06:59:00.966 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8001 (http)
+2020-11-27 06:59:00.977 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8001"]
+2020-11-27 06:59:00.978 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2020-11-27 06:59:00.978 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.31]
+2020-11-27 06:59:01.078 [main] INFO  o.a.c.c.C.[.[.[/news/article] - Initializing Spring embedded WebApplicationContext
+2020-11-27 06:59:01.079 [main] INFO  o.s.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 1753 ms
+2020-11-27 06:59:01.160 [main] INFO  c.a.d.s.b.a.DruidDataSourceAutoConfigure - Init DruidDataSource
+2020-11-27 06:59:01.262 [main] INFO  c.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2020-11-27 06:59:27.275 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2020-11-27 06:59:27.321 [main] WARN  c.n.c.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+2020-11-27 06:59:27.321 [main] INFO  c.n.c.sources.URLConfigurationSource - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2020-11-27 06:59:27.325 [main] WARN  c.n.c.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+2020-11-27 06:59:27.325 [main] INFO  c.n.c.sources.URLConfigurationSource - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2020-11-27 06:59:27.464 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2020-11-27 06:59:27.938 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear tk.mybatis.mapper.util.MsUtil CLASS_CACHE cache.
+2020-11-27 06:59:27.939 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear tk.mybatis.mapper.genid.GenIdUtil CACHE cache.
+2020-11-27 06:59:27.939 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear tk.mybatis.mapper.version.VersionUtil CACHE cache.
+2020-11-27 06:59:27.941 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear EntityHelper entityTableMap cache.
+2020-11-27 06:59:28.010 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Context refreshed
+2020-11-27 06:59:28.022 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2020-11-27 06:59:28.067 [main] INFO  s.d.s.w.s.ApiListingReferenceScanner - Scanning for api listing references
+2020-11-27 06:59:28.247 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8001"]
+2020-11-27 06:59:28.287 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8001 (http) with context path '/news/article'
+2020-11-27 06:59:28.294 [main] INFO  com.aiolos.news.ArticleApplication - Started ArticleApplication in 50.821 seconds (JVM running for 56.592)
+2020-11-27 06:59:58.414 [http-nio-8001-exec-1] INFO  o.a.c.c.C.[.[.[/news/article] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-11-27 06:59:58.416 [http-nio-8001-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2020-11-27 06:59:58.433 [http-nio-8001-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 17 ms
+2020-11-27 06:59:58.530 [http-nio-8001-exec-2] INFO  c.a.n.c.advice.GlobalExceptionAdvice - Failed to convert value of type 'java.lang.String' to required type 'java.util.Date'; nested exception is org.springframework.core.convert.ConversionFailedException: Failed to convert from type [java.lang.String] to type [@org.springframework.web.bind.annotation.RequestParam java.util.Date] for value ''; nested exception is java.lang.IllegalArgumentException
+2020-11-27 07:55:05.356 [http-nio-8001-exec-6] INFO  c.a.n.c.advice.GlobalExceptionAdvice - Failed to convert value of type 'java.lang.String' to required type 'java.util.Date'; nested exception is org.springframework.core.convert.ConversionFailedException: Failed to convert from type [java.lang.String] to type [@org.springframework.web.bind.annotation.RequestParam java.util.Date] for value '2019-10-16'; nested exception is java.lang.IllegalArgumentException
+2020-11-27 07:55:10.361 [http-nio-8001-exec-8] INFO  c.a.n.c.advice.GlobalExceptionAdvice - Failed to convert value of type 'java.lang.String' to required type 'java.util.Date'; nested exception is org.springframework.core.convert.ConversionFailedException: Failed to convert from type [java.lang.String] to type [@org.springframework.web.bind.annotation.RequestParam java.util.Date] for value ''; nested exception is java.lang.IllegalArgumentException
+2020-11-27 07:55:29.210 [http-nio-8001-exec-10] INFO  c.a.n.c.advice.GlobalExceptionAdvice - Failed to convert value of type 'java.lang.String' to required type 'java.util.Date'; nested exception is org.springframework.core.convert.ConversionFailedException: Failed to convert from type [java.lang.String] to type [@org.springframework.web.bind.annotation.RequestParam java.util.Date] for value '2020-03-17'; nested exception is java.lang.IllegalArgumentException
+2020-11-27 08:02:52.667 [http-nio-8001-exec-10] INFO  c.a.n.c.advice.GlobalExceptionAdvice - Failed to convert value of type 'java.lang.String' to required type 'java.util.Date'; nested exception is org.springframework.core.convert.ConversionFailedException: Failed to convert from type [java.lang.String] to type [@org.springframework.web.bind.annotation.RequestParam java.util.Date] for value ''; nested exception is java.lang.IllegalArgumentException
+2020-11-27 08:03:19.166 [http-nio-8001-exec-4] INFO  c.a.n.c.advice.GlobalExceptionAdvice - Failed to convert value of type 'java.lang.String' to required type 'java.util.Date'; nested exception is org.springframework.core.convert.ConversionFailedException: Failed to convert from type [java.lang.String] to type [@org.springframework.web.bind.annotation.RequestParam java.util.Date] for value '2019 10-01'; nested exception is java.lang.IllegalArgumentException
+2020-11-27 08:34:08.631 [SpringContextShutdownHook] INFO  o.s.s.c.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+2020-11-27 08:34:08.690 [SpringContextShutdownHook] INFO  c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2020-11-27 08:34:45.411 [main] INFO  com.aiolos.news.ArticleApplication - The following profiles are active: dev
+2020-11-27 08:34:46.386 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2020-11-27 08:34:46.389 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2020-11-27 08:34:46.431 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 21ms. Found 0 Redis repository interfaces.
+2020-11-27 08:34:46.599 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'articleDao' and 'com.aiolos.news.dao.ArticleDao' mapperInterface. Bean already defined with the same name!
+2020-11-27 08:34:46.600 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'commentsDao' and 'com.aiolos.news.dao.CommentsDao' mapperInterface. Bean already defined with the same name!
+2020-11-27 08:34:46.600 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - No MyBatis mapper was found in '[com.aiolos.news.dao]' package. Please check your configuration.
+2020-11-27 08:34:46.697 [main] INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=89ff2177-cc7e-3213-8a73-43fa88c0c50e
+2020-11-27 08:34:47.477 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8001 (http)
+2020-11-27 08:34:47.489 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8001"]
+2020-11-27 08:34:47.489 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2020-11-27 08:34:47.489 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.31]
+2020-11-27 08:34:47.614 [main] INFO  o.a.c.c.C.[.[.[/news/article] - Initializing Spring embedded WebApplicationContext
+2020-11-27 08:34:47.614 [main] INFO  o.s.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 2178 ms
+2020-11-27 08:34:47.716 [main] INFO  c.a.d.s.b.a.DruidDataSourceAutoConfigure - Init DruidDataSource
+2020-11-27 08:34:47.856 [main] INFO  c.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2020-11-27 08:35:13.954 [main] WARN  o.s.b.a.w.f.WebConversionService - Auto-configuration of Joda-Time formatters is deprecated in favor of using java.time (JSR-310).
+2020-11-27 08:35:14.107 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2020-11-27 08:35:14.160 [main] WARN  c.n.c.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+2020-11-27 08:35:14.161 [main] INFO  c.n.c.sources.URLConfigurationSource - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2020-11-27 08:35:14.167 [main] WARN  c.n.c.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+2020-11-27 08:35:14.167 [main] INFO  c.n.c.sources.URLConfigurationSource - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2020-11-27 08:35:14.345 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2020-11-27 08:35:14.977 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear tk.mybatis.mapper.util.MsUtil CLASS_CACHE cache.
+2020-11-27 08:35:14.979 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear tk.mybatis.mapper.genid.GenIdUtil CACHE cache.
+2020-11-27 08:35:14.980 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear tk.mybatis.mapper.version.VersionUtil CACHE cache.
+2020-11-27 08:35:14.982 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear EntityHelper entityTableMap cache.
+2020-11-27 08:35:15.072 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Context refreshed
+2020-11-27 08:35:15.091 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2020-11-27 08:35:15.146 [main] INFO  s.d.s.w.s.ApiListingReferenceScanner - Scanning for api listing references
+2020-11-27 08:35:15.369 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8001"]
+2020-11-27 08:35:15.406 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8001 (http) with context path '/news/article'
+2020-11-27 08:35:15.411 [main] INFO  com.aiolos.news.ArticleApplication - Started ArticleApplication in 51.989 seconds (JVM running for 57.751)
+2020-11-27 08:35:28.204 [http-nio-8001-exec-1] INFO  o.a.c.c.C.[.[.[/news/article] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-11-27 08:35:28.205 [http-nio-8001-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2020-11-27 08:35:28.217 [http-nio-8001-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 12 ms
+2020-11-27 08:35:28.289 [http-nio-8001-exec-2] INFO  c.a.n.controller.ArticleController - Enter function queryMyArticleList, parameter userId: 1316846502299172864, keyword: , status: null, pageNum: 1, pageSize: 10
+2020-11-27 08:35:28.299 [http-nio-8001-exec-2] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.ArticleServiceImpl.queryMyArticleList ============
+2020-11-27 08:35:29.252 [http-nio-8001-exec-2] INFO  c.a.news.aspect.ServiceLogAspect - 当前执行耗时：953
+2020-11-27 08:37:08.438 [http-nio-8001-exec-6] INFO  c.a.n.controller.ArticleController - Enter function queryMyArticleList, parameter userId: 1316846502299172864, keyword: , status: null, pageNum: 1, pageSize: 10
+2020-11-27 08:37:08.439 [http-nio-8001-exec-6] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.ArticleServiceImpl.queryMyArticleList ============
+2020-11-27 08:37:08.474 [http-nio-8001-exec-6] INFO  c.a.news.aspect.ServiceLogAspect - 当前执行耗时：35
+2020-11-27 08:37:24.624 [SpringContextShutdownHook] INFO  o.s.s.c.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+2020-11-27 08:37:24.646 [SpringContextShutdownHook] INFO  c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2020-11-27 08:38:00.809 [main] INFO  com.aiolos.news.ArticleApplication - The following profiles are active: dev
+2020-11-27 08:38:01.666 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2020-11-27 08:38:01.668 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2020-11-27 08:38:01.700 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 18ms. Found 0 Redis repository interfaces.
+2020-11-27 08:38:01.849 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'articleDao' and 'com.aiolos.news.dao.ArticleDao' mapperInterface. Bean already defined with the same name!
+2020-11-27 08:38:01.849 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'commentsDao' and 'com.aiolos.news.dao.CommentsDao' mapperInterface. Bean already defined with the same name!
+2020-11-27 08:38:01.850 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - No MyBatis mapper was found in '[com.aiolos.news.dao]' package. Please check your configuration.
+2020-11-27 08:38:01.940 [main] INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=89ff2177-cc7e-3213-8a73-43fa88c0c50e
+2020-11-27 08:38:02.542 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8001 (http)
+2020-11-27 08:38:02.552 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8001"]
+2020-11-27 08:38:02.552 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2020-11-27 08:38:02.553 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.31]
+2020-11-27 08:38:02.654 [main] INFO  o.a.c.c.C.[.[.[/news/article] - Initializing Spring embedded WebApplicationContext
+2020-11-27 08:38:02.654 [main] INFO  o.s.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 1824 ms
+2020-11-27 08:38:02.733 [main] INFO  c.a.d.s.b.a.DruidDataSourceAutoConfigure - Init DruidDataSource
+2020-11-27 08:38:02.832 [main] INFO  c.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2020-11-27 08:38:28.718 [main] WARN  o.s.b.a.w.f.WebConversionService - Auto-configuration of Joda-Time formatters is deprecated in favor of using java.time (JSR-310).
+2020-11-27 08:38:28.840 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2020-11-27 08:38:28.891 [main] WARN  c.n.c.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+2020-11-27 08:38:28.891 [main] INFO  c.n.c.sources.URLConfigurationSource - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2020-11-27 08:38:28.896 [main] WARN  c.n.c.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+2020-11-27 08:38:28.896 [main] INFO  c.n.c.sources.URLConfigurationSource - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2020-11-27 08:38:29.036 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2020-11-27 08:38:29.513 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear tk.mybatis.mapper.util.MsUtil CLASS_CACHE cache.
+2020-11-27 08:38:29.514 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear tk.mybatis.mapper.genid.GenIdUtil CACHE cache.
+2020-11-27 08:38:29.514 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear tk.mybatis.mapper.version.VersionUtil CACHE cache.
+2020-11-27 08:38:29.516 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear EntityHelper entityTableMap cache.
+2020-11-27 08:38:29.586 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Context refreshed
+2020-11-27 08:38:29.601 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2020-11-27 08:38:29.640 [main] INFO  s.d.s.w.s.ApiListingReferenceScanner - Scanning for api listing references
+2020-11-27 08:38:29.824 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8001"]
+2020-11-27 08:38:29.860 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8001 (http) with context path '/news/article'
+2020-11-27 08:38:29.865 [main] INFO  com.aiolos.news.ArticleApplication - Started ArticleApplication in 50.953 seconds (JVM running for 56.709)
+2020-11-27 08:38:51.083 [http-nio-8001-exec-1] INFO  o.a.c.c.C.[.[.[/news/article] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-11-27 08:38:51.084 [http-nio-8001-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2020-11-27 08:38:51.099 [http-nio-8001-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 14 ms
+2020-11-27 08:38:51.179 [http-nio-8001-exec-2] INFO  c.a.n.controller.ArticleController - Enter function queryMyArticleList, parameter userId: 1316846502299172864, keyword: , status: null, pageNum: 1, pageSize: 10
+2020-11-27 08:38:51.234 [http-nio-8001-exec-2] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.ArticleServiceImpl.queryMyArticleList ============
+2020-11-27 08:38:51.901 [http-nio-8001-exec-2] INFO  c.a.news.aspect.ServiceLogAspect - 当前执行耗时：667
+2020-11-27 08:44:47.119 [http-nio-8001-exec-6] INFO  c.a.n.controller.ArticleController - Enter function queryMyArticleList, parameter userId: 1316846502299172864, keyword: , status: 3, pageNum: 1, pageSize: 10
+2020-11-27 08:44:47.120 [http-nio-8001-exec-6] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.ArticleServiceImpl.queryMyArticleList ============
+2020-11-27 08:44:47.133 [http-nio-8001-exec-6] INFO  c.a.news.aspect.ServiceLogAspect - 当前执行耗时：13
+2020-11-27 08:44:47.896 [http-nio-8001-exec-8] INFO  c.a.n.controller.ArticleController - Enter function queryMyArticleList, parameter userId: 1316846502299172864, keyword: , status: 12, pageNum: 1, pageSize: 10
+2020-11-27 08:44:47.897 [http-nio-8001-exec-8] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.ArticleServiceImpl.queryMyArticleList ============
+2020-11-27 08:44:47.910 [http-nio-8001-exec-8] INFO  c.a.news.aspect.ServiceLogAspect - 当前执行耗时：13
+2020-11-27 08:44:50.042 [http-nio-8001-exec-10] INFO  c.a.n.controller.ArticleController - Enter function queryMyArticleList, parameter userId: 1316846502299172864, keyword: , status: 4, pageNum: 1, pageSize: 10
+2020-11-27 08:44:50.042 [http-nio-8001-exec-10] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.ArticleServiceImpl.queryMyArticleList ============
+2020-11-27 08:44:50.047 [http-nio-8001-exec-10] INFO  c.a.news.aspect.ServiceLogAspect - 当前执行耗时：4
+2020-11-27 08:44:50.697 [http-nio-8001-exec-2] INFO  c.a.n.controller.ArticleController - Enter function queryMyArticleList, parameter userId: 1316846502299172864, keyword: , status: 5, pageNum: 1, pageSize: 10
+2020-11-27 08:44:50.697 [http-nio-8001-exec-2] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.ArticleServiceImpl.queryMyArticleList ============
+2020-11-27 08:44:50.701 [http-nio-8001-exec-2] INFO  c.a.news.aspect.ServiceLogAspect - 当前执行耗时：4
+2020-11-27 08:44:51.619 [http-nio-8001-exec-3] INFO  c.a.n.controller.ArticleController - Enter function queryMyArticleList, parameter userId: 1316846502299172864, keyword: , status: 0, pageNum: 1, pageSize: 10
+2020-11-27 08:44:51.619 [http-nio-8001-exec-3] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.ArticleServiceImpl.queryMyArticleList ============
+2020-11-27 08:44:51.631 [http-nio-8001-exec-3] INFO  c.a.news.aspect.ServiceLogAspect - 当前执行耗时：12
+2020-11-27 09:43:56.283 [http-nio-8001-exec-1] INFO  c.a.n.c.advice.GlobalExceptionAdvice - Failed to convert value of type 'java.lang.String' to required type 'java.util.Date'; nested exception is org.springframework.core.convert.ConversionFailedException: Failed to convert from type [java.lang.String] to type [@org.springframework.web.bind.annotation.RequestParam java.util.Date] for value '2019 10-01'; nested exception is java.lang.IllegalArgumentException: Parse attempt failed for value [2019 10-01]
+2020-11-27 10:41:56.184 [SpringContextShutdownHook] INFO  o.s.s.c.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+2020-11-27 10:41:56.248 [SpringContextShutdownHook] INFO  c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed

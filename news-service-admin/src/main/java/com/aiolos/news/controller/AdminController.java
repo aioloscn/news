@@ -4,6 +4,7 @@ import com.aiolos.news.common.CommonResponse;
 import com.aiolos.news.common.enums.ErrorEnum;
 import com.aiolos.news.common.exception.CustomizeException;
 import com.aiolos.news.common.utils.CommonUtils;
+import com.aiolos.news.common.utils.PagedResult;
 import com.aiolos.news.common.utils.RedisOperator;
 import com.aiolos.news.controller.admin.AdminControllerApi;
 import com.aiolos.news.pojo.AdminUser;
@@ -95,6 +96,33 @@ public class AdminController extends BaseController implements AdminControllerAp
         checkAdminExist(newAdminBO.getUsername());
         adminUserService.createAdminUser(newAdminBO);
 
+        return CommonResponse.ok();
+    }
+
+    @Override
+    public CommonResponse getAdminList(Integer pageNum, Integer pageSize) {
+
+        log.info("Enter function getAdminList, parameter page: {}, pageSize: {}", pageNum, pageSize);
+
+        if (pageNum == null)
+            pageNum = START_PAGE;
+        if (pageSize == null)
+            pageSize = PAGE_SIZE;
+
+        PagedResult pagedResult = adminUserService.queryAdminList(pageNum, pageSize);
+        return CommonResponse.ok(pagedResult);
+    }
+
+    @Override
+    public CommonResponse adminLogout(String adminId, HttpServletRequest request, HttpServletResponse response) {
+
+        log.info("Enter function adminLogout, parameter adminId: {}", adminId);
+
+        // 从redis删除admin会话token
+        redis.del(REDIS_ADMIN_TOKEN + ":" + adminId);
+        deleteCookieValue("aid", request, response);
+        deleteCookieValue("aname", request, response);
+        deleteCookieValue("atoken", request, response);
         return CommonResponse.ok();
     }
 

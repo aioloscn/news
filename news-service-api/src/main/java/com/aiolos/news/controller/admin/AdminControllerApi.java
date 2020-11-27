@@ -6,6 +6,7 @@ import com.aiolos.news.pojo.bo.AdminLoginBO;
 import com.aiolos.news.pojo.bo.NewAdminBO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -35,4 +36,13 @@ public interface AdminControllerApi {
     @ApiOperation(value = "创建admin", notes = "创建admin", httpMethod = "POST")
     @PostMapping("/addNewAdmin")
     CommonResponse addNewAdmin(@Valid @RequestBody NewAdminBO newAdminBO) throws CustomizeException;
+
+    @ApiOperation(value = "查询admin列表", notes = "查询admin列表", httpMethod = "POST")
+    @PostMapping("/getAdminList")
+    CommonResponse getAdminList(@ApiParam(name = "pageNum", value = "查询第几页", required = false) @RequestParam(required = false) Integer pageNum,
+                                @ApiParam(name = "pageSize", value = "分页查询每一页显示的条数", required = false) @RequestParam(required = false) Integer pageSize);
+
+    @ApiOperation(value = "admin注销登录", notes = "admin注销登录", httpMethod = "POST")
+    @PostMapping("/adminLogout")
+    CommonResponse adminLogout(@RequestParam String adminId, HttpServletRequest request, HttpServletResponse response);
 }

@@ -117,8 +117,8 @@ public class PassportController extends BaseController implements PassportContro
 
         log.info("Enter function logout, parameter userId: {}", userId);
         redis.del(REDIS_USER_TOKEN + ":" + userId);
-        setCookie("uid", "", 0, request, response);
-        setCookie("utoken", "", 0, request, response);
+        deleteCookieValue("uid", request, response);
+        deleteCookieValue("utoken", request, response);
         return CommonResponse.ok();
     }
 }

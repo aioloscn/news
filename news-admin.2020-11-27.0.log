@@ -1,0 +1,11 @@
+2020-11-27 03:02:28.737 [http-nio-8005-exec-4] WARN  o.s.web.servlet.PageNotFound - No mapping for GET /news/admin/friendLinkMng/portal/list
+2020-11-27 03:02:28.738 [http-nio-8005-exec-10] INFO  c.a.n.c.CategoryMngController - Enter function getCats
+2020-11-27 03:02:28.810 [http-nio-8005-exec-4] INFO  c.a.n.c.advice.GlobalExceptionAdvice - No handler found for GET /news/admin/friendLinkMng/portal/list
+2020-11-27 04:22:23.802 [http-nio-8005-exec-6] INFO  c.a.n.c.CategoryMngController - Enter function getCats
+2020-11-27 04:23:20.923 [http-nio-8005-exec-7] INFO  c.a.n.c.CategoryMngController - Enter function getCats
+2020-11-27 06:53:22.812 [http-nio-8005-exec-5] INFO  c.a.n.c.CategoryMngController - Enter function getCats
+2020-11-27 08:46:59.275 [http-nio-8005-exec-9] INFO  c.a.n.c.CategoryMngController - Enter function getCats
+2020-11-27 08:46:59.284 [http-nio-8005-exec-4] WARN  o.s.web.servlet.PageNotFound - No mapping for GET /news/admin/friendLinkMng/portal/list
+2020-11-27 08:46:59.303 [http-nio-8005-exec-4] INFO  c.a.n.c.advice.GlobalExceptionAdvice - No handler found for GET /news/admin/friendLinkMng/portal/list
+2020-11-27 10:41:56.298 [SpringContextShutdownHook] INFO  o.s.s.c.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+2020-11-27 10:41:56.505 [SpringContextShutdownHook] INFO  c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed

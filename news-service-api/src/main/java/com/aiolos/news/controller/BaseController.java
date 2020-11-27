@@ -30,7 +30,13 @@ public class BaseController {
 
     public static final String REDIS_ADMIN_TOKEN = "redis_admin_token";
 
+    public static final String REDIS_ALL_CATEGORY = "redis_all_category";
+
     public static final Integer COOKIE_EXPIRE_TIME = 7 * 24 * 60 * 60;
+
+    public static final Integer START_PAGE = 1;
+
+    public static final Integer PAGE_SIZE = 10;
 
     public void setCookie(String cookieName, String cookieValue, Integer expireTime,
                           HttpServletRequest request, HttpServletResponse response) {
@@ -54,5 +60,10 @@ public class BaseController {
         cookie.setPath("/");
         cookie.setHttpOnly(false);
         response.addCookie(cookie);
+    }
+
+    public void deleteCookieValue(String cookieName, HttpServletRequest request, HttpServletResponse response) {
+
+        setCookie(cookieName, "", 0, request, response);
     }
 }

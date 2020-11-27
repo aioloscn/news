@@ -22,6 +22,7 @@ public enum ErrorEnum implements CommonError {
     ES_SEARCH_ERROR(10009, "ES查询出错"),
     BEAN_ERROR(10010, "bean验证错误"),
     REPEAT_SENDING_SMS_CODE(10011, "短信验证码60s内不能重复发送"),
+    SYSTEM_OPERATION_ERROR(10012, "操作失败，请重试或联系管理员"),
 
     // 用户服务相关错误类型
     USER_NOT_LOGGED_IN(20000, "用户尚未登录"),
@@ -58,6 +59,10 @@ public enum ErrorEnum implements CommonError {
     FILE_FORMAT_ERROR(30011, "图片格式不支持"),
     FILE_UPLOAD_FAILED(30012, "上传失败"),
     FILE_MAX_SIZE_ERROR(30013, "图片过大，仅支持上传10MB以下的图片"),
+    ARTICLE_COVER_NOT_EXIST_ERROR(30014, "文章封面不存在，请选择"),
+    ARTICLE_CATEGORY_NOT_EXIST_ERROR(30015, "请选择正确的文章类型"),
+    ARTICLE_CREATE_FAILED(30016, "发布文章失败.."),
+    ARTICLE_QUERY_PARAMS_ERROR(30017, "查询差数有误"),
 
     // 管理员相关类型错误
     ADMIN_NOT_EXIST_ERROR(40001, "管理员账号不存在或密码错误"),
