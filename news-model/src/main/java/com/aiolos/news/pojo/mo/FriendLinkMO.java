@@ -26,10 +26,10 @@ public class FriendLinkMO {
     private String linkName;
 
     @Field("link_url")
-    private String link_url;
+    private String linkUrl;
 
     @Field("is_delete")
-    private String isDelete;
+    private Integer isDelete;
 
     @Field("create_time")
     private Date createTime;

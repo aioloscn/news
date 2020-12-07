@@ -15,8 +15,23 @@ import java.util.List;
 @ToString
 public class        PagedResult {
 
-    private long current;       // 当前页数
-    private long pages  ;      // 总页数
-    private long total;   // 总记录数
-    private List<?> records;   // 每行显示内容
+    /**
+     * 当前页数
+     */
+    private long current;
+
+    /**
+     * 总页数
+     */
+    private long pages;
+
+    /**
+     * 总记录数
+     */
+    private long total;
+
+    /**
+     * 每行显示内容
+     */
+    private List<?> records;
 }

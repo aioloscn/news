@@ -39,15 +39,16 @@ public class ArticleController extends BaseController implements ArticleControll
 
         log.info("Enter function createArticle, parameter newArticleBO: {}", newArticleBO.toString());
 
-        if (bindingResult.hasErrors())
+        if (bindingResult.hasErrors()) {
             throw new CustomizeException(ErrorEnum.PARAMETER_VALIDATION_ERROR, CommonUtils.processErrorString(bindingResult));
+        }
 
         // 判断文章封面类型，单图必填，纯文字则设置为空
-        if (newArticleBO.getArticleType() == ArticleCoverType.ONE_IMAGE.type) {
+        if (newArticleBO.getArticleType().equals(ArticleCoverType.ONE_IMAGE.type)) {
             if (StringUtils.isBlank(newArticleBO.getArticleCover())) {
                 return CommonResponse.error(ErrorEnum.ARTICLE_COVER_NOT_EXIST_ERROR);
             }
-        } else if (newArticleBO.getArticleType() == ArticleCoverType.WORDS.type) {
+        } else if (newArticleBO.getArticleType().equals(ArticleCoverType.WORDS.type)) {
             newArticleBO.setArticleCover("");
         }
 
@@ -62,7 +63,7 @@ public class ArticleController extends BaseController implements ArticleControll
             List<Category> categoryList = JsonUtils.jsonToList(allCatsJson, Category.class);
             for (Category c : categoryList) {
 
-                if (c.getId() == newArticleBO.getCategoryId()) {
+                if (c.getId().equals(newArticleBO.getCategoryId())) {
                     category = c;
                     break;
                 }
@@ -84,13 +85,16 @@ public class ArticleController extends BaseController implements ArticleControll
         log.info("Enter function queryMyArticleList, parameter userId: {}, keyword: {}, status: {}, pageNum: {}, pageSize: {}",
                                     userId, keyword, status, pageNum, pageSize);
 
-        if (StringUtils.isBlank(userId))
+        if (StringUtils.isBlank(userId)) {
             return CommonResponse.error(ErrorEnum.ARTICLE_QUERY_PARAMS_ERROR);
+        }
 
-        if (pageNum == null)
+        if (pageNum == null) {
             pageNum = START_PAGE;
-        if (pageSize == null)
+        }
+        if (pageSize == null) {
             pageSize = PAGE_SIZE;
+        }
 
         PagedResult pagedResult = articleService.queryMyArticleList(userId, keyword, status, startDate, endDate, pageNum, pageSize);
         return CommonResponse.ok(pagedResult);

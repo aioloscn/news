@@ -45,5 +45,8 @@ news-service-files/src/main/resources/file-prod.properties
 news-service-admin/src/main/resources/application-dev.yml
 news-service-admin/src/main/resources/application-prod.yml
 
+news-service-article/src/main/resources/application-dev.yml
+news-service-article/src/main/resources/application-prod.yml
+
 news-user.*
 news-files.*

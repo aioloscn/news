@@ -39,7 +39,7 @@ public class UserActiveInterceptor extends BaseInterceptor implements HandlerInt
             user = JsonUtils.jsonToPojo(userJson, AppUser.class);
         }
 
-        if (user.getActiveStatus() == null || user.getActiveStatus() != UserStatus.ACTIVE.type) {
+        if (user.getActiveStatus() == null || !user.getActiveStatus().equals(UserStatus.ACTIVE.type)) {
             throw new CustomizeException(ErrorEnum.USER_INACTIVE_ERROR);
         }
         return true;

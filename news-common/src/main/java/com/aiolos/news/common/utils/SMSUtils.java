@@ -33,8 +33,9 @@ public class SMSUtils {
 
         log.info("Enter function sendSMS, parameter mobile: {}, code: {}", mobile, code);
 
-        if (StringUtils.isBlank(mobile))
+        if (StringUtils.isBlank(mobile)) {
             throw new CustomizeException(ErrorEnum.PHONE_INCORRECT);
+        }
 
         DefaultProfile profile = DefaultProfile.getProfile("cn-hangzhou",
                 aliyunResource.getAccessKeyID(),

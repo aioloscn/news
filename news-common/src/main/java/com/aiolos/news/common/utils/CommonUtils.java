@@ -17,8 +17,9 @@ public class CommonUtils {
      */
     public static String processErrorString(BindingResult bindingResult) {
 
-        if (!bindingResult.hasErrors())
+        if (!bindingResult.hasErrors()) {
             return StringUtils.EMPTY;
+        }
 
         StringBuilder sb = new StringBuilder();
         for (FieldError error : bindingResult.getFieldErrors()) {

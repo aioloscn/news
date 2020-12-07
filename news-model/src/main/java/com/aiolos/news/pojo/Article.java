@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import java.util.Date;
 
 public class Article {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "SELECT LAST_INSERT_ID()")
     private String id;

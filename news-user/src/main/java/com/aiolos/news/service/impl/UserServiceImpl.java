@@ -74,8 +74,9 @@ public class UserServiceImpl implements UserService {
         user.setUpdatedTime(new Date());
 
         int resultCount = appUserDao.insert(user);
-        if (resultCount != 1)
+        if (resultCount != 1) {
             throw new CustomizeException(ErrorEnum.REGISTER_FAILED);
+        }
         return user;
     }
 

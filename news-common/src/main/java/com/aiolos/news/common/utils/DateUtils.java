@@ -106,26 +106,28 @@ public class DateUtils {
      *
      */
     public static String fromToday(Date date) {
+
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
 
         long time = date.getTime() / 1000;
-        long now = new Date().getTime() / 1000;
+        long now = System.currentTimeMillis() / 1000;
         long ago = now - time;
-        if (ago < ONE_MINUTE)
+        if (ago < ONE_MINUTE) {
             return ago + "秒前";
-        if (ago <= ONE_HOUR)
+        }
+        if (ago <= ONE_HOUR) {
             return ago / ONE_MINUTE + "分钟前";
-        else if (ago <= ONE_DAY)
+        } else if (ago <= ONE_DAY) {
             return ago / ONE_HOUR + "小时" + (ago % ONE_HOUR / ONE_MINUTE)
                     + "分钟前";
-        else if (ago <= ONE_DAY * 2)
+        } else if (ago <= ONE_DAY * 2) {
             return "昨天" + calendar.get(Calendar.HOUR_OF_DAY) + "点"
                     + calendar.get(Calendar.MINUTE) + "分";
-        else if (ago <= ONE_DAY * 3)
+        } else if (ago <= ONE_DAY * 3) {
             return "前天" + calendar.get(Calendar.HOUR_OF_DAY) + "点"
                     + calendar.get(Calendar.MINUTE) + "分";
-        else if (ago <= ONE_MONTH) {
+        } else if (ago <= ONE_MONTH) {
             long day = ago / ONE_DAY;
             return day + "天前" + calendar.get(Calendar.HOUR_OF_DAY) + "点"
                     + calendar.get(Calendar.MINUTE) + "分";
@@ -152,14 +154,15 @@ public class DateUtils {
      */
     public static String fromDeadline(Date date) {
         long deadline = date.getTime() / 1000;
-        long now = (new Date().getTime()) / 1000;
+        long now = System.currentTimeMillis() / 1000;
         long remain = deadline - now;
-        if (remain <= ONE_HOUR)
+        if (remain <= ONE_HOUR) {
+
             return "只剩下" + remain / ONE_MINUTE + "分钟";
-        else if (remain <= ONE_DAY)
+        } else if (remain <= ONE_DAY) {
             return "只剩下" + remain / ONE_HOUR + "小时"
                     + (remain % ONE_HOUR / ONE_MINUTE) + "分钟";
-        else {
+        } else {
             long day = remain / ONE_DAY;
             long hour = remain % ONE_DAY / ONE_HOUR;
             long minute = remain % ONE_DAY % ONE_HOUR / ONE_MINUTE;
@@ -187,17 +190,18 @@ public class DateUtils {
             minute = "0" + cminute;
         }
         long time = date.getTime() / 1000;
-        long now = (new Date().getTime()) / 1000;
+        long now = System.currentTimeMillis() / 1000;
         long ago = now - time;
-        if (ago < ONE_MINUTE)
+        if (ago < ONE_MINUTE) {
             return ago + "秒前";
-        if (ago <= ONE_HOUR)
+        }
+        if (ago <= ONE_HOUR) {
             return ago / ONE_MINUTE + "分钟前";
-        else if (ago <= ONE_DAY)
+        } else if (ago <= ONE_DAY) {
             return ago / ONE_HOUR + "小时" + (ago % ONE_HOUR / ONE_MINUTE) + "分钟前";
-        else if (ago <= ONE_DAY * 2)
+        } else if (ago <= ONE_DAY * 2) {
             return "昨天 " + chour + ":" + minute;
-        else if (ago <= ONE_DAY * 3) {
+        } else if (ago <= ONE_DAY * 3) {
             return "前天 " + chour + ":" + minute;
         } else if (ago <= ONE_MONTH) {
             long day = ago / ONE_DAY;

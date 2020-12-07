@@ -128,6 +128,7 @@ public class MyCommentGenerator extends DefaultCommentGenerator {
      *@return
      *@throws
      */
+    @Override
     protected String getDateString() {
         String result = null;
         if (!suppressDate) {
@@ -144,6 +145,7 @@ public class MyCommentGenerator extends DefaultCommentGenerator {
      *@param markAsDoNotDelete
      *@throws
      */
+    @Override
     protected void addJavadocTag(JavaElement javaElement, boolean markAsDoNotDelete) {
 //        javaElement.addJavaDocLine(" *");
 //        StringBuilder sb = new StringBuilder();

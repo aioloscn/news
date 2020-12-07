@@ -56,10 +56,12 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
         article.setCreateTime(new Date());
         article.setUpdateTime(new Date());
 
-        if (article.getIsAppoint() == ArticleAppointType.TIMEING.type)
+        if (article.getIsAppoint().equals(ArticleAppointType.TIMEING.type)) {
+
             article.setPublishTime(newArticleBO.getPublishTime());
-        else
+        } else {
             article.setPublishTime(new Date());
+        }
 
         int count = articleDao.insert(article);
         if (count != 1) {
@@ -79,8 +81,9 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
         QueryWrapper<Article> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("publish_user_id", userId);
 
-        if (ArticleReviewStatus.isArticleStatusValid(status))
+        if (ArticleReviewStatus.isArticleStatusValid(status)) {
             queryWrapper.eq("article_status", status);
+        }
 
         if (status != null && status == 12) {
 
@@ -92,13 +95,16 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
         // 已删除的文章虽然仍旧保存在数据库，但在前端不显示
         queryWrapper.eq("is_delete", YesOrNo.NO.type);
 
-        if (startDate != null)
+        if (startDate != null) {
             queryWrapper.ge("publish_time", startDate);
-        if (endDate != null)
+        }
+        if (endDate != null) {
             queryWrapper.le("publish_time", endDate);
+        }
 
-        if (StringUtils.isNotBlank(keyword))
+        if (StringUtils.isNotBlank(keyword)) {
             queryWrapper.like("title", "%" + keyword + "%");
+        }
 
         queryWrapper.orderByDesc("create_time");
 

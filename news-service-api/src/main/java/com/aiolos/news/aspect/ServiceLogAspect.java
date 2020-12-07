@@ -42,13 +42,13 @@ public class ServiceLogAspect {
         long end = System.currentTimeMillis();
         long takeTime = end - start;
 
-        if (takeTime > 3000)
+        if (takeTime > 3000) {
             log.error("当前执行耗时：{}", takeTime);
-        else if (takeTime > 2000)
+        } else if (takeTime > 2000) {
             log.warn("当前执行耗时：{}", takeTime);
-        else
+        } else {
             log.info("当前执行耗时：{}", takeTime);
-
+        }
         return result;
     }
 }

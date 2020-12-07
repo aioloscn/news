@@ -47,8 +47,8 @@ public class AdminUserServiceImpl extends BaseService implements AdminUserServic
         return adminUser;
     }
 
-    @Transactional
     @Override
+    @Transactional(rollbackFor = CustomizeException.class)
     public void createAdminUser(NewAdminBO newAdminBO) throws CustomizeException {
 
         AdminUser adminUser = new AdminUser();
@@ -66,8 +66,9 @@ public class AdminUserServiceImpl extends BaseService implements AdminUserServic
         adminUser.setUpdatedTime(new Date());
         int resultCount = adminUserDao.insert(adminUser);
 
-        if (resultCount != 1)
+        if (resultCount != 1) {
             throw new CustomizeException(ErrorEnum.ADMIN_INSERT_FAILED);
+        }
     }
 
     @Override

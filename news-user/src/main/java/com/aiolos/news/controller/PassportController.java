@@ -43,8 +43,9 @@ public class PassportController extends BaseController implements PassportContro
 
         log.info("Enter function getSMSCode, parameter mobile: {}", mobile);
 
-        if (StringUtils.isBlank(mobile))
+        if (StringUtils.isBlank(mobile)) {
             return CommonResponse.error(ErrorEnum.PHONE_INCORRECT);
+        }
 
         // 获得用户ip
         String userIp = IPUtils.getRequestIp(request);
@@ -74,10 +75,12 @@ public class PassportController extends BaseController implements PassportContro
 
         // 1. 校验验证码是否匹配
         String redisSMSCode = redis.get(MOBILE_SMSCODE + ":" + mobile);
-        if (StringUtils.isBlank(redisSMSCode))
+        if (StringUtils.isBlank(redisSMSCode)) {
             return CommonResponse.error(ErrorEnum.SMS_CODE_EXPIRED);
-        if (!redisSMSCode.equalsIgnoreCase(smsCode))
+        }
+        if (!redisSMSCode.equalsIgnoreCase(smsCode)) {
             return CommonResponse.error(ErrorEnum.SMS_CODE_INCORRECT);
+        }
 
         // 2. 查询数据库，判断该用户是否已注册
         AppUser user = userService.queryMobileIsExist(mobile);

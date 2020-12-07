@@ -44,13 +44,15 @@ public class AdminController extends BaseController implements AdminControllerAp
 
         log.info("Enter function adminLogin, parameter adminLoginBO: {}", adminLoginBO.toString());
 
-        if (bindingResult.hasErrors())
+        if (bindingResult.hasErrors()) {
             throw new CustomizeException(ErrorEnum.PARAMETER_VALIDATION_ERROR, CommonUtils.processErrorString(bindingResult));
+        }
 
         AdminUser adminUser = adminUserService.queryAdminByUsername(adminLoginBO.getUsername());
 
-        if (adminUser == null)
+        if (adminUser == null) {
             throw new CustomizeException(ErrorEnum.ADMIN_NOT_EXIST_ERROR);
+        }
 
         if (BCrypt.checkpw(DigestUtils.md5Hex(adminLoginBO.getPassword()), adminUser.getPassword())) {
 
@@ -104,10 +106,12 @@ public class AdminController extends BaseController implements AdminControllerAp
 
         log.info("Enter function getAdminList, parameter page: {}, pageSize: {}", pageNum, pageSize);
 
-        if (pageNum == null)
+        if (pageNum == null) {
             pageNum = START_PAGE;
-        if (pageSize == null)
+        }
+        if (pageSize == null) {
             pageSize = PAGE_SIZE;
+        }
 
         PagedResult pagedResult = adminUserService.queryAdminList(pageNum, pageSize);
         return CommonResponse.ok(pagedResult);

@@ -17,6 +17,9 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author Aiolos
  * @date 2020/9/20 1:04 下午
@@ -42,12 +45,7 @@ public class UserController extends BaseController implements UserControllerApi 
             return CommonResponse.error(ErrorEnum.USER_NOT_LOGGED_IN);
         }
 
-        // 1. 根据userId查询用户信息
-        AppUser user = getUser(userId);
-
-        // 2.返回用户信息
-        UserBasicInfoVO userBasicInfoVO = new UserBasicInfoVO();
-        BeanUtils.copyProperties(user, userBasicInfoVO);
+        UserBasicInfoVO userBasicInfoVO = getUserBasicInfoVO(userId);
         return CommonResponse.ok(userBasicInfoVO);
     }
 
@@ -99,5 +97,38 @@ public class UserController extends BaseController implements UserControllerApi 
         }
 
         return user;
+    }
+
+    @Override
+    public CommonResponse queryByIds(String userIds) {
+
+        if (StringUtils.isBlank(userIds)) {
+            return CommonResponse.error(ErrorEnum.USER_DOES_NOT_EXIST);
+        }
+
+        List<UserBasicInfoVO> publisherList = new ArrayList<>();
+        List<String> userIdList = JsonUtils.jsonToList(userIds, String.class);
+
+        for (String userId : userIdList) {
+
+            // 获得用户基本信息
+            UserBasicInfoVO userBasicInfoVO = getUserBasicInfoVO(userId);
+
+            // 3.添加到publisherList
+            publisherList.add(userBasicInfoVO);
+        }
+        return CommonResponse.ok(publisherList);
+    }
+
+    private UserBasicInfoVO getUserBasicInfoVO(String userId) {
+
+        // 1.根据userId查询用户信息
+        AppUser user = getUser(userId);
+
+        // 2.返回用户信息
+        UserBasicInfoVO userBasicInfoVO = new UserBasicInfoVO();
+        BeanUtils.copyProperties(user, userBasicInfoVO);
+
+        return userBasicInfoVO;
     }
 }
