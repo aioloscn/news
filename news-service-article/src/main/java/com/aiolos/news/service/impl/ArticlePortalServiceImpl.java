@@ -75,9 +75,18 @@ public class ArticlePortalServiceImpl extends BaseService implements ArticlePort
 
         // 1. 构建发布者ID列表
         Set<String> idSet = new HashSet<>();
+        List<String> idList = new ArrayList<>();
+
         for (Article a : articleList) {
+
+            // 1.1 构建发布者id的set
             idSet.add(a.getPublishUserId());
+            // 1.2 构建文章id的list
+            idList.add(REDIS_ARTICLE_READ_COUNTS + ":" + a.getId());
         }
+
+        // 发起redis的mget批量查询api，获得对应的值
+        List<String> readCountsRedisList = redis.mget(idList);
 
         // 2. 发起远程调用（restTemplate），请求用户服务获得用户（idSet 发布者）的列表
         String userServerUrlExecute = "http://www.aiolos.com:8003/news/user/user/queryByIds?userIds=" + JsonUtils.objectToJson(idSet);
@@ -94,16 +103,43 @@ public class ArticlePortalServiceImpl extends BaseService implements ArticlePort
 
         // 3. 拼接两个List，重组文章列表
         List<IndexArticleVO> indexArticleVOList = new ArrayList<>();
-        for (Article a : articleList) {
 
+        for (int i = 0; i < articleList.size(); i++) {
+
+            Article a = articleList.get(i);
             IndexArticleVO indexArticleVO = new IndexArticleVO();
             BeanUtils.copyProperties(a, indexArticleVO);
 
             // 3.1 从publisherList中获得发布者的基本信息
             UserBasicInfoVO publisher = getUserIfPublisher(a.getPublishUserId(), publisherList);
             indexArticleVO.setPublisherVO(publisher);
+
+            // 3.2 从redis里拿到当前文章的阅读数，赋值
+            String redisCountsStr = readCountsRedisList.get(i);
+            int redisCounts = 0;
+
+            if (StringUtils.isNotBlank(redisCountsStr)) {
+                redisCounts = Integer.valueOf(redisCountsStr);
+            }
+
+            indexArticleVO.setReadCounts(redisCounts);
             indexArticleVOList.add(indexArticleVO);
         }
+//        for (Article a : articleList) {
+//
+//            IndexArticleVO indexArticleVO = new IndexArticleVO();
+//            BeanUtils.copyProperties(a, indexArticleVO);
+//
+//            // 3.1 从publisherList中获得发布者的基本信息
+//            UserBasicInfoVO publisher = getUserIfPublisher(a.getPublishUserId(), publisherList);
+//            indexArticleVO.setPublisherVO(publisher);
+//
+//            // 3.2 从redis里拿到当前文章的阅读数，赋值
+//            int readCounts = getCountsFromRedis(REDIS_ARTICLE_READ_COUNTS + ":" + a.getId());
+//            indexArticleVO.setReadCounts(readCounts);
+//
+//            indexArticleVOList.add(indexArticleVO);
+//        }
 
         PagedResult pagedResult = setterPagedResult(articleIPage);
 

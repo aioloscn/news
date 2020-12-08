@@ -3,6 +3,7 @@ package com.aiolos.news.service;
 import com.aiolos.news.common.utils.PagedResult;
 import com.aiolos.news.common.utils.RedisOperator;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -11,10 +12,12 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public class BaseService {
 
-    public static final String REDIS_ALL_CATEGORY = "redis_all_category";
-
     @Autowired
     public RedisOperator redis;
+
+    public static final String REDIS_ALL_CATEGORY = "redis_all_category";
+
+    public static final String REDIS_ARTICLE_READ_COUNTS = "redis_article_read_counts";
 
     public PagedResult setterPagedResult(IPage<?> page) {
 
@@ -24,5 +27,15 @@ public class BaseService {
         pagedResult.setTotal(page.getTotal());
         pagedResult.setRecords(page.getRecords());
         return pagedResult;
+    }
+
+    public Integer getCountsFromRedis(String key) {
+
+        String countsStr = redis.get(key);
+        if (StringUtils.isBlank(countsStr)) {
+            countsStr = "0";
+        }
+
+        return Integer.valueOf(countsStr);
     }
 }

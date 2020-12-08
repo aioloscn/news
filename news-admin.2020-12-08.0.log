@@ -211,3 +211,76 @@
 2020-12-08 17:30:39.654 [http-nio-8005-exec-9] INFO  c.a.n.c.CategoryMngController - Enter function getCats
 2020-12-08 17:30:41.562 [http-nio-8005-exec-10] INFO  c.a.n.c.CategoryMngController - Enter function getCats
 2020-12-08 17:30:47.599 [http-nio-8005-exec-1] INFO  c.a.n.c.CategoryMngController - Enter function getCats
+2020-12-08 18:01:56.601 [SpringContextShutdownHook] INFO  o.s.s.c.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+2020-12-08 18:01:56.804 [SpringContextShutdownHook] INFO  org.mongodb.driver.connection - Closed connection [connectionId{localValue:2, serverValue:48}] to 127.0.0.1:27017 because the pool has been closed.
+2020-12-08 18:01:57.066 [SpringContextShutdownHook] INFO  c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2020-12-08 20:00:51.577 [main] INFO  com.aiolos.news.AdminApplication - The following profiles are active: dev
+2020-12-08 20:00:52.776 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2020-12-08 20:00:52.777 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data MongoDB repositories in DEFAULT mode.
+2020-12-08 20:00:52.876 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 90ms. Found 1 MongoDB repository interfaces.
+2020-12-08 20:00:52.892 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2020-12-08 20:00:52.893 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2020-12-08 20:00:52.914 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.aiolos.news.repository.FriendLinkRepository. If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository.
+2020-12-08 20:00:52.914 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 11ms. Found 0 Redis repository interfaces.
+2020-12-08 20:00:53.149 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'adminUserDao' and 'com.aiolos.news.dao.AdminUserDao' mapperInterface. Bean already defined with the same name!
+2020-12-08 20:00:53.150 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'categoryDao' and 'com.aiolos.news.dao.CategoryDao' mapperInterface. Bean already defined with the same name!
+2020-12-08 20:00:53.150 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - No MyBatis mapper was found in '[com.aiolos.news.dao]' package. Please check your configuration.
+2020-12-08 20:00:53.299 [main] INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=f6ae6072-185e-3ef8-b618-9af2483b3f4e
+2020-12-08 20:00:54.240 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8005 (http)
+2020-12-08 20:00:54.253 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8005"]
+2020-12-08 20:00:54.254 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2020-12-08 20:00:54.255 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.31]
+2020-12-08 20:00:54.387 [main] INFO  o.a.c.c.C.[.[.[/news/admin] - Initializing Spring embedded WebApplicationContext
+2020-12-08 20:00:54.388 [main] INFO  o.s.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 2776 ms
+2020-12-08 20:00:54.497 [main] INFO  c.a.d.s.b.a.DruidDataSourceAutoConfigure - Init DruidDataSource
+2020-12-08 20:00:54.693 [main] INFO  c.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2020-12-08 20:01:21.260 [main] INFO  org.mongodb.driver.cluster - Cluster created with settings {hosts=[127.0.0.1:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+2020-12-08 20:01:21.327 [cluster-ClusterId{value='5fcf6b11c18aef4b637d690b', description='null'}-127.0.0.1:27017] INFO  org.mongodb.driver.connection - Opened connection [connectionId{localValue:1, serverValue:51}] to 127.0.0.1:27017
+2020-12-08 20:01:21.337 [cluster-ClusterId{value='5fcf6b11c18aef4b637d690b', description='null'}-127.0.0.1:27017] INFO  org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=127.0.0.1:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[4, 4, 2]}, minWireVersion=0, maxWireVersion=9, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=6094836}
+2020-12-08 20:01:22.317 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2020-12-08 20:01:22.343 [main] WARN  c.n.c.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+2020-12-08 20:01:22.343 [main] INFO  c.n.c.sources.URLConfigurationSource - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2020-12-08 20:01:22.349 [main] WARN  c.n.c.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+2020-12-08 20:01:22.349 [main] INFO  c.n.c.sources.URLConfigurationSource - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2020-12-08 20:01:22.592 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2020-12-08 20:01:23.140 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear tk.mybatis.mapper.util.MsUtil CLASS_CACHE cache.
+2020-12-08 20:01:23.140 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear tk.mybatis.mapper.genid.GenIdUtil CACHE cache.
+2020-12-08 20:01:23.141 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear tk.mybatis.mapper.version.VersionUtil CACHE cache.
+2020-12-08 20:01:23.142 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear EntityHelper entityTableMap cache.
+2020-12-08 20:01:23.218 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Context refreshed
+2020-12-08 20:01:23.233 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2020-12-08 20:01:23.275 [main] INFO  s.d.s.w.s.ApiListingReferenceScanner - Scanning for api listing references
+2020-12-08 20:01:23.461 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8005"]
+2020-12-08 20:01:23.493 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8005 (http) with context path '/news/admin'
+2020-12-08 20:01:23.498 [main] INFO  com.aiolos.news.AdminApplication - Started AdminApplication in 54.268 seconds (JVM running for 60.279)
+2020-12-08 20:03:27.440 [http-nio-8005-exec-2] INFO  o.a.c.c.C.[.[.[/news/admin] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-12-08 20:03:27.444 [http-nio-8005-exec-2] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2020-12-08 20:03:27.492 [http-nio-8005-exec-2] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 46 ms
+2020-12-08 20:03:27.593 [http-nio-8005-exec-2] INFO  c.a.n.c.CategoryMngController - Enter function getCats
+2020-12-08 20:03:27.593 [http-nio-8005-exec-1] INFO  c.a.n.c.FriendLinkController - Enter function admin/friendLinkMng/portal/list
+2020-12-08 20:03:27.605 [http-nio-8005-exec-1] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.FriendLinkServiceImpl.queryPortalAllFriendLinkList ============
+2020-12-08 20:03:27.914 [http-nio-8005-exec-2] INFO  io.lettuce.core.EpollProvider - Starting without optional epoll library
+2020-12-08 20:03:27.920 [http-nio-8005-exec-2] INFO  io.lettuce.core.KqueueProvider - Starting without optional kqueue library
+2020-12-08 20:03:27.992 [http-nio-8005-exec-1] INFO  org.mongodb.driver.connection - Opened connection [connectionId{localValue:2, serverValue:53}] to 127.0.0.1:27017
+2020-12-08 20:03:28.106 [http-nio-8005-exec-1] INFO  c.a.news.aspect.ServiceLogAspect - 当前执行耗时：501
+2020-12-08 20:03:58.794 [http-nio-8005-exec-4] INFO  c.a.n.c.FriendLinkController - Enter function admin/friendLinkMng/portal/list
+2020-12-08 20:03:58.794 [http-nio-8005-exec-3] INFO  c.a.n.c.CategoryMngController - Enter function getCats
+2020-12-08 20:03:58.797 [http-nio-8005-exec-4] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.FriendLinkServiceImpl.queryPortalAllFriendLinkList ============
+2020-12-08 20:03:58.812 [http-nio-8005-exec-4] INFO  c.a.news.aspect.ServiceLogAspect - 当前执行耗时：14
+2020-12-08 20:03:58.838 [http-nio-8005-exec-5] INFO  c.a.n.c.CategoryMngController - Enter function getCats
+2020-12-08 20:03:58.842 [http-nio-8005-exec-6] INFO  c.a.n.c.FriendLinkController - Enter function admin/friendLinkMng/portal/list
+2020-12-08 20:03:58.842 [http-nio-8005-exec-6] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.FriendLinkServiceImpl.queryPortalAllFriendLinkList ============
+2020-12-08 20:03:58.845 [http-nio-8005-exec-6] INFO  c.a.news.aspect.ServiceLogAspect - 当前执行耗时：3
+2020-12-08 20:17:38.377 [http-nio-8005-exec-10] INFO  c.a.n.c.FriendLinkController - Enter function admin/friendLinkMng/portal/list
+2020-12-08 20:17:38.377 [http-nio-8005-exec-9] INFO  c.a.n.c.CategoryMngController - Enter function getCats
+2020-12-08 20:17:38.383 [http-nio-8005-exec-10] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.FriendLinkServiceImpl.queryPortalAllFriendLinkList ============
+2020-12-08 20:17:38.404 [http-nio-8005-exec-10] INFO  c.a.news.aspect.ServiceLogAspect - 当前执行耗时：20
+2020-12-08 20:17:50.760 [http-nio-8005-exec-1] INFO  c.a.n.c.CategoryMngController - Enter function getCats
+2020-12-08 20:17:50.761 [http-nio-8005-exec-2] INFO  c.a.n.c.FriendLinkController - Enter function admin/friendLinkMng/portal/list
+2020-12-08 20:17:50.761 [http-nio-8005-exec-2] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.FriendLinkServiceImpl.queryPortalAllFriendLinkList ============
+2020-12-08 20:17:50.768 [http-nio-8005-exec-2] INFO  c.a.news.aspect.ServiceLogAspect - 当前执行耗时：5
+2020-12-08 20:17:57.847 [http-nio-8005-exec-3] INFO  c.a.n.c.CategoryMngController - Enter function getCats
+2020-12-08 20:18:01.916 [http-nio-8005-exec-4] INFO  c.a.n.c.CategoryMngController - Enter function getCats
+2020-12-08 20:18:01.920 [http-nio-8005-exec-5] INFO  c.a.n.c.FriendLinkController - Enter function admin/friendLinkMng/portal/list
+2020-12-08 20:18:01.920 [http-nio-8005-exec-5] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.FriendLinkServiceImpl.queryPortalAllFriendLinkList ============
+2020-12-08 20:18:01.927 [http-nio-8005-exec-5] INFO  c.a.news.aspect.ServiceLogAspect - 当前执行耗时：7

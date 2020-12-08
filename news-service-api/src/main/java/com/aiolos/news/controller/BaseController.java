@@ -33,7 +33,7 @@ public class BaseController {
 
     public static final String REDIS_ALL_CATEGORY = "redis_all_category";
 
-    public static final String REDIS_ARTICLE_READ_COUNT = "redis_article_read_count";
+    public static final String REDIS_ARTICLE_READ_COUNTS = "redis_article_read_counts";
 
     public static final String REDIS_ALREADY_READ = "redis_already_read";
 
