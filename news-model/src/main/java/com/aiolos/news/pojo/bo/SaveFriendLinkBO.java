@@ -1,6 +1,7 @@
 package com.aiolos.news.pojo.bo;
 
 import com.aiolos.news.pojo.validate.CheckUrl;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -12,9 +13,7 @@ import javax.validation.constraints.NotNull;
  * @author Aiolos
  * @date 2020/11/27 11:54 上午
  */
-@Getter
-@Setter
-@ToString
+@Data
 public class SaveFriendLinkBO {
 
     private String id;

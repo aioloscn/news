@@ -1,6 +1,7 @@
 package com.aiolos.news.pojo.bo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -16,9 +17,7 @@ import java.util.Date;
  * @author Aiolos
  * @date 2020/11/26 6:21 上午
  */
-@Getter
-@Setter
-@ToString
+@Data
 public class NewArticleBO {
 
     @NotBlank(message = "文章标题不能为空")

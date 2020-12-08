@@ -5,8 +5,11 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Aiolos
@@ -23,4 +26,17 @@ public interface ArticlePortalControllerApi {
                         @RequestParam Integer page,
                         @ApiParam(name = "pageSize", value = "每一页显示的条数", required = false)
                         @RequestParam Integer pageSize);
+
+    @ApiOperation(value = "首页查询最新热闻列表", notes = "首页查询最新热闻", httpMethod = "GET")
+    @GetMapping("/hotList")
+    CommonResponse hotList();
+
+
+    @ApiOperation(value = "文章详情查询", notes = "文章详情查询", httpMethod = "GET")
+    @GetMapping("/detail")
+    CommonResponse detail(@RequestParam String articleId);
+
+    @ApiOperation(value = "阅读文章，文章阅读量增加", notes = "阅读文章，文章阅读量增加", httpMethod = "POST")
+    @PostMapping("/readArticle")
+    CommonResponse readArticle(@RequestParam String articleId, HttpServletRequest request);
 }

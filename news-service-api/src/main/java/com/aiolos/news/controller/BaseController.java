@@ -1,6 +1,7 @@
 package com.aiolos.news.controller;
 
 import com.aiolos.news.common.utils.RedisOperator;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
@@ -31,6 +32,10 @@ public class BaseController {
     public static final String REDIS_ADMIN_TOKEN = "redis_admin_token";
 
     public static final String REDIS_ALL_CATEGORY = "redis_all_category";
+
+    public static final String REDIS_ARTICLE_READ_COUNT = "redis_article_read_count";
+
+    public static final String REDIS_ALREADY_READ = "redis_already_read";
 
     public static final Integer COOKIE_EXPIRE_TIME = 7 * 24 * 60 * 60;
 
@@ -65,5 +70,15 @@ public class BaseController {
     public void deleteCookieValue(String cookieName, HttpServletRequest request, HttpServletResponse response) {
 
         setCookie(cookieName, "", 0, request, response);
+    }
+
+    public Integer getCountsFromRedis(String key) {
+
+        String countsStr = redis.get(key);
+        if (StringUtils.isBlank(countsStr)) {
+            countsStr = "0";
+        }
+
+        return Integer.valueOf(countsStr);
     }
 }

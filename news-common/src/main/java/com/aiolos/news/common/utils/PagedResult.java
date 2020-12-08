@@ -1,5 +1,6 @@
 package com.aiolos.news.common.utils;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -10,9 +11,7 @@ import java.util.List;
  * @author Aiolos
  * @date 2020/11/24 1:55 上午
  */
-@Getter
-@Setter
-@ToString
+@Data
 public class        PagedResult {
 
     /**

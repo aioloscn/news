@@ -1,6 +1,10 @@
 package com.aiolos.news.service;
 
 import com.aiolos.news.common.utils.PagedResult;
+import com.aiolos.news.pojo.Article;
+import com.aiolos.news.pojo.vo.ArticleDetailVO;
+
+import java.util.List;
 
 /**
  * @author Aiolos
@@ -17,4 +21,8 @@ public interface ArticlePortalService {
      * @return
      */
     PagedResult queryIndexArticleList(String keyword, Integer category, Integer page, Integer pageSize);
+
+    List<Article> queryHotList();
+
+    ArticleDetailVO queryDetail(String articleId);
 }

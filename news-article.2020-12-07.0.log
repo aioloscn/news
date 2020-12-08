@@ -941,3 +941,149 @@ Consider defining a bean of type 'org.springframework.web.client.RestTemplate' i
 2020-12-07 19:52:04.513 [SpringContextShutdownHook] INFO  o.s.s.c.ThreadPoolTaskScheduler - Shutting down ExecutorService 'taskScheduler'
 2020-12-07 19:52:04.521 [SpringContextShutdownHook] INFO  o.s.s.c.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
 2020-12-07 19:52:04.561 [SpringContextShutdownHook] INFO  c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2020-12-07 20:58:58.310 [main] INFO  com.aiolos.news.ArticleApplication - The following profiles are active: dev
+2020-12-07 20:58:59.332 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2020-12-07 20:58:59.333 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data MongoDB repositories in DEFAULT mode.
+2020-12-07 20:58:59.364 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 25ms. Found 0 MongoDB repository interfaces.
+2020-12-07 20:58:59.381 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2020-12-07 20:58:59.383 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2020-12-07 20:58:59.403 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 7ms. Found 0 Redis repository interfaces.
+2020-12-07 20:58:59.602 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'articleDao' and 'com.aiolos.news.dao.ArticleDao' mapperInterface. Bean already defined with the same name!
+2020-12-07 20:58:59.602 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'commentsDao' and 'com.aiolos.news.dao.CommentsDao' mapperInterface. Bean already defined with the same name!
+2020-12-07 20:58:59.602 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - No MyBatis mapper was found in '[com.aiolos.news.dao]' package. Please check your configuration.
+2020-12-07 20:58:59.720 [main] INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=cb4f32d5-532f-3306-b33c-622c9a234ebd
+2020-12-07 20:59:00.487 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8001 (http)
+2020-12-07 20:59:00.497 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8001"]
+2020-12-07 20:59:00.497 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2020-12-07 20:59:00.498 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.31]
+2020-12-07 20:59:00.618 [main] INFO  o.a.c.c.C.[.[.[/news/article] - Initializing Spring embedded WebApplicationContext
+2020-12-07 20:59:00.618 [main] INFO  o.s.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 2285 ms
+2020-12-07 20:59:00.713 [main] INFO  c.a.d.s.b.a.DruidDataSourceAutoConfigure - Init DruidDataSource
+2020-12-07 20:59:00.837 [main] INFO  c.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2020-12-07 20:59:26.935 [main] WARN  o.s.b.a.w.f.WebConversionService - Auto-configuration of Joda-Time formatters is deprecated in favor of using java.time (JSR-310).
+2020-12-07 20:59:27.098 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2020-12-07 20:59:27.176 [main] WARN  c.n.c.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+2020-12-07 20:59:27.176 [main] INFO  c.n.c.sources.URLConfigurationSource - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2020-12-07 20:59:27.183 [main] WARN  c.n.c.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+2020-12-07 20:59:27.183 [main] INFO  c.n.c.sources.URLConfigurationSource - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2020-12-07 20:59:27.438 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2020-12-07 20:59:28.009 [main] INFO  org.mongodb.driver.cluster - Cluster created with settings {hosts=[localhost:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+2020-12-07 20:59:28.108 [cluster-ClusterId{value='5fce272fa449ba5a982acc8c', description='null'}-localhost:27017] INFO  org.mongodb.driver.connection - Opened connection [connectionId{localValue:1, serverValue:40}] to localhost:27017
+2020-12-07 20:59:28.115 [cluster-ClusterId{value='5fce272fa449ba5a982acc8c', description='null'}-localhost:27017] INFO  org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[4, 4, 2]}, minWireVersion=0, maxWireVersion=9, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=4453302}
+2020-12-07 20:59:28.719 [main] WARN  o.s.b.a.f.FreeMarkerAutoConfiguration - Cannot find template location(s): [classpath:/templates/] (please add some templates, check your FreeMarker configuration, or set spring.freemarker.checkTemplateLocation=false)
+2020-12-07 20:59:29.094 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear tk.mybatis.mapper.util.MsUtil CLASS_CACHE cache.
+2020-12-07 20:59:29.095 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear tk.mybatis.mapper.genid.GenIdUtil CACHE cache.
+2020-12-07 20:59:29.096 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear tk.mybatis.mapper.version.VersionUtil CACHE cache.
+2020-12-07 20:59:29.098 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear EntityHelper entityTableMap cache.
+2020-12-07 20:59:29.177 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Context refreshed
+2020-12-07 20:59:29.198 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2020-12-07 20:59:29.253 [main] INFO  s.d.s.w.s.ApiListingReferenceScanner - Scanning for api listing references
+2020-12-07 20:59:29.461 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8001"]
+2020-12-07 20:59:29.502 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8001 (http) with context path '/news/article'
+2020-12-07 20:59:29.508 [main] INFO  com.aiolos.news.ArticleApplication - Started ArticleApplication in 53.27 seconds (JVM running for 59.034)
+2020-12-07 21:00:41.181 [http-nio-8001-exec-1] INFO  o.a.c.c.C.[.[.[/news/article] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-12-07 21:00:41.183 [http-nio-8001-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2020-12-07 21:00:41.261 [http-nio-8001-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 78 ms
+2020-12-07 21:00:41.385 [http-nio-8001-exec-1] INFO  c.a.n.c.ArticlePortalController - Enter function article/portal/list, parameter keyword: , category: null, page: 1, pageSize: 15
+2020-12-07 21:00:41.408 [http-nio-8001-exec-1] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.ArticlePortalServiceImpl.queryIndexArticleList ============
+2020-12-07 21:00:42.411 [http-nio-8001-exec-1] INFO  c.a.news.aspect.ServiceLogAspect - 当前执行耗时：1002
+2020-12-07 21:00:53.209 [http-nio-8001-exec-2] INFO  c.a.n.c.ArticlePortalController - Enter function article/portal/list, parameter keyword: , category: null, page: 1, pageSize: 15
+2020-12-07 21:00:53.210 [http-nio-8001-exec-2] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.ArticlePortalServiceImpl.queryIndexArticleList ============
+2020-12-07 21:00:53.309 [http-nio-8001-exec-2] INFO  c.a.news.aspect.ServiceLogAspect - 当前执行耗时：98
+2020-12-07 21:01:12.255 [http-nio-8001-exec-3] INFO  c.a.n.c.ArticlePortalController - Enter function article/portal/list, parameter keyword: , category: null, page: 1, pageSize: 15
+2020-12-07 21:01:12.256 [http-nio-8001-exec-3] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.ArticlePortalServiceImpl.queryIndexArticleList ============
+2020-12-07 21:01:12.277 [http-nio-8001-exec-4] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.ArticlePortalServiceImpl.queryHotList ============
+2020-12-07 21:01:12.306 [http-nio-8001-exec-3] INFO  c.a.news.aspect.ServiceLogAspect - 当前执行耗时：50
+2020-12-07 21:01:12.333 [http-nio-8001-exec-4] INFO  c.a.news.aspect.ServiceLogAspect - 当前执行耗时：56
+2020-12-07 21:06:11.270 [SpringContextShutdownHook] INFO  o.s.s.c.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+2020-12-07 21:06:11.330 [SpringContextShutdownHook] INFO  c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2020-12-07 21:06:48.252 [main] INFO  com.aiolos.news.ArticleApplication - The following profiles are active: dev
+2020-12-07 21:06:49.119 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2020-12-07 21:06:49.120 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data MongoDB repositories in DEFAULT mode.
+2020-12-07 21:06:49.144 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 20ms. Found 0 MongoDB repository interfaces.
+2020-12-07 21:06:49.157 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2020-12-07 21:06:49.158 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2020-12-07 21:06:49.173 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 7ms. Found 0 Redis repository interfaces.
+2020-12-07 21:06:49.346 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'articleDao' and 'com.aiolos.news.dao.ArticleDao' mapperInterface. Bean already defined with the same name!
+2020-12-07 21:06:49.347 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'commentsDao' and 'com.aiolos.news.dao.CommentsDao' mapperInterface. Bean already defined with the same name!
+2020-12-07 21:06:49.347 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - No MyBatis mapper was found in '[com.aiolos.news.dao]' package. Please check your configuration.
+2020-12-07 21:06:49.463 [main] INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=cb4f32d5-532f-3306-b33c-622c9a234ebd
+2020-12-07 21:06:50.144 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8001 (http)
+2020-12-07 21:06:50.155 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8001"]
+2020-12-07 21:06:50.155 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2020-12-07 21:06:50.155 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.31]
+2020-12-07 21:06:50.264 [main] INFO  o.a.c.c.C.[.[.[/news/article] - Initializing Spring embedded WebApplicationContext
+2020-12-07 21:06:50.264 [main] INFO  o.s.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 1992 ms
+2020-12-07 21:06:50.365 [main] INFO  c.a.d.s.b.a.DruidDataSourceAutoConfigure - Init DruidDataSource
+2020-12-07 21:06:50.486 [main] INFO  c.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2020-12-07 21:07:16.463 [main] WARN  o.s.b.a.w.f.WebConversionService - Auto-configuration of Joda-Time formatters is deprecated in favor of using java.time (JSR-310).
+2020-12-07 21:07:16.597 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2020-12-07 21:07:16.648 [main] WARN  c.n.c.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+2020-12-07 21:07:16.648 [main] INFO  c.n.c.sources.URLConfigurationSource - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2020-12-07 21:07:16.652 [main] WARN  c.n.c.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+2020-12-07 21:07:16.652 [main] INFO  c.n.c.sources.URLConfigurationSource - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2020-12-07 21:07:16.849 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2020-12-07 21:07:17.253 [main] INFO  org.mongodb.driver.cluster - Cluster created with settings {hosts=[localhost:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+2020-12-07 21:07:17.353 [cluster-ClusterId{value='5fce29052b12216aebbd21c0', description='null'}-localhost:27017] INFO  org.mongodb.driver.connection - Opened connection [connectionId{localValue:1, serverValue:41}] to localhost:27017
+2020-12-07 21:07:17.363 [cluster-ClusterId{value='5fce29052b12216aebbd21c0', description='null'}-localhost:27017] INFO  org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[4, 4, 2]}, minWireVersion=0, maxWireVersion=9, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=6598936}
+2020-12-07 21:07:17.996 [main] WARN  o.s.b.a.f.FreeMarkerAutoConfiguration - Cannot find template location(s): [classpath:/templates/] (please add some templates, check your FreeMarker configuration, or set spring.freemarker.checkTemplateLocation=false)
+2020-12-07 21:07:18.334 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear tk.mybatis.mapper.util.MsUtil CLASS_CACHE cache.
+2020-12-07 21:07:18.335 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear tk.mybatis.mapper.genid.GenIdUtil CACHE cache.
+2020-12-07 21:07:18.336 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear tk.mybatis.mapper.version.VersionUtil CACHE cache.
+2020-12-07 21:07:18.338 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear EntityHelper entityTableMap cache.
+2020-12-07 21:07:18.415 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Context refreshed
+2020-12-07 21:07:18.430 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2020-12-07 21:07:18.473 [main] INFO  s.d.s.w.s.ApiListingReferenceScanner - Scanning for api listing references
+2020-12-07 21:07:18.669 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8001"]
+2020-12-07 21:07:18.701 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8001 (http) with context path '/news/article'
+2020-12-07 21:07:18.706 [main] INFO  com.aiolos.news.ArticleApplication - Started ArticleApplication in 52.417 seconds (JVM running for 58.232)
+2020-12-07 21:27:45.288 [http-nio-8001-exec-1] INFO  o.a.c.c.C.[.[.[/news/article] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-12-07 21:27:45.291 [http-nio-8001-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2020-12-07 21:27:45.451 [http-nio-8001-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 159 ms
+2020-12-07 21:27:45.555 [http-nio-8001-exec-1] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.ArticlePortalServiceImpl.queryHotList ============
+2020-12-07 21:27:45.560 [http-nio-8001-exec-2] INFO  c.a.n.c.ArticlePortalController - Enter function article/portal/list, parameter keyword: , category: null, page: 1, pageSize: 15
+2020-12-07 21:27:45.561 [http-nio-8001-exec-2] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.ArticlePortalServiceImpl.queryIndexArticleList ============
+2020-12-07 21:27:46.294 [http-nio-8001-exec-1] INFO  c.a.news.aspect.ServiceLogAspect - 当前执行耗时：737
+2020-12-07 21:27:48.895 [http-nio-8001-exec-2] ERROR c.a.news.aspect.ServiceLogAspect - 当前执行耗时：3334
+2020-12-07 21:30:48.755 [http-nio-8001-exec-6] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.ArticlePortalServiceImpl.queryHotList ============
+2020-12-07 21:30:48.766 [http-nio-8001-exec-5] INFO  c.a.n.c.ArticlePortalController - Enter function article/portal/list, parameter keyword: , category: null, page: 1, pageSize: 15
+2020-12-07 21:30:48.766 [http-nio-8001-exec-5] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.ArticlePortalServiceImpl.queryIndexArticleList ============
+2020-12-07 21:30:48.857 [http-nio-8001-exec-6] INFO  c.a.news.aspect.ServiceLogAspect - 当前执行耗时：100
+2020-12-07 21:30:51.546 [http-nio-8001-exec-5] WARN  c.a.news.aspect.ServiceLogAspect - 当前执行耗时：2779
+2020-12-07 21:30:52.779 [http-nio-8001-exec-8] WARN  o.s.web.servlet.PageNotFound - No mapping for GET /news/article/portal/article/queryGoodArticleListOfWriter
+2020-12-07 21:30:52.779 [http-nio-8001-exec-7] WARN  o.s.web.servlet.PageNotFound - No mapping for GET /news/article/portal/article/queryArticleListOfWriter
+2020-12-07 21:30:52.817 [http-nio-8001-exec-8] INFO  c.a.n.c.advice.GlobalExceptionAdvice - No handler found for GET /news/article/portal/article/queryGoodArticleListOfWriter
+2020-12-07 21:30:52.817 [http-nio-8001-exec-7] INFO  c.a.n.c.advice.GlobalExceptionAdvice - No handler found for GET /news/article/portal/article/queryArticleListOfWriter
+2020-12-07 21:32:26.473 [http-nio-8001-exec-2] WARN  o.s.web.servlet.PageNotFound - No mapping for GET /news/article/portal/article/queryGoodArticleListOfWriter
+2020-12-07 21:32:26.473 [http-nio-8001-exec-1] WARN  o.s.web.servlet.PageNotFound - No mapping for GET /news/article/portal/article/queryArticleListOfWriter
+2020-12-07 21:32:26.478 [http-nio-8001-exec-1] INFO  c.a.n.c.advice.GlobalExceptionAdvice - No handler found for GET /news/article/portal/article/queryArticleListOfWriter
+2020-12-07 21:32:26.478 [http-nio-8001-exec-2] INFO  c.a.n.c.advice.GlobalExceptionAdvice - No handler found for GET /news/article/portal/article/queryGoodArticleListOfWriter
+2020-12-07 21:32:26.760 [http-nio-8001-exec-3] INFO  c.a.n.c.ArticlePortalController - Enter function article/portal/list, parameter keyword: , category: null, page: 1, pageSize: 15
+2020-12-07 21:32:26.761 [http-nio-8001-exec-3] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.ArticlePortalServiceImpl.queryIndexArticleList ============
+2020-12-07 21:32:26.771 [http-nio-8001-exec-4] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.ArticlePortalServiceImpl.queryHotList ============
+2020-12-07 21:32:26.825 [http-nio-8001-exec-4] INFO  c.a.news.aspect.ServiceLogAspect - 当前执行耗时：53
+2020-12-07 21:32:26.846 [http-nio-8001-exec-3] INFO  c.a.news.aspect.ServiceLogAspect - 当前执行耗时：85
+2020-12-07 21:32:54.941 [http-nio-8001-exec-6] INFO  c.a.n.c.ArticlePortalController - Enter function article/portal/list, parameter keyword: , category: null, page: 1, pageSize: 15
+2020-12-07 21:32:54.942 [http-nio-8001-exec-6] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.ArticlePortalServiceImpl.queryIndexArticleList ============
+2020-12-07 21:32:54.958 [http-nio-8001-exec-5] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.ArticlePortalServiceImpl.queryHotList ============
+2020-12-07 21:32:54.983 [http-nio-8001-exec-6] INFO  c.a.news.aspect.ServiceLogAspect - 当前执行耗时：41
+2020-12-07 21:32:54.987 [http-nio-8001-exec-5] INFO  c.a.news.aspect.ServiceLogAspect - 当前执行耗时：29
+2020-12-07 21:32:55.100 [http-nio-8001-exec-8] WARN  o.s.web.servlet.PageNotFound - No mapping for GET /news/article/portal/article/queryArticleListOfWriter
+2020-12-07 21:32:55.101 [http-nio-8001-exec-7] WARN  o.s.web.servlet.PageNotFound - No mapping for GET /news/article/portal/article/queryGoodArticleListOfWriter
+2020-12-07 21:32:55.101 [http-nio-8001-exec-8] INFO  c.a.n.c.advice.GlobalExceptionAdvice - No handler found for GET /news/article/portal/article/queryArticleListOfWriter
+2020-12-07 21:32:55.102 [http-nio-8001-exec-7] INFO  c.a.n.c.advice.GlobalExceptionAdvice - No handler found for GET /news/article/portal/article/queryGoodArticleListOfWriter
+2020-12-07 21:34:01.106 [http-nio-8001-exec-1] WARN  o.s.web.servlet.PageNotFound - No mapping for GET /news/article/portal/article/queryArticleListOfWriter
+2020-12-07 21:34:01.109 [http-nio-8001-exec-2] WARN  o.s.web.servlet.PageNotFound - No mapping for GET /news/article/portal/article/queryGoodArticleListOfWriter
+2020-12-07 21:34:01.112 [http-nio-8001-exec-1] INFO  c.a.n.c.advice.GlobalExceptionAdvice - No handler found for GET /news/article/portal/article/queryArticleListOfWriter
+2020-12-07 21:34:01.112 [http-nio-8001-exec-2] INFO  c.a.n.c.advice.GlobalExceptionAdvice - No handler found for GET /news/article/portal/article/queryGoodArticleListOfWriter
+2020-12-07 21:34:42.539 [http-nio-8001-exec-4] WARN  o.s.web.servlet.PageNotFound - No mapping for GET /news/article/portal/article/queryArticleListOfWriter
+2020-12-07 21:34:42.539 [http-nio-8001-exec-3] WARN  o.s.web.servlet.PageNotFound - No mapping for GET /news/article/portal/article/queryGoodArticleListOfWriter
+2020-12-07 21:34:42.540 [http-nio-8001-exec-4] INFO  c.a.n.c.advice.GlobalExceptionAdvice - No handler found for GET /news/article/portal/article/queryArticleListOfWriter
+2020-12-07 21:34:42.540 [http-nio-8001-exec-3] INFO  c.a.n.c.advice.GlobalExceptionAdvice - No handler found for GET /news/article/portal/article/queryGoodArticleListOfWriter
+2020-12-07 21:34:43.005 [http-nio-8001-exec-6] INFO  c.a.n.c.ArticlePortalController - Enter function article/portal/list, parameter keyword: , category: null, page: 1, pageSize: 15
+2020-12-07 21:34:43.004 [http-nio-8001-exec-5] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.ArticlePortalServiceImpl.queryHotList ============
+2020-12-07 21:34:43.005 [http-nio-8001-exec-6] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.ArticlePortalServiceImpl.queryIndexArticleList ============
+2020-12-07 21:34:43.051 [http-nio-8001-exec-5] INFO  c.a.news.aspect.ServiceLogAspect - 当前执行耗时：46
+2020-12-07 21:34:44.559 [http-nio-8001-exec-6] INFO  c.a.news.aspect.ServiceLogAspect - 当前执行耗时：1554
+2020-12-07 21:54:17.571 [SpringContextShutdownHook] INFO  o.s.s.c.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+2020-12-07 21:54:17.781 [SpringContextShutdownHook] INFO  c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed

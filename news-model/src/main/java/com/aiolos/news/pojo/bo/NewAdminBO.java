@@ -1,5 +1,6 @@
 package com.aiolos.news.pojo.bo;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -8,9 +9,7 @@ import lombok.ToString;
  * @author Aiolos
  * @date 2020/11/14 8:45 下午
  */
-@Getter
-@Setter
-@ToString
+@Data
 public class NewAdminBO {
 
     private String username;

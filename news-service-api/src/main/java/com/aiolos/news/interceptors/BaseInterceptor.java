@@ -21,6 +21,8 @@ public class BaseInterceptor {
 
     public static final String REDIS_ADMIN_TOKEN = "redis_admin_token";
 
+    public static final String REDIS_ALREADY_READ = "redis_already_read";
+
     public boolean verifyUserIdToken(String id, String token, String redisKeyPrefix) throws CustomizeException {
 
         if (StringUtils.isNotBlank(id) && StringUtils.isNotBlank(token)) {

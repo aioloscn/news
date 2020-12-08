@@ -1,5 +1,6 @@
 package com.aiolos.news.pojo.vo;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,9 +16,7 @@ import java.util.Date;
  * @author Aiolos
  * @date 2020/12/7 5:58 下午
  */
-@Getter
-@Setter
-@ToString
+@Data
 public class IndexArticleVO {
 
     @Id

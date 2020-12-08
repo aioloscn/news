@@ -336,3 +336,43 @@
 2020-12-07 19:51:47.211 [http-nio-8005-exec-4] INFO  c.a.n.c.FriendLinkController - Enter function admin/friendLinkMng/portal/list
 2020-12-07 19:51:47.212 [http-nio-8005-exec-4] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.FriendLinkServiceImpl.queryPortalAllFriendLinkList ============
 2020-12-07 19:51:47.217 [http-nio-8005-exec-4] INFO  c.a.news.aspect.ServiceLogAspect - 当前执行耗时：4
+2020-12-07 21:00:40.974 [http-nio-8005-exec-7] INFO  c.a.n.c.CategoryMngController - Enter function getCats
+2020-12-07 21:00:40.974 [http-nio-8005-exec-8] INFO  c.a.n.c.FriendLinkController - Enter function admin/friendLinkMng/portal/list
+2020-12-07 21:00:40.984 [http-nio-8005-exec-8] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.FriendLinkServiceImpl.queryPortalAllFriendLinkList ============
+2020-12-07 21:00:41.036 [http-nio-8005-exec-8] INFO  c.a.news.aspect.ServiceLogAspect - 当前执行耗时：50
+2020-12-07 21:00:53.201 [http-nio-8005-exec-9] INFO  c.a.n.c.FriendLinkController - Enter function admin/friendLinkMng/portal/list
+2020-12-07 21:00:53.202 [http-nio-8005-exec-10] INFO  c.a.n.c.CategoryMngController - Enter function getCats
+2020-12-07 21:00:53.203 [http-nio-8005-exec-9] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.FriendLinkServiceImpl.queryPortalAllFriendLinkList ============
+2020-12-07 21:00:53.221 [http-nio-8005-exec-9] INFO  c.a.news.aspect.ServiceLogAspect - 当前执行耗时：17
+2020-12-07 21:01:12.246 [http-nio-8005-exec-2] INFO  c.a.n.c.CategoryMngController - Enter function getCats
+2020-12-07 21:01:12.257 [http-nio-8005-exec-1] INFO  c.a.n.c.FriendLinkController - Enter function admin/friendLinkMng/portal/list
+2020-12-07 21:01:12.257 [http-nio-8005-exec-1] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.FriendLinkServiceImpl.queryPortalAllFriendLinkList ============
+2020-12-07 21:01:12.270 [http-nio-8005-exec-1] INFO  c.a.news.aspect.ServiceLogAspect - 当前执行耗时：13
+2020-12-07 21:27:45.021 [http-nio-8005-exec-5] INFO  c.a.n.c.CategoryMngController - Enter function getCats
+2020-12-07 21:27:45.021 [http-nio-8005-exec-6] INFO  c.a.n.c.FriendLinkController - Enter function admin/friendLinkMng/portal/list
+2020-12-07 21:27:45.026 [http-nio-8005-exec-6] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.FriendLinkServiceImpl.queryPortalAllFriendLinkList ============
+2020-12-07 21:27:45.054 [http-nio-8005-exec-6] INFO  c.a.news.aspect.ServiceLogAspect - 当前执行耗时：28
+2020-12-07 21:30:48.873 [http-nio-8005-exec-9] INFO  c.a.n.c.FriendLinkController - Enter function admin/friendLinkMng/portal/list
+2020-12-07 21:30:48.873 [http-nio-8005-exec-10] INFO  c.a.n.c.CategoryMngController - Enter function getCats
+2020-12-07 21:30:48.877 [http-nio-8005-exec-9] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.FriendLinkServiceImpl.queryPortalAllFriendLinkList ============
+2020-12-07 21:30:48.910 [http-nio-8005-exec-9] INFO  c.a.news.aspect.ServiceLogAspect - 当前执行耗时：33
+2020-12-07 21:30:52.753 [http-nio-8005-exec-2] INFO  c.a.n.c.CategoryMngController - Enter function getCats
+2020-12-07 21:32:26.480 [http-nio-8005-exec-4] INFO  c.a.n.c.CategoryMngController - Enter function getCats
+2020-12-07 21:32:26.747 [http-nio-8005-exec-5] INFO  c.a.n.c.CategoryMngController - Enter function getCats
+2020-12-07 21:32:26.769 [http-nio-8005-exec-6] INFO  c.a.n.c.FriendLinkController - Enter function admin/friendLinkMng/portal/list
+2020-12-07 21:32:26.771 [http-nio-8005-exec-6] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.FriendLinkServiceImpl.queryPortalAllFriendLinkList ============
+2020-12-07 21:32:26.776 [http-nio-8005-exec-6] INFO  c.a.news.aspect.ServiceLogAspect - 当前执行耗时：5
+2020-12-07 21:32:54.940 [http-nio-8005-exec-7] INFO  c.a.n.c.CategoryMngController - Enter function getCats
+2020-12-07 21:32:54.942 [http-nio-8005-exec-8] INFO  c.a.n.c.FriendLinkController - Enter function admin/friendLinkMng/portal/list
+2020-12-07 21:32:54.944 [http-nio-8005-exec-8] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.FriendLinkServiceImpl.queryPortalAllFriendLinkList ============
+2020-12-07 21:32:54.947 [http-nio-8005-exec-8] INFO  c.a.news.aspect.ServiceLogAspect - 当前执行耗时：3
+2020-12-07 21:32:55.104 [http-nio-8005-exec-10] INFO  c.a.n.c.CategoryMngController - Enter function getCats
+2020-12-07 21:34:01.121 [http-nio-8005-exec-1] INFO  c.a.n.c.CategoryMngController - Enter function getCats
+2020-12-07 21:34:42.541 [http-nio-8005-exec-3] INFO  c.a.n.c.CategoryMngController - Enter function getCats
+2020-12-07 21:34:43.002 [http-nio-8005-exec-4] INFO  c.a.n.c.CategoryMngController - Enter function getCats
+2020-12-07 21:34:43.004 [http-nio-8005-exec-5] INFO  c.a.n.c.FriendLinkController - Enter function admin/friendLinkMng/portal/list
+2020-12-07 21:34:43.004 [http-nio-8005-exec-5] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.FriendLinkServiceImpl.queryPortalAllFriendLinkList ============
+2020-12-07 21:34:43.007 [http-nio-8005-exec-5] INFO  c.a.news.aspect.ServiceLogAspect - 当前执行耗时：3
+2020-12-07 21:54:17.945 [SpringContextShutdownHook] INFO  o.s.s.c.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+2020-12-07 21:54:18.229 [SpringContextShutdownHook] INFO  org.mongodb.driver.connection - Closed connection [connectionId{localValue:2, serverValue:38}] to 127.0.0.1:27017 because the pool has been closed.
+2020-12-07 21:54:18.440 [SpringContextShutdownHook] INFO  c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed

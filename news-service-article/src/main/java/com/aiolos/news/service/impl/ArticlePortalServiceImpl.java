@@ -7,6 +7,7 @@ import com.aiolos.news.common.utils.JsonUtils;
 import com.aiolos.news.common.utils.PagedResult;
 import com.aiolos.news.dao.ArticleDao;
 import com.aiolos.news.pojo.Article;
+import com.aiolos.news.pojo.vo.ArticleDetailVO;
 import com.aiolos.news.pojo.vo.IndexArticleVO;
 import com.aiolos.news.pojo.vo.UserBasicInfoVO;
 import com.aiolos.news.service.ArticlePortalService;
@@ -109,6 +110,52 @@ public class ArticlePortalServiceImpl extends BaseService implements ArticlePort
         // 用拼接后的List替换原有的ArticleList
         pagedResult.setRecords(indexArticleVOList);
         return pagedResult;
+    }
+
+    @Override
+    public List<Article> queryHotList() {
+
+        /**
+         * 查询首页文章的隐性查询条件：
+         * isAppoint=0 即时发布，表示文章已经发布，或定时发布到点后已发布
+         * isDelete=0 未删除，表示只能显示未删除的文章
+         * articleStatus=3 审核通过，表示文章只有通过机审/人工审核之后才能显示
+         */
+        Article article = new Article();
+        article.setIsAppoint(YesOrNo.NO.type);
+        article.setIsDelete(YesOrNo.NO.type);
+        article.setArticleStatus(ArticleReviewStatus.SUCCESS.type);
+
+        QueryWrapper<Article> queryWrapper = new QueryWrapper<>(article);
+
+        queryWrapper.orderByDesc("publish_time");
+
+        IPage<Article> articleIPage = new Page<>(1, 5);
+        articleIPage = articleDao.selectPage(articleIPage, queryWrapper);
+
+        List<Article> articleList = articleIPage.getRecords();
+        return articleList;
+    }
+
+    @Override
+    public ArticleDetailVO queryDetail(String articleId) {
+
+        Article article = new Article();
+        article.setId(articleId);
+        article.setIsAppoint(YesOrNo.NO.type);
+        article.setIsDelete(YesOrNo.NO.type);
+        article.setArticleStatus(ArticleReviewStatus.SUCCESS.type);
+
+        QueryWrapper<Article> queryWrapper = new QueryWrapper<>(article);
+        article = articleDao.selectOne(queryWrapper);
+
+        ArticleDetailVO articleDetailVO = new ArticleDetailVO();
+
+        if (article != null) {
+            BeanUtils.copyProperties(article, articleDetailVO);
+        }
+
+        return articleDetailVO;
     }
 
     /**
