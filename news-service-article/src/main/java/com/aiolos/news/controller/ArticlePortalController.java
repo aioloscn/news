@@ -9,6 +9,7 @@ import com.aiolos.news.pojo.vo.ArticleDetailVO;
 import com.aiolos.news.pojo.vo.UserBasicInfoVO;
 import com.aiolos.news.service.ArticlePortalService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
@@ -94,7 +95,9 @@ public class ArticlePortalController extends BaseController implements ArticlePo
      */
     private List<UserBasicInfoVO> getPublisherList(Set<String> idSet) {
 
-        String userServerUrlExecute = "http://www.aiolos.com:8003/news/user/user/queryByIds?userIds=" + JsonUtils.objectToJson(idSet);
+        String serviceId = "NEWS-USER";
+        String userServerUrlExecute = "http://" + serviceId+ "/news/user/user/queryByIds?userIds=" + JsonUtils.objectToJson(idSet);
+
         ResponseEntity<CommonResponse> responseEntity = restTemplate.getForEntity(userServerUrlExecute, CommonResponse.class);
         CommonResponse bodyResult = responseEntity.getBody();
 

@@ -1,0 +1,20 @@
+# eureka注册中心
+server:
+  port: 7000
+  tomcat:
+    uri-encoding: UTF-8
+spring:
+  application:
+    name: springcloud-eureka
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    # 是否要把当前的eureka server注册到自己的注册中心
+    register-with-eureka: false
+    # 从注册中心获得检索服务实例，当前server就是注册中心所以没必要
+    fetch-registry: false
+    # 单实例配置自己的服务地址，如果是高可用集群则配置多个地址，用,分割
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/

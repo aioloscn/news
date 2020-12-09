@@ -4,6 +4,7 @@ import com.aiolos.news.common.utils.RedisOperator;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +20,12 @@ public class BaseController {
 
     @Autowired
     public RedisOperator redis;
+
+    /**
+     * 注入服务发现，可以获得已经注册的服务相关信息
+     */
+    @Autowired
+    public DiscoveryClient discoveryClient;
 
     @Value("${website.domain-name}")
     public String DOMAIN_NAME;

@@ -1,0 +1,17 @@
+# eureka注册中心
+server:
+  port: ${port:7001}
+  tomcat:
+    uri-encoding: UTF-8
+spring:
+  application:
+    name: springcloud-eureka-cluster
+
+eureka:
+  instance:
+    hostname: server-${server.port}
+  other-node-port2: ${port2:7002}
+  other-node-port3: ${port3:7003}
+  client:
+    service-url:
+      defaultZone: http://server-${eureka.other-node-port2}:${eureka.other-node-port2}/eureka/,http://server-${eureka.other-node-port3}:${eureka.other-node-port3}/eureka/

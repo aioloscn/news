@@ -5,6 +5,7 @@ import com.aiolos.news.common.utils.RedisOperator;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 
 /**
  * @author Aiolos
@@ -14,6 +15,12 @@ public class BaseService {
 
     @Autowired
     public RedisOperator redis;
+
+    /**
+     * 注入服务发现，可以获得已经注册的服务相关信息
+     */
+    @Autowired
+    public DiscoveryClient discoveryClient;
 
     public static final String REDIS_ALL_CATEGORY = "redis_all_category";
 

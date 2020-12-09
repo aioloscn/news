@@ -17,6 +17,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -88,8 +90,18 @@ public class ArticlePortalServiceImpl extends BaseService implements ArticlePort
         // 发起redis的mget批量查询api，获得对应的值
         List<String> readCountsRedisList = redis.mget(idList);
 
+        String serviceId = "NEWS-USER";
+//        List<ServiceInstance> serviceInstanceList = discoveryClient.getInstances(serviceId);
+//        ServiceInstance userService = serviceInstanceList.get(0);
+
         // 2. 发起远程调用（restTemplate），请求用户服务获得用户（idSet 发布者）的列表
-        String userServerUrlExecute = "http://www.aiolos.com:8003/news/user/user/queryByIds?userIds=" + JsonUtils.objectToJson(idSet);
+//        String userServerUrlExecute = "http://www.aiolos.com:8003/news/user/user/queryByIds?userIds=" + JsonUtils.objectToJson(idSet);
+
+//        String userServerUrlExecute = "http://" + userService.getHost() + ":" + userService.getPort()
+//                + "/news/user/user/queryByIds?userIds=" + JsonUtils.objectToJson(idSet);
+
+        String userServerUrlExecute = "http://" + serviceId+ "/news/user/user/queryByIds?userIds=" + JsonUtils.objectToJson(idSet);
+
         ResponseEntity<CommonResponse> responseEntity = restTemplate.getForEntity(userServerUrlExecute, CommonResponse.class);
         CommonResponse bodyResult = responseEntity.getBody();
 
