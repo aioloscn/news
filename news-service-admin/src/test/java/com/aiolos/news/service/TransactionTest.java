@@ -12,8 +12,8 @@ import org.springframework.test.context.junit4.SpringRunner;
  * @author Aiolos
  * @date 2020/12/4 6:31 上午
  */
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes = {TestApplication.class}, webEnvironment = SpringBootTest.WebEnvironment.NONE)
+//@RunWith(SpringRunner.class)
+//@SpringBootTest(classes = {TestApplication.class}, webEnvironment = SpringBootTest.WebEnvironment.NONE)
 public class TransactionTest {
 
     @Autowired
@@ -22,37 +22,37 @@ public class TransactionTest {
     @Autowired
     private AnotherSpringTransaction anotherSpringTransaction;
 
-    @Test
+//    @Test
     public void testCatchExceptionCanNotRollback() {
         springTransactionService.catchExceptionCanNotRollback();
     }
 
-    @Test
+//    @Test
     public void testNotRuntimeExceptionCanNotRollback() throws CustomizeException {
         springTransactionService.notRuntimeExceptionCanNotRollback();
     }
 
-    @Test
+//    @Test
     public void testRuntimeExceptionCanRollback() {
         springTransactionService.runtimeExceptionCanRollback();
     }
 
-    @Test
+//    @Test
     public void testAssignExceptionCanRollback() throws CustomizeException {
         springTransactionService.assignExceptionCanRollback();
     }
 
-    @Test
+//    @Test
     public void testRollbackOnlyCanRollback() throws CustomizeException {
         springTransactionService.rollbackOnlyCanRollback();
     }
 
-    @Test
+//    @Test
     public void testNonTransactionalCanNotRollback() {
         springTransactionService.nonTransactionalCanNotRollback();
     }
 
-    @Test
+//    @Test
     public void testTransactionalCanRollback() {
         anotherSpringTransaction.transactionalCanRollback();
     }

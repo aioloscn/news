@@ -37,7 +37,7 @@ eureka:
     service-url:
       defaultZone: http://server-7001:7001/eureka/,http://server-7002:7002/eureka/,http://server-7003:7003/eureka/
 
-# 配置指定自定义的ribbon规则
-news-user:
-  ribbon:
-    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+# 配置指定自定义的ribbon规则，注释掉用默认的轮询
+#news-user:
+#  ribbon:
+#    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule

@@ -14,7 +14,6 @@ import com.aiolos.news.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -69,13 +68,9 @@ public class UserController extends BaseController implements UserControllerApi 
     }
 
     @Override
-    public CommonResponse updateAccountInfo(UpdateUserInfoBO updateUserInfoBO, BindingResult bindingResult) throws CustomizeException {
+    public CommonResponse updateAccountInfo(UpdateUserInfoBO updateUserInfoBO) throws CustomizeException {
 
         log.info("Enter function updateAccountInfo, parameter updateUserInfoBO: {}", JsonUtils.objectToJson(updateUserInfoBO));
-
-        if (bindingResult.hasErrors()) {
-            throw new CustomizeException(ErrorEnum.PARAMETER_VALIDATION_ERROR, CommonUtils.processErrorString(bindingResult));
-        }
 
         userService.updateAccountInfo(updateUserInfoBO);
         return CommonResponse.ok();
@@ -101,6 +96,8 @@ public class UserController extends BaseController implements UserControllerApi 
 
     @Override
     public CommonResponse queryByIds(String userIds) {
+
+        log.info("Enter function queryByIds, parameter userIds: {}", userIds);
 
         if (StringUtils.isBlank(userIds)) {
             return CommonResponse.error(ErrorEnum.USER_DOES_NOT_EXIST);

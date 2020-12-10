@@ -5,6 +5,7 @@ import com.aiolos.news.common.enums.ArticleReviewStatus;
 import com.aiolos.news.common.enums.YesOrNo;
 import com.aiolos.news.common.utils.JsonUtils;
 import com.aiolos.news.common.utils.PagedResult;
+import com.aiolos.news.controller.user.UserControllerApi;
 import com.aiolos.news.dao.ArticleDao;
 import com.aiolos.news.pojo.Article;
 import com.aiolos.news.pojo.vo.ArticleDetailVO;
@@ -17,9 +18,6 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
-import org.springframework.cloud.client.ServiceInstance;
-import org.springframework.cloud.client.discovery.DiscoveryClient;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -39,9 +37,12 @@ public class ArticlePortalServiceImpl extends BaseService implements ArticlePort
 
     private final RestTemplate restTemplate;
 
-    public ArticlePortalServiceImpl(ArticleDao articleDao, RestTemplate restTemplate) {
+    private final UserControllerApi userMicroservice;
+
+    public ArticlePortalServiceImpl(ArticleDao articleDao, RestTemplate restTemplate, UserControllerApi userMicroservice) {
         this.articleDao = articleDao;
         this.restTemplate = restTemplate;
+        this.userMicroservice = userMicroservice;
     }
 
     @Override
@@ -90,20 +91,27 @@ public class ArticlePortalServiceImpl extends BaseService implements ArticlePort
         // 发起redis的mget批量查询api，获得对应的值
         List<String> readCountsRedisList = redis.mget(idList);
 
-        String serviceId = "NEWS-USER";
+        // 2. 发起远程调用（restTemplate），请求用户服务获得用户（idSet 发布者）的列表
+
+        // 第一种远程调用接口方式，硬编码方式
+//        String userServerUrlExecute = "http://www.aiolos.com:8003/news/user/user/queryByIds?userIds=" + JsonUtils.objectToJson(idSet);
+
+//        String serviceId = "NEWS-USER";
+        // 第二种远程调用接口方式，用discovery
 //        List<ServiceInstance> serviceInstanceList = discoveryClient.getInstances(serviceId);
 //        ServiceInstance userService = serviceInstanceList.get(0);
 
-        // 2. 发起远程调用（restTemplate），请求用户服务获得用户（idSet 发布者）的列表
-//        String userServerUrlExecute = "http://www.aiolos.com:8003/news/user/user/queryByIds?userIds=" + JsonUtils.objectToJson(idSet);
-
-//        String userServerUrlExecute = "http://" + userService.getHost() + ":" + userService.getPort()
+        //        String userServerUrlExecute = "http://" + userService.getHost() + ":" + userService.getPort()
 //                + "/news/user/user/queryByIds?userIds=" + JsonUtils.objectToJson(idSet);
 
-        String userServerUrlExecute = "http://" + serviceId+ "/news/user/user/queryByIds?userIds=" + JsonUtils.objectToJson(idSet);
+        // 第二种的优化，用serviceId替换userService.getHost()
+//        String userServerUrlExecute = "http://" + serviceId+ "/news/user/user/queryByIds?userIds=" + JsonUtils.objectToJson(idSet);
 
-        ResponseEntity<CommonResponse> responseEntity = restTemplate.getForEntity(userServerUrlExecute, CommonResponse.class);
-        CommonResponse bodyResult = responseEntity.getBody();
+//        ResponseEntity<CommonResponse> responseEntity = restTemplate.getForEntity(userServerUrlExecute, CommonResponse.class);
+//        CommonResponse bodyResult = responseEntity.getBody();
+
+        // 第三种远程调用接口方式，生产者Api上加上@FeignClient注解，消费者启动程序上加@EnableFeignClient注解
+        CommonResponse bodyResult = userMicroservice.queryByIds(JsonUtils.objectToJson(idSet));
 
         List<UserBasicInfoVO> publisherList = null;
 

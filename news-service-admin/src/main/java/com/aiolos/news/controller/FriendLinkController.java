@@ -10,7 +10,6 @@ import com.aiolos.news.pojo.mo.FriendLinkMO;
 import com.aiolos.news.service.FriendLinkService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
@@ -31,13 +30,9 @@ public class FriendLinkController extends BaseController implements FriendLinkCo
     }
 
     @Override
-    public CommonResponse saveOrUpdateFriendLink(@Valid SaveFriendLinkBO saveFriendLinkBO, BindingResult bindingResult) throws CustomizeException {
+    public CommonResponse saveOrUpdateFriendLink(@Valid SaveFriendLinkBO saveFriendLinkBO) throws CustomizeException {
 
         log.info("Enter function saveOrUpdateFriendLink, parameter saveFriendLinkBO: {}", saveFriendLinkBO.toString());
-
-        if (bindingResult.hasErrors()) {
-            throw new CustomizeException(ErrorEnum.PARAMETER_VALIDATION_ERROR, CommonUtils.processErrorString(bindingResult));
-        }
 
         FriendLinkMO friendLinkMO = new FriendLinkMO();
         BeanUtils.copyProperties(saveFriendLinkBO, friendLinkMO);

@@ -3,8 +3,11 @@ package com.aiolos.news.common.advice;
 import com.aiolos.news.common.CommonResponse;
 import com.aiolos.news.common.exception.CustomizeException;
 import com.aiolos.news.common.enums.ErrorEnum;
+import com.aiolos.news.common.utils.CommonUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -37,6 +40,10 @@ public class GlobalExceptionAdvice {
             log.info(e.getMessage());
             if (e instanceof NoHandlerFoundException) {
                 return CommonResponse.error(ErrorEnum.NO_HANDLER_FOUND);
+            } else if (e instanceof MethodArgumentNotValidException) {
+
+                BindingResult bindingResult = ((MethodArgumentNotValidException) e).getBindingResult();
+                return CommonResponse.error(ErrorEnum.PARAMETER_VALIDATION_ERROR.getErrCode(), CommonUtils.processErrorString(bindingResult));
             } else if (e instanceof ServletRequestBindingException) {
                 return CommonResponse.error(ErrorEnum.BIND_EXCEPTION_ERROR);
             } else if (e instanceof NullPointerException) {

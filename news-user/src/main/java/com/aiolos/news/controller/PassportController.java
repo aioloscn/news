@@ -14,7 +14,6 @@ import com.aiolos.news.pojo.bo.RegisterLoginBO;
 import com.aiolos.news.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -61,14 +60,10 @@ public class PassportController extends BaseController implements PassportContro
     }
 
     @Override
-    public CommonResponse login(RegisterLoginBO registerLoginBO, BindingResult bindingResult,
+    public CommonResponse login(RegisterLoginBO registerLoginBO,
                                 HttpServletRequest request, HttpServletResponse response) throws CustomizeException {
 
         log.info("Enter function login, parameter registerLoginBO: {}", registerLoginBO.toString());
-        // 0. 判断BindingResult是否有错误信息
-        if (bindingResult.hasErrors()) {
-            throw new CustomizeException(ErrorEnum.PARAMETER_VALIDATION_ERROR, CommonUtils.processErrorString(bindingResult));
-        }
 
         String mobile = registerLoginBO.getMobile();
         String smsCode = registerLoginBO.getSmsCode();

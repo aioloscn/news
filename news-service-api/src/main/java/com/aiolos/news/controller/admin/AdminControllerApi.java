@@ -7,7 +7,6 @@ import com.aiolos.news.pojo.bo.NewAdminBO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,7 +26,7 @@ public interface AdminControllerApi {
 
     @ApiOperation(value = "admin登录接口", notes = "admin登录接口", httpMethod = "POST")
     @PostMapping("/adminLogin")
-    CommonResponse adminLogin(@Valid @RequestBody AdminLoginBO adminLoginBO, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) throws CustomizeException;
+    CommonResponse adminLogin(@Valid @RequestBody AdminLoginBO adminLoginBO, HttpServletRequest request, HttpServletResponse response) throws CustomizeException;
 
     @ApiOperation(value = "查询admin用户名是否存在", notes = "查询admin用户名是否存在", httpMethod = "POST")
     @PostMapping("/adminIsExist")

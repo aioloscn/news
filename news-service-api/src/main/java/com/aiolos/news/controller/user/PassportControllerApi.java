@@ -5,7 +5,6 @@ import com.aiolos.news.common.exception.CustomizeException;
 import com.aiolos.news.pojo.bo.RegisterLoginBO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,7 +25,7 @@ public interface PassportControllerApi {
 
     @ApiOperation(value = "一键注册登录接口", notes = "一键注册登录接口", httpMethod = "POST")
     @PostMapping("/login")
-    CommonResponse login(@Valid @RequestBody RegisterLoginBO registerLoginBO, BindingResult bindingResult,
+    CommonResponse login(@Valid @RequestBody RegisterLoginBO registerLoginBO,
                          HttpServletRequest request, HttpServletResponse response) throws CustomizeException;
 
     @ApiOperation(value = "用户退出登录", notes = "用户退出登录", httpMethod = "POST")

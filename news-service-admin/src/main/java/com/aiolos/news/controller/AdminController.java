@@ -15,7 +15,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.crypto.bcrypt.BCrypt;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -40,13 +39,9 @@ public class AdminController extends BaseController implements AdminControllerAp
     }
 
     @Override
-    public CommonResponse adminLogin(AdminLoginBO adminLoginBO, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) throws CustomizeException {
+    public CommonResponse adminLogin(AdminLoginBO adminLoginBO, HttpServletRequest request, HttpServletResponse response) throws CustomizeException {
 
         log.info("Enter function adminLogin, parameter adminLoginBO: {}", adminLoginBO.toString());
-
-        if (bindingResult.hasErrors()) {
-            throw new CustomizeException(ErrorEnum.PARAMETER_VALIDATION_ERROR, CommonUtils.processErrorString(bindingResult));
-        }
 
         AdminUser adminUser = adminUserService.queryAdminByUsername(adminLoginBO.getUsername());
 

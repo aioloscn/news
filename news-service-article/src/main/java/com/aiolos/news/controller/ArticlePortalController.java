@@ -5,11 +5,11 @@ import com.aiolos.news.common.utils.IPUtils;
 import com.aiolos.news.common.utils.JsonUtils;
 import com.aiolos.news.common.utils.PagedResult;
 import com.aiolos.news.controller.article.ArticlePortalControllerApi;
+import com.aiolos.news.controller.user.UserControllerApi;
 import com.aiolos.news.pojo.vo.ArticleDetailVO;
 import com.aiolos.news.pojo.vo.UserBasicInfoVO;
 import com.aiolos.news.service.ArticlePortalService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
@@ -31,9 +31,12 @@ public class ArticlePortalController extends BaseController implements ArticlePo
 
     private final RestTemplate restTemplate;
 
-    public ArticlePortalController(ArticlePortalService articlePortalService, RestTemplate restTemplate) {
+    private final UserControllerApi userMicroservice;
+
+    public ArticlePortalController(ArticlePortalService articlePortalService, RestTemplate restTemplate, UserControllerApi userMicroservice) {
         this.articlePortalService = articlePortalService;
         this.restTemplate = restTemplate;
+        this.userMicroservice = userMicroservice;
     }
 
     @Override
@@ -95,11 +98,7 @@ public class ArticlePortalController extends BaseController implements ArticlePo
      */
     private List<UserBasicInfoVO> getPublisherList(Set<String> idSet) {
 
-        String serviceId = "NEWS-USER";
-        String userServerUrlExecute = "http://" + serviceId+ "/news/user/user/queryByIds?userIds=" + JsonUtils.objectToJson(idSet);
-
-        ResponseEntity<CommonResponse> responseEntity = restTemplate.getForEntity(userServerUrlExecute, CommonResponse.class);
-        CommonResponse bodyResult = responseEntity.getBody();
+        CommonResponse bodyResult = userMicroservice.queryByIds(JsonUtils.objectToJson(idSet));
 
         List<UserBasicInfoVO> publisherList = null;
 

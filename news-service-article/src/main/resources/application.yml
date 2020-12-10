@@ -42,3 +42,14 @@ eureka:
   client:
     service-url:
       defaultZone: http://server-7001:7001/eureka/,http://server-7002:7002/eureka/,http://server-7003:7003/eureka/
+
+ribbon:
+  # 当请求某个微服务5s没连接，超时后会进行重试，先重试连接自己当前的这个实例
+  # 如果当前实例重连一次失败，则会切换到访问集群中的下一个微服务实例，切换次数最大为2次
+  ConnectTimeout: 5000          # 创建连接的超时时间，单位：ms
+  ReadTimeout: 5000             # 在连接创建好以后，调用接口的超时时间，单位：ms
+  MaxAutoRetries: 1             # 最大重试次数
+  MaxAutoRetriesNextServer: 2   # 集群上一个实例节点宕机后，切换到后面多少个微服务实例去重试
+#logging:
+#  level:
+#    root: debug

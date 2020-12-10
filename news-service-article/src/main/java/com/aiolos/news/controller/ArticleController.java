@@ -13,7 +13,6 @@ import com.aiolos.news.pojo.bo.NewArticleBO;
 import com.aiolos.news.service.ArticleService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
@@ -35,13 +34,9 @@ public class ArticleController extends BaseController implements ArticleControll
     }
 
     @Override
-    public CommonResponse createArticle(@Valid NewArticleBO newArticleBO, BindingResult bindingResult) throws CustomizeException {
+    public CommonResponse createArticle(@Valid NewArticleBO newArticleBO) throws CustomizeException {
 
         log.info("Enter function createArticle, parameter newArticleBO: {}", newArticleBO.toString());
-
-        if (bindingResult.hasErrors()) {
-            throw new CustomizeException(ErrorEnum.PARAMETER_VALIDATION_ERROR, CommonUtils.processErrorString(bindingResult));
-        }
 
         // 判断文章封面类型，单图必填，纯文字则设置为空
         if (newArticleBO.getArticleType().equals(ArticleCoverType.ONE_IMAGE.type)) {
