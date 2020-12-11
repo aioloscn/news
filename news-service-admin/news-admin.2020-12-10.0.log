@@ -1,0 +1,258 @@
+2020-12-10 08:34:12.897 [main] INFO  c.a.news.service.TransactionTest - The following profiles are active: dev
+2020-12-10 08:34:13.488 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2020-12-10 08:34:13.492 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data MongoDB repositories in DEFAULT mode.
+2020-12-10 08:34:13.714 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 216ms. Found 1 MongoDB repository interfaces.
+2020-12-10 08:34:13.726 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2020-12-10 08:34:13.727 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2020-12-10 08:34:13.741 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.aiolos.news.repository.FriendLinkRepository. If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository.
+2020-12-10 08:34:13.741 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 8ms. Found 0 Redis repository interfaces.
+2020-12-10 08:34:13.980 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'adminUserDao' and 'com.aiolos.news.dao.AdminUserDao' mapperInterface. Bean already defined with the same name!
+2020-12-10 08:34:13.981 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'categoryDao' and 'com.aiolos.news.dao.CategoryDao' mapperInterface. Bean already defined with the same name!
+2020-12-10 08:34:13.981 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - No MyBatis mapper was found in '[com.aiolos.news.dao]' package. Please check your configuration.
+2020-12-10 08:34:14.072 [main] INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=1a037083-d208-3117-bf1e-19dec528d35f
+2020-12-10 08:34:14.472 [main] INFO  c.a.d.s.b.a.DruidDataSourceAutoConfigure - Init DruidDataSource
+2020-12-10 08:34:14.618 [main] INFO  c.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2020-12-10 08:34:40.944 [main] INFO  org.mongodb.driver.cluster - Cluster created with settings {hosts=[127.0.0.1:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+2020-12-10 08:34:41.044 [cluster-ClusterId{value='5fd16d20cfac3e4773cd71b6', description='null'}-127.0.0.1:27017] INFO  org.mongodb.driver.connection - Opened connection [connectionId{localValue:1, serverValue:75}] to 127.0.0.1:27017
+2020-12-10 08:34:41.052 [cluster-ClusterId{value='5fd16d20cfac3e4773cd71b6', description='null'}-127.0.0.1:27017] INFO  org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=127.0.0.1:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[4, 4, 2]}, minWireVersion=0, maxWireVersion=9, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=4543259}
+2020-12-10 08:34:41.624 [main] WARN  c.n.c.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+2020-12-10 08:34:41.624 [main] INFO  c.n.c.sources.URLConfigurationSource - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2020-12-10 08:34:41.630 [main] WARN  c.n.c.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+2020-12-10 08:34:41.630 [main] INFO  c.n.c.sources.URLConfigurationSource - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2020-12-10 08:34:42.228 [main] WARN  o.s.c.l.c.BlockingLoadBalancerClientAutoConfiguration$BlockingLoadBalancerClientRibbonWarnLogger - You already have RibbonLoadBalancerClient on your classpath. It will be used by default. As Spring Cloud Ribbon is in maintenance mode. We recommend switching to BlockingLoadBalancerClient instead. In order to use it, set the value of `spring.cloud.loadbalancer.ribbon.enabled` to `false` or remove spring-cloud-starter-netflix-ribbon from your project.
+2020-12-10 08:34:42.536 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear tk.mybatis.mapper.util.MsUtil CLASS_CACHE cache.
+2020-12-10 08:34:42.538 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear tk.mybatis.mapper.genid.GenIdUtil CACHE cache.
+2020-12-10 08:34:42.539 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear tk.mybatis.mapper.version.VersionUtil CACHE cache.
+2020-12-10 08:34:42.541 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear EntityHelper entityTableMap cache.
+2020-12-10 08:34:42.590 [main] INFO  c.a.news.service.TransactionTest - Started TransactionTest in 51.374 seconds (JVM running for 52.237)
+2020-12-10 08:34:42.793 [main] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.SpringTransactionServiceImpl.nonTransactionalCanNotRollback ============
+2020-12-10 08:34:43.332 [main] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.SpringTransactionServiceImpl.notRuntimeExceptionCanNotRollback ============
+2020-12-10 08:34:43.350 [main] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.SpringTransactionServiceImpl.runtimeExceptionCanRollback ============
+2020-12-10 08:34:43.364 [main] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.SpringTransactionServiceImpl.catchExceptionCanNotRollback ============
+2020-12-10 08:34:43.370 [main] INFO  c.a.news.aspect.ServiceLogAspect - 当前执行耗时：6
+2020-12-10 08:34:43.376 [main] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.SpringTransactionServiceImpl.rollbackOnlyCanRollback ============
+2020-12-10 08:34:43.387 [main] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.SpringTransactionServiceImpl.assignExceptionCanRollback ============
+2020-12-10 08:34:43.398 [main] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.SpringTransactionServiceImpl.anotherOneSave ============
+2020-12-10 08:34:43.481 [SpringContextShutdownHook] INFO  o.s.c.n.eureka.InstanceInfoFactory - Setting initial instance status as: STARTING
+2020-12-10 08:34:43.484 [SpringContextShutdownHook] INFO  o.s.c.n.e.s.EurekaServiceRegistry - Unregistering application NEWS-SERVICE-ADMIN with eureka with status DOWN
+2020-12-10 08:34:43.506 [SpringContextShutdownHook] INFO  c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2020-12-10 08:41:50.636 [main] INFO  c.a.news.service.TransactionTest - The following profiles are active: dev
+2020-12-10 08:41:51.207 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2020-12-10 08:41:51.208 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data MongoDB repositories in DEFAULT mode.
+2020-12-10 08:41:51.387 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 174ms. Found 1 MongoDB repository interfaces.
+2020-12-10 08:41:51.402 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2020-12-10 08:41:51.403 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2020-12-10 08:41:51.422 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.aiolos.news.repository.FriendLinkRepository. If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository.
+2020-12-10 08:41:51.422 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 10ms. Found 0 Redis repository interfaces.
+2020-12-10 08:41:51.669 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'adminUserDao' and 'com.aiolos.news.dao.AdminUserDao' mapperInterface. Bean already defined with the same name!
+2020-12-10 08:41:51.669 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'categoryDao' and 'com.aiolos.news.dao.CategoryDao' mapperInterface. Bean already defined with the same name!
+2020-12-10 08:41:51.669 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - No MyBatis mapper was found in '[com.aiolos.news.dao]' package. Please check your configuration.
+2020-12-10 08:41:51.761 [main] INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=1a037083-d208-3117-bf1e-19dec528d35f
+2020-12-10 08:41:52.149 [main] INFO  c.a.d.s.b.a.DruidDataSourceAutoConfigure - Init DruidDataSource
+2020-12-10 08:41:52.325 [main] INFO  c.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2020-12-10 08:42:18.573 [main] INFO  org.mongodb.driver.cluster - Cluster created with settings {hosts=[127.0.0.1:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+2020-12-10 08:42:18.652 [cluster-ClusterId{value='5fd16eeaf369de308af46dba', description='null'}-127.0.0.1:27017] INFO  org.mongodb.driver.connection - Opened connection [connectionId{localValue:1, serverValue:76}] to 127.0.0.1:27017
+2020-12-10 08:42:18.658 [cluster-ClusterId{value='5fd16eeaf369de308af46dba', description='null'}-127.0.0.1:27017] INFO  org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=127.0.0.1:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[4, 4, 2]}, minWireVersion=0, maxWireVersion=9, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=3783767}
+2020-12-10 08:42:19.456 [main] WARN  c.n.c.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+2020-12-10 08:42:19.457 [main] INFO  c.n.c.sources.URLConfigurationSource - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2020-12-10 08:42:19.464 [main] WARN  c.n.c.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+2020-12-10 08:42:19.464 [main] INFO  c.n.c.sources.URLConfigurationSource - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2020-12-10 08:42:20.044 [main] WARN  o.s.c.l.c.BlockingLoadBalancerClientAutoConfiguration$BlockingLoadBalancerClientRibbonWarnLogger - You already have RibbonLoadBalancerClient on your classpath. It will be used by default. As Spring Cloud Ribbon is in maintenance mode. We recommend switching to BlockingLoadBalancerClient instead. In order to use it, set the value of `spring.cloud.loadbalancer.ribbon.enabled` to `false` or remove spring-cloud-starter-netflix-ribbon from your project.
+2020-12-10 08:42:20.235 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear tk.mybatis.mapper.util.MsUtil CLASS_CACHE cache.
+2020-12-10 08:42:20.236 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear tk.mybatis.mapper.genid.GenIdUtil CACHE cache.
+2020-12-10 08:42:20.237 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear tk.mybatis.mapper.version.VersionUtil CACHE cache.
+2020-12-10 08:42:20.238 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear EntityHelper entityTableMap cache.
+2020-12-10 08:42:20.275 [main] INFO  c.a.news.service.TransactionTest - Started TransactionTest in 51.386 seconds (JVM running for 52.2)
+2020-12-10 08:42:20.439 [main] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.SpringTransactionServiceImpl.nonTransactionalCanNotRollback ============
+2020-12-10 08:42:20.863 [main] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.SpringTransactionServiceImpl.notRuntimeExceptionCanNotRollback ============
+2020-12-10 08:42:20.941 [main] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.SpringTransactionServiceImpl.runtimeExceptionCanRollback ============
+2020-12-10 08:42:20.953 [main] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.SpringTransactionServiceImpl.catchExceptionCanNotRollback ============
+2020-12-10 08:42:20.964 [main] INFO  c.a.news.aspect.ServiceLogAspect - 当前执行耗时：11
+2020-12-10 08:42:20.979 [main] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.SpringTransactionServiceImpl.rollbackOnlyCanRollback ============
+2020-12-10 08:42:20.989 [main] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.SpringTransactionServiceImpl.assignExceptionCanRollback ============
+2020-12-10 08:42:21.001 [main] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.SpringTransactionServiceImpl.anotherOneSave ============
+2020-12-10 08:42:21.058 [SpringContextShutdownHook] INFO  o.s.c.n.eureka.InstanceInfoFactory - Setting initial instance status as: STARTING
+2020-12-10 08:42:21.061 [SpringContextShutdownHook] INFO  o.s.c.n.e.s.EurekaServiceRegistry - Unregistering application NEWS-SERVICE-ADMIN with eureka with status DOWN
+2020-12-10 08:42:21.083 [SpringContextShutdownHook] INFO  c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2020-12-10 08:44:14.889 [main] INFO  c.a.news.service.TransactionTest - The following profiles are active: dev
+2020-12-10 08:44:15.529 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2020-12-10 08:44:15.531 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data MongoDB repositories in DEFAULT mode.
+2020-12-10 08:44:15.732 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 195ms. Found 1 MongoDB repository interfaces.
+2020-12-10 08:44:15.746 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2020-12-10 08:44:15.747 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2020-12-10 08:44:15.763 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.aiolos.news.repository.FriendLinkRepository. If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository.
+2020-12-10 08:44:15.764 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 9ms. Found 0 Redis repository interfaces.
+2020-12-10 08:44:15.999 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'adminUserDao' and 'com.aiolos.news.dao.AdminUserDao' mapperInterface. Bean already defined with the same name!
+2020-12-10 08:44:15.999 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'categoryDao' and 'com.aiolos.news.dao.CategoryDao' mapperInterface. Bean already defined with the same name!
+2020-12-10 08:44:15.999 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - No MyBatis mapper was found in '[com.aiolos.news.dao]' package. Please check your configuration.
+2020-12-10 08:44:16.092 [main] INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=1a037083-d208-3117-bf1e-19dec528d35f
+2020-12-10 08:44:16.494 [main] INFO  c.a.d.s.b.a.DruidDataSourceAutoConfigure - Init DruidDataSource
+2020-12-10 08:44:16.659 [main] INFO  c.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2020-12-10 08:44:42.991 [main] INFO  org.mongodb.driver.cluster - Cluster created with settings {hosts=[127.0.0.1:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+2020-12-10 08:44:43.072 [cluster-ClusterId{value='5fd16f7aa74db857dc7ab3e0', description='null'}-127.0.0.1:27017] INFO  org.mongodb.driver.connection - Opened connection [connectionId{localValue:1, serverValue:77}] to 127.0.0.1:27017
+2020-12-10 08:44:43.079 [cluster-ClusterId{value='5fd16f7aa74db857dc7ab3e0', description='null'}-127.0.0.1:27017] INFO  org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=127.0.0.1:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[4, 4, 2]}, minWireVersion=0, maxWireVersion=9, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=4239386}
+2020-12-10 08:44:43.779 [main] WARN  c.n.c.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+2020-12-10 08:44:43.779 [main] INFO  c.n.c.sources.URLConfigurationSource - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2020-12-10 08:44:43.786 [main] WARN  c.n.c.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+2020-12-10 08:44:43.787 [main] INFO  c.n.c.sources.URLConfigurationSource - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2020-12-10 08:44:44.432 [main] WARN  o.s.c.l.c.BlockingLoadBalancerClientAutoConfiguration$BlockingLoadBalancerClientRibbonWarnLogger - You already have RibbonLoadBalancerClient on your classpath. It will be used by default. As Spring Cloud Ribbon is in maintenance mode. We recommend switching to BlockingLoadBalancerClient instead. In order to use it, set the value of `spring.cloud.loadbalancer.ribbon.enabled` to `false` or remove spring-cloud-starter-netflix-ribbon from your project.
+2020-12-10 08:44:44.648 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear tk.mybatis.mapper.util.MsUtil CLASS_CACHE cache.
+2020-12-10 08:44:44.649 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear tk.mybatis.mapper.genid.GenIdUtil CACHE cache.
+2020-12-10 08:44:44.650 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear tk.mybatis.mapper.version.VersionUtil CACHE cache.
+2020-12-10 08:44:44.652 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear EntityHelper entityTableMap cache.
+2020-12-10 08:44:44.693 [main] INFO  c.a.news.service.TransactionTest - Started TransactionTest in 51.517 seconds (JVM running for 52.637)
+2020-12-10 08:44:44.871 [main] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.SpringTransactionServiceImpl.nonTransactionalCanNotRollback ============
+2020-12-10 08:44:45.428 [main] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.SpringTransactionServiceImpl.notRuntimeExceptionCanNotRollback ============
+2020-12-10 08:44:45.455 [main] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.SpringTransactionServiceImpl.runtimeExceptionCanRollback ============
+2020-12-10 08:44:45.633 [main] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.SpringTransactionServiceImpl.catchExceptionCanNotRollback ============
+2020-12-10 08:44:45.640 [main] INFO  c.a.news.aspect.ServiceLogAspect - 当前执行耗时：7
+2020-12-10 08:44:45.645 [main] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.SpringTransactionServiceImpl.rollbackOnlyCanRollback ============
+2020-12-10 08:44:45.657 [main] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.SpringTransactionServiceImpl.assignExceptionCanRollback ============
+2020-12-10 08:44:45.670 [main] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.SpringTransactionServiceImpl.anotherOneSave ============
+2020-12-10 08:44:45.805 [SpringContextShutdownHook] INFO  o.s.c.n.eureka.InstanceInfoFactory - Setting initial instance status as: STARTING
+2020-12-10 08:44:45.809 [SpringContextShutdownHook] INFO  o.s.c.n.e.s.EurekaServiceRegistry - Unregistering application NEWS-SERVICE-ADMIN with eureka with status DOWN
+2020-12-10 08:44:45.831 [SpringContextShutdownHook] INFO  c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2020-12-10 08:46:34.787 [main] INFO  c.a.news.service.TransactionTest - The following profiles are active: dev
+2020-12-10 08:46:35.323 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2020-12-10 08:46:35.324 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data MongoDB repositories in DEFAULT mode.
+2020-12-10 08:46:35.499 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 169ms. Found 1 MongoDB repository interfaces.
+2020-12-10 08:46:35.513 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2020-12-10 08:46:35.515 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2020-12-10 08:46:35.531 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.aiolos.news.repository.FriendLinkRepository. If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository.
+2020-12-10 08:46:35.531 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 9ms. Found 0 Redis repository interfaces.
+2020-12-10 08:46:35.768 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'adminUserDao' and 'com.aiolos.news.dao.AdminUserDao' mapperInterface. Bean already defined with the same name!
+2020-12-10 08:46:35.769 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'categoryDao' and 'com.aiolos.news.dao.CategoryDao' mapperInterface. Bean already defined with the same name!
+2020-12-10 08:46:35.769 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - No MyBatis mapper was found in '[com.aiolos.news.dao]' package. Please check your configuration.
+2020-12-10 08:46:35.862 [main] INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=1a037083-d208-3117-bf1e-19dec528d35f
+2020-12-10 08:46:36.247 [main] INFO  c.a.d.s.b.a.DruidDataSourceAutoConfigure - Init DruidDataSource
+2020-12-10 08:46:36.405 [main] INFO  c.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2020-12-10 08:47:02.602 [main] INFO  org.mongodb.driver.cluster - Cluster created with settings {hosts=[127.0.0.1:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+2020-12-10 08:47:02.684 [cluster-ClusterId{value='5fd1700651b4c7604b7468fc', description='null'}-127.0.0.1:27017] INFO  org.mongodb.driver.connection - Opened connection [connectionId{localValue:1, serverValue:78}] to 127.0.0.1:27017
+2020-12-10 08:47:02.690 [cluster-ClusterId{value='5fd1700651b4c7604b7468fc', description='null'}-127.0.0.1:27017] INFO  org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=127.0.0.1:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[4, 4, 2]}, minWireVersion=0, maxWireVersion=9, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=3710707}
+2020-12-10 08:47:03.385 [main] WARN  c.n.c.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+2020-12-10 08:47:03.385 [main] INFO  c.n.c.sources.URLConfigurationSource - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2020-12-10 08:47:03.391 [main] WARN  c.n.c.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+2020-12-10 08:47:03.392 [main] INFO  c.n.c.sources.URLConfigurationSource - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2020-12-10 08:47:03.956 [main] WARN  o.s.c.l.c.BlockingLoadBalancerClientAutoConfiguration$BlockingLoadBalancerClientRibbonWarnLogger - You already have RibbonLoadBalancerClient on your classpath. It will be used by default. As Spring Cloud Ribbon is in maintenance mode. We recommend switching to BlockingLoadBalancerClient instead. In order to use it, set the value of `spring.cloud.loadbalancer.ribbon.enabled` to `false` or remove spring-cloud-starter-netflix-ribbon from your project.
+2020-12-10 08:47:04.171 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear tk.mybatis.mapper.util.MsUtil CLASS_CACHE cache.
+2020-12-10 08:47:04.172 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear tk.mybatis.mapper.genid.GenIdUtil CACHE cache.
+2020-12-10 08:47:04.172 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear tk.mybatis.mapper.version.VersionUtil CACHE cache.
+2020-12-10 08:47:04.174 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear EntityHelper entityTableMap cache.
+2020-12-10 08:47:04.210 [main] INFO  c.a.news.service.TransactionTest - Started TransactionTest in 51.159 seconds (JVM running for 52.042)
+2020-12-10 08:47:04.372 [main] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.SpringTransactionServiceImpl.nonTransactionalCanNotRollback ============
+2020-12-10 08:47:04.841 [main] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.SpringTransactionServiceImpl.notRuntimeExceptionCanNotRollback ============
+2020-12-10 08:47:04.864 [main] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.SpringTransactionServiceImpl.runtimeExceptionCanRollback ============
+2020-12-10 08:47:04.876 [main] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.SpringTransactionServiceImpl.catchExceptionCanNotRollback ============
+2020-12-10 08:47:04.883 [main] INFO  c.a.news.aspect.ServiceLogAspect - 当前执行耗时：6
+2020-12-10 08:47:04.889 [main] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.SpringTransactionServiceImpl.rollbackOnlyCanRollback ============
+2020-12-10 08:47:04.900 [main] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.SpringTransactionServiceImpl.assignExceptionCanRollback ============
+2020-12-10 08:47:04.961 [SpringContextShutdownHook] INFO  o.s.c.n.eureka.InstanceInfoFactory - Setting initial instance status as: STARTING
+2020-12-10 08:47:04.965 [SpringContextShutdownHook] INFO  o.s.c.n.e.s.EurekaServiceRegistry - Unregistering application NEWS-SERVICE-ADMIN with eureka with status DOWN
+2020-12-10 08:47:04.986 [SpringContextShutdownHook] INFO  c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2020-12-10 08:49:28.029 [main] INFO  c.a.news.service.TransactionTest - The following profiles are active: dev
+2020-12-10 08:49:28.568 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2020-12-10 08:49:28.570 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data MongoDB repositories in DEFAULT mode.
+2020-12-10 08:49:28.744 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 169ms. Found 1 MongoDB repository interfaces.
+2020-12-10 08:49:28.758 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2020-12-10 08:49:28.759 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2020-12-10 08:49:28.774 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.aiolos.news.repository.FriendLinkRepository. If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository.
+2020-12-10 08:49:28.775 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 9ms. Found 0 Redis repository interfaces.
+2020-12-10 08:49:29.013 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'adminUserDao' and 'com.aiolos.news.dao.AdminUserDao' mapperInterface. Bean already defined with the same name!
+2020-12-10 08:49:29.014 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'categoryDao' and 'com.aiolos.news.dao.CategoryDao' mapperInterface. Bean already defined with the same name!
+2020-12-10 08:49:29.014 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - No MyBatis mapper was found in '[com.aiolos.news.dao]' package. Please check your configuration.
+2020-12-10 08:49:29.107 [main] INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=1a037083-d208-3117-bf1e-19dec528d35f
+2020-12-10 08:49:29.484 [main] INFO  c.a.d.s.b.a.DruidDataSourceAutoConfigure - Init DruidDataSource
+2020-12-10 08:49:29.643 [main] INFO  c.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2020-12-10 08:49:55.844 [main] INFO  org.mongodb.driver.cluster - Cluster created with settings {hosts=[127.0.0.1:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+2020-12-10 08:49:55.926 [cluster-ClusterId{value='5fd170b33024ee5127642538', description='null'}-127.0.0.1:27017] INFO  org.mongodb.driver.connection - Opened connection [connectionId{localValue:1, serverValue:79}] to 127.0.0.1:27017
+2020-12-10 08:49:55.933 [cluster-ClusterId{value='5fd170b33024ee5127642538', description='null'}-127.0.0.1:27017] INFO  org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=127.0.0.1:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[4, 4, 2]}, minWireVersion=0, maxWireVersion=9, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=4052214}
+2020-12-10 08:49:56.595 [main] WARN  c.n.c.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+2020-12-10 08:49:56.595 [main] INFO  c.n.c.sources.URLConfigurationSource - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2020-12-10 08:49:56.601 [main] WARN  c.n.c.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+2020-12-10 08:49:56.602 [main] INFO  c.n.c.sources.URLConfigurationSource - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2020-12-10 08:49:57.211 [main] WARN  o.s.c.l.c.BlockingLoadBalancerClientAutoConfiguration$BlockingLoadBalancerClientRibbonWarnLogger - You already have RibbonLoadBalancerClient on your classpath. It will be used by default. As Spring Cloud Ribbon is in maintenance mode. We recommend switching to BlockingLoadBalancerClient instead. In order to use it, set the value of `spring.cloud.loadbalancer.ribbon.enabled` to `false` or remove spring-cloud-starter-netflix-ribbon from your project.
+2020-12-10 08:49:57.408 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear tk.mybatis.mapper.util.MsUtil CLASS_CACHE cache.
+2020-12-10 08:49:57.409 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear tk.mybatis.mapper.genid.GenIdUtil CACHE cache.
+2020-12-10 08:49:57.410 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear tk.mybatis.mapper.version.VersionUtil CACHE cache.
+2020-12-10 08:49:57.411 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear EntityHelper entityTableMap cache.
+2020-12-10 08:49:57.448 [main] INFO  c.a.news.service.TransactionTest - Started TransactionTest in 51.156 seconds (JVM running for 52.013)
+2020-12-10 08:49:57.611 [main] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.SpringTransactionServiceImpl.nonTransactionalCanNotRollback ============
+2020-12-10 08:49:57.856 [main] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.SpringTransactionServiceImpl.notRuntimeExceptionCanNotRollback ============
+2020-12-10 08:49:58.008 [main] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.SpringTransactionServiceImpl.runtimeExceptionCanRollback ============
+2020-12-10 08:49:58.018 [main] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.SpringTransactionServiceImpl.catchExceptionCanNotRollback ============
+2020-12-10 08:49:58.024 [main] INFO  c.a.news.aspect.ServiceLogAspect - 当前执行耗时：6
+2020-12-10 08:49:58.032 [main] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.SpringTransactionServiceImpl.rollbackOnlyCanRollback ============
+2020-12-10 08:49:58.050 [main] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.SpringTransactionServiceImpl.assignExceptionCanRollback ============
+2020-12-10 08:49:58.061 [main] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.SpringTransactionServiceImpl.anotherOneSave ============
+2020-12-10 08:49:58.117 [SpringContextShutdownHook] INFO  o.s.c.n.eureka.InstanceInfoFactory - Setting initial instance status as: STARTING
+2020-12-10 08:49:58.121 [SpringContextShutdownHook] INFO  o.s.c.n.e.s.EurekaServiceRegistry - Unregistering application NEWS-SERVICE-ADMIN with eureka with status DOWN
+2020-12-10 08:49:58.145 [SpringContextShutdownHook] INFO  c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2020-12-10 08:52:41.179 [main] INFO  c.a.news.service.TransactionTest - The following profiles are active: dev
+2020-12-10 08:52:41.737 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2020-12-10 08:52:41.739 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data MongoDB repositories in DEFAULT mode.
+2020-12-10 08:52:41.923 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 179ms. Found 1 MongoDB repository interfaces.
+2020-12-10 08:52:41.936 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2020-12-10 08:52:41.938 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2020-12-10 08:52:41.957 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.aiolos.news.repository.FriendLinkRepository. If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository.
+2020-12-10 08:52:41.957 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 10ms. Found 0 Redis repository interfaces.
+2020-12-10 08:52:42.153 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'adminUserDao' and 'com.aiolos.news.dao.AdminUserDao' mapperInterface. Bean already defined with the same name!
+2020-12-10 08:52:42.154 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'categoryDao' and 'com.aiolos.news.dao.CategoryDao' mapperInterface. Bean already defined with the same name!
+2020-12-10 08:52:42.154 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - No MyBatis mapper was found in '[com.aiolos.news.dao]' package. Please check your configuration.
+2020-12-10 08:52:42.257 [main] INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=1a037083-d208-3117-bf1e-19dec528d35f
+2020-12-10 08:52:42.749 [main] INFO  c.a.d.s.b.a.DruidDataSourceAutoConfigure - Init DruidDataSource
+2020-12-10 08:52:42.892 [main] INFO  c.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2020-12-10 08:53:09.229 [main] INFO  org.mongodb.driver.cluster - Cluster created with settings {hosts=[127.0.0.1:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+2020-12-10 08:53:09.296 [cluster-ClusterId{value='5fd1717538a7cb21cbabd6bf', description='null'}-127.0.0.1:27017] INFO  org.mongodb.driver.connection - Opened connection [connectionId{localValue:1, serverValue:80}] to 127.0.0.1:27017
+2020-12-10 08:53:09.302 [cluster-ClusterId{value='5fd1717538a7cb21cbabd6bf', description='null'}-127.0.0.1:27017] INFO  org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=127.0.0.1:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[4, 4, 2]}, minWireVersion=0, maxWireVersion=9, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=3566169}
+2020-12-10 08:53:09.860 [main] WARN  c.n.c.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+2020-12-10 08:53:09.860 [main] INFO  c.n.c.sources.URLConfigurationSource - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2020-12-10 08:53:09.869 [main] WARN  c.n.c.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+2020-12-10 08:53:09.869 [main] INFO  c.n.c.sources.URLConfigurationSource - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2020-12-10 08:53:10.553 [main] WARN  o.s.c.l.c.BlockingLoadBalancerClientAutoConfiguration$BlockingLoadBalancerClientRibbonWarnLogger - You already have RibbonLoadBalancerClient on your classpath. It will be used by default. As Spring Cloud Ribbon is in maintenance mode. We recommend switching to BlockingLoadBalancerClient instead. In order to use it, set the value of `spring.cloud.loadbalancer.ribbon.enabled` to `false` or remove spring-cloud-starter-netflix-ribbon from your project.
+2020-12-10 08:53:10.741 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear tk.mybatis.mapper.util.MsUtil CLASS_CACHE cache.
+2020-12-10 08:53:10.742 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear tk.mybatis.mapper.genid.GenIdUtil CACHE cache.
+2020-12-10 08:53:10.743 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear tk.mybatis.mapper.version.VersionUtil CACHE cache.
+2020-12-10 08:53:10.745 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear EntityHelper entityTableMap cache.
+2020-12-10 08:53:10.782 [main] INFO  c.a.news.service.TransactionTest - Started TransactionTest in 51.407 seconds (JVM running for 52.477)
+2020-12-10 08:53:11.209 [main] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.SpringTransactionServiceImpl.notRuntimeExceptionCanNotRollback ============
+2020-12-10 08:53:11.405 [SpringContextShutdownHook] INFO  o.s.c.n.eureka.InstanceInfoFactory - Setting initial instance status as: STARTING
+2020-12-10 08:53:11.411 [SpringContextShutdownHook] INFO  o.s.c.n.e.s.EurekaServiceRegistry - Unregistering application NEWS-SERVICE-ADMIN with eureka with status DOWN
+2020-12-10 08:53:11.459 [SpringContextShutdownHook] INFO  c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2020-12-10 08:55:31.835 [main] INFO  c.a.news.service.TransactionTest - The following profiles are active: dev
+2020-12-10 08:55:32.391 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2020-12-10 08:55:32.392 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data MongoDB repositories in DEFAULT mode.
+2020-12-10 08:55:32.581 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 182ms. Found 1 MongoDB repository interfaces.
+2020-12-10 08:55:32.592 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2020-12-10 08:55:32.593 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2020-12-10 08:55:32.609 [main] INFO  o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.aiolos.news.repository.FriendLinkRepository. If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository.
+2020-12-10 08:55:32.609 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 8ms. Found 0 Redis repository interfaces.
+2020-12-10 08:55:32.835 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'adminUserDao' and 'com.aiolos.news.dao.AdminUserDao' mapperInterface. Bean already defined with the same name!
+2020-12-10 08:55:32.836 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'categoryDao' and 'com.aiolos.news.dao.CategoryDao' mapperInterface. Bean already defined with the same name!
+2020-12-10 08:55:32.836 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - No MyBatis mapper was found in '[com.aiolos.news.dao]' package. Please check your configuration.
+2020-12-10 08:55:32.928 [main] INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=1a037083-d208-3117-bf1e-19dec528d35f
+2020-12-10 08:55:33.322 [main] INFO  c.a.d.s.b.a.DruidDataSourceAutoConfigure - Init DruidDataSource
+2020-12-10 08:55:33.467 [main] INFO  c.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2020-12-10 08:55:59.688 [main] INFO  org.mongodb.driver.cluster - Cluster created with settings {hosts=[127.0.0.1:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+2020-12-10 08:55:59.769 [cluster-ClusterId{value='5fd1721fe3cfc3627143756f', description='null'}-127.0.0.1:27017] INFO  org.mongodb.driver.connection - Opened connection [connectionId{localValue:1, serverValue:81}] to 127.0.0.1:27017
+2020-12-10 08:55:59.776 [cluster-ClusterId{value='5fd1721fe3cfc3627143756f', description='null'}-127.0.0.1:27017] INFO  org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=127.0.0.1:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[4, 4, 2]}, minWireVersion=0, maxWireVersion=9, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=3631826}
+2020-12-10 08:56:00.448 [main] WARN  c.n.c.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+2020-12-10 08:56:00.448 [main] INFO  c.n.c.sources.URLConfigurationSource - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2020-12-10 08:56:00.454 [main] WARN  c.n.c.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+2020-12-10 08:56:00.454 [main] INFO  c.n.c.sources.URLConfigurationSource - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2020-12-10 08:56:01.041 [main] WARN  o.s.c.l.c.BlockingLoadBalancerClientAutoConfiguration$BlockingLoadBalancerClientRibbonWarnLogger - You already have RibbonLoadBalancerClient on your classpath. It will be used by default. As Spring Cloud Ribbon is in maintenance mode. We recommend switching to BlockingLoadBalancerClient instead. In order to use it, set the value of `spring.cloud.loadbalancer.ribbon.enabled` to `false` or remove spring-cloud-starter-netflix-ribbon from your project.
+2020-12-10 08:56:01.231 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear tk.mybatis.mapper.util.MsUtil CLASS_CACHE cache.
+2020-12-10 08:56:01.231 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear tk.mybatis.mapper.genid.GenIdUtil CACHE cache.
+2020-12-10 08:56:01.232 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear tk.mybatis.mapper.version.VersionUtil CACHE cache.
+2020-12-10 08:56:01.234 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear EntityHelper entityTableMap cache.
+2020-12-10 08:56:01.269 [main] INFO  c.a.news.service.TransactionTest - Started TransactionTest in 51.117 seconds (JVM running for 51.964)
+2020-12-10 08:56:01.435 [main] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.SpringTransactionServiceImpl.nonTransactionalCanNotRollback ============
+2020-12-10 08:56:01.681 [main] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.SpringTransactionServiceImpl.notRuntimeExceptionCanNotRollback ============
+2020-12-10 08:56:01.851 [main] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.SpringTransactionServiceImpl.runtimeExceptionCanRollback ============
+2020-12-10 08:56:01.862 [main] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.SpringTransactionServiceImpl.catchExceptionCanNotRollback ============
+2020-12-10 08:56:01.869 [main] INFO  c.a.news.aspect.ServiceLogAspect - 当前执行耗时：6
+2020-12-10 08:56:01.874 [main] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.SpringTransactionServiceImpl.rollbackOnlyCanRollback ============
+2020-12-10 08:56:01.887 [main] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.SpringTransactionServiceImpl.assignExceptionCanRollback ============
+2020-12-10 08:56:01.904 [main] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.SpringTransactionServiceImpl.anotherOneSave ============
+2020-12-10 08:56:01.969 [SpringContextShutdownHook] INFO  o.s.c.n.eureka.InstanceInfoFactory - Setting initial instance status as: STARTING
+2020-12-10 08:56:01.972 [SpringContextShutdownHook] INFO  o.s.c.n.e.s.EurekaServiceRegistry - Unregistering application NEWS-SERVICE-ADMIN with eureka with status DOWN
+2020-12-10 08:56:01.995 [SpringContextShutdownHook] INFO  c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed

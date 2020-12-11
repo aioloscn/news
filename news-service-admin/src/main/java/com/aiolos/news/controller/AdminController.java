@@ -41,7 +41,7 @@ public class AdminController extends BaseController implements AdminControllerAp
     @Override
     public CommonResponse adminLogin(AdminLoginBO adminLoginBO, HttpServletRequest request, HttpServletResponse response) throws CustomizeException {
 
-        log.info("Enter function adminLogin, parameter adminLoginBO: {}", adminLoginBO.toString());
+        log.info("Enter the method adminLogin, parameter adminLoginBO: {}", adminLoginBO.toString());
 
         AdminUser adminUser = adminUserService.queryAdminByUsername(adminLoginBO.getUsername());
 
@@ -62,7 +62,7 @@ public class AdminController extends BaseController implements AdminControllerAp
     @Override
     public CommonResponse adminIsExist(String username) throws CustomizeException {
 
-        log.info("Enter function adminIsExist, parameter username: {}", username);
+        log.info("Enter the method adminIsExist, parameter username: {}", username);
 
         checkAdminExist(username);
         return CommonResponse.ok();
@@ -71,7 +71,7 @@ public class AdminController extends BaseController implements AdminControllerAp
     @Override
     public CommonResponse addNewAdmin(NewAdminBO newAdminBO) throws CustomizeException {
 
-        log.info("Enter function addNewAdmin, parameter newAdminBO: {}", newAdminBO);
+        log.info("Enter the method addNewAdmin, parameter newAdminBO: {}", newAdminBO);
 
         // base64不为空，则代表人脸入库，否则需要用户输入密码和确认密码
         if (StringUtils.isBlank(newAdminBO.getImg64())) {
@@ -99,7 +99,7 @@ public class AdminController extends BaseController implements AdminControllerAp
     @Override
     public CommonResponse getAdminList(Integer pageNum, Integer pageSize) {
 
-        log.info("Enter function getAdminList, parameter page: {}, pageSize: {}", pageNum, pageSize);
+        log.info("Enter the method getAdminList, parameter page: {}, pageSize: {}", pageNum, pageSize);
 
         if (pageNum == null) {
             pageNum = START_PAGE;
@@ -115,7 +115,7 @@ public class AdminController extends BaseController implements AdminControllerAp
     @Override
     public CommonResponse adminLogout(String adminId, HttpServletRequest request, HttpServletResponse response) {
 
-        log.info("Enter function adminLogout, parameter adminId: {}", adminId);
+        log.info("Enter the method adminLogout, parameter adminId: {}", adminId);
 
         // 从redis删除admin会话token
         redis.del(REDIS_ADMIN_TOKEN + ":" + adminId);

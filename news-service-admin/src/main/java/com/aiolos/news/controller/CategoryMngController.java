@@ -28,7 +28,7 @@ public class CategoryMngController extends BaseController implements CategoryMng
     @Override
     public CommonResponse getCats() {
 
-        log.info("Enter function getCats");
+        log.info("Enter the method getCats");
 
         // 先从redis中查询，如果有则返回，没有则从数据库中查询并保存到redis中
         String allCatsJson = redis.get(REDIS_ALL_CATEGORY);

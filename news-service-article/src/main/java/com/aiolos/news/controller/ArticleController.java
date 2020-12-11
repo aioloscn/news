@@ -36,7 +36,7 @@ public class ArticleController extends BaseController implements ArticleControll
     @Override
     public CommonResponse createArticle(@Valid NewArticleBO newArticleBO) throws CustomizeException {
 
-        log.info("Enter function createArticle, parameter newArticleBO: {}", newArticleBO.toString());
+        log.info("Enter the method createArticle, parameter newArticleBO: {}", newArticleBO.toString());
 
         // 判断文章封面类型，单图必填，纯文字则设置为空
         if (newArticleBO.getArticleType().equals(ArticleCoverType.ONE_IMAGE.type)) {
@@ -77,7 +77,7 @@ public class ArticleController extends BaseController implements ArticleControll
     @Override
     public CommonResponse queryMyArticleList(String userId, String keyword, Integer status, Date startDate, Date endDate, Integer pageNum, Integer pageSize) {
 
-        log.info("Enter function queryMyArticleList, parameter userId: {}, keyword: {}, status: {}, pageNum: {}, pageSize: {}",
+        log.info("Enter the method queryMyArticleList, parameter userId: {}, keyword: {}, status: {}, pageNum: {}, pageSize: {}",
                                     userId, keyword, status, pageNum, pageSize);
 
         if (StringUtils.isBlank(userId)) {

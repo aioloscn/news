@@ -3,6 +3,7 @@ package com.aiolos.news;
 import com.rule.MyRule;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.netflix.ribbon.RibbonClient;
 import org.springframework.context.annotation.ComponentScan;
@@ -18,7 +19,7 @@ import tk.mybatis.spring.annotation.MapperScan;
 @ComponentScan(basePackages = "com.aiolos")    // 容器会扫描这个包下所有的@Component、@Configuration、@Bean、@Service等
 @EnableAspectJAutoProxy(proxyTargetClass = true)
 @EnableEurekaClient
-//@RibbonClient(name = "news-user", configuration = MyRule.class)
+@EnableCircuitBreaker   // 开启Hystrix的熔断机制
 public class UserApplication {
     public static void main(String[] args) {
         SpringApplication.run(UserApplication.class, args);

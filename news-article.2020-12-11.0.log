@@ -1,0 +1,277 @@
+2020-12-11 22:16:27.087 [main] INFO  com.aiolos.news.ArticleApplication - The following profiles are active: dev
+2020-12-11 22:16:28.096 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2020-12-11 22:16:28.097 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data MongoDB repositories in DEFAULT mode.
+2020-12-11 22:16:28.126 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 23ms. Found 0 MongoDB repository interfaces.
+2020-12-11 22:16:28.138 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2020-12-11 22:16:28.140 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2020-12-11 22:16:28.155 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 8ms. Found 0 Redis repository interfaces.
+2020-12-11 22:16:28.433 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'articleDao' and 'com.aiolos.news.dao.ArticleDao' mapperInterface. Bean already defined with the same name!
+2020-12-11 22:16:28.433 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'commentsDao' and 'com.aiolos.news.dao.CommentsDao' mapperInterface. Bean already defined with the same name!
+2020-12-11 22:16:28.433 [main] WARN  o.m.s.mapper.ClassPathMapperScanner - No MyBatis mapper was found in '[com.aiolos.news.dao]' package. Please check your configuration.
+2020-12-11 22:16:28.532 [main] INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=347e4fcb-da94-3c36-b18b-f31eae95d322
+2020-12-11 22:16:28.648 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'com.aiolos.news.controller.user.UserControllerApi' of type [org.springframework.cloud.openfeign.FeignClientFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-12-11 22:16:29.297 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8001 (http)
+2020-12-11 22:16:29.310 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8001"]
+2020-12-11 22:16:29.311 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2020-12-11 22:16:29.312 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.31]
+2020-12-11 22:16:29.483 [main] INFO  o.a.c.c.C.[.[.[/news/article] - Initializing Spring embedded WebApplicationContext
+2020-12-11 22:16:29.484 [main] INFO  o.s.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 2370 ms
+2020-12-11 22:16:29.611 [main] INFO  c.a.d.s.b.a.DruidDataSourceAutoConfigure - Init DruidDataSource
+2020-12-11 22:16:29.750 [main] INFO  c.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2020-12-11 22:16:56.479 [main] WARN  o.s.b.a.w.f.WebConversionService - Auto-configuration of Joda-Time formatters is deprecated in favor of using java.time (JSR-310).
+2020-12-11 22:16:56.632 [main] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2020-12-11 22:16:56.705 [main] WARN  c.n.c.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+2020-12-11 22:16:56.705 [main] INFO  c.n.c.sources.URLConfigurationSource - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2020-12-11 22:16:56.710 [main] WARN  c.n.c.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+2020-12-11 22:16:56.710 [main] INFO  c.n.c.sources.URLConfigurationSource - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2020-12-11 22:16:56.949 [main] INFO  o.s.s.c.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2020-12-11 22:16:57.398 [main] INFO  org.mongodb.driver.cluster - Cluster created with settings {hosts=[localhost:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+2020-12-11 22:16:57.468 [cluster-ClusterId{value='5fd37f59ad16b1011e80b19c', description='null'}-localhost:27017] INFO  org.mongodb.driver.connection - Opened connection [connectionId{localValue:1, serverValue:113}] to localhost:27017
+2020-12-11 22:16:57.474 [cluster-ClusterId{value='5fd37f59ad16b1011e80b19c', description='null'}-localhost:27017] INFO  org.mongodb.driver.cluster - Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[4, 4, 2]}, minWireVersion=0, maxWireVersion=9, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=3883034}
+2020-12-11 22:16:58.209 [main] WARN  o.s.b.a.f.FreeMarkerAutoConfiguration - Cannot find template location(s): [classpath:/templates/] (please add some templates, check your FreeMarker configuration, or set spring.freemarker.checkTemplateLocation=false)
+2020-12-11 22:16:59.311 [main] INFO  o.s.cloud.commons.util.InetUtils - Cannot determine local hostname
+2020-12-11 22:16:59.332 [main] WARN  o.s.c.l.c.BlockingLoadBalancerClientAutoConfiguration$BlockingLoadBalancerClientRibbonWarnLogger - You already have RibbonLoadBalancerClient on your classpath. It will be used by default. As Spring Cloud Ribbon is in maintenance mode. We recommend switching to BlockingLoadBalancerClient instead. In order to use it, set the value of `spring.cloud.loadbalancer.ribbon.enabled` to `false` or remove spring-cloud-starter-netflix-ribbon from your project.
+2020-12-11 22:16:59.450 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear tk.mybatis.mapper.util.MsUtil CLASS_CACHE cache.
+2020-12-11 22:16:59.451 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear tk.mybatis.mapper.genid.GenIdUtil CACHE cache.
+2020-12-11 22:16:59.451 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear tk.mybatis.mapper.version.VersionUtil CACHE cache.
+2020-12-11 22:16:59.453 [main] INFO  t.m.m.a.MapperCacheDisabler - Clear EntityHelper entityTableMap cache.
+2020-12-11 22:16:59.552 [main] INFO  o.s.c.n.eureka.InstanceInfoFactory - Setting initial instance status as: STARTING
+2020-12-11 22:16:59.603 [main] INFO  c.netflix.discovery.DiscoveryClient - Initializing Eureka in region us-east-1
+2020-12-11 22:16:59.689 [main] INFO  c.n.d.p.DiscoveryJerseyProvider - Using JSON encoding codec LegacyJacksonJson
+2020-12-11 22:16:59.689 [main] INFO  c.n.d.p.DiscoveryJerseyProvider - Using JSON decoding codec LegacyJacksonJson
+2020-12-11 22:16:59.846 [main] INFO  c.n.d.p.DiscoveryJerseyProvider - Using XML encoding codec XStreamXml
+2020-12-11 22:16:59.846 [main] INFO  c.n.d.p.DiscoveryJerseyProvider - Using XML decoding codec XStreamXml
+2020-12-11 22:17:00.172 [main] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2020-12-11 22:17:00.205 [main] INFO  c.netflix.discovery.DiscoveryClient - Disable delta property : false
+2020-12-11 22:17:00.206 [main] INFO  c.netflix.discovery.DiscoveryClient - Single vip registry refresh property : null
+2020-12-11 22:17:00.206 [main] INFO  c.netflix.discovery.DiscoveryClient - Force full registry fetch : false
+2020-12-11 22:17:00.206 [main] INFO  c.netflix.discovery.DiscoveryClient - Application is null : false
+2020-12-11 22:17:00.206 [main] INFO  c.netflix.discovery.DiscoveryClient - Registered Applications size is zero : true
+2020-12-11 22:17:00.206 [main] INFO  c.netflix.discovery.DiscoveryClient - Application version is -1: true
+2020-12-11 22:17:00.206 [main] INFO  c.netflix.discovery.DiscoveryClient - Getting all instance registry info from the eureka server
+2020-12-11 22:17:00.444 [main] INFO  c.netflix.discovery.DiscoveryClient - The response status is 200
+2020-12-11 22:17:00.448 [main] INFO  c.netflix.discovery.DiscoveryClient - Starting heartbeat executor: renew interval is: 30
+2020-12-11 22:17:00.451 [main] INFO  c.n.discovery.InstanceInfoReplicator - InstanceInfoReplicator onDemand update allowed rate per min is 4
+2020-12-11 22:17:00.456 [main] INFO  c.netflix.discovery.DiscoveryClient - Discovery Client initialized at timestamp 1607696220455 with initial instances count: 3
+2020-12-11 22:17:00.462 [main] INFO  o.s.c.n.e.s.EurekaServiceRegistry - Registering application NEWS-SERVICE-ARTICLE with eureka with status UP
+2020-12-11 22:17:00.463 [main] INFO  c.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1607696220463, current=UP, previous=STARTING]
+2020-12-11 22:17:00.466 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Context refreshed
+2020-12-11 22:17:00.466 [DiscoveryClient-InstanceInfoReplicator-0] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_NEWS-SERVICE-ARTICLE/192.168.3.2:news-service-article:8001: registering service...
+2020-12-11 22:17:00.490 [main] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2020-12-11 22:17:00.528 [DiscoveryClient-InstanceInfoReplicator-0] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_NEWS-SERVICE-ARTICLE/192.168.3.2:news-service-article:8001 - registration status: 204
+2020-12-11 22:17:00.557 [main] INFO  s.d.s.w.s.ApiListingReferenceScanner - Scanning for api listing references
+2020-12-11 22:17:00.841 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8001"]
+2020-12-11 22:17:00.904 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8001 (http) with context path '/news/article'
+2020-12-11 22:17:00.906 [main] INFO  o.s.c.n.e.s.EurekaAutoServiceRegistration - Updating port to 8001
+2020-12-11 22:17:00.913 [main] INFO  com.aiolos.news.ArticleApplication - Started ArticleApplication in 54.797 seconds (JVM running for 60.728)
+2020-12-11 22:21:41.984 [http-nio-8001-exec-1] INFO  o.a.c.c.C.[.[.[/news/article] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-12-11 22:21:41.985 [http-nio-8001-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2020-12-11 22:21:42.016 [http-nio-8001-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 31 ms
+2020-12-11 22:21:42.073 [http-nio-8001-exec-1] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.ArticlePortalServiceImpl.queryDetail ============
+2020-12-11 22:21:42.508 [http-nio-8001-exec-1] INFO  c.a.news.aspect.ServiceLogAspect - 当前执行耗时：435
+2020-12-11 22:21:42.827 [hystrix-news-user/news/user-1] DEBUG c.a.n.c.user.UserControllerApi - [UserControllerApi#queryByIds] ---> GET http://news-user/news/user/user/queryByIds?userIds=%5B%221316846502299172864%22%5D HTTP/1.1
+2020-12-11 22:21:42.828 [hystrix-news-user/news/user-1] DEBUG c.a.n.c.user.UserControllerApi - [UserControllerApi#queryByIds] ---> END HTTP (0-byte body)
+2020-12-11 22:21:43.042 [hystrix-news-user/news/user-1] INFO  c.n.config.ChainedDynamicProperty - Flipping property: news-user.ribbon.ActiveConnectionsLimit to use NEXT property: niws.loadbalancer.availabilityFilteringRule.activeConnectionsLimit = 2147483647
+2020-12-11 22:21:43.062 [hystrix-news-user/news/user-1] INFO  c.n.u.c.ShutdownEnabledTimer - Shutdown hook installed for: NFLoadBalancer-PingTimer-news-user
+2020-12-11 22:21:43.063 [hystrix-news-user/news/user-1] INFO  c.n.loadbalancer.BaseLoadBalancer - Client: news-user instantiated a LoadBalancer: DynamicServerListLoadBalancer:{NFLoadBalancer:name=news-user,current list of Servers=[],Load balancer stats=Zone stats: {},Server stats: []}ServerList:null
+2020-12-11 22:21:43.071 [hystrix-news-user/news/user-1] INFO  c.n.l.DynamicServerListLoadBalancer - Using serverListUpdater PollingServerListUpdater
+2020-12-11 22:21:43.093 [hystrix-news-user/news/user-1] INFO  c.n.config.ChainedDynamicProperty - Flipping property: news-user.ribbon.ActiveConnectionsLimit to use NEXT property: niws.loadbalancer.availabilityFilteringRule.activeConnectionsLimit = 2147483647
+2020-12-11 22:21:43.096 [hystrix-news-user/news/user-1] INFO  c.n.l.DynamicServerListLoadBalancer - DynamicServerListLoadBalancer for client news-user initialized: DynamicServerListLoadBalancer:{NFLoadBalancer:name=news-user,current list of Servers=[192.168.3.2:8003, 192.168.3.2:8103],Load balancer stats=Zone stats: {defaultzone=[Zone:defaultzone;	Instance count:2;	Active connections count: 0;	Circuit breaker tripped count: 0;	Active connections per server: 0.0;]
+},Server stats: [[Server:192.168.3.2:8103;	Zone:defaultZone;	Total Requests:0;	Successive connection failure:0;	Total blackout seconds:0;	Last connection made:Thu Jan 01 08:00:00 CST 1970;	First connection made: Thu Jan 01 08:00:00 CST 1970;	Active Connections:0;	total failure count in last (1000) msecs:0;	average resp time:0.0;	90 percentile resp time:0.0;	95 percentile resp time:0.0;	min resp time:0.0;	max resp time:0.0;	stddev resp time:0.0]
+, [Server:192.168.3.2:8003;	Zone:defaultZone;	Total Requests:0;	Successive connection failure:0;	Total blackout seconds:0;	Last connection made:Thu Jan 01 08:00:00 CST 1970;	First connection made: Thu Jan 01 08:00:00 CST 1970;	Active Connections:0;	total failure count in last (1000) msecs:0;	average resp time:0.0;	90 percentile resp time:0.0;	95 percentile resp time:0.0;	min resp time:0.0;	max resp time:0.0;	stddev resp time:0.0]
+]}ServerList:org.springframework.cloud.netflix.ribbon.eureka.DomainExtractingServerList@41c3a82a
+2020-12-11 22:21:43.818 [HystrixTimer-1] ERROR c.a.n.c.u.f.UserControllerFallbackFactory - Connection refused, enter the degraded method of the service caller
+2020-12-11 22:21:44.078 [PollingServerListUpdater-0] INFO  c.n.config.ChainedDynamicProperty - Flipping property: news-user.ribbon.ActiveConnectionsLimit to use NEXT property: niws.loadbalancer.availabilityFilteringRule.activeConnectionsLimit = 2147483647
+2020-12-11 22:21:44.149 [hystrix-news-user/news/user-1] DEBUG c.a.n.c.user.UserControllerApi - [UserControllerApi#queryByIds] <--- HTTP/1.1 200 (1320ms)
+2020-12-11 22:21:44.149 [hystrix-news-user/news/user-1] DEBUG c.a.n.c.user.UserControllerApi - [UserControllerApi#queryByIds] connection: keep-alive
+2020-12-11 22:21:44.149 [hystrix-news-user/news/user-1] DEBUG c.a.n.c.user.UserControllerApi - [UserControllerApi#queryByIds] content-type: application/json
+2020-12-11 22:21:44.149 [hystrix-news-user/news/user-1] DEBUG c.a.n.c.user.UserControllerApi - [UserControllerApi#queryByIds] date: Fri, 11 Dec 2020 14:21:44 GMT
+2020-12-11 22:21:44.149 [hystrix-news-user/news/user-1] DEBUG c.a.n.c.user.UserControllerApi - [UserControllerApi#queryByIds] keep-alive: timeout=60
+2020-12-11 22:21:44.149 [hystrix-news-user/news/user-1] DEBUG c.a.n.c.user.UserControllerApi - [UserControllerApi#queryByIds] transfer-encoding: chunked
+2020-12-11 22:21:44.149 [hystrix-news-user/news/user-1] DEBUG c.a.n.c.user.UserControllerApi - [UserControllerApi#queryByIds] vary: Access-Control-Request-Headers
+2020-12-11 22:21:44.149 [hystrix-news-user/news/user-1] DEBUG c.a.n.c.user.UserControllerApi - [UserControllerApi#queryByIds] vary: Access-Control-Request-Method
+2020-12-11 22:21:44.149 [hystrix-news-user/news/user-1] DEBUG c.a.n.c.user.UserControllerApi - [UserControllerApi#queryByIds] vary: Origin
+2020-12-11 22:21:44.149 [hystrix-news-user/news/user-1] DEBUG c.a.n.c.user.UserControllerApi - [UserControllerApi#queryByIds] 
+2020-12-11 22:21:44.151 [hystrix-news-user/news/user-1] DEBUG c.a.n.c.user.UserControllerApi - [UserControllerApi#queryByIds] {"code":10013,"msg":"全局降级(服务提供者)：系统繁忙，请稍后再试","data":null}
+2020-12-11 22:21:44.151 [hystrix-news-user/news/user-1] DEBUG c.a.n.c.user.UserControllerApi - [UserControllerApi#queryByIds] <--- END HTTP (97-byte body)
+2020-12-11 22:21:44.226 [http-nio-8001-exec-1] INFO  io.lettuce.core.EpollProvider - Starting without optional epoll library
+2020-12-11 22:21:44.228 [http-nio-8001-exec-1] INFO  io.lettuce.core.KqueueProvider - Starting without optional kqueue library
+2020-12-11 22:22:00.215 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2020-12-11 22:24:33.084 [http-nio-8001-exec-4] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.ArticlePortalServiceImpl.queryDetail ============
+2020-12-11 22:24:33.148 [http-nio-8001-exec-4] INFO  c.a.news.aspect.ServiceLogAspect - 当前执行耗时：59
+2020-12-11 22:24:33.156 [hystrix-news-user/news/user-2] DEBUG c.a.n.c.user.UserControllerApi - [UserControllerApi#queryByIds] ---> GET http://news-user/news/user/user/queryByIds?userIds=%5B%221316846502299172864%22%5D HTTP/1.1
+2020-12-11 22:24:33.156 [hystrix-news-user/news/user-2] DEBUG c.a.n.c.user.UserControllerApi - [UserControllerApi#queryByIds] ---> END HTTP (0-byte body)
+2020-12-11 22:24:33.316 [hystrix-news-user/news/user-2] DEBUG c.a.n.c.user.UserControllerApi - [UserControllerApi#queryByIds] <--- HTTP/1.1 500 (159ms)
+2020-12-11 22:24:33.316 [hystrix-news-user/news/user-2] DEBUG c.a.n.c.user.UserControllerApi - [UserControllerApi#queryByIds] connection: close
+2020-12-11 22:24:33.316 [hystrix-news-user/news/user-2] DEBUG c.a.n.c.user.UserControllerApi - [UserControllerApi#queryByIds] content-language: en
+2020-12-11 22:24:33.316 [hystrix-news-user/news/user-2] DEBUG c.a.n.c.user.UserControllerApi - [UserControllerApi#queryByIds] content-length: 455
+2020-12-11 22:24:33.317 [hystrix-news-user/news/user-2] DEBUG c.a.n.c.user.UserControllerApi - [UserControllerApi#queryByIds] content-type: text/html;charset=utf-8
+2020-12-11 22:24:33.317 [hystrix-news-user/news/user-2] DEBUG c.a.n.c.user.UserControllerApi - [UserControllerApi#queryByIds] date: Fri, 11 Dec 2020 14:24:33 GMT
+2020-12-11 22:24:33.317 [hystrix-news-user/news/user-2] DEBUG c.a.n.c.user.UserControllerApi - [UserControllerApi#queryByIds] 
+2020-12-11 22:24:33.317 [hystrix-news-user/news/user-2] DEBUG c.a.n.c.user.UserControllerApi - [UserControllerApi#queryByIds] <!doctype html><html lang="en"><head><title>HTTP Status 500 – Internal Server Error</title><style type="text/css">body {font-family:Tahoma,Arial,sans-serif;} h1, h2, h3, b {color:white;background-color:#525D76;} h1 {font-size:22px;} h2 {font-size:16px;} h3 {font-size:14px;} p {font-size:12px;} a {color:black;} .line {height:1px;background-color:#525D76;border:none;}</style></head><body><h1>HTTP Status 500 – Internal Server Error</h1></body></html>
+2020-12-11 22:24:33.317 [hystrix-news-user/news/user-2] DEBUG c.a.n.c.user.UserControllerApi - [UserControllerApi#queryByIds] <--- END HTTP (455-byte body)
+2020-12-11 22:24:33.326 [hystrix-news-user/news/user-2] ERROR c.a.n.c.u.f.UserControllerFallbackFactory - Connection refused, enter the degraded method of the service caller
+2020-12-11 22:24:53.250 [http-nio-8001-exec-6] INFO  c.a.news.aspect.ServiceLogAspect - ============ 开始执行 class com.aiolos.news.service.impl.ArticlePortalServiceImpl.queryDetail ============
+2020-12-11 22:24:53.260 [http-nio-8001-exec-6] INFO  c.a.news.aspect.ServiceLogAspect - 当前执行耗时：10
+2020-12-11 22:24:53.261 [hystrix-news-user/news/user-3] DEBUG c.a.n.c.user.UserControllerApi - [UserControllerApi#queryByIds] ---> GET http://news-user/news/user/user/queryByIds?userIds=%5B%221316846502299172864%22%5D HTTP/1.1
+2020-12-11 22:24:53.261 [hystrix-news-user/news/user-3] DEBUG c.a.n.c.user.UserControllerApi - [UserControllerApi#queryByIds] ---> END HTTP (0-byte body)
+2020-12-11 22:24:53.276 [hystrix-news-user/news/user-3] DEBUG c.a.n.c.user.UserControllerApi - [UserControllerApi#queryByIds] <--- ERROR ConnectException: Connection refused (Connection refused) (14ms)
+2020-12-11 22:24:53.277 [hystrix-news-user/news/user-3] DEBUG c.a.n.c.user.UserControllerApi - [UserControllerApi#queryByIds] java.net.ConnectException: Connection refused (Connection refused)
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at sun.net.NetworkClient.doConnect(NetworkClient.java:175)
+	at sun.net.www.http.HttpClient.openServer(HttpClient.java:463)
+	at sun.net.www.http.HttpClient.openServer(HttpClient.java:558)
+	at sun.net.www.http.HttpClient.<init>(HttpClient.java:242)
+	at sun.net.www.http.HttpClient.New(HttpClient.java:339)
+	at sun.net.www.http.HttpClient.New(HttpClient.java:357)
+	at sun.net.www.protocol.http.HttpURLConnection.getNewHttpClient(HttpURLConnection.java:1220)
+	at sun.net.www.protocol.http.HttpURLConnection.plainConnect0(HttpURLConnection.java:1156)
+	at sun.net.www.protocol.http.HttpURLConnection.plainConnect(HttpURLConnection.java:1050)
+	at sun.net.www.protocol.http.HttpURLConnection.connect(HttpURLConnection.java:984)
+	at sun.net.www.protocol.http.HttpURLConnection.getInputStream0(HttpURLConnection.java:1564)
+	at sun.net.www.protocol.http.HttpURLConnection.getInputStream(HttpURLConnection.java:1492)
+	at java.net.HttpURLConnection.getResponseCode(HttpURLConnection.java:480)
+	at feign.Client$Default.convertResponse(Client.java:78)
+	at feign.Client$Default.execute(Client.java:74)
+	at org.springframework.cloud.openfeign.ribbon.RetryableFeignLoadBalancer$1.doWithRetry(RetryableFeignLoadBalancer.java:114)
+	at org.springframework.cloud.openfeign.ribbon.RetryableFeignLoadBalancer$1.doWithRetry(RetryableFeignLoadBalancer.java:94)
+	at org.springframework.retry.support.RetryTemplate.doExecute(RetryTemplate.java:287)
+	at org.springframework.retry.support.RetryTemplate.execute(RetryTemplate.java:180)
+	at org.springframework.cloud.openfeign.ribbon.RetryableFeignLoadBalancer.execute(RetryableFeignLoadBalancer.java:94)
+	at org.springframework.cloud.openfeign.ribbon.RetryableFeignLoadBalancer.execute(RetryableFeignLoadBalancer.java:54)
+	at com.netflix.client.AbstractLoadBalancerAwareClient$1.call(AbstractLoadBalancerAwareClient.java:104)
+	at com.netflix.loadbalancer.reactive.LoadBalancerCommand$3$1.call(LoadBalancerCommand.java:303)
+	at com.netflix.loadbalancer.reactive.LoadBalancerCommand$3$1.call(LoadBalancerCommand.java:287)
+	at rx.internal.util.ScalarSynchronousObservable$3.call(ScalarSynchronousObservable.java:231)
+	at rx.internal.util.ScalarSynchronousObservable$3.call(ScalarSynchronousObservable.java:228)
+	at rx.Observable.unsafeSubscribe(Observable.java:10327)
+	at rx.internal.operators.OperatorRetryWithPredicate$SourceSubscriber$1.call(OperatorRetryWithPredicate.java:127)
+	at rx.internal.schedulers.TrampolineScheduler$InnerCurrentThreadScheduler.enqueue(TrampolineScheduler.java:73)
+	at rx.internal.schedulers.TrampolineScheduler$InnerCurrentThreadScheduler.schedule(TrampolineScheduler.java:52)
+	at rx.internal.operators.OperatorRetryWithPredicate$SourceSubscriber.onNext(OperatorRetryWithPredicate.java:79)
+	at rx.internal.operators.OperatorRetryWithPredicate$SourceSubscriber.onNext(OperatorRetryWithPredicate.java:45)
+	at rx.internal.util.ScalarSynchronousObservable$WeakSingleProducer.request(ScalarSynchronousObservable.java:276)
+	at rx.Subscriber.setProducer(Subscriber.java:209)
+	at rx.internal.util.ScalarSynchronousObservable$JustOnSubscribe.call(ScalarSynchronousObservable.java:138)
+	at rx.internal.util.ScalarSynchronousObservable$JustOnSubscribe.call(ScalarSynchronousObservable.java:129)
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:48)
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:30)
+	at rx.Observable.unsafeSubscribe(Observable.java:10327)
+	at rx.internal.operators.OnSubscribeConcatMap$ConcatMapSubscriber.drain(OnSubscribeConcatMap.java:286)
+	at rx.internal.operators.OnSubscribeConcatMap$ConcatMapSubscriber.onNext(OnSubscribeConcatMap.java:144)
+	at com.netflix.loadbalancer.reactive.LoadBalancerCommand$1.call(LoadBalancerCommand.java:185)
+	at com.netflix.loadbalancer.reactive.LoadBalancerCommand$1.call(LoadBalancerCommand.java:180)
+	at rx.Observable.unsafeSubscribe(Observable.java:10327)
+	at rx.internal.operators.OnSubscribeConcatMap.call(OnSubscribeConcatMap.java:94)
+	at rx.internal.operators.OnSubscribeConcatMap.call(OnSubscribeConcatMap.java:42)
+	at rx.Observable.unsafeSubscribe(Observable.java:10327)
+	at rx.internal.operators.OperatorRetryWithPredicate$SourceSubscriber$1.call(OperatorRetryWithPredicate.java:127)
+	at rx.internal.schedulers.TrampolineScheduler$InnerCurrentThreadScheduler.enqueue(TrampolineScheduler.java:73)
+	at rx.internal.schedulers.TrampolineScheduler$InnerCurrentThreadScheduler.schedule(TrampolineScheduler.java:52)
+	at rx.internal.operators.OperatorRetryWithPredicate$SourceSubscriber.onNext(OperatorRetryWithPredicate.java:79)
+	at rx.internal.operators.OperatorRetryWithPredicate$SourceSubscriber.onNext(OperatorRetryWithPredicate.java:45)
+	at rx.internal.util.ScalarSynchronousObservable$WeakSingleProducer.request(ScalarSynchronousObservable.java:276)
+	at rx.Subscriber.setProducer(Subscriber.java:209)
+	at rx.internal.util.ScalarSynchronousObservable$JustOnSubscribe.call(ScalarSynchronousObservable.java:138)
+	at rx.internal.util.ScalarSynchronousObservable$JustOnSubscribe.call(ScalarSynchronousObservable.java:129)
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:48)
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:30)
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:48)
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:30)
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:48)
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:30)
+	at rx.Observable.subscribe(Observable.java:10423)
+	at rx.Observable.subscribe(Observable.java:10390)
+	at rx.observables.BlockingObservable.blockForSingle(BlockingObservable.java:443)
+	at rx.observables.BlockingObservable.single(BlockingObservable.java:340)
+	at com.netflix.client.AbstractLoadBalancerAwareClient.executeWithLoadBalancer(AbstractLoadBalancerAwareClient.java:112)
+	at org.springframework.cloud.openfeign.ribbon.LoadBalancerFeignClient.execute(LoadBalancerFeignClient.java:83)
+	at feign.SynchronousMethodHandler.executeAndDecode(SynchronousMethodHandler.java:110)
+	at feign.SynchronousMethodHandler.invoke(SynchronousMethodHandler.java:80)
+	at feign.hystrix.HystrixInvocationHandler$1.run(HystrixInvocationHandler.java:109)
+	at com.netflix.hystrix.HystrixCommand$2.call(HystrixCommand.java:302)
+	at com.netflix.hystrix.HystrixCommand$2.call(HystrixCommand.java:298)
+	at rx.internal.operators.OnSubscribeDefer.call(OnSubscribeDefer.java:46)
+	at rx.internal.operators.OnSubscribeDefer.call(OnSubscribeDefer.java:35)
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:48)
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:30)
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:48)
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:30)
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:48)
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:30)
+	at rx.Observable.unsafeSubscribe(Observable.java:10327)
+	at rx.internal.operators.OnSubscribeDefer.call(OnSubscribeDefer.java:51)
+	at rx.internal.operators.OnSubscribeDefer.call(OnSubscribeDefer.java:35)
+	at rx.Observable.unsafeSubscribe(Observable.java:10327)
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:41)
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:30)
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:48)
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:30)
+	at rx.Observable.unsafeSubscribe(Observable.java:10327)
+	at rx.internal.operators.OperatorSubscribeOn$SubscribeOnSubscriber.call(OperatorSubscribeOn.java:100)
+	at com.netflix.hystrix.strategy.concurrency.HystrixContexSchedulerAction$1.call(HystrixContexSchedulerAction.java:56)
+	at com.netflix.hystrix.strategy.concurrency.HystrixContexSchedulerAction$1.call(HystrixContexSchedulerAction.java:47)
+	at com.netflix.hystrix.strategy.concurrency.HystrixContexSchedulerAction.call(HystrixContexSchedulerAction.java:69)
+	at rx.internal.schedulers.ScheduledAction.run(ScheduledAction.java:55)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run$$$capture(FutureTask.java:266)
+	at java.util.concurrent.FutureTask.run(FutureTask.java)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+
+2020-12-11 22:24:53.278 [hystrix-news-user/news/user-3] DEBUG c.a.n.c.user.UserControllerApi - [UserControllerApi#queryByIds] <--- END ERROR
+2020-12-11 22:24:53.279 [hystrix-news-user/news/user-3] ERROR c.a.n.c.u.f.UserControllerFallbackFactory - Connection refused, enter the degraded method of the service caller
+2020-12-11 22:27:00.222 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2020-12-11 22:32:00.235 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2020-12-11 22:37:00.263 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2020-12-11 22:42:00.273 [AsyncResolver-bootstrap-executor-0] INFO  c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration
+2020-12-11 22:43:00.435 [Thread-121] INFO  c.n.l.PollingServerListUpdater - Shutting down the Executor Pool for PollingServerListUpdater
+2020-12-11 22:43:00.450 [SpringContextShutdownHook] INFO  o.s.c.n.e.s.EurekaServiceRegistry - Unregistering application NEWS-SERVICE-ARTICLE with eureka with status DOWN
+2020-12-11 22:43:00.452 [SpringContextShutdownHook] WARN  c.netflix.discovery.DiscoveryClient - Saw local status change event StatusChangeEvent [timestamp=1607697780452, current=DOWN, previous=UP]
+2020-12-11 22:43:00.452 [DiscoveryClient-InstanceInfoReplicator-0] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_NEWS-SERVICE-ARTICLE/192.168.3.2:news-service-article:8001: registering service...
+2020-12-11 22:43:00.489 [DiscoveryClient-InstanceInfoReplicator-0] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_NEWS-SERVICE-ARTICLE/192.168.3.2:news-service-article:8001 - registration status: 204
+2020-12-11 22:43:00.592 [SpringContextShutdownHook] INFO  o.s.s.c.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+2020-12-11 22:43:00.718 [SpringContextShutdownHook] INFO  c.n.u.c.ShutdownEnabledTimer - Shutdown hook removed for: NFLoadBalancer-PingTimer-news-user
+2020-12-11 22:43:00.734 [SpringContextShutdownHook] INFO  c.n.u.c.ShutdownEnabledTimer - Exception caught (might be ok if at shutdown)
+java.lang.IllegalStateException: Shutdown in progress
+	at java.lang.ApplicationShutdownHooks.remove(ApplicationShutdownHooks.java:82)
+	at java.lang.Runtime.removeShutdownHook(Runtime.java:239)
+	at com.netflix.util.concurrent.ShutdownEnabledTimer.cancel(ShutdownEnabledTimer.java:70)
+	at com.netflix.loadbalancer.BaseLoadBalancer.cancelPingTask(BaseLoadBalancer.java:632)
+	at com.netflix.loadbalancer.BaseLoadBalancer.shutdown(BaseLoadBalancer.java:883)
+	at com.netflix.loadbalancer.DynamicServerListLoadBalancer.shutdown(DynamicServerListLoadBalancer.java:285)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.invokeCustomDestroyMethod(DisposableBeanAdapter.java:339)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:273)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroyBean(DefaultSingletonBeanRegistry.java:571)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingleton(DefaultSingletonBeanRegistry.java:543)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingleton(DefaultListableBeanFactory.java:1072)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingletons(DefaultSingletonBeanRegistry.java:504)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingletons(DefaultListableBeanFactory.java:1065)
+	at org.springframework.context.support.AbstractApplicationContext.destroyBeans(AbstractApplicationContext.java:1060)
+	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1029)
+	at org.springframework.context.support.AbstractApplicationContext.close(AbstractApplicationContext.java:978)
+	at org.springframework.cloud.context.named.NamedContextFactory.destroy(NamedContextFactory.java:92)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:258)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroyBean(DefaultSingletonBeanRegistry.java:571)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingleton(DefaultSingletonBeanRegistry.java:543)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingleton(DefaultListableBeanFactory.java:1072)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingletons(DefaultSingletonBeanRegistry.java:504)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingletons(DefaultListableBeanFactory.java:1065)
+	at org.springframework.context.support.AbstractApplicationContext.destroyBeans(AbstractApplicationContext.java:1060)
+	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1029)
+	at org.springframework.context.support.AbstractApplicationContext$1.run(AbstractApplicationContext.java:948)
+2020-12-11 22:43:01.174 [SpringContextShutdownHook] INFO  c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2020-12-11 22:43:01.183 [SpringContextShutdownHook] INFO  c.netflix.discovery.DiscoveryClient - Shutting down DiscoveryClient ...
+2020-12-11 22:43:04.197 [SpringContextShutdownHook] INFO  c.netflix.discovery.DiscoveryClient - Unregistering ...
+2020-12-11 22:43:04.230 [SpringContextShutdownHook] INFO  c.netflix.discovery.DiscoveryClient - DiscoveryClient_NEWS-SERVICE-ARTICLE/192.168.3.2:news-service-article:8001 - deregister  status: 200
+2020-12-11 22:43:04.281 [SpringContextShutdownHook] INFO  c.netflix.discovery.DiscoveryClient - Completed shut down of DiscoveryClient

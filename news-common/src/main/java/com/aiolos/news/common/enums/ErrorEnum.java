@@ -23,6 +23,8 @@ public enum ErrorEnum implements CommonError {
     BEAN_ERROR(10010, "bean验证错误"),
     REPEAT_SENDING_SMS_CODE(10011, "短信验证码60s内不能重复发送"),
     SYSTEM_OPERATION_ERROR(10012, "操作失败，请重试或联系管理员"),
+    GLOBAL_FALLBACK_EXCEPTION(10013, "全局降级(服务提供者)：系统繁忙，请稍后再试"),
+    FEIGN_FALLBACK_EXCEPTION(10013, "Feign降级(服务调用者)：系统繁忙，请稍后再试"),
 
     // 用户服务相关错误类型
     USER_NOT_LOGGED_IN(20000, "用户尚未登录"),

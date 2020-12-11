@@ -3,6 +3,7 @@ package com.aiolos.news.controller.user;
 import com.aiolos.news.common.CommonResponse;
 import com.aiolos.news.common.exception.CustomizeException;
 import com.aiolos.news.config.MyServiceList;
+import com.aiolos.news.controller.user.fallbacks.UserControllerFallbackFactory;
 import com.aiolos.news.pojo.bo.UpdateUserInfoBO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -17,7 +18,7 @@ import javax.validation.Valid;
  */
 @Api(value = "用户信息相关", tags = {"用户功能的controller"})      // 代表当前这个类会被Swagger2扫描到
 @RequestMapping("/user")
-@FeignClient(value = MyServiceList.NEWS_USER)
+@FeignClient(value = MyServiceList.NEWS_USER, fallbackFactory = UserControllerFallbackFactory.class)       // 服务提供者
 public interface UserControllerApi {
 
     @ApiOperation(value = "获取用户基本信息", notes = "获取用户基本信息", httpMethod = "POST")

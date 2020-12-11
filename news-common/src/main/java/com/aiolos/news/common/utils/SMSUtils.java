@@ -31,7 +31,7 @@ public class SMSUtils {
 
     public void sendSMS(String mobile, String code) throws CustomizeException {
 
-        log.info("Enter function sendSMS, parameter mobile: {}, code: {}", mobile, code);
+        log.info("Enter the method sendSMS, parameter mobile: {}, code: {}", mobile, code);
 
         if (StringUtils.isBlank(mobile)) {
             throw new CustomizeException(ErrorEnum.PHONE_INCORRECT);

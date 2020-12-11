@@ -10,11 +10,11 @@ import com.aiolos.news.pojo.vo.ArticleDetailVO;
 import com.aiolos.news.pojo.vo.UserBasicInfoVO;
 import com.aiolos.news.service.ArticlePortalService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -42,7 +42,7 @@ public class ArticlePortalController extends BaseController implements ArticlePo
     @Override
     public CommonResponse list(String keyword, Integer category, Integer page, Integer pageSize) {
 
-        log.info("Enter function article/portal/list, parameter keyword: {}, category: {}, page: {}, pageSize: {}", keyword, category, page, pageSize);
+        log.info("Enter the method article/portal/list, parameter keyword: {}, category: {}, page: {}, pageSize: {}", keyword, category, page, pageSize);
 
         if (page == null) {
             page = START_PAGE;
@@ -106,6 +106,8 @@ public class ArticlePortalController extends BaseController implements ArticlePo
 
             String userJson = JsonUtils.objectToJson(bodyResult.getData());
             publisherList = JsonUtils.jsonToList(userJson, UserBasicInfoVO.class);
+        } else {
+            publisherList = new ArrayList<>();
         }
 
         return publisherList;

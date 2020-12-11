@@ -4,7 +4,6 @@ import com.aiolos.news.common.CommonResponse;
 import com.aiolos.news.common.enums.UserStatus;
 import com.aiolos.news.common.exception.CustomizeException;
 import com.aiolos.news.common.enums.ErrorEnum;
-import com.aiolos.news.common.utils.CommonUtils;
 import com.aiolos.news.common.utils.IPUtils;
 import com.aiolos.news.common.utils.JsonUtils;
 import com.aiolos.news.common.utils.SMSUtils;
@@ -40,7 +39,7 @@ public class PassportController extends BaseController implements PassportContro
     @Override
     public CommonResponse getSMSCode(String mobile, HttpServletRequest request) throws CustomizeException {
 
-        log.info("Enter function getSMSCode, parameter mobile: {}", mobile);
+        log.info("Enter the method getSMSCode, parameter mobile: {}", mobile);
 
         if (StringUtils.isBlank(mobile)) {
             return CommonResponse.error(ErrorEnum.PHONE_INCORRECT);
@@ -54,7 +53,7 @@ public class PassportController extends BaseController implements PassportContro
 
         String code = String.valueOf((int) ((1 + Math.random()) * 1000000)).substring(1);
         log.info("code: {}", code);
-//        smsUtils.sendSMS(mobile, code);
+        smsUtils.sendSMS(mobile, code);
         redis.set(MOBILE_SMSCODE + ":" + mobile, code, 30 * 60);
         return CommonResponse.ok();
     }
@@ -63,7 +62,7 @@ public class PassportController extends BaseController implements PassportContro
     public CommonResponse login(RegisterLoginBO registerLoginBO,
                                 HttpServletRequest request, HttpServletResponse response) throws CustomizeException {
 
-        log.info("Enter function login, parameter registerLoginBO: {}", registerLoginBO.toString());
+        log.info("Enter the method login, parameter registerLoginBO: {}", registerLoginBO.toString());
 
         String mobile = registerLoginBO.getMobile();
         String smsCode = registerLoginBO.getSmsCode();
@@ -113,7 +112,7 @@ public class PassportController extends BaseController implements PassportContro
     @Override
     public CommonResponse logout(String userId, HttpServletRequest request, HttpServletResponse response) {
 
-        log.info("Enter function logout, parameter userId: {}", userId);
+        log.info("Enter the method logout, parameter userId: {}", userId);
         redis.del(REDIS_USER_TOKEN + ":" + userId);
         deleteCookieValue("uid", request, response);
         deleteCookieValue("utoken", request, response);

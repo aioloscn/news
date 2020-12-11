@@ -32,7 +32,7 @@ public class FriendLinkController extends BaseController implements FriendLinkCo
     @Override
     public CommonResponse saveOrUpdateFriendLink(@Valid SaveFriendLinkBO saveFriendLinkBO) throws CustomizeException {
 
-        log.info("Enter function saveOrUpdateFriendLink, parameter saveFriendLinkBO: {}", saveFriendLinkBO.toString());
+        log.info("Enter the method saveOrUpdateFriendLink, parameter saveFriendLinkBO: {}", saveFriendLinkBO.toString());
 
         FriendLinkMO friendLinkMO = new FriendLinkMO();
         BeanUtils.copyProperties(saveFriendLinkBO, friendLinkMO);
@@ -47,14 +47,14 @@ public class FriendLinkController extends BaseController implements FriendLinkCo
     @Override
     public CommonResponse getFriendLinkList() {
 
-        log.info("Enter function getFriendLinkList");
+        log.info("Enter the method getFriendLinkList");
         return CommonResponse.ok(friendLinkService.queryAllFriendLinks());
     }
 
     @Override
     public CommonResponse delete(String linkId) {
 
-        log.info("Enter function admin/friendLinkMng/delete, parameter linkId: {}", linkId);
+        log.info("Enter the method admin/friendLinkMng/delete, parameter linkId: {}", linkId);
 
         friendLinkService.delete(linkId);
         return CommonResponse.ok();
@@ -63,7 +63,7 @@ public class FriendLinkController extends BaseController implements FriendLinkCo
     @Override
     public CommonResponse queryPortalAllFriendLinkList() {
 
-        log.info("Enter function admin/friendLinkMng/portal/list");
+        log.info("Enter the method admin/friendLinkMng/portal/list");
         return CommonResponse.ok(friendLinkService.queryPortalAllFriendLinkList());
     }
 }

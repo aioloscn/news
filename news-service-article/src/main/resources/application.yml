@@ -50,6 +50,19 @@ ribbon:
   ReadTimeout: 5000             # 在连接创建好以后，调用接口的超时时间，单位：ms
   MaxAutoRetries: 1             # 最大重试次数
   MaxAutoRetriesNextServer: 2   # 集群上一个实例节点宕机后，切换到后面多少个微服务实例去重试
-#logging:
-#  level:
+
+# 开启日志打印
+logging:
+  level:
 #    root: debug
+    com.aiolos.news.controller.user.UserControllerApi: debug
+# 也可以用FeignLogConfig类代替，都是应对全局配置，目前↑配置了只打印UserControllerApi的日志
+# 用方法返回类型Logger.Level: debug替换路径便可支持全局打印
+feign:
+  client:
+    config:
+      # 配置服务提供方的名称
+      default:
+        loggerLevel: FULL
+  hystrix:
+    enabled: true   # 打开服务调用方的内置Hystrix，默认是false

@@ -11,6 +11,8 @@ import com.aiolos.news.pojo.bo.UpdateUserInfoBO;
 import com.aiolos.news.pojo.vo.UserAccountInfoVO;
 import com.aiolos.news.pojo.vo.UserBasicInfoVO;
 import com.aiolos.news.service.UserService;
+import com.netflix.hystrix.contrib.javanica.annotation.DefaultProperties;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
@@ -25,6 +27,7 @@ import java.util.List;
  */
 @Slf4j
 @RestController
+@DefaultProperties(defaultFallback = "defaultFallback")     // 服务提供方全局降级处理，服务降级一般都在服务调用端处理，这种方式正式上线不需要用
 public class UserController extends BaseController implements UserControllerApi {
 
 
@@ -34,10 +37,21 @@ public class UserController extends BaseController implements UserControllerApi 
         this.userService = userService;
     }
 
+    /**
+     * 服务提供方全局降级处理
+     * 服务降级一般都在服务调用端处理，这种方式正式上线不需要用
+     * @return
+     */
+    public CommonResponse defaultFallback() {
+
+        log.error("Enter the user controller global degraded method defaultFallback");
+        return CommonResponse.error(ErrorEnum.GLOBAL_FALLBACK_EXCEPTION);
+    }
+
     @Override
     public CommonResponse getUserBasicInfo(String userId) {
 
-        log.info("Enter function getUserBasicInfo, parameter userId: {}", userId);
+        log.info("Enter the method getUserBasicInfo, parameter userId: {}", userId);
 
         // 0. 判断参数不能为空
         if (StringUtils.isBlank(userId)) {
@@ -51,7 +65,7 @@ public class UserController extends BaseController implements UserControllerApi 
     @Override
     public CommonResponse getAccountInfo(String userId) {
 
-        log.info("Enter function getAccountInfo, parameter userId: {}", userId);
+        log.info("Enter the method getAccountInfo, parameter userId: {}", userId);
 
         // 0. 判断参数不能为空
         if (StringUtils.isBlank(userId)) {
@@ -70,7 +84,7 @@ public class UserController extends BaseController implements UserControllerApi 
     @Override
     public CommonResponse updateAccountInfo(UpdateUserInfoBO updateUserInfoBO) throws CustomizeException {
 
-        log.info("Enter function updateAccountInfo, parameter updateUserInfoBO: {}", JsonUtils.objectToJson(updateUserInfoBO));
+        log.info("Enter the method updateAccountInfo, parameter updateUserInfoBO: {}", JsonUtils.objectToJson(updateUserInfoBO));
 
         userService.updateAccountInfo(updateUserInfoBO);
         return CommonResponse.ok();
@@ -94,10 +108,13 @@ public class UserController extends BaseController implements UserControllerApi 
         return user;
     }
 
+    @HystrixCommand
     @Override
     public CommonResponse queryByIds(String userIds) {
 
-        log.info("Enter function queryByIds, parameter userIds: {}", userIds);
+        log.info("Enter the method queryByIds, parameter userIds: {}", userIds);
+
+        int a = 1 / 0;
 
         if (StringUtils.isBlank(userIds)) {
             return CommonResponse.error(ErrorEnum.USER_DOES_NOT_EXIST);
@@ -127,5 +144,31 @@ public class UserController extends BaseController implements UserControllerApi 
         BeanUtils.copyProperties(user, userBasicInfoVO);
 
         return userBasicInfoVO;
+    }
+
+    /**
+     * 用于指定熔断降级处理的方式，目前不用，用全局处理方式
+     * @HystrixCommand(fallbackMethod = "queryByIdsFallback")
+     * @param userIds
+     * @return
+     */
+    public CommonResponse queryByIdsFallback(String userIds) {
+
+        log.error("Enter the user controller fallback method queryByIdsFallback");
+
+        if (StringUtils.isBlank(userIds)) {
+            return CommonResponse.error(ErrorEnum.USER_DOES_NOT_EXIST);
+        }
+
+        List<UserBasicInfoVO> publisherList = new ArrayList<>();
+        List<String> userIdList = JsonUtils.jsonToList(userIds, String.class);
+
+        for (String userId : userIdList) {
+
+            // 手动构建空对象，文章详情方法调用该接口，获取作者时发生异常，所以返回一个空对象回去，这个值没有也没关系，只要不返回异常信息给前端
+            UserBasicInfoVO userBasicInfoVO = new UserBasicInfoVO();
+            publisherList.add(userBasicInfoVO);
+        }
+        return CommonResponse.ok(publisherList);
     }
 }
