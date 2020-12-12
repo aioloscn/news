@@ -114,8 +114,6 @@ public class UserController extends BaseController implements UserControllerApi 
 
         log.info("Enter the method queryByIds, parameter userIds: {}", userIds);
 
-        int a = 1 / 0;
-
         if (StringUtils.isBlank(userIds)) {
             return CommonResponse.error(ErrorEnum.USER_DOES_NOT_EXIST);
         }
