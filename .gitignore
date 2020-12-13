@@ -18,6 +18,8 @@ target/
 *.iws
 *.iml
 *.ipr
+*.DS_Store
+.DS_Store
 
 ### NetBeans ###
 /nbproject/private/
@@ -48,5 +50,11 @@ news-service-admin/src/main/resources/application-prod.yml
 news-service-article/src/main/resources/application-dev.yml
 news-service-article/src/main/resources/application-prod.yml
 
-news-user.*
-news-files.*
+
+springcloud-eureka-cluster/src/main/resources/application-server1.yml
+springcloud-eureka-cluster/src/main/resources/application-server2.yml
+springcloud-eureka-cluster/src/main/resources/application-server3.yml
+
+springcloud-zuul-server/src/main/resources/application-prod.yml
+
+log/

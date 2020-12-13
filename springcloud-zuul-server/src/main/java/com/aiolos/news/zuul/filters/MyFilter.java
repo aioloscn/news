@@ -22,7 +22,7 @@ public class MyFilter extends ZuulFilter {
      */
     @Override
     public String filterType() {
-        return null;
+        return "pre";
     }
 
     /**
