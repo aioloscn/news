@@ -35,14 +35,6 @@ mybatis-plus:
   type-aliases-package: com.aiolos.news.pojo
   mapper-locations: classpath:mapper/*.xml
 
-eureka:
-  server:
-    hostname: localhost
-    port: 7000
-  client:
-    service-url:
-      defaultZone: http://server-7001:7001/eureka/,http://server-7002:7002/eureka/,http://server-7003:7003/eureka/
-
 ribbon:
   # 当请求某个微服务5s没连接，超时后会进行重试，先重试连接自己当前的这个实例
   # 如果当前实例重连一次失败，则会切换到访问集群中的下一个微服务实例，切换次数最大为2次

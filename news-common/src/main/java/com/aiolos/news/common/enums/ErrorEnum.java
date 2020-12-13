@@ -25,6 +25,7 @@ public enum ErrorEnum implements CommonError {
     SYSTEM_OPERATION_ERROR(10012, "操作失败，请重试或联系管理员"),
     GLOBAL_FALLBACK_EXCEPTION(10013, "全局降级(服务提供者)：系统繁忙，请稍后再试"),
     FEIGN_FALLBACK_EXCEPTION(10013, "Feign降级(服务调用者)：系统繁忙，请稍后再试"),
+    SYSTEM_ZUUL_ERROR(10014, "请求过于频繁，请稍后再试"),
 
     // 用户服务相关错误类型
     USER_NOT_LOGGED_IN(20000, "用户尚未登录"),

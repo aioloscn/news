@@ -1,0 +1,14 @@
+server:
+  port: 10002
+spring:
+  application:
+    name: springcloud-eureka-cluster
+  profiles: server2
+eureka:
+  instance:
+    hostname: server2
+  client:
+    fetch-registry: false
+    register-with-eureka: false
+    service-url:
+      defaultZone: http://server1:10001/eureka/,http://server3:10003/eureka/

@@ -5,7 +5,6 @@ server:
     max-swallow-size: -1
   servlet:
     context-path: /news/admin
-  port: 8005
 spring:
   application:
     name: news-service-admin
