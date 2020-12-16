@@ -19,7 +19,7 @@ zuul:
 #      url: http://localhost:8001        # 请求转发到指定的微服务所在的ip地址，但是不稳定，端口号改了这里也得改
 
 # ip请求限制的参数配置
-ipBlacklist:
-  continueCounts: ${counts:10}    # ip连续请求的次数
-  timeInterval: ${interval:10}    # 判断ip连续请求的时间跨度，单位：秒
-  limitTime: ${time:15}           # 限制多长时间内不能在请求，单位：秒
+#ipBlacklist:
+#  continueCounts: ${counts:10}    # ip连续请求的次数
+#  timeInterval: ${interval:10}    # 判断ip连续请求的时间跨度，单位：秒
+#  limitTime: ${time:15}           # 限制多长时间内不能在请求，单位：秒

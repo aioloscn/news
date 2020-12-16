@@ -11,6 +11,7 @@ import com.netflix.zuul.exception.ZuulException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 
@@ -22,6 +23,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Slf4j
 @Component
+@RefreshScope
 public class IpBlacklistFilter extends ZuulFilter {
 
     private final RedisOperator redis ;
@@ -56,6 +58,10 @@ public class IpBlacklistFilter extends ZuulFilter {
 
     @Override
     public Object run() throws ZuulException {
+
+        System.out.println("continueCounts: " + continueCounts);
+        System.out.println("timeInterval: " + timeInterval);
+        System.out.println("limitTime: " + limitTime);
 
         log.info("Enter ip blacklist filter");
 
