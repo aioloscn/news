@@ -25,6 +25,11 @@ spring:
     content-type: text/html
     suffix: .ftl
     template-loader-path: classpath:/templates/
+  rabbitmq:
+    host: 120.26.73.8
+    username: aiolos
+    password: aiolos
+    virtual-host: news
 mapper:
   mappers: com.aiolos.news.utils.MyMapper
   not-empty: false        # 在进行数据库操作的时候，判断表达式 username != null, 是否追加 username != ''

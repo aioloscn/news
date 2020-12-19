@@ -16,6 +16,11 @@ spring:
       discovery:
         service-id: springcloud-config
         enabled: true
+  rabbitmq:
+    host: 120.26.73.8
+    username: aiolos
+    password: aiolos
+    virtual-host: news
 
 eureka:
   client:

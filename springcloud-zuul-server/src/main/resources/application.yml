@@ -6,6 +6,14 @@ spring:
     name: springcloud-zuul
   profiles:
     active: dev
+  cloud:
+    config:
+      label: main
+      name: zuul
+      profile: test
+      discovery:
+        service-id: springcloud-config
+        enabled: true
 
 # 路由规则：http://[网关地址]:[端口号]/[prefix]/[微服务实例名称]/[请求地址路径]
 zuul:
@@ -19,7 +27,7 @@ zuul:
 #      url: http://localhost:8001        # 请求转发到指定的微服务所在的ip地址，但是不稳定，端口号改了这里也得改
 
 # ip请求限制的参数配置
-#ipBlacklist:
-#  continueCounts: ${counts:10}    # ip连续请求的次数
-#  timeInterval: ${interval:10}    # 判断ip连续请求的时间跨度，单位：秒
-#  limitTime: ${time:15}           # 限制多长时间内不能在请求，单位：秒
+ipBlacklist:
+  continueCounts: ${counts:10}    # ip连续请求的次数
+  timeInterval: ${interval:10}    # 判断ip连续请求的时间跨度，单位：秒
+  limitTime: ${time:15}           # 限制多长时间内不能在请求，单位：秒

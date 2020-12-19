@@ -1,0 +1,13 @@
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/aioloscn/news-config.git
+          username: aioloscn
+          password: aiolos1204285
+    rabbitmq:
+      host: 120.26.73.8
+      username: aiolos
+      password: aiolos
+      virtual-host: news
