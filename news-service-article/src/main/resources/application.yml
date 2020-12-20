@@ -5,6 +5,7 @@ server:
     max-swallow-size: -1
   servlet:
     context-path: /news/article
+
 spring:
   application:
     name: news-service-article
@@ -25,11 +26,21 @@ spring:
     content-type: text/html
     suffix: .ftl
     template-loader-path: classpath:/templates/
-  rabbitmq:
-    host: 120.26.73.8
-    username: aiolos
-    password: aiolos
-    virtual-host: news
+  cloud:
+    stream:
+      bindings:             # 绑定通道和交换机
+        myOutput:           # 定义生产者的通道
+          destination: streamExchange   # 自定义交换机名字，也就是代码里构建的消息，交给底层mq的交换机
+        myInput:           # 定义消费者的通道
+          destination: streamExchange   # 自定义交换机名字，也就是消息从底层mq输入到消费端进行消费
+  zipkin:
+    base-url: http://localhost:9411/    # 配置zipkin采集的服务地址，数据会发送到这里
+    sender:
+      type: web       # 数据采集的传输通信方式，web：http的形式
+  sleuth:
+    sampler:
+      probability: 0.8    # 数据采样比例（百分数），0-1
+
 mapper:
   mappers: com.aiolos.news.utils.MyMapper
   not-empty: false        # 在进行数据库操作的时候，判断表达式 username != null, 是否追加 username != ''
@@ -43,9 +54,9 @@ mybatis-plus:
 ribbon:
   # 当请求某个微服务5s没连接，超时后会进行重试，先重试连接自己当前的这个实例
   # 如果当前实例重连一次失败，则会切换到访问集群中的下一个微服务实例，切换次数最大为2次
-  ConnectTimeout: 5000          # 创建连接的超时时间，单位：ms
-  ReadTimeout: 5000             # 在连接创建好以后，调用接口的超时时间，单位：ms
-  MaxAutoRetries: 1             # 最大重试次数
+  ConnectTimeout: 10000          # 创建连接的超时时间，单位：ms
+  ReadTimeout: 10000             # 在连接创建好以后，调用接口的超时时间，单位：ms
+  MaxAutoRetries: 3             # 最大重试次数
   MaxAutoRetriesNextServer: 2   # 集群上一个实例节点宕机后，切换到后面多少个微服务实例去重试
 
 # 开启日志打印
