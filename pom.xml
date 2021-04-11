@@ -40,7 +40,7 @@
         <java.version>1.8</java.version>
 
         <mongodb-driver.version>3.11.1</mongodb-driver.version>
-        <mysql-connector-java.version>8.0.13</mysql-connector-java.version>
+        <mysql-connector-java.version>8.0.19</mysql-connector-java.version>
         <mybatis-spring-boot-starter.version>2.1.0</mybatis-spring-boot-starter.version>
         <tk.mybatis.mapper.version>4.1.2</tk.mybatis.mapper.version>
         <mapper-spring-boot-starter.version>2.1.5</mapper-spring-boot-starter.version>
@@ -92,11 +92,7 @@
                 <artifactId>mongodb-driver</artifactId>
                 <version>${mongodb-driver.version}</version>
             </dependency>
-            <dependency>
-                <groupId>msyql</groupId>
-                <artifactId>mysql-connector-java</artifactId>
-                <version>${mysql-connector-java.version}</version>
-            </dependency>
+
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-freemarker</artifactId>

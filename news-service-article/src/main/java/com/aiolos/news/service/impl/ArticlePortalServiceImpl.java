@@ -18,6 +18,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -36,12 +37,14 @@ public class ArticlePortalServiceImpl extends BaseService implements ArticlePort
     private final ArticleDao articleDao;
 
     private final RestTemplate restTemplate;
+    private final DiscoveryClient discoveryClient;
 
     private final UserControllerApi userMicroservice;
 
-    public ArticlePortalServiceImpl(ArticleDao articleDao, RestTemplate restTemplate, UserControllerApi userMicroservice) {
+    public ArticlePortalServiceImpl(ArticleDao articleDao, RestTemplate restTemplate, DiscoveryClient discoveryClient, UserControllerApi userMicroservice) {
         this.articleDao = articleDao;
         this.restTemplate = restTemplate;
+        this.discoveryClient = discoveryClient;
         this.userMicroservice = userMicroservice;
     }
 
@@ -95,6 +98,7 @@ public class ArticlePortalServiceImpl extends BaseService implements ArticlePort
 
         // 第一种远程调用接口方式，硬编码方式
 //        String userServerUrlExecute = "http://www.aiolos.com:8003/news/user/user/queryByIds?userIds=" + JsonUtils.objectToJson(idSet);
+//        ResponseEntity<CommonResponse> responseEntity = restTemplate.getForEntity(userServerUrlExecute, CommonResponse.class);
 
 //        String serviceId = "NEWS-USER";
         // 第二种远程调用接口方式，用discovery
@@ -110,7 +114,7 @@ public class ArticlePortalServiceImpl extends BaseService implements ArticlePort
 //        ResponseEntity<CommonResponse> responseEntity = restTemplate.getForEntity(userServerUrlExecute, CommonResponse.class);
 //        CommonResponse bodyResult = responseEntity.getBody();
 
-        // 第三种远程调用接口方式，生产者Api上加上@FeignClient注解，消费者启动程序上加@EnableFeignClient注解
+        // 第三种远程调用接口方式，生产者Api上加上@FeignClient注解，消费者启动程序上加@EnableFeignClients注解
         CommonResponse bodyResult = userMicroservice.queryByIds(JsonUtils.objectToJson(idSet));
 
         List<UserBasicInfoVO> publisherList = null;

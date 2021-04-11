@@ -78,7 +78,7 @@ public class PassportController extends BaseController implements PassportContro
 
         // 2. 查询数据库，判断该用户是否已注册
         AppUser user = userService.queryMobileIsExist(mobile);
-        if (user != null && user.getActiveStatus() == UserStatus.FROZEN.type) {
+        if (user != null && user.getActiveStatus().equals(UserStatus.FROZEN.type)) {
             // 如果用户已注册并且状态为冻结，则直接抛出异常，禁止登录
             return CommonResponse.error(ErrorEnum.ACCOUNT_FROZEN);
         } else if (user == null) {

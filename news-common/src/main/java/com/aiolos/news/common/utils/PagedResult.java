@@ -12,7 +12,7 @@ import java.util.List;
  * @date 2020/11/24 1:55 上午
  */
 @Data
-public class        PagedResult {
+public class PagedResult {
 
     /**
      * 当前页数
