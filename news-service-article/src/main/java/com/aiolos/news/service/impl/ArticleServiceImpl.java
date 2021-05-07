@@ -49,14 +49,14 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
         BeanUtils.copyProperties(newArticleBO, article);
         article.setId(articleId);
         article.setCategoryId(category.getId());
-        article.setArticleStatus(ArticleReviewStatus.REVIEWING.type);
+        article.setArticleStatus(ArticleReviewStatus.REVIEWING.getType());
         article.setCommentCounts(0);
         article.setReadCounts(0);
-        article.setIsDelete(YesOrNo.NO.type);
+        article.setIsDelete(YesOrNo.NO.getType());
         article.setCreateTime(new Date());
         article.setUpdateTime(new Date());
 
-        if (article.getIsAppoint().equals(ArticleAppointType.TIMEING.type)) {
+        if (article.getIsAppoint().equals(ArticleAppointType.TIMEING.getType())) {
 
             article.setPublishTime(newArticleBO.getPublishTime());
         } else {
@@ -87,13 +87,13 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
 
         if (status != null && status == 12) {
 
-            queryWrapper.and(wrapper -> wrapper.eq("article_status", ArticleReviewStatus.REVIEWING.type)
+            queryWrapper.and(wrapper -> wrapper.eq("article_status", ArticleReviewStatus.REVIEWING.getType())
                                         .or()
-                                        .eq("article_status", ArticleReviewStatus.WAITING_MANUAL.type));
+                                        .eq("article_status", ArticleReviewStatus.WAITING_MANUAL.getType()));
         }
 
         // 已删除的文章虽然仍旧保存在数据库，但在前端不显示
-        queryWrapper.eq("is_delete", YesOrNo.NO.type);
+        queryWrapper.eq("is_delete", YesOrNo.NO.getType());
 
         if (startDate != null) {
             queryWrapper.ge("publish_time", startDate);

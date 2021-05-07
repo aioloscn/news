@@ -1,6 +1,8 @@
 package com.aiolos.news.common.enums;
 
 import com.aiolos.news.common.exception.CommonError;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 /**
  *
@@ -8,6 +10,8 @@ import com.aiolos.news.common.exception.CommonError;
  * @author Aiolos
  * @date 2020/9/22 2:50 下午
  */
+@Getter
+@AllArgsConstructor
 public enum ErrorEnum implements CommonError {
 
     // 通用错误类型
@@ -75,23 +79,8 @@ public enum ErrorEnum implements CommonError {
     ADMIN_INSERT_FAILED(40005, "添加管理员失败"),
     ;
 
-    ErrorEnum(int errCode, String errMsg) {
-        this.errCode = errCode;
-        this.errMsg = errMsg;
-    }
-
     private Integer errCode;
     private String errMsg;
-
-    @Override
-    public Integer getErrCode() {
-        return this.errCode;
-    }
-
-    @Override
-    public String getErrMsg() {
-        return this.errMsg;
-    }
 
     @Override
     public CommonError setErrMsg(String errMsg) {

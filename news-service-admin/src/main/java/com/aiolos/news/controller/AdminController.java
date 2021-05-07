@@ -1,9 +1,8 @@
 package com.aiolos.news.controller;
 
-import com.aiolos.news.common.CommonResponse;
+import com.aiolos.news.common.response.CommonResponse;
 import com.aiolos.news.common.enums.ErrorEnum;
 import com.aiolos.news.common.exception.CustomizeException;
-import com.aiolos.news.common.utils.CommonUtils;
 import com.aiolos.news.common.utils.PagedResult;
 import com.aiolos.news.common.utils.RedisOperator;
 import com.aiolos.news.controller.admin.AdminControllerApi;

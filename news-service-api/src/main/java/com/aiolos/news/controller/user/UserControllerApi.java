@@ -1,6 +1,6 @@
 package com.aiolos.news.controller.user;
 
-import com.aiolos.news.common.CommonResponse;
+import com.aiolos.news.common.response.CommonResponse;
 import com.aiolos.news.common.exception.CustomizeException;
 import com.aiolos.news.config.MyServiceList;
 import com.aiolos.news.controller.user.fallbacks.UserControllerFallbackFactory;

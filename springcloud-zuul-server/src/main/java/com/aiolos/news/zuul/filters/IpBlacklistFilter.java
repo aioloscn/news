@@ -1,6 +1,6 @@
 package com.aiolos.news.zuul.filters;
 
-import com.aiolos.news.common.CommonResponse;
+import com.aiolos.news.common.response.CommonResponse;
 import com.aiolos.news.common.enums.ErrorEnum;
 import com.aiolos.news.common.utils.IPUtils;
 import com.aiolos.news.common.utils.JsonUtils;
@@ -9,7 +9,6 @@ import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.MediaType;

@@ -1,6 +1,6 @@
 package com.aiolos.news.common.advice;
 
-import com.aiolos.news.common.CommonResponse;
+import com.aiolos.news.common.response.CommonResponse;
 import com.aiolos.news.common.exception.CustomizeException;
 import com.aiolos.news.common.enums.ErrorEnum;
 import com.aiolos.news.common.utils.CommonUtils;
@@ -20,16 +20,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
+ * 所有执行的controller都会被这个切面所包含
  * @author Aiolos
  * @date 2020/10/10 4:14 下午
  */
 @Slf4j
-@RestControllerAdvice       // 所有执行的controller都会被这个切面所包含
+@RestControllerAdvice
 public class GlobalExceptionAdvice {
 
-    // 定义ExceptionHandler解决为被controller层吸收的exception
-    @ExceptionHandler(value = Exception.class)      // 只要对应的controller抛出了任何Exception或者继承自Exception的异常，都会做一个对应的处理
-    @ResponseStatus(HttpStatus.OK)
+    /**
+     * 定义ExceptionHandler解决为被controller层吸收的Exception和它的子类异常
+     * 默认配置中，Spring事务框架只会将Runtime、unchecked异常的事务标记为回滚
+     * 但是如果捕获RuntimeException的异常，Spring校验会用DefaultHandlerExceptionResolver解析器，从而进不了该类
+     * 如果捕获Exception异常，Spring校验会用ExceptionHandlerExceptionResolver解析器
+     * @return  返回封装好的公共web对象
+     */
+    @ExceptionHandler(value = CustomizeException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ResponseBody
     public CommonResponse handlerCustomizeException(HttpServletRequest req, HttpServletResponse res, Exception e) {
 
@@ -41,7 +48,6 @@ public class GlobalExceptionAdvice {
             if (e instanceof NoHandlerFoundException) {
                 return CommonResponse.error(ErrorEnum.NO_HANDLER_FOUND);
             } else if (e instanceof MethodArgumentNotValidException) {
-
                 BindingResult bindingResult = ((MethodArgumentNotValidException) e).getBindingResult();
                 return CommonResponse.error(ErrorEnum.PARAMETER_VALIDATION_ERROR.getErrCode(), CommonUtils.processErrorString(bindingResult));
             } else if (e instanceof ServletRequestBindingException) {

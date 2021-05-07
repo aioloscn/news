@@ -1,6 +1,6 @@
 package com.aiolos.news.controller.user;
 
-import com.aiolos.news.common.CommonResponse;
+import com.aiolos.news.common.response.CommonResponse;
 import com.aiolos.news.common.exception.CustomizeException;
 import com.aiolos.news.pojo.bo.RegisterLoginBO;
 import io.swagger.annotations.Api;

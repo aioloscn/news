@@ -2,7 +2,7 @@ package com.aiolos.news.controller;
 
 import com.aiolos.news.pojo.bo.NewAdminBO;
 import com.aiolos.news.resources.FileResource;
-import com.aiolos.news.common.CommonResponse;
+import com.aiolos.news.common.response.CommonResponse;
 import com.aiolos.news.common.enums.ErrorEnum;
 import com.aiolos.news.controller.files.FileUploadControllerApi;
 import com.aiolos.news.service.UploadService;

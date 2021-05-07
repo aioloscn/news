@@ -41,6 +41,6 @@ public class FriendLinkServiceImpl implements FriendLinkService {
 
     @Override
     public List<FriendLinkMO> queryPortalAllFriendLinkList() {
-        return friendLinkRepository.getAllByIsDelete(YesOrNo.NO.type);
+        return friendLinkRepository.getAllByIsDelete(YesOrNo.NO.getType());
     }
 }

@@ -1,6 +1,6 @@
 package com.aiolos.news.controller.admin;
 
-import com.aiolos.news.common.CommonResponse;
+import com.aiolos.news.common.response.CommonResponse;
 import com.aiolos.news.common.exception.CustomizeException;
 import com.aiolos.news.pojo.bo.SaveFriendLinkBO;
 import io.swagger.annotations.Api;

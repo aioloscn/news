@@ -1,6 +1,6 @@
 package com.aiolos.news.controller;
 
-import com.aiolos.news.common.CommonResponse;
+import com.aiolos.news.common.response.CommonResponse;
 import com.aiolos.news.common.enums.UserStatus;
 import com.aiolos.news.common.exception.CustomizeException;
 import com.aiolos.news.common.enums.ErrorEnum;
@@ -78,7 +78,7 @@ public class PassportController extends BaseController implements PassportContro
 
         // 2. 查询数据库，判断该用户是否已注册
         AppUser user = userService.queryMobileIsExist(mobile);
-        if (user != null && user.getActiveStatus().equals(UserStatus.FROZEN.type)) {
+        if (user != null && user.getActiveStatus().equals(UserStatus.FROZEN.getType())) {
             // 如果用户已注册并且状态为冻结，则直接抛出异常，禁止登录
             return CommonResponse.error(ErrorEnum.ACCOUNT_FROZEN);
         } else if (user == null) {
@@ -88,7 +88,7 @@ public class PassportController extends BaseController implements PassportContro
 
         // 3. 保存用户分布式会话的相关操作
         int userActiveStatus = user.getActiveStatus();
-        if (userActiveStatus != UserStatus.FROZEN.type) {
+        if (userActiveStatus != UserStatus.FROZEN.getType()) {
 
             String utoken = UUID.randomUUID().toString();
             log.info("token: {}", utoken);

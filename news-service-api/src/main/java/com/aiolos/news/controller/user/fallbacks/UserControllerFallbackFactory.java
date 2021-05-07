@@ -1,6 +1,6 @@
 package com.aiolos.news.controller.user.fallbacks;
 
-import com.aiolos.news.common.CommonResponse;
+import com.aiolos.news.common.response.CommonResponse;
 import com.aiolos.news.common.enums.ErrorEnum;
 import com.aiolos.news.common.exception.CustomizeException;
 import com.aiolos.news.controller.user.UserControllerApi;

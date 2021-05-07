@@ -1,6 +1,6 @@
 package com.aiolos.news.service.impl;
 
-import com.aiolos.news.common.CommonResponse;
+import com.aiolos.news.common.response.CommonResponse;
 import com.aiolos.news.common.enums.ArticleReviewStatus;
 import com.aiolos.news.common.enums.YesOrNo;
 import com.aiolos.news.common.utils.JsonUtils;
@@ -58,9 +58,9 @@ public class ArticlePortalServiceImpl extends BaseService implements ArticlePort
          * articleStatus=3 审核通过，表示文章只有通过机审/人工审核之后才能显示
          */
         Article article = new Article();
-        article.setIsAppoint(YesOrNo.NO.type);
-        article.setIsDelete(YesOrNo.NO.type);
-        article.setArticleStatus(ArticleReviewStatus.SUCCESS.type);
+        article.setIsAppoint(YesOrNo.NO.getType());
+        article.setIsDelete(YesOrNo.NO.getType());
+        article.setArticleStatus(ArticleReviewStatus.SUCCESS.getType());
 
         if (category != null) {
             article.setCategoryId(category);
@@ -182,9 +182,9 @@ public class ArticlePortalServiceImpl extends BaseService implements ArticlePort
          * articleStatus=3 审核通过，表示文章只有通过机审/人工审核之后才能显示
          */
         Article article = new Article();
-        article.setIsAppoint(YesOrNo.NO.type);
-        article.setIsDelete(YesOrNo.NO.type);
-        article.setArticleStatus(ArticleReviewStatus.SUCCESS.type);
+        article.setIsAppoint(YesOrNo.NO.getType());
+        article.setIsDelete(YesOrNo.NO.getType());
+        article.setArticleStatus(ArticleReviewStatus.SUCCESS.getType());
 
         QueryWrapper<Article> queryWrapper = new QueryWrapper<>(article);
 
@@ -202,9 +202,9 @@ public class ArticlePortalServiceImpl extends BaseService implements ArticlePort
 
         Article article = new Article();
         article.setId(articleId);
-        article.setIsAppoint(YesOrNo.NO.type);
-        article.setIsDelete(YesOrNo.NO.type);
-        article.setArticleStatus(ArticleReviewStatus.SUCCESS.type);
+        article.setIsAppoint(YesOrNo.NO.getType());
+        article.setIsDelete(YesOrNo.NO.getType());
+        article.setArticleStatus(ArticleReviewStatus.SUCCESS.getType());
 
         QueryWrapper<Article> queryWrapper = new QueryWrapper<>(article);
         article = articleDao.selectOne(queryWrapper);

@@ -67,8 +67,8 @@ public class UserServiceImpl implements UserService {
         user.setNickname("用户" + CommonUtils.hidePhoneNo(mobile));
         user.setFace("");
         user.setBirthday(DateUtils.strToDate("1970-01-01 00:00:00"));
-        user.setSex(Sex.secret.type);
-        user.setActiveStatus(UserStatus.INACTIVE.type);
+        user.setSex(Sex.secret.getType());
+        user.setActiveStatus(UserStatus.INACTIVE.getType());
         user.setTotalIncome(0);
         user.setCreatedTime(new Date());
         user.setUpdatedTime(new Date());
@@ -96,14 +96,14 @@ public class UserServiceImpl implements UserService {
         AppUser user = new AppUser();
         BeanUtils.copyProperties(updateUserInfoBO, user);
         user.setUpdatedTime(new Date());
-        user.setActiveStatus(UserStatus.ACTIVE.type);
+        user.setActiveStatus(UserStatus.ACTIVE.getType());
 
         int affected = appUserDao.updateById(user);
         if (affected != 1) {
             throw new CustomizeException(ErrorEnum.USER_UPDATE_FAILED);
         }
 
-        // 更新用户信息后，必须修改redis中保存的用户信息
+        // 更新用户信息后，必须修改redis中保存的用户信息，因为删除redis信息到更新这段期间其他线程会获取到旧的值并set到redis
         AppUser appUser = getUser(userId);
         redis.set(REDIS_USER_INFO + ":" + userId, JsonUtils.objectToJson(user));
 

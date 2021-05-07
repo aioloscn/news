@@ -1,10 +1,9 @@
 package com.aiolos.news.controller;
 
-import com.aiolos.news.common.CommonResponse;
+import com.aiolos.news.common.response.CommonResponse;
 import com.aiolos.news.common.enums.ArticleCoverType;
 import com.aiolos.news.common.enums.ErrorEnum;
 import com.aiolos.news.common.exception.CustomizeException;
-import com.aiolos.news.common.utils.CommonUtils;
 import com.aiolos.news.common.utils.JsonUtils;
 import com.aiolos.news.common.utils.PagedResult;
 import com.aiolos.news.controller.article.ArticleControllerApi;
@@ -39,11 +38,11 @@ public class ArticleController extends BaseController implements ArticleControll
         log.info("Enter the method createArticle, parameter newArticleBO: {}", newArticleBO.toString());
 
         // 判断文章封面类型，单图必填，纯文字则设置为空
-        if (newArticleBO.getArticleType().equals(ArticleCoverType.ONE_IMAGE.type)) {
+        if (newArticleBO.getArticleType().equals(ArticleCoverType.ONE_IMAGE.getType())) {
             if (StringUtils.isBlank(newArticleBO.getArticleCover())) {
                 return CommonResponse.error(ErrorEnum.ARTICLE_COVER_NOT_EXIST_ERROR);
             }
-        } else if (newArticleBO.getArticleType().equals(ArticleCoverType.WORDS.type)) {
+        } else if (newArticleBO.getArticleType().equals(ArticleCoverType.WORDS.getType())) {
             newArticleBO.setArticleCover("");
         }
 

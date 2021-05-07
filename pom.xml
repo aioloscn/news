@@ -12,7 +12,6 @@
         <module>news-model</module>
         <module>news-service-api</module>
         <module>news-user</module>
-        <module>mybatis-generator-database</module>
         <module>news-service-files</module>
         <module>news-service-admin</module>
         <module>news-service-article</module>

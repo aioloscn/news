@@ -1,9 +1,7 @@
 package com.aiolos.news.controller;
 
-import com.aiolos.news.common.CommonResponse;
-import com.aiolos.news.common.enums.ErrorEnum;
+import com.aiolos.news.common.response.CommonResponse;
 import com.aiolos.news.common.exception.CustomizeException;
-import com.aiolos.news.common.utils.CommonUtils;
 import com.aiolos.news.controller.admin.FriendLinkControllerApi;
 import com.aiolos.news.pojo.bo.SaveFriendLinkBO;
 import com.aiolos.news.pojo.mo.FriendLinkMO;

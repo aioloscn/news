@@ -1,9 +1,8 @@
 package com.aiolos.news.controller;
 
-import com.aiolos.news.common.CommonResponse;
+import com.aiolos.news.common.response.CommonResponse;
 import com.aiolos.news.common.enums.ErrorEnum;
 import com.aiolos.news.common.exception.CustomizeException;
-import com.aiolos.news.common.utils.CommonUtils;
 import com.aiolos.news.common.utils.JsonUtils;
 import com.aiolos.news.controller.user.UserControllerApi;
 import com.aiolos.news.pojo.AppUser;
@@ -96,10 +95,8 @@ public class UserController extends BaseController implements UserControllerApi 
         String userJson = redis.get(REDIS_USER_INFO + ":" + userId);
         AppUser user = null;
         if (StringUtils.isNotBlank(userJson)) {
-
             user = JsonUtils.jsonToPojo(userJson, AppUser.class);
         } else {
-
             user = userService.getUser(userId);
             // 由于用户信息不怎么变动，对于千万级别的网站这类信息不会直接去查询数据库，可以把查询后的数据存入redis
             redis.set(REDIS_USER_INFO + ":" + userId, JsonUtils.objectToJson(user));
