@@ -14,13 +14,6 @@ spring:
       discovery:
         service-id: springcloud-config
         enabled: true
-  zipkin:
-    base-url: http://localhost:9411/    # 配置zipkin采集的服务地址，数据会发送到这里
-    sender:
-      type: web       # 数据采集的传输通信方式，web：http的形式
-  sleuth:
-    sampler:
-      probability: 0.8    # 数据采样比例（百分数），0-1
 
 # 路由规则：http://[网关地址]:[端口号]/[prefix]/[微服务实例名称]/[请求地址路径]
 zuul:

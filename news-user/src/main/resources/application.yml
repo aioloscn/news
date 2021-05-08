@@ -25,13 +25,6 @@ spring:
           destination: streamExchange   # 自定义交换机名字，也就是代码里构建的消息，交给底层mq的交换机
         myInput:           # 定义消费者的通道
           destination: streamExchange   # 自定义交换机名字，也就是消息从底层mq输入到消费端进行消费
-  zipkin:
-    base-url: http://localhost:9411/    # 配置zipkin采集的服务地址，数据会发送到这里
-    sender:
-      type: web       # 数据采集的传输通信方式，web：http的形式
-  sleuth:
-    sampler:
-      probability: 0.8    # 数据采样比例（百分数），0-1
 
 mapper:
   mappers: com.aiolos.news.utils.MyMapper
@@ -42,6 +35,10 @@ mybatis-plus:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # 开启mybatis日志
   type-aliases-package: com.aiolos.news.pojo
   mapper-locations: classpath:mapper/*.xml
+
+logging:
+  level:
+    org.springframework.cloud.loadbalancer.config.BlockingLoadBalancerClientAutoConfiguration: error
 
 # 配置指定自定义的ribbon规则，也可以在启动类上添加@RibbonClient(name = "news-user", configuration = MyRule.class)注解，现在注释掉用默认的轮询
 #news-user:
