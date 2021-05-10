@@ -24,6 +24,7 @@ zuul:
     news-user: /news-user/**
     news-service-admin: /news-service-admin/**
     news-service-article: /news-service-article/**    # 只要路由id和微服务实例id相同，就可以简写成这样去配置路由规则
+    news-files: /news-files/**
   host:
     connect-timeout-millis: 15000        # http连接超时要比Hystrix的大
     socket-timeout-millis: 60000         # socket超时
