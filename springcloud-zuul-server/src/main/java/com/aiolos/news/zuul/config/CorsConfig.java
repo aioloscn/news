@@ -1,4 +1,4 @@
-package com.aiolos.news.config;
+package com.aiolos.news.zuul.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,16 +8,15 @@ import org.springframework.web.filter.CorsFilter;
 
 /**
  * 解决跨域问题
- * 如果不使用zuul，所有微服务都可以使用这个配置解决跨域，如果使用zuul，zuul和其他微服务不能同时使用这个配置，会出现互斥，所以在zuul模块中单独配置
  * @author Aiolos
  * @date 2020/9/30 8:42 下午
  */
-//@Configuration
+@Configuration
 public class CorsConfig {
 
     public CorsConfig() {}
 
-//    @Bean
+    @Bean
     public CorsFilter corsFilter() {
 
         // 1.添加cors配置信息
