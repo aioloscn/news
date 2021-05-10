@@ -1,9 +1,11 @@
 package com.aiolos.news.controller;
 
+import com.aiolos.news.common.exception.CustomizeException;
 import com.aiolos.news.common.response.CommonResponse;
 import com.aiolos.news.common.utils.JsonUtils;
 import com.aiolos.news.controller.admin.CategoryMngControllerApi;
 import com.aiolos.news.pojo.Category;
+import com.aiolos.news.pojo.bo.SaveCategoryBO;
 import com.aiolos.news.service.CategoryService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -26,7 +28,7 @@ public class CategoryMngController extends BaseController implements CategoryMng
     }
 
     @Override
-    public CommonResponse getCats() {
+    public CommonResponse getCatList() {
 
         log.info("Enter the method getCats");
 
@@ -41,5 +43,11 @@ public class CategoryMngController extends BaseController implements CategoryMng
             categoryList = JsonUtils.jsonToList(allCatsJson, Category.class);
         }
         return CommonResponse.ok(categoryList);
+    }
+
+    @Override
+    public CommonResponse saveOrUpdateCategory(SaveCategoryBO saveCategoryBO) throws CustomizeException {
+        categoryService.saveOrUpdateCategory(saveCategoryBO);
+        return CommonResponse.ok();
     }
 }

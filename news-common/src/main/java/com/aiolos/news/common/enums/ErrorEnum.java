@@ -71,6 +71,7 @@ public enum ErrorEnum implements CommonError {
     ARTICLE_CATEGORY_NOT_EXIST_ERROR(30015, "请选择正确的文章类型"),
     ARTICLE_CREATE_FAILED(30016, "发布文章失败.."),
     ARTICLE_QUERY_PARAMS_ERROR(30017, "查询差数有误"),
+    SAVE_CATEGORY_FAILED(30018, "保存分类失败"),
 
     // 管理员相关类型错误
     ADMIN_NOT_EXIST_ERROR(40001, "管理员账号不存在或密码错误"),

@@ -105,7 +105,6 @@ public class UserServiceImpl implements UserService {
 
         // 更新用户信息后，必须修改redis中保存的用户信息，因为删除redis信息到更新这段期间其他线程会获取到旧的值并set到redis
         AppUser appUser = getUser(userId);
-        redis.set(REDIS_USER_INFO + ":" + userId, JsonUtils.objectToJson(user));
 
         // 缓存双删策略
         try {

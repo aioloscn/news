@@ -2,9 +2,6 @@ package com.aiolos.news.pojo.bo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.*;

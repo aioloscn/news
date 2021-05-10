@@ -1,5 +1,6 @@
 package com.aiolos.news.service;
 
+import com.aiolos.news.common.config.IdGeneratorSnowflake;
 import com.aiolos.news.common.utils.PagedResult;
 import com.aiolos.news.common.utils.RedisOperator;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -15,6 +16,9 @@ public class BaseService {
 
     @Autowired
     public RedisOperator redis;
+
+    @Autowired
+    public IdGeneratorSnowflake idWorker;
 
     /**
      * 注入服务发现，可以获得已经注册的服务相关信息
