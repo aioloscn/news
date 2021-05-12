@@ -38,7 +38,10 @@ public class CategoryMngController extends BaseController implements CategoryMng
 
         if (StringUtils.isBlank(allCatsJson)) {
             categoryList = categoryService.queryCategoryList();
-            redis.set(REDIS_ALL_CATEGORY, JsonUtils.objectToJson(categoryList));
+            for (Category category : categoryList) {
+                Integer id = category.getId();
+                redis.set(REDIS_ALL_CATEGORY + ":" + id, JsonUtils.objectToJson(category), REDIS_ALL_CATEGORY_TIME_OUT);
+            }
         } else {
             categoryList = JsonUtils.jsonToList(allCatsJson, Category.class);
         }

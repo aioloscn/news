@@ -51,7 +51,6 @@ public class CategoryServiceImpl extends BaseService implements CategoryService 
         } else {
             category = new Category();
             BeanUtil.copyProperties(saveCategoryBO, category);
-            category.setId((int) idWorker.nextId());
             result = categoryDao.insert(category);
         }
         if (result != 1) {

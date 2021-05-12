@@ -1,5 +1,8 @@
 package com.aiolos.news.pojo;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,6 +10,7 @@ import javax.persistence.Id;
 
 public class Category {
     @Id
+    @TableId(type = IdType.AUTO)
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "SELECT LAST_INSERT_ID()")
     private Integer id;
 

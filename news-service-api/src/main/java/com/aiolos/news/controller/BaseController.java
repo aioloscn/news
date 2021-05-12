@@ -39,6 +39,7 @@ public class BaseController {
     public static final String REDIS_ADMIN_TOKEN = "redis_admin_token";
 
     public static final String REDIS_ALL_CATEGORY = "redis_all_category";
+    public static final long REDIS_ALL_CATEGORY_TIME_OUT = 24 * 60 * 60;
 
     public static final String REDIS_ARTICLE_READ_COUNTS = "redis_article_read_counts";
 
