@@ -16,6 +16,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
@@ -48,7 +49,7 @@ public class AdminUserServiceImpl extends BaseService implements AdminUserServic
     }
 
     @Override
-    @Transactional(rollbackFor = CustomizeException.class)
+    @Transactional(propagation = Propagation.NESTED, rollbackFor = CustomizeException.class)
     public void createAdminUser(NewAdminBO newAdminBO) throws CustomizeException {
 
         AdminUser adminUser = new AdminUser();
@@ -67,7 +68,11 @@ public class AdminUserServiceImpl extends BaseService implements AdminUserServic
         int resultCount = adminUserDao.insert(adminUser);
 
         if (resultCount != 1) {
-            throw new CustomizeException(ErrorEnum.ADMIN_INSERT_FAILED);
+            try {
+                throw new RuntimeException();
+            } catch (Exception e) {
+                throw new CustomizeException(ErrorEnum.ADMIN_INSERT_FAILED);
+            }
         }
     }
 

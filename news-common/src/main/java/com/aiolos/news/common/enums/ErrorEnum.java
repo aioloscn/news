@@ -51,6 +51,7 @@ public enum ErrorEnum implements CommonError {
     REGISTER_FAILED(20015, "注册失败"),
     USER_UPDATE_FAILED(20016, "用户信息更新失败，请联系管理员"),
     USER_INACTIVE_ERROR(20017, "请前往[账号设置]修改信息激活后再进行操作"),
+    USER_STATUS_ERROR(20018, "用户状态参数出错"),
 
     // 业务相关错误类型
     INFORMATION_RELEASE_FAILED(30000, "短消息提交失败"),
@@ -72,6 +73,7 @@ public enum ErrorEnum implements CommonError {
     ARTICLE_CREATE_FAILED(30016, "发布文章失败.."),
     ARTICLE_QUERY_PARAMS_ERROR(30017, "查询差数有误"),
     SAVE_CATEGORY_FAILED(30018, "保存分类失败"),
+    FAILED_TO_PUBLISH_AN_ARTICLE_ON_A_SCHEDULED_TASK(30019, "定时任务发布文章失败"),
 
     // 管理员相关类型错误
     ADMIN_NOT_EXIST_ERROR(40001, "管理员账号不存在或密码错误"),

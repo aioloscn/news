@@ -19,6 +19,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
@@ -39,7 +40,7 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
         this.snowflake = snowflake;
     }
 
-    @Transactional
+    @Transactional(propagation = Propagation.NESTED, rollbackFor = CustomizeException.class)
     @Override
     public void createArticle(NewArticleBO newArticleBO, Category category) throws CustomizeException {
 
@@ -65,14 +66,23 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
 
         int count = articleDao.insert(article);
         if (count != 1) {
-            throw new CustomizeException(ErrorEnum.ARTICLE_CREATE_FAILED);
+            try {
+                throw new RuntimeException();
+            } catch (Exception e) {
+                throw new CustomizeException(ErrorEnum.ARTICLE_CREATE_FAILED);
+            }
         }
     }
 
-    @Transactional
+    @Transactional(propagation = Propagation.NESTED, rollbackFor = CustomizeException.class)
     @Override
-    public void updateAppointToPublish() {
-        int count = articleDao.updateAppointToPublish();
+    public void updateAppointToPublish() throws CustomizeException {
+        int result = articleDao.updateAppointToPublish();
+        try {
+            throw new RuntimeException();
+        } catch (Exception e) {
+            throw new CustomizeException(ErrorEnum.FAILED_TO_PUBLISH_AN_ARTICLE_ON_A_SCHEDULED_TASK);
+        }
     }
 
     @Override

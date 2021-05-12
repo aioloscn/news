@@ -15,7 +15,7 @@ public interface ArticleService {
 
     void createArticle(NewArticleBO newArticleBO, Category category) throws CustomizeException;
 
-    void updateAppointToPublish();
+    void updateAppointToPublish() throws CustomizeException;
 
     PagedResult queryMyArticleList(String userId, String keyword, Integer status, Date startDate, Date endDate, Integer pageNum, Integer pageSize);
 }
