@@ -16,6 +16,7 @@ import com.aiolos.news.service.UserService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
@@ -52,7 +53,7 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
-    @Transactional
+    @Transactional(propagation = Propagation.NESTED, rollbackFor = CustomizeException.class)
     @Override
     public AppUser creatUser(String mobile) throws CustomizeException {
 
@@ -75,7 +76,11 @@ public class UserServiceImpl implements UserService {
 
         int resultCount = appUserDao.insert(user);
         if (resultCount != 1) {
-            throw new CustomizeException(ErrorEnum.REGISTER_FAILED);
+            try {
+                throw new RuntimeException();
+            } catch (Exception e) {
+                throw new CustomizeException(ErrorEnum.REGISTER_FAILED);
+            }
         }
         return user;
     }
@@ -85,6 +90,7 @@ public class UserServiceImpl implements UserService {
         return appUserDao.selectById(userId);
     }
 
+    @Transactional(propagation = Propagation.NESTED, rollbackFor = CustomizeException.class)
     @Override
     public void updateAccountInfo(UpdateUserInfoBO updateUserInfoBO) throws CustomizeException {
 
@@ -100,7 +106,11 @@ public class UserServiceImpl implements UserService {
 
         int affected = appUserDao.updateById(user);
         if (affected != 1) {
-            throw new CustomizeException(ErrorEnum.USER_UPDATE_FAILED);
+            try {
+                throw new RuntimeException();
+            } catch (Exception e) {
+                throw new CustomizeException(ErrorEnum.USER_UPDATE_FAILED);
+            }
         }
 
         // 更新用户信息后，必须修改redis中保存的用户信息，因为删除redis信息到更新这段期间其他线程会获取到旧的值并set到redis
@@ -112,6 +122,22 @@ public class UserServiceImpl implements UserService {
             redis.del(REDIS_USER_INFO + ":" + userId);
         } catch (InterruptedException e) {
             e.printStackTrace();
+        }
+    }
+
+    @Transactional(propagation = Propagation.NESTED, rollbackFor = CustomizeException.class)
+    @Override
+    public void freezeUserOrNot(String userId, Integer doStatus) throws CustomizeException {
+        AppUser user = new AppUser();
+        user.setId(userId);
+        user.setActiveStatus(doStatus);
+        int result = appUserDao.updateById(user);
+        if (result != 1) {
+            try {
+                throw new RuntimeException();
+            } catch (Exception e) {
+                throw new CustomizeException(ErrorEnum.USER_UPDATE_FAILED);
+            }
         }
     }
 }

@@ -37,4 +37,6 @@ public interface UserService {
      * @return
      */
     void updateAccountInfo(UpdateUserInfoBO updateUserInfoBO) throws CustomizeException;
+
+    void freezeUserOrNot(String userId, Integer doStatus) throws CustomizeException;
 }
