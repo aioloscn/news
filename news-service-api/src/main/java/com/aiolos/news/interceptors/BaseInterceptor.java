@@ -4,7 +4,8 @@ import com.aiolos.news.common.enums.ErrorEnum;
 import com.aiolos.news.common.exception.CustomizeException;
 import com.aiolos.news.common.utils.RedisOperator;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.annotation.Resource;
 
 /**
  * @author Aiolos
@@ -12,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public class BaseInterceptor {
 
-    @Autowired
+    @Resource
     public RedisOperator redis;
 
     public static final String REDIS_USER_TOKEN = "redis_user_token";

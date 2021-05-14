@@ -31,6 +31,10 @@ public class BaseService {
 
     public static final String REDIS_ARTICLE_READ_COUNTS = "redis_article_read_counts";
 
+    public static final String REDIS_WRITER_FANS_COUNT = "redis_writer_fans_count";
+
+    public static final String REDIS_MY_FOLLOW_COUNT = "redis_my_follow_count";
+
     public PagedResult setterPagedResult(IPage<?> page) {
 
         PagedResult pagedResult = new PagedResult();

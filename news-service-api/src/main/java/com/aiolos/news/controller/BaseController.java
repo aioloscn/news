@@ -45,6 +45,10 @@ public class BaseController {
 
     public static final String REDIS_ALREADY_READ = "redis_already_read";
 
+    public static final String REDIS_WRITER_FANS_COUNT = "redis_writer_fans_count";
+
+    public static final String REDIS_MY_FOLLOW_COUNT = "redis_my_follow_count";
+
     public static final Integer COOKIE_EXPIRE_TIME = 7 * 24 * 60 * 60;
 
     public static final Integer START_PAGE = 1;

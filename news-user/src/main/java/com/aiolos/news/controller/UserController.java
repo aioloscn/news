@@ -138,6 +138,14 @@ public class UserController extends BaseController implements UserControllerApi 
         UserBasicInfoVO userBasicInfoVO = new UserBasicInfoVO();
         BeanUtils.copyProperties(user, userBasicInfoVO);
 
+        // 3.查询redis中用户的关注数和粉丝数
+        // 我的关注数
+        Integer myFollowCounts = getCountsFromRedis(REDIS_MY_FOLLOW_COUNT + ":" + userId);
+        // 我的粉丝数
+        Integer myFansCounts = getCountsFromRedis(REDIS_WRITER_FANS_COUNT + ":" + userId);
+
+        userBasicInfoVO.setMyFollowCounts(myFollowCounts);
+        userBasicInfoVO.setMyFansCounts(myFansCounts);
         return userBasicInfoVO;
     }
 

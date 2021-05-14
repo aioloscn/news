@@ -72,7 +72,7 @@ public class IpBlacklistFilter extends ZuulFilter {
         String ip = IPUtils.getRequestIp(request);
 
         /**
-         * 判断ip在10秒内的请求次数是否超过10次
+         * 判断ip在10秒内的请求次数是否超过20次
          * 如果超过，则限制这个ip访问15秒，15秒后再放行
          */
         final String ipRedisKey = "zuul-ip:" + ip;
