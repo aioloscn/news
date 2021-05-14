@@ -44,6 +44,12 @@ mybatis-plus:
   type-aliases-package: com.aiolos.news.pojo
   mapper-locations: classpath:mapper/*.xml
 
+# 定义freemarker生成的html位置
+freemarker:
+  html:
+    target: /workspace/freemarker_html
+    article: /Users/Aiolos/developer/apache-tomcat-9.0.38/webapps/news-web/portal/a
+
 ribbon:
   # 当请求某个微服务5s没连接，超时后会进行重试，先重试连接自己当前的这个实例
   # 如果当前实例重连一次失败，则会切换到访问集群中的下一个微服务实例，切换次数最大为2次
