@@ -1,11 +1,9 @@
 package com.aiolos.news.service.impl;
 
 import com.aiolos.news.common.config.IdGeneratorSnowflake;
-import com.aiolos.news.common.enums.ArticleAppointType;
-import com.aiolos.news.common.enums.ArticleReviewStatus;
-import com.aiolos.news.common.enums.ErrorEnum;
-import com.aiolos.news.common.enums.YesOrNo;
+import com.aiolos.news.common.enums.*;
 import com.aiolos.news.common.exception.CustomizeException;
+import com.aiolos.news.common.utils.AliTextReviewUtils;
 import com.aiolos.news.common.utils.PagedResult;
 import com.aiolos.news.dao.ArticleDao;
 import com.aiolos.news.pojo.Article;
@@ -35,9 +33,12 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
 
     public final IdGeneratorSnowflake snowflake;
 
-    public ArticleServiceImpl(ArticleDao articleDao, IdGeneratorSnowflake snowflake) {
+    public final AliTextReviewUtils aliTextReviewUtils;
+
+    public ArticleServiceImpl(ArticleDao articleDao, IdGeneratorSnowflake snowflake, AliTextReviewUtils aliTextReviewUtils) {
         this.articleDao = articleDao;
         this.snowflake = snowflake;
+        this.aliTextReviewUtils = aliTextReviewUtils;
     }
 
     @Transactional(propagation = Propagation.NESTED, rollbackFor = CustomizeException.class)
@@ -50,7 +51,6 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
         BeanUtils.copyProperties(newArticleBO, article);
         article.setId(articleId);
         article.setCategoryId(category.getId());
-        article.setArticleStatus(ArticleReviewStatus.REVIEWING.getType());
         article.setCommentCounts(0);
         article.setReadCounts(0);
         article.setIsDelete(YesOrNo.NO.getType());
@@ -58,10 +58,24 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
         article.setUpdateTime(new Date());
 
         if (article.getIsAppoint().equals(ArticleAppointType.TIMEING.getType())) {
-
             article.setPublishTime(newArticleBO.getPublishTime());
         } else {
             article.setPublishTime(new Date());
+        }
+
+        // 通过阿里智能AI实现对文章文本的自动检测
+        String reviewTextResult = aliTextReviewUtils.reviewTextContent(newArticleBO.getContent());
+        if (reviewTextResult.equalsIgnoreCase(ArticleReviewLevel.PASS.getType())) {
+            // 修改标记为审核通过
+            article.setArticleStatus(ArticleReviewStatus.SUCCESS.getType());
+        } else if (reviewTextResult.equalsIgnoreCase(ArticleReviewLevel.REVIEW.getType())) {
+            // 修改标记为需要人工审核
+            article.setArticleStatus(ArticleReviewStatus.WAITING_MANUAL.getType());
+        } else if (reviewTextResult.equalsIgnoreCase(ArticleReviewLevel.BLOCK.getType())) {
+            // 修改标记为审核未通过
+            article.setArticleStatus(ArticleReviewStatus.FAILED.getType());
+        } else {
+            article.setArticleStatus(ArticleReviewStatus.REVIEWING.getType());
         }
 
         int count = articleDao.insert(article);
@@ -122,5 +136,55 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
         articlePage = articleDao.selectPage(articlePage, queryWrapper);
         PagedResult pagedResult = setterPagedResult(articlePage);
         return pagedResult;
+    }
+
+    @Override
+    public void updateArticleStatus(String articleId, Integer pendingStatus) throws CustomizeException {
+        Article article = new Article();
+        article.setId(articleId);
+        article.setArticleStatus(pendingStatus);
+        article.setUpdateTime(new Date());
+        int result = articleDao.updateById(article);
+        if (result != 1) {
+            try {
+                throw new RuntimeException();
+            } catch (Exception e) {
+                throw new CustomizeException(ErrorEnum.UPDATE_ARTICLE_STATUS_FAILED);
+            }
+        }
+    }
+
+    @Override
+    public void withdraw(String userId, String articleId) throws CustomizeException {
+        Article article = new Article();
+        article.setId(articleId);
+        article.setPublishUserId(userId);
+        article.setArticleStatus(ArticleReviewStatus.WITHDRAW.getType());
+        article.setUpdateTime(new Date());
+        int result = articleDao.updateById(article);
+        if (result != 1) {
+            try {
+                throw new RuntimeException();
+            } catch (Exception e) {
+                throw new CustomizeException(ErrorEnum.UPDATE_ARTICLE_STATUS_FAILED);
+            }
+        }
+    }
+
+    @Override
+    public void delete(String userId, String articleId) throws CustomizeException {
+        Article article = new Article();
+        article.setId(articleId);
+        article.setPublishUserId(userId);
+        article.setIsDelete(YesOrNo.YES.getType());
+        article.setUpdateTime(new Date());
+        int result = articleDao.updateById(article);
+        if (result != 1) {
+            try {
+                throw new RuntimeException();
+            } catch (Exception e) {
+                throw new CustomizeException(ErrorEnum.UPDATE_ARTICLE_STATUS_FAILED);
+            }
+        }
     }
 }

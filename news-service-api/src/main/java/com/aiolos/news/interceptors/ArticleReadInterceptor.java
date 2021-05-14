@@ -21,9 +21,6 @@ public class ArticleReadInterceptor extends BaseInterceptor implements HandlerIn
         // 设置针对当前用户ip的永久存在的key，存入到redis，表示该ip的用户已经阅读过了，无法累加阅读量
         boolean isExist = redis.keyIsExist(REDIS_ALREADY_READ + ":" + articleId + ":" + userIp);
 
-        if (isExist) {
-            return false;
-        }
-        return true;
+        return !isExist;
     }
 }

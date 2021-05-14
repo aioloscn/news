@@ -29,4 +29,16 @@ public interface ArticleControllerApi {
     @PostMapping("/queryMyArticleList")
     CommonResponse queryMyArticleList(@RequestParam String userId, @RequestParam String keyword, @RequestParam Integer status,
                                       @RequestParam Date startDate, @RequestParam Date endDate, @RequestParam Integer pageNum, @RequestParam Integer pageSize);
+
+    @ApiOperation(value = "文章审核", httpMethod = "POST")
+    @PostMapping("/doReview")
+    CommonResponse doReview(@RequestParam String articleId, @RequestParam Integer passOrNot) throws CustomizeException;
+
+    @ApiOperation(value = "用户撤回文章", httpMethod = "POST")
+    @PostMapping("/withdraw")
+    CommonResponse withdraw(@RequestParam String userId, @RequestParam String articleId) throws CustomizeException;
+
+    @ApiOperation(value = "用户删除文章", httpMethod = "POST")
+    @PostMapping("/delete")
+    CommonResponse delete(@RequestParam String userId, @RequestParam String articleId) throws CustomizeException;
 }

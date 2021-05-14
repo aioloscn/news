@@ -1,5 +1,7 @@
 package com.aiolos.news.controller;
 
+import com.aiolos.news.common.enums.ArticleReviewStatus;
+import com.aiolos.news.common.enums.YesOrNo;
 import com.aiolos.news.common.response.CommonResponse;
 import com.aiolos.news.common.enums.ArticleCoverType;
 import com.aiolos.news.common.enums.ErrorEnum;
@@ -15,8 +17,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author Aiolos
@@ -35,8 +36,6 @@ public class ArticleController extends BaseController implements ArticleControll
     @Override
     public CommonResponse createArticle(@Valid NewArticleBO newArticleBO) throws CustomizeException {
 
-        log.info("Enter the method createArticle, parameter newArticleBO: {}", newArticleBO.toString());
-
         // 判断文章封面类型，单图必填，纯文字则设置为空
         if (newArticleBO.getArticleType().equals(ArticleCoverType.ONE_IMAGE.getType())) {
             if (StringUtils.isBlank(newArticleBO.getArticleCover())) {
@@ -49,27 +48,25 @@ public class ArticleController extends BaseController implements ArticleControll
         Category category = null;
 
         // 判断redis中是否保存里分类ID
-        String allCatsJson = redis.get(REDIS_ALL_CATEGORY);
-        if (StringUtils.isBlank(allCatsJson)) {
+        Set<String> categoryKeys = redis.keys(REDIS_ALL_CATEGORY + "*");
+        if (categoryKeys == null) {
             return CommonResponse.error(ErrorEnum.SYSTEM_OPERATION_ERROR);
         } else {
-
-            List<Category> categoryList = JsonUtils.jsonToList(allCatsJson, Category.class);
-            for (Category c : categoryList) {
-
+            List<String> keyList = new ArrayList<>(categoryKeys);
+            List<String> categories = redis.mget(keyList);
+            for (String s : categories) {
+                Category c = JsonUtils.jsonToPojo(s, Category.class);
                 if (c.getId().equals(newArticleBO.getCategoryId())) {
                     category = c;
                     break;
                 }
             }
-
             if (category == null) {
                 return CommonResponse.error(ErrorEnum.ARTICLE_CATEGORY_NOT_EXIST_ERROR);
             }
         }
 
         articleService.createArticle(newArticleBO, category);
-
         return CommonResponse.ok();
     }
 
@@ -92,5 +89,31 @@ public class ArticleController extends BaseController implements ArticleControll
 
         PagedResult pagedResult = articleService.queryMyArticleList(userId, keyword, status, startDate, endDate, pageNum, pageSize);
         return CommonResponse.ok(pagedResult);
+    }
+
+    @Override
+    public CommonResponse doReview(String articleId, Integer passOrNot) throws CustomizeException {
+        Integer pendingStatus;
+        if (passOrNot.equals(YesOrNo.YES.getType())) {
+            pendingStatus = ArticleReviewStatus.SUCCESS.getType();
+        } else if (passOrNot.equals(YesOrNo.NO.getType())) {
+            pendingStatus = ArticleReviewStatus.FAILED.getType();
+        } else {
+            return CommonResponse.error(ErrorEnum.ARTICLE_REVIEW_ERROR);
+        }
+        articleService.updateArticleStatus(articleId, pendingStatus);
+        return CommonResponse.ok();
+    }
+
+    @Override
+    public CommonResponse withdraw(String userId, String articleId) throws CustomizeException {
+        articleService.withdraw(userId, articleId);
+        return CommonResponse.ok();
+    }
+
+    @Override
+    public CommonResponse delete(String userId, String articleId) throws CustomizeException {
+        articleService.delete(userId, articleId);
+        return CommonResponse.ok();
     }
 }

@@ -74,6 +74,11 @@ public enum ErrorEnum implements CommonError {
     ARTICLE_QUERY_PARAMS_ERROR(30017, "查询差数有误"),
     SAVE_CATEGORY_FAILED(30018, "保存分类失败"),
     FAILED_TO_PUBLISH_AN_ARTICLE_ON_A_SCHEDULED_TASK(30019, "定时任务发布文章失败"),
+    WRITER_ID_NULL_ERROR(30020, "作者主键不能为空"),
+    FAN_ID_NULL_ERROR(30021, "关注者主键不能为空"),
+    UNFOLLOW_FAILED(30022, "取消关注失败"),
+    UPDATE_ARTICLE_STATUS_FAILED(30023, "修改文章状态失败"),
+    ARTICLE_REVIEW_ERROR(30024, "文章审核异常"),
 
     // 管理员相关类型错误
     ADMIN_NOT_EXIST_ERROR(40001, "管理员账号不存在或密码错误"),

@@ -4,7 +4,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.reflect.CodeSignature;
 import org.springframework.stereotype.Component;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * AOP通知
@@ -30,14 +34,19 @@ public class ServiceLogAspect {
      * 第四个*：代表当前类的所有方法
      * (..)：代表扩号里可以是任意参数，可以有参可以无参
      */
-    @Around("execution(* com.aiolos.*.service.impl..*.*(..))")
-    public Object recordTimeOfService(ProceedingJoinPoint joinPoint) throws Throwable {
+//    @Around("execution(* com.aiolos.*.service.impl..*.*(..))")
+    @Around("execution(public * com.aiolos.*.controller.*.*(..))")
+    public Object recordTimeOfService(ProceedingJoinPoint point) throws Throwable {
 
-        log.info("============ 开始执行 {}.{} ============", joinPoint.getTarget().getClass(), joinPoint.getSignature().getName());
+        Map<String, Object> params = getArgsNameAndValue(point);
+        log.info("============ 开始执行 {}.{} ============\n", point.getTarget().getClass(), point.getSignature().getName());
+        params.entrySet().stream().forEach(entry -> {
+            log.info("============ argName: {}, argValue: {} ============\n", entry.getKey(), entry.getValue());
+        });
 
         long start = System.currentTimeMillis();
 
-        Object result = joinPoint.proceed();
+        Object result = point.proceed();
 
         long end = System.currentTimeMillis();
         long takeTime = end - start;
@@ -50,5 +59,20 @@ public class ServiceLogAspect {
             log.info("当前执行耗时：{}", takeTime);
         }
         return result;
+    }
+
+    /**
+     * 获取参数Map集合
+     * @param point
+     * @return
+     */
+    private Map<String, Object> getArgsNameAndValue(ProceedingJoinPoint point) {
+        Map<String, Object> params = new HashMap<>();
+        String[] parameterNames = ((CodeSignature) point.getSignature()).getParameterNames();
+        Object[] args = point.getArgs();
+        for (int i = 0; i < parameterNames.length; i++) {
+            params.put(parameterNames[i], args[i]);
+        }
+        return params;
     }
 }
