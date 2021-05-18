@@ -19,6 +19,7 @@
         <module>springcloud-eureka-cluster</module>
         <module>springcloud-zuul-server</module>
         <module>springcloud-config</module>
+        <module>news-service-article-html</module>
     </modules>
     <!--
         1.聚合工程分为父工程（顶级工程）和子工程，他们是继承关系，子工程在maven中称为module，模块与模块之间是平级的，可以相互依赖的

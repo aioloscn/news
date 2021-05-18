@@ -2,6 +2,7 @@ package com.aiolos.news.service;
 
 import com.aiolos.news.common.exception.CustomizeException;
 import com.aiolos.news.common.utils.PagedResult;
+import com.aiolos.news.pojo.Article;
 import com.aiolos.news.pojo.Category;
 import com.aiolos.news.pojo.bo.NewArticleBO;
 
@@ -41,6 +42,15 @@ public interface ArticleService {
     PagedResult queryMyArticleList(String userId, String keyword, Integer status, Date startDate, Date endDate, Integer pageNum, Integer pageSize);
 
     /**
+     * 管理员查询所有文章
+     * @param status
+     * @param page
+     * @param pageSize
+     * @return
+     */
+    PagedResult queryAllList(Integer status, Integer page, Integer pageSize);
+
+    /**
      * 修改文章审核状态
      * @param articleId
      * @param pendingStatus
@@ -61,4 +71,18 @@ public interface ArticleService {
      * @param articleId
      */
     void delete(String userId, String articleId) throws CustomizeException;
+
+    /**
+     * 关联文章和GridFS的html文件id
+     * @param articleId
+     * @param articleMongoId
+     */
+    void updateArticleToGridFS(String articleId, String articleMongoId) throws CustomizeException;
+
+    /**
+     * 根据主键查询文章信息
+     * @param articleId
+     * @return
+     */
+    Article queryById(String articleId);
 }

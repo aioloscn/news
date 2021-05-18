@@ -9,9 +9,11 @@ import com.aiolos.news.common.exception.CustomizeException;
 import com.aiolos.news.common.utils.JsonUtils;
 import com.aiolos.news.common.utils.PagedResult;
 import com.aiolos.news.controller.article.ArticleControllerApi;
+import com.aiolos.news.pojo.Article;
 import com.aiolos.news.pojo.Category;
 import com.aiolos.news.pojo.bo.NewArticleBO;
 import com.aiolos.news.service.ArticleService;
+import com.aiolos.news.utils.ArticleUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,10 +29,13 @@ import java.util.*;
 @RestController
 public class ArticleController extends BaseController implements ArticleControllerApi {
 
-    public final ArticleService articleService;
+    private final ArticleService articleService;
 
-    public ArticleController(ArticleService articleService) {
+    private final ArticleUtil articleUtil;
+
+    public ArticleController(ArticleService articleService, ArticleUtil articleUtil) {
         this.articleService = articleService;
+        this.articleUtil = articleUtil;
     }
 
     @Override
@@ -72,10 +77,6 @@ public class ArticleController extends BaseController implements ArticleControll
 
     @Override
     public CommonResponse queryMyArticleList(String userId, String keyword, Integer status, Date startDate, Date endDate, Integer pageNum, Integer pageSize) {
-
-        log.info("Enter the method queryMyArticleList, parameter userId: {}, keyword: {}, status: {}, pageNum: {}, pageSize: {}",
-                                    userId, keyword, status, pageNum, pageSize);
-
         if (StringUtils.isBlank(userId)) {
             return CommonResponse.error(ErrorEnum.ARTICLE_QUERY_PARAMS_ERROR);
         }
@@ -92,6 +93,13 @@ public class ArticleController extends BaseController implements ArticleControll
     }
 
     @Override
+    public CommonResponse queryAllList(Integer status, Integer page, Integer pageSize) {
+        if (page == null) page = START_PAGE;
+        if (pageSize == null) pageSize = PAGE_SIZE;
+        return CommonResponse.ok(articleService.queryAllList(status, page, pageSize));
+    }
+
+    @Override
     public CommonResponse doReview(String articleId, Integer passOrNot) throws CustomizeException {
         Integer pendingStatus;
         if (passOrNot.equals(YesOrNo.YES.getType())) {
@@ -102,18 +110,50 @@ public class ArticleController extends BaseController implements ArticleControll
             return CommonResponse.error(ErrorEnum.ARTICLE_REVIEW_ERROR);
         }
         articleService.updateArticleStatus(articleId, pendingStatus);
+        if (pendingStatus.equals(ArticleReviewStatus.SUCCESS.getType())) {
+            // 审核成功，生成文章静态html
+            String articleMongoId = articleUtil.createArticleHtmlToGridFS(articleId);
+            // 存储到对应的文章，进行关联保存
+            articleService.updateArticleToGridFS(articleId, articleMongoId);
+            // 调用消费端，执行下载html
+            articleUtil.downloadArticleHtml(articleId, articleMongoId);
+        }
         return CommonResponse.ok();
     }
 
     @Override
     public CommonResponse withdraw(String userId, String articleId) throws CustomizeException {
+        // 查询文章获取articleMongoId
+        Article article = articleService.queryById(articleId);
+        if (article == null) {
+            return CommonResponse.error(ErrorEnum.UNDO_FAILED_THE_ARTICLE_DOES_NOT_EXIST);
+        }
+        String articleMongoId = article.getMongoFileId();
         articleService.withdraw(userId, articleId);
+        // 删除GridFS存储的关联数据
+        articleUtil.deleteFromGridFS(articleMongoId);
+        // 删除对应的静态html
+        try {
+            articleUtil.deleteArticleHtml(articleId);
+        } catch (CustomizeException e) {
+            throw new CustomizeException(ErrorEnum.FAILED_TO_WITHDRAW_THE_ARTICLE);
+        }
         return CommonResponse.ok();
     }
 
     @Override
     public CommonResponse delete(String userId, String articleId) throws CustomizeException {
+        // 查询文章获取articleMongoId
+        Article article = articleService.queryById(articleId);
+        if (article == null) {
+            return CommonResponse.error(ErrorEnum.UNDO_FAILED_THE_ARTICLE_DOES_NOT_EXIST);
+        }
+        String articleMongoId = article.getMongoFileId();
         articleService.delete(userId, articleId);
+        // 删除GridFS存储的关联数据
+        articleUtil.deleteFromGridFS(articleMongoId);
+        // 删除对应的静态html
+        articleUtil.deleteArticleHtml(articleId);
         return CommonResponse.ok();
     }
 }

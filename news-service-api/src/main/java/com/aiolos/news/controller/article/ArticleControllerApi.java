@@ -5,6 +5,7 @@ import com.aiolos.news.common.exception.CustomizeException;
 import com.aiolos.news.pojo.bo.NewArticleBO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +30,11 @@ public interface ArticleControllerApi {
     @PostMapping("/queryMyArticleList")
     CommonResponse queryMyArticleList(@RequestParam String userId, @RequestParam String keyword, @RequestParam Integer status,
                                       @RequestParam Date startDate, @RequestParam Date endDate, @RequestParam Integer pageNum, @RequestParam Integer pageSize);
+
+    @ApiOperation(value = "管理员查询所有文章", httpMethod = "POST")
+    @PostMapping("/queryAllList")
+    CommonResponse queryAllList(@RequestParam Integer status, @ApiParam(name = "page", value = "查询第几页") @RequestParam Integer page,
+                                @ApiParam(name = "pageSize", value = "每页显示数") Integer pageSize);
 
     @ApiOperation(value = "文章审核", httpMethod = "POST")
     @PostMapping("/doReview")

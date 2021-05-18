@@ -10,6 +10,7 @@ import com.aiolos.news.pojo.vo.ArticleDetailVO;
 import com.aiolos.news.pojo.vo.UserBasicInfoVO;
 import com.aiolos.news.service.ArticlePortalService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.http.HttpStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
@@ -81,6 +82,11 @@ public class ArticlePortalController extends BaseController implements ArticlePo
     }
 
     @Override
+    public Integer readCounts(String articleId) {
+        return getCountsFromRedis(REDIS_ARTICLE_READ_COUNTS + ":" + articleId);
+    }
+
+    @Override
     public CommonResponse readArticle(String articleId, HttpServletRequest request) {
 
         String userIp = IPUtils.getRequestIp(request);
@@ -102,7 +108,7 @@ public class ArticlePortalController extends BaseController implements ArticlePo
 
         List<UserBasicInfoVO> publisherList = null;
 
-        if (bodyResult.getCode() == 200) {
+        if (bodyResult.getCode() == HttpStatus.SC_OK) {
 
             String userJson = JsonUtils.objectToJson(bodyResult.getData());
             publisherList = JsonUtils.jsonToList(userJson, UserBasicInfoVO.class);

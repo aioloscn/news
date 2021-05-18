@@ -11,6 +11,7 @@ import com.aiolos.news.pojo.Category;
 import com.aiolos.news.pojo.bo.NewArticleBO;
 import com.aiolos.news.service.ArticleService;
 import com.aiolos.news.service.BaseService;
+import com.aiolos.news.utils.ArticleUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -29,16 +30,20 @@ import java.util.Date;
 @Service
 public class ArticleServiceImpl extends BaseService implements ArticleService {
 
-    public final ArticleDao articleDao;
+    private final ArticleDao articleDao;
 
-    public final IdGeneratorSnowflake snowflake;
+    private final IdGeneratorSnowflake snowflake;
 
-    public final AliTextReviewUtils aliTextReviewUtils;
+    private final AliTextReviewUtils aliTextReviewUtils;
 
-    public ArticleServiceImpl(ArticleDao articleDao, IdGeneratorSnowflake snowflake, AliTextReviewUtils aliTextReviewUtils) {
+    private final ArticleUtil articleUtil;
+
+    public ArticleServiceImpl(ArticleDao articleDao, IdGeneratorSnowflake snowflake,
+                              AliTextReviewUtils aliTextReviewUtils, ArticleUtil articleUtil) {
         this.articleDao = articleDao;
         this.snowflake = snowflake;
         this.aliTextReviewUtils = aliTextReviewUtils;
+        this.articleUtil = articleUtil;
     }
 
     @Transactional(propagation = Propagation.NESTED, rollbackFor = CustomizeException.class)
@@ -86,6 +91,16 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
                 throw new CustomizeException(ErrorEnum.ARTICLE_CREATE_FAILED);
             }
         }
+
+        // 如果机审成功且不需要人工复审，则直接生成静态页面
+        if (reviewTextResult.equalsIgnoreCase(ArticleReviewLevel.PASS.getType())) {
+            // 审核成功，生成文章静态html
+            String articleMongoId = articleUtil.createArticleHtmlToGridFS(articleId);
+            // 存储到对应的文章，进行关联保存
+            this.updateArticleToGridFS(articleId, articleMongoId);
+            // 调用消费端，执行下载html
+            articleUtil.downloadArticleHtml(articleId, articleMongoId);
+        }
     }
 
     @Transactional(propagation = Propagation.NESTED, rollbackFor = CustomizeException.class)
@@ -110,7 +125,6 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
         }
 
         if (status != null && status == 12) {
-
             queryWrapper.and(wrapper -> wrapper.eq("article_status", ArticleReviewStatus.REVIEWING.getType())
                                         .or()
                                         .eq("article_status", ArticleReviewStatus.WAITING_MANUAL.getType()));
@@ -132,12 +146,29 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
 
         queryWrapper.orderByDesc("create_time");
 
-        IPage<Article> articlePage = new Page<>();
+        IPage<Article> articlePage = new Page<>(pageNum, pageSize);
         articlePage = articleDao.selectPage(articlePage, queryWrapper);
         PagedResult pagedResult = setterPagedResult(articlePage);
         return pagedResult;
     }
 
+    @Override
+    public PagedResult queryAllList(Integer status, Integer page, Integer pageSize) {
+        IPage<Article> articlePage = new Page<>(page, pageSize);
+        QueryWrapper<Article> queryWrapper = new QueryWrapper<>();
+        if (status != null && status == 12) {
+            queryWrapper.and(wrapper -> wrapper.eq("article_status", ArticleReviewStatus.REVIEWING.getType())
+                                        .or()
+                                        .eq("article_status", ArticleReviewStatus.WAITING_MANUAL.getType()));
+        }
+        queryWrapper.eq("is_delete", YesOrNo.NO.getType());
+        queryWrapper.orderByDesc("create_time");
+        articlePage = articleDao.selectPage(articlePage, queryWrapper);
+        PagedResult pagedResult = setterPagedResult(articlePage);
+        return pagedResult;
+    }
+
+    @Transactional(propagation = Propagation.NESTED, rollbackFor = CustomizeException.class)
     @Override
     public void updateArticleStatus(String articleId, Integer pendingStatus) throws CustomizeException {
         Article article = new Article();
@@ -154,12 +185,50 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
         }
     }
 
+    @Transactional(propagation = Propagation.NESTED, rollbackFor = CustomizeException.class)
     @Override
     public void withdraw(String userId, String articleId) throws CustomizeException {
         Article article = new Article();
         article.setId(articleId);
         article.setPublishUserId(userId);
         article.setArticleStatus(ArticleReviewStatus.WITHDRAW.getType());
+        article.setMongoFileId(null);
+        article.setUpdateTime(new Date());
+        int result = articleDao.updateById(article);
+        if (result != 1) {
+            try {
+                throw new RuntimeException();
+            } catch (Exception e) {
+                throw new CustomizeException(ErrorEnum.UPDATE_ARTICLE_STATUS_FAILED);
+            }
+        }
+    }
+
+    @Transactional(propagation = Propagation.NESTED, rollbackFor = CustomizeException.class)
+    @Override
+    public void delete(String userId, String articleId) throws CustomizeException {
+        Article article = new Article();
+        article.setId(articleId);
+        article.setPublishUserId(userId);
+        article.setIsDelete(YesOrNo.YES.getType());
+        article.setMongoFileId(null);
+        article.setUpdateTime(new Date());
+        int result = articleDao.updateById(article);
+        if (result != 1) {
+            try {
+                throw new RuntimeException();
+            } catch (Exception e) {
+                throw new CustomizeException(ErrorEnum.UPDATE_ARTICLE_STATUS_FAILED);
+            }
+        }
+    }
+
+    @Transactional(propagation = Propagation.NESTED, rollbackFor = CustomizeException.class)
+    @Override
+    public void updateArticleToGridFS(String articleId, String articleMongoId) throws CustomizeException {
+        Article article = new Article();
+        article.setId(articleId);
+        article.setMongoFileId(articleMongoId);
         article.setUpdateTime(new Date());
         int result = articleDao.updateById(article);
         if (result != 1) {
@@ -172,19 +241,7 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
     }
 
     @Override
-    public void delete(String userId, String articleId) throws CustomizeException {
-        Article article = new Article();
-        article.setId(articleId);
-        article.setPublishUserId(userId);
-        article.setIsDelete(YesOrNo.YES.getType());
-        article.setUpdateTime(new Date());
-        int result = articleDao.updateById(article);
-        if (result != 1) {
-            try {
-                throw new RuntimeException();
-            } catch (Exception e) {
-                throw new CustomizeException(ErrorEnum.UPDATE_ARTICLE_STATUS_FAILED);
-            }
-        }
+    public Article queryById(String articleId) {
+        return articleDao.selectById(articleId);
     }
 }

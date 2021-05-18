@@ -79,6 +79,10 @@ public enum ErrorEnum implements CommonError {
     UNFOLLOW_FAILED(30022, "取消关注失败"),
     UPDATE_ARTICLE_STATUS_FAILED(30023, "修改文章状态失败"),
     ARTICLE_REVIEW_ERROR(30024, "文章审核异常"),
+    UNDO_FAILED_THE_ARTICLE_DOES_NOT_EXIST(30025, "撤销失败，文章不存在"),
+    DELETE_FAILED_THE_ARTICLE_DOES_NOT_EXIST(30026, "删除失败，文章不存在"),
+    FAILED_TO_WITHDRAW_THE_ARTICLE(30027, "撤销文章失败"),
+    FAILED_TO_DELETE_ARTICLE(30028, "删除文章失败"),
 
     // 管理员相关类型错误
     ADMIN_NOT_EXIST_ERROR(40001, "管理员账号不存在或密码错误"),

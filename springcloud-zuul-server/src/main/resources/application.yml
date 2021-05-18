@@ -8,9 +8,9 @@ spring:
     active: dev
   cloud:
     config:
-      label: main
-      name: zuul
-      profile: test
+#      label: main
+#      name: zuul
+#      profile: test
       discovery:
         service-id: springcloud-config
         enabled: true

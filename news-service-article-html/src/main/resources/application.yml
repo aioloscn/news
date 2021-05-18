@@ -4,11 +4,11 @@ server:
     uri-encoding: UTF-8
     max-swallow-size: -1
   servlet:
-    context-path: /news/article
+    context-path: /news/article/html
 
 spring:
   application:
-    name: news-service-article
+    name: news-service-article-html
   profiles:
     active: dev # redis, mysql
   jackson:
@@ -33,16 +33,6 @@ spring:
           destination: streamExchange   # 自定义交换机名字，也就是代码里构建的消息，交给底层mq的交换机
         myInput:           # 定义消费者的通道
           destination: streamExchange   # 自定义交换机名字，也就是消息从底层mq输入到消费端进行消费
-
-mapper:
-  mappers: com.aiolos.news.utils.MyMapper
-  not-empty: false        # 在进行数据库操作的时候，判断表达式 username != null, 是否追加 username != ''
-  identity: MYSQL
-mybatis-plus:
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # 开启mybatis日志
-  type-aliases-package: com.aiolos.news.pojo
-  mapper-locations: classpath:mapper/*.xml
 
 # 定义freemarker生成的html位置
 freemarker:

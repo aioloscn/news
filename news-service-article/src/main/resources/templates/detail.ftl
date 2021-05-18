@@ -313,7 +313,7 @@
                 },
                 // 跳转作家页面
                 showWriter(writerId) {
-                    window.open("writer.html?writerId=" + writerId);
+                    window.open("../writer.html?writerId=" + writerId);
                 },
                 // 查询文章详情
                 getArticleDetail(articleId) {

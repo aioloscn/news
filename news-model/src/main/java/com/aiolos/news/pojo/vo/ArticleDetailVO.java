@@ -1,5 +1,6 @@
 package com.aiolos.news.pojo.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.util.Date;
@@ -46,6 +47,7 @@ public class ArticleDetailVO {
     /**
      * 文章发布时间（也是预约发布的时间）
      */
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Date publishTime;
 
     /**

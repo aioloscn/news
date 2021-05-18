@@ -1,9 +1,12 @@
 package com.aiolos.news.controller.article;
 
 import com.aiolos.news.common.response.CommonResponse;
+import com.aiolos.news.config.MyServiceList;
+import com.aiolos.news.controller.article.fallbacks.ArticlePortalControllerFallbackFactory;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Api(value = "门户端文章业务的controller", tags = "门户端文章业务的controller")
 @RequestMapping("/portal")
+//@FeignClient(value = MyServiceList.NEWS_SERVICE_ARTICLE, fallbackFactory = ArticlePortalControllerFallbackFactory.class)
 public interface ArticlePortalControllerApi {
 
     @ApiOperation(value = "首页查询文章列表", notes = "首页查询文章列表", httpMethod = "GET")
@@ -31,10 +35,13 @@ public interface ArticlePortalControllerApi {
     @GetMapping("/hotList")
     CommonResponse hotList();
 
-
     @ApiOperation(value = "文章详情查询", notes = "文章详情查询", httpMethod = "GET")
     @GetMapping("/detail")
     CommonResponse detail(@RequestParam String articleId);
+
+    @ApiOperation(value = "获得文章阅读数", httpMethod = "GET")
+    @GetMapping("/readCounts")
+    Integer readCounts(@RequestParam String articleId);
 
     @ApiOperation(value = "阅读文章，文章阅读量增加", notes = "阅读文章，文章阅读量增加", httpMethod = "POST")
     @PostMapping("/readArticle")
