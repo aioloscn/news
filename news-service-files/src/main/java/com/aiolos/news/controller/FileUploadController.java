@@ -1,5 +1,7 @@
 package com.aiolos.news.controller;
 
+import com.aiolos.news.common.exception.CustomizeException;
+import com.aiolos.news.common.utils.FileUtils;
 import com.aiolos.news.pojo.bo.NewAdminBO;
 import com.aiolos.news.resources.FileResource;
 import com.aiolos.news.common.response.CommonResponse;
@@ -7,6 +9,9 @@ import com.aiolos.news.common.enums.ErrorEnum;
 import com.aiolos.news.controller.files.FileUploadControllerApi;
 import com.aiolos.news.service.UploadService;
 import com.mongodb.client.gridfs.GridFSBucket;
+import com.mongodb.client.gridfs.GridFSFindIterable;
+import com.mongodb.client.gridfs.model.GridFSFile;
+import com.mongodb.client.model.Filters;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.bson.types.ObjectId;
@@ -14,8 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import sun.misc.BASE64Decoder;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -150,5 +156,41 @@ public class FileUploadController implements FileUploadControllerApi {
             e.printStackTrace();
         }
         return CommonResponse.ok("上传成功", fileIdStr);
+    }
+
+    @Override
+    public void readInGridFS(String faceId, HttpServletRequest request, HttpServletResponse response) throws CustomizeException {
+        if (StringUtils.isBlank(faceId) || faceId.equalsIgnoreCase("null")) {
+            throw new CustomizeException(ErrorEnum.FILE_DOES_NOT_EXIST_ERROR);
+        }
+        // 从GridFS中获取图片
+        File adminFace = readGridFSByFaceId(faceId);
+        // 把人脸图片输出到浏览器
+        FileUtils.downloadFileByStream(response, adminFace);
+    }
+
+    private File readGridFSByFaceId(String faceId) throws CustomizeException {
+        GridFSFindIterable gridFSFiles = gridFSBucket.find(Filters.eq("_id", new ObjectId(faceId)));
+        GridFSFile gridFSFile = gridFSFiles.first();
+        if (gridFSFile == null) {
+            throw new CustomizeException(ErrorEnum.FILE_DOES_NOT_EXIST_ERROR);
+        }
+        String filename = gridFSFile.getFilename();
+        // 获取文件流，保存文件到本地或服务器临时目录
+        File file = new File("/workspace/temp_face");
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+        File myFile = new File("/workspace/temp_face" + filename);
+        try {
+            // 创建文件输出流
+            OutputStream os = new FileOutputStream(myFile);
+            // 下载到服务器或本地
+            gridFSBucket.downloadToStream(new ObjectId(faceId), os);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            throw new CustomizeException(ErrorEnum.FILE_ACQUISITION_FAILED);
+        }
+        return myFile;
     }
 }

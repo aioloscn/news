@@ -83,6 +83,8 @@ public enum ErrorEnum implements CommonError {
     DELETE_FAILED_THE_ARTICLE_DOES_NOT_EXIST(30026, "删除失败，文章不存在"),
     FAILED_TO_WITHDRAW_THE_ARTICLE(30027, "撤销文章失败"),
     FAILED_TO_DELETE_ARTICLE(30028, "删除文章失败"),
+    FILE_DOES_NOT_EXIST_ERROR(30029, "文件不存在"),
+    FILE_ACQUISITION_FAILED(30030, "文件获取失败"),
 
     // 管理员相关类型错误
     ADMIN_NOT_EXIST_ERROR(40001, "管理员账号不存在或密码错误"),

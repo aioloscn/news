@@ -1,13 +1,14 @@
 package com.aiolos.news.controller.files;
 
+import com.aiolos.news.common.exception.CustomizeException;
 import com.aiolos.news.common.response.CommonResponse;
 import com.aiolos.news.pojo.bo.NewAdminBO;
 import io.swagger.annotations.Api;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author Aiolos
@@ -43,4 +44,12 @@ public interface FileUploadControllerApi {
      */
     @PostMapping("/uploadToGridFS")
     CommonResponse uploadToGridFS(@RequestBody NewAdminBO newAdminBO);
+
+    /**
+     * 从GridFS中读取图片内容
+     * @param faceId
+     * @return
+     */
+    @GetMapping("/readInGridFS")
+    void readInGridFS(@RequestParam String faceId, HttpServletRequest request, HttpServletResponse response) throws CustomizeException;
 }

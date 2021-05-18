@@ -60,7 +60,9 @@ public class InterceptorConfig implements WebMvcConfigurer {
                 .addPathPatterns("/admin/getAdminList")
                 .addPathPatterns("/friendLinkMng/saveOrUpdateFriendLink")
                 .addPathPatterns("/friendLinkMng/getFriendLinkList")
-                .addPathPatterns("/friendLinkMng/delete");
+                .addPathPatterns("/friendLinkMng/delete")
+                .addPathPatterns("/file/uploadToGridFS")
+                .addPathPatterns("/file/readInGridFS");
 
         // 发表/修改/删除文章、发表/查看评论等等这些接口都是需要在用户激活以后才能进行
         registry.addInterceptor(userActiveInterceptor())
