@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author Aiolos
  * @date 2021/5/13 4:11 上午
  */
-@Api(value = "粉丝管理")
+@Api(value = "粉丝管理", tags = "粉丝管理controller")
 @RequestMapping("/fans")
 public interface FansControllerApi {
 

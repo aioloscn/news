@@ -67,7 +67,7 @@ public enum ErrorEnum implements CommonError {
     FILE_UPLOAD_NULL_ERROR(30010, "文件不能为空"),
     FILE_FORMAT_ERROR(30011, "图片格式不支持"),
     FILE_UPLOAD_FAILED(30012, "上传失败"),
-    FILE_MAX_SIZE_ERROR(30013, "图片过大，仅支持上传10MB以下的图片"),
+    FILE_MAX_SIZE_ERROR(30013, "图片过大，仅支持上传2MB以下的图片"),
     ARTICLE_COVER_NOT_EXIST_ERROR(30014, "文章封面不存在，请选择"),
     ARTICLE_CATEGORY_NOT_EXIST_ERROR(30015, "请选择正确的文章类型"),
     ARTICLE_CREATE_FAILED(30016, "发布文章失败.."),

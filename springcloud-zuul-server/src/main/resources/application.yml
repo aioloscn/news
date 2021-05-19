@@ -14,6 +14,9 @@ spring:
       discovery:
         service-id: springcloud-config
         enabled: true
+  servlet:
+    multipart:
+      max-file-size: 2MB  # 修改最大上传文件限制，默认1MB
 
 # 路由规则：http://[网关地址]:[端口号]/[prefix]/[微服务实例名称]/[请求地址路径]
 zuul:

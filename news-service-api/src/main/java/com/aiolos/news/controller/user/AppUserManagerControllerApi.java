@@ -14,7 +14,7 @@ import java.util.Date;
  * @author Aiolos
  * @date 2021/5/8 7:41 下午
  */
-@Api(value = "用户管理相关接口定义")
+@Api(value = "用户管理相关接口定义", tags = "用户管理相关接口定义controller")
 @RequestMapping("/appUser")
 public interface AppUserManagerControllerApi {
 

@@ -96,6 +96,12 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
         if (reviewTextResult.equalsIgnoreCase(ArticleReviewLevel.PASS.getType())) {
             // 审核成功，生成文章静态html
             String articleMongoId = articleUtil.createArticleHtmlToGridFS(articleId);
+            if (StringUtils.isBlank(articleMongoId) || articleMongoId.equalsIgnoreCase("null")) {
+                // 静态文章html上传到GridFS出错，走人工审核
+                this.updateArticleStatus(articleId, ArticleReviewStatus.WAITING_MANUAL.getType());
+                return;
+            }
+
             // 存储到对应的文章，进行关联保存
             this.updateArticleToGridFS(articleId, articleMongoId);
             // 发送消息到mq队列，让消费者监听并且执行下载html
@@ -192,7 +198,7 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
         article.setId(articleId);
         article.setPublishUserId(userId);
         article.setArticleStatus(ArticleReviewStatus.WITHDRAW.getType());
-        article.setMongoFileId(null);
+        article.setMongoFileId(StringUtils.EMPTY);
         article.setUpdateTime(new Date());
         int result = articleDao.updateById(article);
         if (result != 1) {
@@ -211,7 +217,7 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
         article.setId(articleId);
         article.setPublishUserId(userId);
         article.setIsDelete(YesOrNo.YES.getType());
-        article.setMongoFileId(null);
+        article.setMongoFileId(StringUtils.EMPTY);
         article.setUpdateTime(new Date());
         int result = articleDao.updateById(article);
         if (result != 1) {

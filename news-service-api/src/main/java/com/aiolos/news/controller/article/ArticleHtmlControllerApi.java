@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author Aiolos
  * @date 2021/5/18 3:40 上午
  */
-@Api(value = "静态化文章业务的controller")
+@Api(value = "静态化文章业务的controller", tags = "静态化文章业务的controller")
 @RequestMapping("/article/html")
 @FeignClient(value = MyServiceList.NEWS_SERVICE_ARTICLE_HTML, fallbackFactory = ArticleHtmlControllerFallbackFactory.class)
 public interface ArticleHtmlControllerApi {

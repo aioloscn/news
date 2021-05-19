@@ -70,7 +70,7 @@
                 ${articleDetail.title}
             </div>
             <div class="read-counts">
-                阅读量：${articleDetail.readCounts}
+                阅读量：{{readCounts}}
             </div>
 
             <div class="detail-really">
@@ -239,6 +239,7 @@
 
                 articleId: "",
                 articleDetail: {},
+                readCounts: 0,   // 文章阅读数
 
                 // 文章分类列表
                 catList: [],
@@ -263,6 +264,8 @@
                 var articleId = thisPage;
                 this.articleId = articleId;
 
+                // 获得文章阅读数
+                this.getArticleReadCounts(articleId);
                 // 获得分类
                 this.getAllCategory();
                 // 文章阅读数累加
@@ -310,6 +313,17 @@
                             console.log(res.data.msg);
                         }
                     });
+                },
+                // 获得文章阅读数
+                getArticleReadCounts(articleId) {
+                    var me = this;
+
+                    var articleServerUrl = app.articleServerUrl;
+                    axios.defaults.withCredentials = true;
+                    axios.get(articleServerUrl + "/portal/readCounts?articleId=" + articleId)
+                        .then(res => {
+                            this.readCounts = res.data
+                        });
                 },
                 // 跳转作家页面
                 showWriter(writerId) {
