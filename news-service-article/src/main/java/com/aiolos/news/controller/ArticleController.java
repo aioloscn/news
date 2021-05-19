@@ -115,8 +115,8 @@ public class ArticleController extends BaseController implements ArticleControll
             String articleMongoId = articleUtil.createArticleHtmlToGridFS(articleId);
             // 存储到对应的文章，进行关联保存
             articleService.updateArticleToGridFS(articleId, articleMongoId);
-            // 调用消费端，执行下载html
-            articleUtil.downloadArticleHtml(articleId, articleMongoId);
+            // 发送消息到mq队列，让消费者监听并且执行下载html
+            articleUtil.downloadArticleHtmlByMQ(articleId, articleMongoId);
         }
         return CommonResponse.ok();
     }
@@ -133,11 +133,7 @@ public class ArticleController extends BaseController implements ArticleControll
         // 删除GridFS存储的关联数据
         articleUtil.deleteFromGridFS(articleMongoId);
         // 删除对应的静态html
-        try {
-            articleUtil.deleteArticleHtml(articleId);
-        } catch (CustomizeException e) {
-            throw new CustomizeException(ErrorEnum.FAILED_TO_WITHDRAW_THE_ARTICLE);
-        }
+        articleUtil.deleteArticleHtmlByMQ(articleId);
         return CommonResponse.ok();
     }
 
@@ -153,7 +149,7 @@ public class ArticleController extends BaseController implements ArticleControll
         // 删除GridFS存储的关联数据
         articleUtil.deleteFromGridFS(articleMongoId);
         // 删除对应的静态html
-        articleUtil.deleteArticleHtml(articleId);
+        articleUtil.deleteArticleHtmlByMQ(articleId);
         return CommonResponse.ok();
     }
 }

@@ -4,6 +4,7 @@ import com.aiolos.news.common.enums.ErrorEnum;
 import com.aiolos.news.common.exception.CustomizeException;
 import com.aiolos.news.common.response.CommonResponse;
 import com.aiolos.news.common.utils.JsonUtils;
+import com.aiolos.news.config.RabbitMQConfig;
 import com.aiolos.news.controller.article.ArticleHtmlControllerApi;
 import com.aiolos.news.controller.article.ArticlePortalControllerApi;
 import com.aiolos.news.pojo.vo.ArticleDetailVO;
@@ -14,6 +15,7 @@ import freemarker.template.TemplateException;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.bson.types.ObjectId;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
@@ -39,10 +41,13 @@ public class ArticleUtil {
 
     private final ArticleHtmlControllerApi articleHtmlControllerApi;
 
-    public ArticleUtil(ArticlePortalControllerApi articlePortalControllerApi, GridFSBucket gridFSBucket, ArticleHtmlControllerApi articleHtmlControllerApi) {
+    private final RabbitTemplate rabbitTemplate;
+
+    public ArticleUtil(ArticlePortalControllerApi articlePortalControllerApi, GridFSBucket gridFSBucket, ArticleHtmlControllerApi articleHtmlControllerApi, RabbitTemplate rabbitTemplate) {
         this.articlePortalControllerApi = articlePortalControllerApi;
         this.gridFSBucket = gridFSBucket;
         this.articleHtmlControllerApi = articleHtmlControllerApi;
+        this.rabbitTemplate = rabbitTemplate;
     }
 
     /**
@@ -125,8 +130,8 @@ public class ArticleUtil {
 
     /**
      * 从mongodb GridFS中下载静态html
-     * @param articleId
-     * @param articleMongoId
+     * @param articleId 文章主键
+     * @param articleMongoId    MongoDB文章文件的主键
      * @throws CustomizeException
      */
     public void downloadArticleHtml(String articleId, String articleMongoId) throws CustomizeException {
@@ -134,6 +139,15 @@ public class ArticleUtil {
         if (status != HttpStatus.OK.value()) {
             throw new CustomizeException(ErrorEnum.ARTICLE_REVIEW_ERROR);
         }
+    }
+
+    /**
+     * 发送消息到MQ队列，让消费端监听并执行后续的下载
+     * @param articleId 文章主键
+     * @param articleMongoId    MongoDB文章文件的主键
+     */
+    public void downloadArticleHtmlByMQ(String articleId, String articleMongoId) {
+        rabbitTemplate.convertAndSend(RabbitMQConfig.EXCHANGE_ARTICLE, "article.download", articleId + "," + articleMongoId);
     }
 
     /**
@@ -145,10 +159,23 @@ public class ArticleUtil {
         gridFSBucket.delete(new ObjectId(articleMongoId));
     }
 
+    /**
+     * 删除服务器或本地的静态文章html
+     * @param articleId
+     * @throws CustomizeException
+     */
     public void deleteArticleHtml(String articleId) throws CustomizeException {
         Integer status = articleHtmlControllerApi.delete(articleId);
         if (status != HttpStatus.OK.value()) {
             throw new CustomizeException(ErrorEnum.FAILED_TO_DELETE_ARTICLE);
         }
+    }
+
+    /**
+     * 发送消息到mq队列，让消费端监听并删除html
+     * @param articleId
+     */
+    public void deleteArticleHtmlByMQ(String articleId) {
+        rabbitTemplate.convertAndSend(RabbitMQConfig.EXCHANGE_ARTICLE, "article.delete", articleId);
     }
 }

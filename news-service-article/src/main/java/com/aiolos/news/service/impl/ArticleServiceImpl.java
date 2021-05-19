@@ -98,8 +98,8 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
             String articleMongoId = articleUtil.createArticleHtmlToGridFS(articleId);
             // 存储到对应的文章，进行关联保存
             this.updateArticleToGridFS(articleId, articleMongoId);
-            // 调用消费端，执行下载html
-            articleUtil.downloadArticleHtml(articleId, articleMongoId);
+            // 发送消息到mq队列，让消费者监听并且执行下载html
+            articleUtil.downloadArticleHtmlByMQ(articleId, articleMongoId);
         }
     }
 

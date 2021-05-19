@@ -23,6 +23,8 @@ public class RabbitMQConfig {
      */
     public static final String QUEUE_DOWNLOAD_HTML = "queue_download_html";
 
+    public static final String QUEUE_DELETE_HTML = "queue_delete_html";
+
     /**
      * 创建交换机
      * @return
@@ -40,11 +42,21 @@ public class RabbitMQConfig {
         return new Queue(QUEUE_DOWNLOAD_HTML);
     }
 
+    @Bean(QUEUE_DELETE_HTML)
+    public Queue delete() {
+        return new Queue(QUEUE_DELETE_HTML);
+    }
+
     /**
      * 队列绑定交换机
      */
     @Bean
-    public Binding binding(@Qualifier(EXCHANGE_ARTICLE) Exchange exchange, @Qualifier(QUEUE_DOWNLOAD_HTML) Queue queue) {
-        return BindingBuilder.bind(queue).to(exchange).with("article.*").noargs();
+    public Binding bindingDownloadQUEUE(@Qualifier(EXCHANGE_ARTICLE) Exchange exchange, @Qualifier(QUEUE_DOWNLOAD_HTML) Queue queue) {
+        return BindingBuilder.bind(queue).to(exchange).with("article.download").noargs();
+    }
+
+    @Bean
+    public Binding bindingDeleteQUEUE(@Qualifier(EXCHANGE_ARTICLE) Exchange exchange, @Qualifier(QUEUE_DELETE_HTML) Queue queue) {
+        return BindingBuilder.bind(queue).to(exchange).with("article.delete").noargs();
     }
 }

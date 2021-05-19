@@ -22,7 +22,7 @@ public class BaseController {
     public RedisOperator redis;
 
     /**
-     * 注入服务发现，可以获得已经注册的服务相关信息
+     * 注入服务发现，可以获得已经注册的服务相关信息，引入Feign后不再使用
      */
     @Autowired
     public DiscoveryClient discoveryClient;
