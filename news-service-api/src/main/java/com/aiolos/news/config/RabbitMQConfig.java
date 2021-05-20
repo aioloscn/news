@@ -31,7 +31,7 @@ public class RabbitMQConfig {
      */
     @Bean(EXCHANGE_ARTICLE)
     public Exchange exchange() {
-        return ExchangeBuilder.topicExchange(EXCHANGE_ARTICLE).build();
+        return ExchangeBuilder.topicExchange(EXCHANGE_ARTICLE).durable(true).build();
     }
 
     /**

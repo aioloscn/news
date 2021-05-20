@@ -5,6 +5,7 @@ import com.aiolos.news.common.utils.PagedResult;
 import com.aiolos.news.common.utils.RedisOperator;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 
@@ -25,6 +26,9 @@ public class BaseService {
      */
     @Autowired
     public DiscoveryClient discoveryClient;
+
+    @Autowired
+    public RabbitTemplate rabbitTemplate;
 
     public static final String REDIS_ALL_CATEGORY = "redis_all_category";
     public static final long REDIS_ALL_CATEGORY_TIME_OUT = 24 * 60 * 60;

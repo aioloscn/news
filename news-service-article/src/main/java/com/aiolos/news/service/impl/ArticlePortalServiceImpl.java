@@ -218,6 +218,25 @@ public class ArticlePortalServiceImpl extends BaseService implements ArticlePort
         return articleDetailVO;
     }
 
+    @Override
+    public ArticleDetailVO queryDetailContainsRegularlyPublishedArticles(String articleId) {
+        Article article = new Article();
+        article.setId(articleId);
+        article.setIsDelete(YesOrNo.NO.getType());
+        article.setArticleStatus(ArticleReviewStatus.SUCCESS.getType());
+
+        QueryWrapper<Article> queryWrapper = new QueryWrapper<>(article);
+        article = articleDao.selectOne(queryWrapper);
+
+        ArticleDetailVO articleDetailVO = new ArticleDetailVO();
+
+        if (article != null) {
+            BeanUtils.copyProperties(article, articleDetailVO);
+        }
+
+        return articleDetailVO;
+    }
+
     /**
      * 文章列表中拿出发布者ID，在发布者基本信息列表中匹配
      * @param publisherId       发布者ID

@@ -39,6 +39,10 @@ public interface ArticlePortalControllerApi {
     @GetMapping("/detail")
     CommonResponse detail(@RequestParam String articleId);
 
+    @ApiOperation(value = "文章详情查询，包含定时发布的文章", notes = "文章详情查询，多用于生成静态文章html", httpMethod = "GET")
+    @GetMapping("/detailContainsRegularlyPublishedArticles")
+    CommonResponse detailContainsRegularlyPublishedArticles(@RequestParam String articleId);
+
     @ApiOperation(value = "获得文章阅读数", httpMethod = "GET")
     @GetMapping("/readCounts")
     Integer readCounts(@RequestParam String articleId);

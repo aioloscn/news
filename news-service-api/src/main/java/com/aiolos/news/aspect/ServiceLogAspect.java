@@ -52,11 +52,11 @@ public class ServiceLogAspect {
         long takeTime = end - start;
 
         if (takeTime > 3000) {
-            log.error("当前执行耗时：{}", takeTime);
+            log.error(point.getTarget().getClass() + "." + point.getSignature().getName() + "执行耗时：{}", takeTime);
         } else if (takeTime > 2000) {
-            log.warn("当前执行耗时：{}", takeTime);
+            log.warn(point.getTarget().getClass() + "." + point.getSignature().getName() + "执行耗时：{}", takeTime);
         } else {
-            log.info("当前执行耗时：{}", takeTime);
+            log.info(point.getTarget().getClass() + "." + point.getSignature().getName() + "执行耗时：{}", takeTime);
         }
         return result;
     }

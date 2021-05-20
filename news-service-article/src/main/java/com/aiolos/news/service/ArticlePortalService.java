@@ -25,4 +25,6 @@ public interface ArticlePortalService {
     List<Article> queryHotList();
 
     ArticleDetailVO queryDetail(String articleId);
+
+    ArticleDetailVO queryDetailContainsRegularlyPublishedArticles(String articleId);
 }

@@ -12,6 +12,7 @@ import com.mongodb.client.gridfs.GridFSBucket;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.bson.types.ObjectId;
@@ -29,6 +30,7 @@ import java.util.Map;
  * @author Aiolos
  * @date 2021/5/17 5:55 下午
  */
+@Slf4j
 @Component
 public class ArticleUtil {
 
@@ -98,6 +100,11 @@ public class ArticleUtil {
 
             // 获得文章详情数据
             ArticleDetailVO articleDetailVO = getArticleDetail(articleId);
+            if (articleDetailVO == null) {
+                log.error("生成静态文章，获取文章: {}失败", articleId);
+                return null;
+            }
+
             Map<String, Object> map = new HashMap<>();
             map.put("articleDetail", articleDetailVO);
 
@@ -119,7 +126,7 @@ public class ArticleUtil {
      * @return
      */
     public ArticleDetailVO getArticleDetail(String articleId) {
-        CommonResponse resp = articlePortalControllerApi.detail(articleId);
+        CommonResponse resp = articlePortalControllerApi.detailContainsRegularlyPublishedArticles(articleId);
         ArticleDetailVO articleDetailVO = null;
         if (resp != null && resp.getCode() == HttpStatus.OK.value()) {
             String articleJson = JsonUtils.objectToJson(resp.getData());

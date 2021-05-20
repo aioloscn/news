@@ -29,6 +29,12 @@ public interface ArticleService {
     void updateAppointToPublish() throws CustomizeException;
 
     /**
+     * 修改某篇文章状态为即时发布
+     * @param articleId
+     */
+    void updateArticleToPublish(String articleId) throws CustomizeException;
+
+    /**
      * 根据条件查询文章列表
      * @param userId
      * @param keyword

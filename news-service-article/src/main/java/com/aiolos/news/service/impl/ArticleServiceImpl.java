@@ -4,7 +4,9 @@ import com.aiolos.news.common.config.IdGeneratorSnowflake;
 import com.aiolos.news.common.enums.*;
 import com.aiolos.news.common.exception.CustomizeException;
 import com.aiolos.news.common.utils.AliTextReviewUtils;
+import com.aiolos.news.common.utils.DateUtils;
 import com.aiolos.news.common.utils.PagedResult;
+import com.aiolos.news.config.RabbitMQDelayQueueConfig;
 import com.aiolos.news.dao.ArticleDao;
 import com.aiolos.news.pojo.Article;
 import com.aiolos.news.pojo.Category;
@@ -15,7 +17,12 @@ import com.aiolos.news.utils.ArticleUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.amqp.AmqpException;
+import org.springframework.amqp.core.Message;
+import org.springframework.amqp.core.MessageDeliveryMode;
+import org.springframework.amqp.core.MessagePostProcessor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -27,6 +34,7 @@ import java.util.Date;
  * @author Aiolos
  * @date 2020/11/26 5:34 下午
  */
+@Slf4j
 @Service
 public class ArticleServiceImpl extends BaseService implements ArticleService {
 
@@ -92,12 +100,37 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
             }
         }
 
+        // 发送延迟消息到mq，计算定时发布时间和当前时间的时间差，为往后延时的时间
+        if (article.getIsAppoint().equals(ArticleAppointType.TIMEING.getType())) {
+
+            Date publishTime = newArticleBO.getPublishTime();
+            Date currentTime = new Date();
+            int delayTime = (int) (publishTime.getTime() - currentTime.getTime());
+
+            MessagePostProcessor messagePostProcessor = new MessagePostProcessor() {
+                @Override
+                public Message postProcessMessage(Message message) throws AmqpException {
+                    // 设置持久消息
+                    message.getMessageProperties().setDeliveryMode(MessageDeliveryMode.PERSISTENT);
+                    // 设置消息的延迟时间，单位为ms
+                    message.getMessageProperties().setDelay(delayTime);
+                    return message;
+                }
+            };
+
+            log.info("exchange: {}, routingKey: {}, message: {}, delayTime: {}",
+                    RabbitMQDelayQueueConfig.EXCHANGE_DELAY, "delay.create.article", articleId, DateUtils.fromDeadline(publishTime));
+            rabbitTemplate.convertAndSend(RabbitMQDelayQueueConfig.EXCHANGE_DELAY, "delay.create.article",
+                    articleId, messagePostProcessor);
+        }
+
         // 如果机审成功且不需要人工复审，则直接生成静态页面
         if (reviewTextResult.equalsIgnoreCase(ArticleReviewLevel.PASS.getType())) {
             // 审核成功，生成文章静态html
             String articleMongoId = articleUtil.createArticleHtmlToGridFS(articleId);
             if (StringUtils.isBlank(articleMongoId) || articleMongoId.equalsIgnoreCase("null")) {
                 // 静态文章html上传到GridFS出错，走人工审核
+                log.error("静态文章html: {}上传到GridFS出错，走人工审核", articleId);
                 this.updateArticleStatus(articleId, ArticleReviewStatus.WAITING_MANUAL.getType());
                 return;
             }
@@ -117,6 +150,23 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
             throw new RuntimeException();
         } catch (Exception e) {
             throw new CustomizeException(ErrorEnum.FAILED_TO_PUBLISH_AN_ARTICLE_ON_A_SCHEDULED_TASK);
+        }
+    }
+
+    @Transactional(propagation = Propagation.NESTED, rollbackFor = CustomizeException.class)
+    @Override
+    public void updateArticleToPublish(String articleId) throws CustomizeException {
+        Article article = new Article();
+        article.setId(articleId);
+        article.setIsAppoint(ArticleAppointType.IMMEDIATELY.getType());
+        article.setUpdateTime(new Date());
+        int result = articleDao.updateById(article);
+        if (result != 1) {
+            try {
+                throw new RuntimeException();
+            } catch (Exception e) {
+                throw new CustomizeException(ErrorEnum.FAILED_TO_POST_AN_ARTICLE_LATE);
+            }
         }
     }
 

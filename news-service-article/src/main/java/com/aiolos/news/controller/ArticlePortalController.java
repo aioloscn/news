@@ -61,13 +61,27 @@ public class ArticlePortalController extends BaseController implements ArticlePo
         return CommonResponse.ok(articlePortalService.queryHotList());
     }
 
-
     @Override
     public CommonResponse detail(String articleId) {
 
-        ArticleDetailVO articleDetailVO = new ArticleDetailVO();
-        articleDetailVO = articlePortalService.queryDetail(articleId);
+        ArticleDetailVO articleDetailVO = articlePortalService.queryDetail(articleId);
+        Set<String> idSet = new HashSet<>();
+        idSet.add(articleDetailVO.getPublishUserId());
+        List<UserBasicInfoVO> publisherList = getPublisherList(idSet);
 
+        if (!publisherList.isEmpty()) {
+            articleDetailVO.setPublishUserName(publisherList.get(0).getNickname());
+        }
+
+        articleDetailVO.setReadCounts(getCountsFromRedis(REDIS_ARTICLE_READ_COUNTS + ":" + articleId));
+
+        return CommonResponse.ok(articleDetailVO);
+    }
+
+    @Override
+    public CommonResponse detailContainsRegularlyPublishedArticles(String articleId) {
+
+        ArticleDetailVO articleDetailVO = articlePortalService.queryDetailContainsRegularlyPublishedArticles(articleId);
         Set<String> idSet = new HashSet<>();
         idSet.add(articleDetailVO.getPublishUserId());
         List<UserBasicInfoVO> publisherList = getPublisherList(idSet);
