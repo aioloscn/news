@@ -30,12 +30,9 @@ public class GlobalExceptionAdvice {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ResponseBody
     public CommonResponse handlerException(HttpServletRequest req, HttpServletResponse resp, Exception e) {
-        log.info("全局异常捕获：{}", e.getMessage());
+        log.warn("全局异常捕获：{}", e.getMessage());
         if (e instanceof NoHandlerFoundException) {
             return CommonResponse.error(ErrorEnum.NO_HANDLER_FOUND);
-        } else if (e instanceof MethodArgumentNotValidException) {
-            BindingResult bindingResult = ((MethodArgumentNotValidException) e).getBindingResult();
-            return CommonResponse.error(ErrorEnum.PARAMETER_VALIDATION_ERROR.getErrCode(), CommonUtils.processErrorString(bindingResult));
         } else if (e instanceof ServletRequestBindingException) {
             return CommonResponse.error(ErrorEnum.BIND_EXCEPTION_ERROR);
         } else if (e instanceof NullPointerException) {

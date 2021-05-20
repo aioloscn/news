@@ -32,10 +32,10 @@ public class CustomizeExceptionAdvice {
     @ExceptionHandler(value = CustomizeException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ResponseBody
-    public CommonResponse handlerCustomizeException(HttpServletRequest req, HttpServletResponse res, Exception e) {
+    public CommonResponse handlerCustomizeException(HttpServletRequest req, HttpServletResponse resp, Exception e) {
 
         if (e instanceof CustomizeException) {
-            log.info("自定义异常捕获，异常信息：{}", ((CustomizeException) e).getErrMsg());
+            log.warn("自定义异常捕获，异常信息：{}", ((CustomizeException) e).getErrMsg());
             return CommonResponse.error(((CustomizeException) e).getErrCode(), ((CustomizeException) e).getErrMsg());
         } else {
             return CommonResponse.error(ErrorEnum.UNKNOWN_ERROR);
