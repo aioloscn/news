@@ -12,6 +12,9 @@ import java.util.List;
 @Data
 public class CanalBean {
 
+    /**
+     * 数据
+     */
     private List<Category> data;
 
     private String database;
@@ -22,12 +25,24 @@ public class CanalBean {
 
     private boolean isDdl;
 
+    /**
+     * 表结构的字段类型
+     */
     private MysqlType mysqlType;
 
+    /**
+     * UPDATE语句，旧数据
+     */
     private String old;
 
+    /**
+     * 主键名称
+     */
     private List<String> pkNames;
 
+    /**
+     * sql语句
+     */
     private String sql;
 
     private SqlType sqlType;

@@ -37,18 +37,19 @@ public class ArticleUtil {
     @Value("${freemarker.html.article}")
     private String articlePath;
 
+    // 项目内调用，不是Feign远程调用
     private final ArticlePortalControllerApi articlePortalControllerApi;
 
     private final GridFSBucket gridFSBucket;
 
-    private final ArticleHtmlControllerApi articleHtmlControllerApi;
+    private final ArticleHtmlControllerApi articleHtmlMicroservice;
 
     private final RabbitTemplate rabbitTemplate;
 
-    public ArticleUtil(ArticlePortalControllerApi articlePortalControllerApi, GridFSBucket gridFSBucket, ArticleHtmlControllerApi articleHtmlControllerApi, RabbitTemplate rabbitTemplate) {
+    public ArticleUtil(ArticlePortalControllerApi articlePortalControllerApi, GridFSBucket gridFSBucket, ArticleHtmlControllerApi articleHtmlMicroservice, RabbitTemplate rabbitTemplate) {
         this.articlePortalControllerApi = articlePortalControllerApi;
         this.gridFSBucket = gridFSBucket;
-        this.articleHtmlControllerApi = articleHtmlControllerApi;
+        this.articleHtmlMicroservice = articleHtmlMicroservice;
         this.rabbitTemplate = rabbitTemplate;
     }
 
@@ -142,7 +143,7 @@ public class ArticleUtil {
      * @throws CustomizeException
      */
     public void downloadArticleHtml(String articleId, String articleMongoId) throws CustomizeException {
-        Integer status = articleHtmlControllerApi.download(articleId, articleMongoId);
+        Integer status = articleHtmlMicroservice.download(articleId, articleMongoId);
         if (status != HttpStatus.OK.value()) {
             throw new CustomizeException(ErrorEnum.ARTICLE_REVIEW_ERROR);
         }
@@ -172,7 +173,7 @@ public class ArticleUtil {
      * @throws CustomizeException
      */
     public void deleteArticleHtml(String articleId) throws CustomizeException {
-        Integer status = articleHtmlControllerApi.delete(articleId);
+        Integer status = articleHtmlMicroservice.delete(articleId);
         if (status != HttpStatus.OK.value()) {
             throw new CustomizeException(ErrorEnum.FAILED_TO_DELETE_ARTICLE);
         }

@@ -23,7 +23,7 @@ public class CanalConsumer extends BaseService {
     @KafkaListener(topics = "canaltopic")
     public void receive(ConsumerRecord<?, ?> consumer) {
         String value = (String) consumer.value();
-        log.info("topic名称:{}, key:{}, 分区位置:{}, 下标:{}, value:{}", consumer.topic(), consumer.key(), consumer.partition(), consumer.offset(), value);
+        log.info("topic名称:{},\nkey:{},\n分区位置:{},\n下标:{},\nvalue:{}", consumer.topic(), consumer.key(), consumer.partition(), consumer.offset(), value);
         CanalBean canalBean = JSONObject.parseObject(value, CanalBean.class);
         boolean isDdl = canalBean.isDdl();
         String type = canalBean.getType();
