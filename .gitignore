@@ -1,0 +1,51 @@
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**
+!**/src/test/**
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+*.DS_Store
+.DS_Store
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+
+### VS Code ###
+.vscode/
+
+mybatis-generator-database/src/main/resources/jdbc.properties
+
+news-common/src/main/resources/aliyun.properties
+
+application-dev.yml
+application-prod.yml
+
+news-service-files/src/main/resources/file-dev.properties
+news-service-files/src/main/resources/file-prod.properties
+
+springcloud-eureka-cluster/src/main/resources/application-server1.yml
+springcloud-eureka-cluster/src/main/resources/application-server2.yml
+springcloud-eureka-cluster/src/main/resources/application-server3.yml
+
+springcloud-zuul-server/src/main/resources/pending-bootstrap.yml
+
+log/

@@ -1,0 +1,60 @@
+# 用户微服务
+server:
+  tomcat:
+    uri-encoding: UTF-8
+    max-swallow-size: -1
+  servlet:
+    context-path: /news/user
+
+spring:
+  application:
+    name: news-user
+  profiles:
+    active: dev # redis, mysql
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  resources:
+    add-mappings: false   # true: 如果所有的controller都没有命中，则使用默认的静态资源处理器做匹配，匹配不上和false一样被全局异常捕获
+  mvc:
+    throw-exception-if-no-handler-found: true    #找不到handler（所有匹配的controller）就抛出对应的异常
+  cloud:
+    stream:     # 目前没有controller用到
+      bindings:             # 绑定通道和交换机
+        myOutput:           # 定义生产者的通道
+          destination: streamExchange   # 自定义交换机名字，也就是代码里构建的消息，交给底层mq的交换机
+        myInput:           # 定义消费者的通道
+          destination: streamExchange   # 自定义交换机名字，也就是消息从底层mq输入到消费端进行消费
+
+mapper:
+  mappers: com.aiolos.news.utils.MyMapper
+  not-empty: false        # 在进行数据库操作的时候，判断表达式 username != null, 是否追加 username != ''
+  identity: MYSQL
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # 开启mybatis日志
+  type-aliases-package: com.aiolos.news.pojo
+  mapper-locations: classpath:mapper/*.xml
+
+logging:
+  level:
+    org.springframework.cloud.loadbalancer.config.BlockingLoadBalancerClientAutoConfiguration: error
+
+# 配置指定自定义的ribbon规则，也可以在启动类上添加@RibbonClient(name = "news-user", configuration = MyRule.class)注解，现在注释掉用默认的轮询
+#news-user:
+#  ribbon:
+#    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+
+# 配置Hystrix
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 6000   # 设置Hystrix超时时间，超过2秒触发降级
+      circuitBreaker:
+        enabled: true
+        requestVolumeThreshold: 10    # 触发断路器打开的滑动窗口中的最小请求数量，那么有9个请求都失败了断路器也不会打开，默认：20
+        sleepWindowInMilliseconds: 15000    # 熔断后过多少秒后尝试半开状态（请求重试），默认：5s
+        errorThresholdPercentage: 50    # 触发熔断的失败率（异常率/阈值），默认：50%

@@ -1,0 +1,74 @@
+# article微服务
+server:
+  tomcat:
+    uri-encoding: UTF-8
+    max-swallow-size: -1
+  servlet:
+    context-path: /news/article
+
+spring:
+  application:
+    name: news-service-article
+  profiles:
+    active: dev # redis, mysql
+  jackson:
+    # 返回格式化日期
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  resources:
+    add-mappings: false   # true: 如果所有的controller都没有命中，则使用默认的静态资源处理器做匹配，匹配不上和false一样被全局异常捕获
+  mvc:
+    # 前端参数格式化
+    date-format: yyyy-MM-dd HH:mm:ss
+    throw-exception-if-no-handler-found: true    #找不到handler（所有匹配的controller）就抛出对应的异常
+  freemarker:
+    charset: UTF-8
+    content-type: text/html
+    suffix: .ftl
+    template-loader-path: classpath:/templates/
+  cloud:
+    stream:
+      bindings:             # 绑定通道和交换机
+        myOutput:           # 定义生产者的通道
+          destination: streamExchange   # 自定义交换机名字，也就是代码里构建的消息，交给底层mq的交换机
+        myInput:           # 定义消费者的通道
+          destination: streamExchange   # 自定义交换机名字，也就是消息从底层mq输入到消费端进行消费
+
+mapper:
+  mappers: com.aiolos.news.utils.MyMapper
+  not-empty: false        # 在进行数据库操作的时候，判断表达式 username != null, 是否追加 username != ''
+  identity: MYSQL
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # 开启mybatis日志
+  type-aliases-package: com.aiolos.news.pojo
+  mapper-locations: classpath:mapper/*.xml
+
+# 定义freemarker生成的html位置
+freemarker:
+  html:
+    article: /Users/Aiolos/developer/apache-tomcat-9.0.38/webapps/news-web/portal/a
+
+ribbon:
+  # 当请求某个微服务5s没连接，超时后会进行重试，先重试连接自己当前的这个实例
+  # 如果当前实例重连一次失败，则会切换到访问集群中的下一个微服务实例，切换次数最大为2次
+  ConnectTimeout: 10000          # 创建连接的超时时间，单位：ms
+  ReadTimeout: 10000             # 在连接创建好以后，调用接口的超时时间，单位：ms
+  MaxAutoRetries: 3             # 最大重试次数
+  MaxAutoRetriesNextServer: 2   # 集群上一个实例节点宕机后，切换到后面多少个微服务实例去重试
+
+# 开启日志打印
+logging:
+  level:
+#    root: debug
+    com.aiolos.news.controller.user.UserControllerApi: debug
+# 也可以用FeignLogConfig类代替，都是应对全局配置，目前↑配置了只打印UserControllerApi的日志
+# 用方法返回类型Logger.Level: debug替换路径便可支持全局打印
+feign:
+  client:
+    config:
+      # 配置服务提供方的名称
+      default:
+        loggerLevel: FULL
+  hystrix:
+    enabled: true   # 打开服务调用方的内置Hystrix，默认是false
