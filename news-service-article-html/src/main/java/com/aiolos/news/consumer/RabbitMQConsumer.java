@@ -11,7 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
 /**
- * rabbitmq消费端
+ * rabbitmq消费端，负责下载和删除静态文章html
  * @author Aiolos
  * @date 2021/5/19 7:53 下午
  */

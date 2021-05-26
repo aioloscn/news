@@ -150,9 +150,9 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
             BeanUtils.copyProperties(article, articleEO);
             IndexQuery indexQuery = new IndexQueryBuilder().withObject(articleEO).build();
             String index = elasticsearchTemplate.index(indexQuery);
-            log.info("创建文章{}, 保存ES索引: {}", articleId, index);
+            log.info("创建文章{}，保存ES索引: {}", articleId, index);
             if (StringUtils.isBlank(index)) {
-                log.error("创建文章{}, 保存ES索引失败", articleId);
+                log.error("创建文章{}，保存ES索引失败", articleId);
             }
         }
     }

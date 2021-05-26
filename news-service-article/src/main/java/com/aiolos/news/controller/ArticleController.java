@@ -130,9 +130,9 @@ public class ArticleController extends BaseController implements ArticleControll
                 BeanUtils.copyProperties(article, articleEO);
                 IndexQuery indexQuery = new IndexQueryBuilder().withObject(articleEO).build();
                 String index = elasticsearchTemplate.index(indexQuery);
-                log.info("审核文章{}, 保存ES索引: {}", articleId, index);
+                log.info("审核文章{}，保存ES索引: {}", articleId, index);
                 if (StringUtils.isBlank(index)) {
-                    log.error("审核文章{}, 保存ES索引失败", articleId);
+                    log.error("审核文章{}，保存ES索引失败", articleId);
                 }
             }
         }
@@ -147,11 +147,17 @@ public class ArticleController extends BaseController implements ArticleControll
             return CommonResponse.error(ErrorEnum.UNDO_FAILED_THE_ARTICLE_DOES_NOT_EXIST);
         }
         String articleMongoId = article.getMongoFileId();
+        if (StringUtils.isBlank(articleMongoId)) {
+            log.warn("文章{}撤回，不存在MongoDB数据");
+            return CommonResponse.ok();
+        }
         articleService.withdraw(userId, articleId);
         // 删除GridFS存储的关联数据
         articleUtil.deleteFromGridFS(articleMongoId);
         // 删除对应的静态html
         articleUtil.deleteArticleHtmlByMQ(articleId);
+        // 删除ES中的文章数据
+        elasticsearchTemplate.delete(ArticleEO.class, articleId);
         return CommonResponse.ok();
     }
 
@@ -163,11 +169,16 @@ public class ArticleController extends BaseController implements ArticleControll
             return CommonResponse.error(ErrorEnum.UNDO_FAILED_THE_ARTICLE_DOES_NOT_EXIST);
         }
         String articleMongoId = article.getMongoFileId();
+        if (StringUtils.isBlank(articleMongoId)) {
+            log.warn("文章{}删除，不存在MongoDB数据");
+        }
         articleService.delete(userId, articleId);
         // 删除GridFS存储的关联数据
         articleUtil.deleteFromGridFS(articleMongoId);
         // 删除对应的静态html
         articleUtil.deleteArticleHtmlByMQ(articleId);
+        // 删除ES中的文章数据
+        elasticsearchTemplate.delete(ArticleEO.class, articleId);
         return CommonResponse.ok();
     }
 }
