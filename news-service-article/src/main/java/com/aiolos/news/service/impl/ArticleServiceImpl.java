@@ -11,6 +11,7 @@ import com.aiolos.news.dao.ArticleDao;
 import com.aiolos.news.pojo.Article;
 import com.aiolos.news.pojo.Category;
 import com.aiolos.news.pojo.bo.NewArticleBO;
+import com.aiolos.news.pojo.eo.ArticleEO;
 import com.aiolos.news.service.ArticleService;
 import com.aiolos.news.service.BaseService;
 import com.aiolos.news.utils.ArticleUtil;
@@ -24,6 +25,9 @@ import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.MessageDeliveryMode;
 import org.springframework.amqp.core.MessagePostProcessor;
 import org.springframework.beans.BeanUtils;
+import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
+import org.springframework.data.elasticsearch.core.query.IndexQuery;
+import org.springframework.data.elasticsearch.core.query.IndexQueryBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,12 +50,15 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
 
     private final ArticleUtil articleUtil;
 
+    private final ElasticsearchTemplate elasticsearchTemplate;
+
     public ArticleServiceImpl(ArticleDao articleDao, IdGeneratorSnowflake snowflake,
-                              AliTextReviewUtils aliTextReviewUtils, ArticleUtil articleUtil) {
+                              AliTextReviewUtils aliTextReviewUtils, ArticleUtil articleUtil, ElasticsearchTemplate elasticsearchTemplate) {
         this.articleDao = articleDao;
         this.snowflake = snowflake;
         this.aliTextReviewUtils = aliTextReviewUtils;
         this.articleUtil = articleUtil;
+        this.elasticsearchTemplate = elasticsearchTemplate;
     }
 
     @Transactional(propagation = Propagation.NESTED, rollbackFor = CustomizeException.class)
@@ -107,19 +114,17 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
             Date currentTime = new Date();
             int delayTime = (int) (publishTime.getTime() - currentTime.getTime());
 
-            MessagePostProcessor messagePostProcessor = new MessagePostProcessor() {
-                @Override
-                public Message postProcessMessage(Message message) throws AmqpException {
-                    // 设置持久消息
-                    message.getMessageProperties().setDeliveryMode(MessageDeliveryMode.PERSISTENT);
-                    // 设置消息的延迟时间，单位为ms
-                    message.getMessageProperties().setDelay(delayTime);
-                    return message;
-                }
+            MessagePostProcessor messagePostProcessor = message -> {
+                // 设置持久消息
+                message.getMessageProperties().setDeliveryMode(MessageDeliveryMode.PERSISTENT);
+                // 设置消息的延迟时间，单位为ms
+                message.getMessageProperties().setDelay(delayTime);
+                return message;
             };
 
             log.info("exchange: {}, routingKey: {}, message: {}, delayTime: {}",
                     RabbitMQDelayQueueConfig.EXCHANGE_DELAY, "delay.create.article", articleId, DateUtils.fromDeadline(publishTime));
+            // 下载静态html，保存文章数据到ES
             rabbitTemplate.convertAndSend(RabbitMQDelayQueueConfig.EXCHANGE_DELAY, "delay.create.article",
                     articleId, messagePostProcessor);
         }
@@ -139,6 +144,16 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
             this.updateArticleToGridFS(articleId, articleMongoId);
             // 发送消息到mq队列，让消费者监听并且执行下载html
             articleUtil.downloadArticleHtmlByMQ(articleId, articleMongoId);
+
+            // 即时发布的文章直接保存文章数据到ES
+            ArticleEO articleEO = new ArticleEO();
+            BeanUtils.copyProperties(article, articleEO);
+            IndexQuery indexQuery = new IndexQueryBuilder().withObject(articleEO).build();
+            String index = elasticsearchTemplate.index(indexQuery);
+            log.info("创建文章{}, 保存ES索引: {}", articleId, index);
+            if (StringUtils.isBlank(index)) {
+                log.error("创建文章{}, 保存ES索引失败", articleId);
+            }
         }
     }
 

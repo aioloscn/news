@@ -1,10 +1,7 @@
 package com.aiolos.news.controller;
 
-import com.aiolos.news.common.enums.ArticleReviewStatus;
-import com.aiolos.news.common.enums.YesOrNo;
+import com.aiolos.news.common.enums.*;
 import com.aiolos.news.common.response.CommonResponse;
-import com.aiolos.news.common.enums.ArticleCoverType;
-import com.aiolos.news.common.enums.ErrorEnum;
 import com.aiolos.news.common.exception.CustomizeException;
 import com.aiolos.news.common.utils.JsonUtils;
 import com.aiolos.news.common.utils.PagedResult;
@@ -12,10 +9,15 @@ import com.aiolos.news.controller.article.ArticleControllerApi;
 import com.aiolos.news.pojo.Article;
 import com.aiolos.news.pojo.Category;
 import com.aiolos.news.pojo.bo.NewArticleBO;
+import com.aiolos.news.pojo.eo.ArticleEO;
 import com.aiolos.news.service.ArticleService;
 import com.aiolos.news.utils.ArticleUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.BeanUtils;
+import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
+import org.springframework.data.elasticsearch.core.query.IndexQuery;
+import org.springframework.data.elasticsearch.core.query.IndexQueryBuilder;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
@@ -33,9 +35,12 @@ public class ArticleController extends BaseController implements ArticleControll
 
     private final ArticleUtil articleUtil;
 
-    public ArticleController(ArticleService articleService, ArticleUtil articleUtil) {
+    private final ElasticsearchTemplate elasticsearchTemplate;
+
+    public ArticleController(ArticleService articleService, ArticleUtil articleUtil, ElasticsearchTemplate elasticsearchTemplate) {
         this.articleService = articleService;
         this.articleUtil = articleUtil;
+        this.elasticsearchTemplate = elasticsearchTemplate;
     }
 
     @Override
@@ -117,6 +122,19 @@ public class ArticleController extends BaseController implements ArticleControll
             articleService.updateArticleToGridFS(articleId, articleMongoId);
             // 发送消息到mq队列，让消费者监听并且执行下载html
             articleUtil.downloadArticleHtmlByMQ(articleId, articleMongoId);
+            // 审核通过，查询article把响应的字段信息存入ES
+            Article article = articleService.queryById(articleId);
+            if (article.getIsAppoint().equals(ArticleAppointType.IMMEDIATELY.getType())) {
+                // 如果是即时发布的文章则直接存入ES，如果是定时发布的文章则在延迟队列消费端去执行
+                ArticleEO articleEO = new ArticleEO();
+                BeanUtils.copyProperties(article, articleEO);
+                IndexQuery indexQuery = new IndexQueryBuilder().withObject(articleEO).build();
+                String index = elasticsearchTemplate.index(indexQuery);
+                log.info("审核文章{}, 保存ES索引: {}", articleId, index);
+                if (StringUtils.isBlank(index)) {
+                    log.error("审核文章{}, 保存ES索引失败", articleId);
+                }
+            }
         }
         return CommonResponse.ok();
     }

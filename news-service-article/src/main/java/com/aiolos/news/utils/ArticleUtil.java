@@ -106,6 +106,7 @@ public class ArticleUtil {
                 return null;
             }
 
+            log.info("生成静态文章{}，文章标题: {}", articleDetailVO.getId(), articleDetailVO.getTitle());
             Map<String, Object> map = new HashMap<>();
             map.put("articleDetail", articleDetailVO);
 
