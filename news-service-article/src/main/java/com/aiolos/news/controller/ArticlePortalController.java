@@ -6,11 +6,20 @@ import com.aiolos.news.common.utils.JsonUtils;
 import com.aiolos.news.common.utils.PagedResult;
 import com.aiolos.news.controller.article.ArticlePortalControllerApi;
 import com.aiolos.news.controller.user.UserControllerApi;
+import com.aiolos.news.pojo.eo.ArticleEO;
 import com.aiolos.news.pojo.vo.ArticleDetailVO;
 import com.aiolos.news.pojo.vo.UserBasicInfoVO;
 import com.aiolos.news.service.ArticlePortalService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpStatus;
+import org.elasticsearch.index.query.QueryBuilders;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
+import org.springframework.data.elasticsearch.core.aggregation.AggregatedPage;
+import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
+import org.springframework.data.elasticsearch.core.query.SearchQuery;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
@@ -34,10 +43,13 @@ public class ArticlePortalController extends BaseController implements ArticlePo
 
     private final UserControllerApi userMicroservice;
 
-    public ArticlePortalController(ArticlePortalService articlePortalService, RestTemplate restTemplate, UserControllerApi userMicroservice) {
+    private final ElasticsearchTemplate elasticsearchTemplate;
+
+    public ArticlePortalController(ArticlePortalService articlePortalService, RestTemplate restTemplate, UserControllerApi userMicroservice, ElasticsearchTemplate elasticsearchTemplate) {
         this.articlePortalService = articlePortalService;
         this.restTemplate = restTemplate;
         this.userMicroservice = userMicroservice;
+        this.elasticsearchTemplate = elasticsearchTemplate;
     }
 
     @Override
@@ -54,6 +66,34 @@ public class ArticlePortalController extends BaseController implements ArticlePo
 
         PagedResult pagedResult = articlePortalService.queryIndexArticleList(keyword, category, page, pageSize);
         return CommonResponse.ok(pagedResult);
+    }
+
+    @Override
+    public CommonResponse esList(String keyword, Integer category, Integer page, Integer pageSize) {
+        /**
+         * 1. 首页默认查询，不带参数
+         * 2. 按照文章分类查询
+         * 3. 按照关键字查询
+         */
+        // es的页面是从0开始计算的，所以在这里page需要-1
+        if (page < 1) return null;
+        page--;
+        Pageable pageable = PageRequest.of(page, pageSize);
+
+        SearchQuery query = null;
+        if (StringUtils.isBlank(keyword) && category == null) {
+            query = new NativeSearchQueryBuilder().withQuery(QueryBuilders.matchAllQuery()).withPageable(pageable).build();
+        }
+        if (StringUtils.isBlank(keyword) && category != null) {
+            query = new NativeSearchQueryBuilder().withQuery(QueryBuilders.termQuery("categoryId", category)).build();
+        }
+        if (StringUtils.isNotBlank(keyword) && category == null) {
+            query = new NativeSearchQueryBuilder().withQuery(QueryBuilders.matchQuery("title", keyword)).build();
+        }
+
+        AggregatedPage<ArticleEO> pagedArticle = elasticsearchTemplate.queryForPage(query, ArticleEO.class);
+        List<ArticleEO> articleList = pagedArticle.getContent();
+        return CommonResponse.ok(articleList);
     }
 
     @Override
