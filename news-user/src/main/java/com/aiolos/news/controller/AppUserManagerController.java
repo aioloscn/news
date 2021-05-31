@@ -2,7 +2,7 @@ package com.aiolos.news.controller;
 
 import com.aiolos.news.common.enums.ErrorEnum;
 import com.aiolos.news.common.enums.UserStatus;
-import com.aiolos.news.common.exception.CustomizeException;
+import com.aiolos.news.common.exception.CustomizedException;
 import com.aiolos.news.common.response.CommonResponse;
 import com.aiolos.news.controller.user.AppUserManagerControllerApi;
 import com.aiolos.news.service.AppUserManagerService;
@@ -42,7 +42,7 @@ public class AppUserManagerController extends BaseController implements AppUserM
     }
 
     @Override
-    public CommonResponse freezeUserOrNot(String userId, Integer doStatus) throws CustomizeException {
+    public CommonResponse freezeUserOrNot(String userId, Integer doStatus) throws CustomizedException {
         if (!UserStatus.isUserStatusValid(doStatus)) {
             return CommonResponse.error(ErrorEnum.USER_STATUS_ERROR);
         }

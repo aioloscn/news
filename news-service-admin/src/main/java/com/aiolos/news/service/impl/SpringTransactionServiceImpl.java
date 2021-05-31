@@ -1,7 +1,7 @@
 package com.aiolos.news.service.impl;
 
 import com.aiolos.news.common.enums.ErrorEnum;
-import com.aiolos.news.common.exception.CustomizeException;
+import com.aiolos.news.common.exception.CustomizedException;
 import com.aiolos.news.dao.AdminUserDao;
 import com.aiolos.news.pojo.AdminUser;
 import com.aiolos.news.service.SpringTransactionService;
@@ -47,7 +47,7 @@ public class SpringTransactionServiceImpl implements SpringTransactionService {
 
     @Override
     @Transactional
-    public void notRuntimeExceptionCanNotRollback() throws CustomizeException {
+    public void notRuntimeExceptionCanNotRollback() throws CustomizedException {
 
         try {
             AdminUser user = new AdminUser();
@@ -58,7 +58,7 @@ public class SpringTransactionServiceImpl implements SpringTransactionService {
             throw new RuntimeException();
         } catch (Exception ex) {
             // 抛出的自定义异常不是unchecked所以不会rollback
-            throw new CustomizeException(ErrorEnum.HYSTRIX_FALLBACK, ex.getMessage());
+            throw new CustomizedException(ErrorEnum.HYSTRIX_FALLBACK, ex.getMessage());
         }
     }
 
@@ -75,8 +75,8 @@ public class SpringTransactionServiceImpl implements SpringTransactionService {
     }
 
     @Override
-    @Transactional(rollbackFor = {CustomizeException.class})
-    public void assignExceptionCanRollback() throws CustomizeException {
+    @Transactional(rollbackFor = {CustomizedException.class})
+    public void assignExceptionCanRollback() throws CustomizedException {
 
         try {
             AdminUser user = new AdminUser();
@@ -87,7 +87,7 @@ public class SpringTransactionServiceImpl implements SpringTransactionService {
             throw new RuntimeException();
         } catch (Exception ex) {
             // 将RuntimeException改为自定义异常
-            throw new CustomizeException(ErrorEnum.HYSTRIX_FALLBACK, ex.getMessage());
+            throw new CustomizedException(ErrorEnum.HYSTRIX_FALLBACK, ex.getMessage());
         }
     }
 
@@ -108,10 +108,10 @@ public class SpringTransactionServiceImpl implements SpringTransactionService {
      * 在事务方法中，调用多个事务方法的时候，Spring会把这些事务合而为一
      * 当整个方法中的每一个子方法都没有报错，整个方法执行完时才会进行事务提交
      * 如果某个方法出现了异常，Spring就会将异常标记为rollbackOnly
-     * @throws CustomizeException
+     * @throws CustomizedException
      */
     @Override
-    public void rollbackOnlyCanRollback() throws CustomizeException {
+    public void rollbackOnlyCanRollback() throws CustomizedException {
 
         oneSave();
 

@@ -1,7 +1,7 @@
 package com.aiolos.news.controller.article;
 
 import com.aiolos.news.common.response.CommonResponse;
-import com.aiolos.news.common.exception.CustomizeException;
+import com.aiolos.news.common.exception.CustomizedException;
 import com.aiolos.news.pojo.bo.NewArticleBO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -24,7 +24,7 @@ public interface ArticleControllerApi {
 
     @ApiOperation(value = "用户发布文章", notes = "用户发布文章", httpMethod = "POST")
     @PostMapping("/createArticle")
-    CommonResponse createArticle(@Valid @RequestBody NewArticleBO newArticleBO) throws CustomizeException;
+    CommonResponse createArticle(@Valid @RequestBody NewArticleBO newArticleBO) throws CustomizedException;
 
     @ApiOperation(value = "查询用户自己的所有文章", notes = "查询用户自己的所有文章", httpMethod = "POST")
     @PostMapping("/queryMyArticleList")
@@ -38,13 +38,13 @@ public interface ArticleControllerApi {
 
     @ApiOperation(value = "文章审核", httpMethod = "POST")
     @PostMapping("/doReview")
-    CommonResponse doReview(@RequestParam String articleId, @RequestParam Integer passOrNot) throws CustomizeException;
+    CommonResponse doReview(@RequestParam String articleId, @RequestParam Integer passOrNot) throws CustomizedException;
 
     @ApiOperation(value = "用户撤回文章", httpMethod = "POST")
     @PostMapping("/withdraw")
-    CommonResponse withdraw(@RequestParam String userId, @RequestParam String articleId) throws CustomizeException;
+    CommonResponse withdraw(@RequestParam String userId, @RequestParam String articleId) throws CustomizedException;
 
     @ApiOperation(value = "用户删除文章", httpMethod = "POST")
     @PostMapping("/delete")
-    CommonResponse delete(@RequestParam String userId, @RequestParam String articleId) throws CustomizeException;
+    CommonResponse delete(@RequestParam String userId, @RequestParam String articleId) throws CustomizedException;
 }

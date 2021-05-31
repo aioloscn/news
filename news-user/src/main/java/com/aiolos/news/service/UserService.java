@@ -1,6 +1,6 @@
 package com.aiolos.news.service;
 
-import com.aiolos.news.common.exception.CustomizeException;
+import com.aiolos.news.common.exception.CustomizedException;
 import com.aiolos.news.pojo.AppUser;
 import com.aiolos.news.pojo.bo.UpdateUserInfoBO;
 
@@ -22,7 +22,7 @@ public interface UserService {
      * @param mobile
      * @return
      */
-    AppUser creatUser(String mobile) throws CustomizeException;
+    AppUser creatUser(String mobile) throws CustomizedException;
 
     /**
      * 根据用户主键ID查询用户信息
@@ -36,7 +36,7 @@ public interface UserService {
      * @param updateUserInfoBO
      * @return
      */
-    void updateAccountInfo(UpdateUserInfoBO updateUserInfoBO) throws CustomizeException;
+    void updateAccountInfo(UpdateUserInfoBO updateUserInfoBO) throws CustomizedException;
 
-    void freezeUserOrNot(String userId, Integer doStatus) throws CustomizeException;
+    void freezeUserOrNot(String userId, Integer doStatus) throws CustomizedException;
 }

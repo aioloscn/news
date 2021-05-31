@@ -2,7 +2,7 @@ package com.aiolos.news.controller;
 
 import com.aiolos.news.common.enums.*;
 import com.aiolos.news.common.response.CommonResponse;
-import com.aiolos.news.common.exception.CustomizeException;
+import com.aiolos.news.common.exception.CustomizedException;
 import com.aiolos.news.common.utils.JsonUtils;
 import com.aiolos.news.common.utils.PagedResult;
 import com.aiolos.news.controller.article.ArticleControllerApi;
@@ -44,7 +44,7 @@ public class ArticleController extends BaseController implements ArticleControll
     }
 
     @Override
-    public CommonResponse createArticle(@Valid NewArticleBO newArticleBO) throws CustomizeException {
+    public CommonResponse createArticle(@Valid NewArticleBO newArticleBO) throws CustomizedException {
 
         // 判断文章封面类型，单图必填，纯文字则设置为空
         if (newArticleBO.getArticleType().equals(ArticleCoverType.ONE_IMAGE.getType())) {
@@ -105,7 +105,7 @@ public class ArticleController extends BaseController implements ArticleControll
     }
 
     @Override
-    public CommonResponse doReview(String articleId, Integer passOrNot) throws CustomizeException {
+    public CommonResponse doReview(String articleId, Integer passOrNot) throws CustomizedException {
         Integer pendingStatus;
         if (passOrNot.equals(YesOrNo.YES.getType())) {
             pendingStatus = ArticleReviewStatus.SUCCESS.getType();
@@ -140,7 +140,7 @@ public class ArticleController extends BaseController implements ArticleControll
     }
 
     @Override
-    public CommonResponse withdraw(String userId, String articleId) throws CustomizeException {
+    public CommonResponse withdraw(String userId, String articleId) throws CustomizedException {
         // 查询文章获取articleMongoId
         Article article = articleService.queryById(articleId);
         if (article == null) {
@@ -162,7 +162,7 @@ public class ArticleController extends BaseController implements ArticleControll
     }
 
     @Override
-    public CommonResponse delete(String userId, String articleId) throws CustomizeException {
+    public CommonResponse delete(String userId, String articleId) throws CustomizedException {
         // 查询文章获取articleMongoId
         Article article = articleService.queryById(articleId);
         if (article == null) {

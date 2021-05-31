@@ -1,9 +1,7 @@
 package com.aiolos.news.task;
 
-import com.aiolos.news.common.exception.CustomizeException;
+import com.aiolos.news.common.exception.CustomizedException;
 import com.aiolos.news.service.ArticleService;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
 /**
@@ -21,7 +19,7 @@ public class TaskPublishArticles {
     }
 
     @Scheduled(cron = "0/3 * * * * ? ")
-    private void publishArticles() throws CustomizeException {
+    private void publishArticles() throws CustomizedException {
 
         // 把当前时间应该发布的定时文章，状态改为即时
         articleService.updateAppointToPublish();

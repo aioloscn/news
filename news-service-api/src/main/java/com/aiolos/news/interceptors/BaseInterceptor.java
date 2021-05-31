@@ -1,7 +1,7 @@
 package com.aiolos.news.interceptors;
 
 import com.aiolos.news.common.enums.ErrorEnum;
-import com.aiolos.news.common.exception.CustomizeException;
+import com.aiolos.news.common.exception.CustomizedException;
 import com.aiolos.news.common.utils.RedisOperator;
 import org.apache.commons.lang3.StringUtils;
 
@@ -24,7 +24,7 @@ public class BaseInterceptor {
 
     public static final String REDIS_ALREADY_READ = "redis_already_read";
 
-    public boolean verifyUserIdToken(String id, String token, String redisKeyPrefix) throws CustomizeException {
+    public boolean verifyUserIdToken(String id, String token, String redisKeyPrefix) throws CustomizedException {
 
         if (StringUtils.isNotBlank(id) && StringUtils.isNotBlank(token)) {
 
@@ -34,10 +34,10 @@ public class BaseInterceptor {
                 // token不一致，redis删除token，前端也会删除
                 redis.del(REDIS_USER_TOKEN + ":" + id);
                 redis.del(REDIS_USER_INFO + ":" + id);
-                throw new CustomizeException(ErrorEnum.TOKEN_INVALID);
+                throw new CustomizedException(ErrorEnum.TOKEN_INVALID);
             }
         } else {
-            throw new CustomizeException(ErrorEnum.USER_NOT_LOGGED_IN);
+            throw new CustomizedException(ErrorEnum.USER_NOT_LOGGED_IN);
         }
 
         return true;

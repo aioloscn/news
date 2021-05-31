@@ -1,7 +1,7 @@
 package com.aiolos.news.controller.user;
 
 import com.aiolos.news.common.response.CommonResponse;
-import com.aiolos.news.common.exception.CustomizeException;
+import com.aiolos.news.common.exception.CustomizedException;
 import com.aiolos.news.config.MyServiceList;
 import com.aiolos.news.controller.user.fallbacks.UserControllerFallbackFactory;
 import com.aiolos.news.pojo.bo.UpdateUserInfoBO;
@@ -31,7 +31,7 @@ public interface UserControllerApi {
 
     @ApiOperation(value = "修改用户信息", notes = "修改用户信息", httpMethod = "POST")
     @PostMapping("/updateAccountInfo")
-    CommonResponse updateAccountInfo(@Valid @RequestBody UpdateUserInfoBO updateUserInfoBO) throws CustomizeException;
+    CommonResponse updateAccountInfo(@Valid @RequestBody UpdateUserInfoBO updateUserInfoBO) throws CustomizedException;
 
     @ApiOperation(value = "根据多个用户的id查询用户列表", notes = "根据多个用户的id查询用户列表", httpMethod = "GET")
     @GetMapping("/queryByIds")

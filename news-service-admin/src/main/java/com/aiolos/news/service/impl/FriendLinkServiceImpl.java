@@ -1,7 +1,7 @@
 package com.aiolos.news.service.impl;
 
 import com.aiolos.news.common.enums.YesOrNo;
-import com.aiolos.news.common.exception.CustomizeException;
+import com.aiolos.news.common.exception.CustomizedException;
 import com.aiolos.news.pojo.mo.FriendLinkMO;
 import com.aiolos.news.repository.FriendLinkRepository;
 import com.aiolos.news.service.FriendLinkService;
@@ -24,7 +24,7 @@ public class FriendLinkServiceImpl implements FriendLinkService {
     }
 
     @Override
-    @Transactional(rollbackFor = CustomizeException.class)
+    @Transactional(rollbackFor = CustomizedException.class)
     public void saveOrUpdateFriendLink(FriendLinkMO friendLinkMO) {
         friendLinkRepository.save(friendLinkMO);
     }

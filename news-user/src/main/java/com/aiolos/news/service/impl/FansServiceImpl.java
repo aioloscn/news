@@ -2,7 +2,7 @@ package com.aiolos.news.service.impl;
 
 import com.aiolos.news.common.enums.ErrorEnum;
 import com.aiolos.news.common.enums.Sex;
-import com.aiolos.news.common.exception.CustomizeException;
+import com.aiolos.news.common.exception.CustomizedException;
 import com.aiolos.news.common.utils.PagedResult;
 import com.aiolos.news.dao.FansDao;
 import com.aiolos.news.pojo.AppUser;
@@ -49,9 +49,9 @@ public class FansServiceImpl extends BaseService implements FansService {
         Fans fans = fansDao.selectOne(queryWrapper);
     }
 
-    @Transactional(propagation = Propagation.NESTED, rollbackFor = CustomizeException.class)
+    @Transactional(propagation = Propagation.NESTED, rollbackFor = CustomizedException.class)
     @Override
-    public void follow(String writerId, String fanId) throws CustomizeException {
+    public void follow(String writerId, String fanId) throws CustomizedException {
         AppUser fanInfo = userService.getUser(fanId);
         Fans fans = new Fans();
         fans.setId(String.valueOf(idWorker.nextId()));
@@ -66,7 +66,7 @@ public class FansServiceImpl extends BaseService implements FansService {
             try {
                 throw new RuntimeException();
             } catch (Exception e) {
-                throw new CustomizeException(ErrorEnum.FOLLOW_FAILED);
+                throw new CustomizedException(ErrorEnum.FOLLOW_FAILED);
             }
         }
 
@@ -76,15 +76,15 @@ public class FansServiceImpl extends BaseService implements FansService {
         redis.increment(REDIS_MY_FOLLOW_COUNT + ":" + fanId, 1);
     }
 
-    @Transactional(propagation = Propagation.NESTED, rollbackFor = CustomizeException.class)
+    @Transactional(propagation = Propagation.NESTED, rollbackFor = CustomizedException.class)
     @Override
-    public void unfollow(String writerId, String fanId) throws CustomizeException {
+    public void unfollow(String writerId, String fanId) throws CustomizedException {
         UpdateWrapper wrapper = new UpdateWrapper();
         wrapper.eq("writer_id", writerId);
         wrapper.eq("fan_id", fanId);
         int result = fansDao.delete(wrapper);
         if (result == 0) {
-            throw new CustomizeException(ErrorEnum.UNFOLLOW_FAILED);
+            throw new CustomizedException(ErrorEnum.UNFOLLOW_FAILED);
         }
         // 作家粉丝数累减
         redis.decrement(REDIS_WRITER_FANS_COUNT + ":" + writerId, 1);

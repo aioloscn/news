@@ -1,11 +1,9 @@
 package com.aiolos.news.service;
 
-import com.aiolos.news.common.exception.CustomizeException;
+import com.aiolos.news.common.exception.CustomizedException;
 import com.aiolos.news.common.utils.PagedResult;
 import com.aiolos.news.pojo.AdminUser;
 import com.aiolos.news.pojo.bo.NewAdminBO;
-
-import java.util.List;
 
 /**
  * @author Aiolos
@@ -25,7 +23,7 @@ public interface AdminUserService {
      * @param newAdminBO
      * @return
      */
-    void createAdminUser(NewAdminBO newAdminBO) throws CustomizeException;
+    void createAdminUser(NewAdminBO newAdminBO) throws CustomizedException;
 
     /**
      * 分页查询admin列表

@@ -1,6 +1,6 @@
 package com.aiolos.news.controller.files;
 
-import com.aiolos.news.common.exception.CustomizeException;
+import com.aiolos.news.common.exception.CustomizedException;
 import com.aiolos.news.common.response.CommonResponse;
 import com.aiolos.news.pojo.bo.NewAdminBO;
 import io.swagger.annotations.Api;
@@ -51,5 +51,5 @@ public interface FileUploadControllerApi {
      * @return
      */
     @GetMapping("/readInGridFS")
-    void readInGridFS(@RequestParam String faceId, HttpServletRequest request, HttpServletResponse response) throws CustomizeException;
+    void readInGridFS(@RequestParam String faceId, HttpServletRequest request, HttpServletResponse response) throws CustomizedException;
 }

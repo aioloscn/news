@@ -1,6 +1,6 @@
 package com.aiolos.news.consumer;
 
-import com.aiolos.news.common.exception.CustomizeException;
+import com.aiolos.news.common.exception.CustomizedException;
 import com.aiolos.news.config.RabbitMQDelayQueueConfig;
 import com.aiolos.news.pojo.Article;
 import com.aiolos.news.pojo.eo.ArticleEO;
@@ -45,7 +45,7 @@ public class RabbitMQDelayConsumer {
         }
         try {
             articleService.updateArticleToPublish(articleId);
-        } catch (CustomizeException e) {
+        } catch (CustomizedException e) {
             log.error(articleId + e.getErrMsg());
         }
 

@@ -1,7 +1,7 @@
 package com.aiolos.news.interceptors;
 
 import com.aiolos.news.common.enums.ErrorEnum;
-import com.aiolos.news.common.exception.CustomizeException;
+import com.aiolos.news.common.exception.CustomizedException;
 import com.aiolos.news.common.utils.IPUtils;
 import com.aiolos.news.common.utils.RedisOperator;
 import lombok.extern.slf4j.Slf4j;
@@ -45,7 +45,7 @@ public class PassportInterceptor implements HandlerInterceptor {
         boolean keyIsExist = redis.keyIsExist(MOBILE_SMSCODE + ":" + userIp);
         if (keyIsExist) {
 
-            throw new CustomizeException(ErrorEnum.REPEAT_SENDING_SMS_CODE);
+            throw new CustomizedException(ErrorEnum.REPEAT_SENDING_SMS_CODE);
         }
 
         return true;

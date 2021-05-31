@@ -1,6 +1,6 @@
 package com.aiolos.news.service;
 
-import com.aiolos.news.common.exception.CustomizeException;
+import com.aiolos.news.common.exception.CustomizedException;
 import com.aiolos.news.pojo.Category;
 import com.aiolos.news.pojo.bo.SaveCategoryBO;
 
@@ -22,5 +22,5 @@ public interface CategoryService {
      * 保存或更新分类
      * @param saveCategoryBO
      */
-    void saveOrUpdateCategory(SaveCategoryBO saveCategoryBO) throws CustomizeException;
+    void saveOrUpdateCategory(SaveCategoryBO saveCategoryBO) throws CustomizedException;
 }

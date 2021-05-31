@@ -1,7 +1,7 @@
 package com.aiolos.news.controller;
 
 import com.aiolos.news.common.response.CommonResponse;
-import com.aiolos.news.common.exception.CustomizeException;
+import com.aiolos.news.common.exception.CustomizedException;
 import com.aiolos.news.controller.admin.FriendLinkControllerApi;
 import com.aiolos.news.pojo.bo.SaveFriendLinkBO;
 import com.aiolos.news.pojo.mo.FriendLinkMO;
@@ -28,7 +28,7 @@ public class FriendLinkController extends BaseController implements FriendLinkCo
     }
 
     @Override
-    public CommonResponse saveOrUpdateFriendLink(@Valid SaveFriendLinkBO saveFriendLinkBO) throws CustomizeException {
+    public CommonResponse saveOrUpdateFriendLink(@Valid SaveFriendLinkBO saveFriendLinkBO) throws CustomizedException {
 
         log.info("Enter the method saveOrUpdateFriendLink, parameter saveFriendLinkBO: {}", saveFriendLinkBO.toString());
 

@@ -1,7 +1,7 @@
 package com.aiolos.news.common.advice;
 
 import com.aiolos.news.common.response.CommonResponse;
-import com.aiolos.news.common.exception.CustomizeException;
+import com.aiolos.news.common.exception.CustomizedException;
 import com.aiolos.news.common.enums.ErrorEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Slf4j
 @RestControllerAdvice
-public class CustomizeExceptionAdvice {
+public class CustomizedExceptionAdvice {
 
     /**
      * 定义ExceptionHandler解决为被controller层吸收的Exception和它的子类异常
@@ -29,14 +29,14 @@ public class CustomizeExceptionAdvice {
      * 如果捕获Exception异常，Spring校验会用ExceptionHandlerExceptionResolver解析器
      * @return  返回封装好的公共web对象
      */
-    @ExceptionHandler(value = CustomizeException.class)
+    @ExceptionHandler(value = CustomizedException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ResponseBody
     public CommonResponse handlerCustomizeException(HttpServletRequest req, HttpServletResponse resp, Exception e) {
 
-        if (e instanceof CustomizeException) {
-            log.warn("自定义异常捕获，异常信息：{}", ((CustomizeException) e).getErrMsg());
-            return CommonResponse.error(((CustomizeException) e).getErrCode(), ((CustomizeException) e).getErrMsg());
+        if (e instanceof CustomizedException) {
+            log.warn("自定义异常捕获，异常信息：{}", ((CustomizedException) e).getErrMsg());
+            return CommonResponse.error(((CustomizedException) e).getErrCode(), ((CustomizedException) e).getErrMsg());
         } else {
             return CommonResponse.error(ErrorEnum.UNKNOWN_ERROR);
         }

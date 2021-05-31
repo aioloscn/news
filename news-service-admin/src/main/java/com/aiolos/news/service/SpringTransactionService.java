@@ -1,6 +1,6 @@
 package com.aiolos.news.service;
 
-import com.aiolos.news.common.exception.CustomizeException;
+import com.aiolos.news.common.exception.CustomizedException;
 
 /**
  * Spring 事务测试接口定义
@@ -17,9 +17,9 @@ public interface SpringTransactionService {
     /**
      * 抛出一个 checked 异常，导致事务不能回滚
      * 不是 unchecked 异常事务不能回滚
-     * @throws CustomizeException   自定义异常类
+     * @throws CustomizedException   自定义异常类
      */
-    void notRuntimeExceptionCanNotRollback() throws CustomizeException;
+    void notRuntimeExceptionCanNotRollback() throws CustomizedException;
 
     /**
      * unchecked异常，事务可以回滚
@@ -28,15 +28,15 @@ public interface SpringTransactionService {
 
     /**
      * 在rollbackFor里指定异常，Spring的事务处理可以回滚
-     * @throws CustomizeException
+     * @throws CustomizedException
      */
-    void assignExceptionCanRollback() throws CustomizeException;
+    void assignExceptionCanRollback() throws CustomizedException;
 
     /**
      * Rollback Only， 事务可以回滚
-     * @throws CustomizeException
+     * @throws CustomizedException
      */
-    void rollbackOnlyCanRollback() throws CustomizeException;
+    void rollbackOnlyCanRollback() throws CustomizedException;
 
     /**
      * 在同一个类中，一个不标注事务的方法去调用标注了事务的方法，事务会失效导致没有回滚

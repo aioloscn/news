@@ -2,7 +2,7 @@ package com.aiolos.news.controller;
 
 import com.aiolos.news.common.response.CommonResponse;
 import com.aiolos.news.common.enums.UserStatus;
-import com.aiolos.news.common.exception.CustomizeException;
+import com.aiolos.news.common.exception.CustomizedException;
 import com.aiolos.news.common.enums.ErrorEnum;
 import com.aiolos.news.common.utils.IPUtils;
 import com.aiolos.news.common.utils.JsonUtils;
@@ -37,7 +37,7 @@ public class PassportController extends BaseController implements PassportContro
     }
 
     @Override
-    public CommonResponse getSMSCode(String mobile, HttpServletRequest request) throws CustomizeException {
+    public CommonResponse getSMSCode(String mobile, HttpServletRequest request) throws CustomizedException {
 
         log.info("Enter the method getSMSCode, parameter mobile: {}", mobile);
 
@@ -60,7 +60,7 @@ public class PassportController extends BaseController implements PassportContro
 
     @Override
     public CommonResponse login(RegisterLoginBO registerLoginBO,
-                                HttpServletRequest request, HttpServletResponse response) throws CustomizeException {
+                                HttpServletRequest request, HttpServletResponse response) throws CustomizedException {
 
         log.info("Enter the method login, parameter registerLoginBO: {}", registerLoginBO.toString());
 

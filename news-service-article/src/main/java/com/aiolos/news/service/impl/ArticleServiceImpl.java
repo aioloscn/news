@@ -2,7 +2,7 @@ package com.aiolos.news.service.impl;
 
 import com.aiolos.news.common.config.IdGeneratorSnowflake;
 import com.aiolos.news.common.enums.*;
-import com.aiolos.news.common.exception.CustomizeException;
+import com.aiolos.news.common.exception.CustomizedException;
 import com.aiolos.news.common.utils.AliTextReviewUtils;
 import com.aiolos.news.common.utils.DateUtils;
 import com.aiolos.news.common.utils.PagedResult;
@@ -20,8 +20,6 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.amqp.AmqpException;
-import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.MessageDeliveryMode;
 import org.springframework.amqp.core.MessagePostProcessor;
 import org.springframework.beans.BeanUtils;
@@ -61,9 +59,9 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
         this.elasticsearchTemplate = elasticsearchTemplate;
     }
 
-    @Transactional(propagation = Propagation.NESTED, rollbackFor = CustomizeException.class)
+    @Transactional(propagation = Propagation.NESTED, rollbackFor = CustomizedException.class)
     @Override
-    public void createArticle(NewArticleBO newArticleBO, Category category) throws CustomizeException {
+    public void createArticle(NewArticleBO newArticleBO, Category category) throws CustomizedException {
 
         String articleId = snowflake.nextIdStr();
 
@@ -103,7 +101,7 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
             try {
                 throw new RuntimeException();
             } catch (Exception e) {
-                throw new CustomizeException(ErrorEnum.ARTICLE_CREATE_FAILED);
+                throw new CustomizedException(ErrorEnum.ARTICLE_CREATE_FAILED);
             }
         }
 
@@ -157,20 +155,20 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
         }
     }
 
-    @Transactional(propagation = Propagation.NESTED, rollbackFor = CustomizeException.class)
+    @Transactional(propagation = Propagation.NESTED, rollbackFor = CustomizedException.class)
     @Override
-    public void updateAppointToPublish() throws CustomizeException {
+    public void updateAppointToPublish() throws CustomizedException {
         int result = articleDao.updateAppointToPublish();
         try {
             throw new RuntimeException();
         } catch (Exception e) {
-            throw new CustomizeException(ErrorEnum.FAILED_TO_PUBLISH_AN_ARTICLE_ON_A_SCHEDULED_TASK);
+            throw new CustomizedException(ErrorEnum.FAILED_TO_PUBLISH_AN_ARTICLE_ON_A_SCHEDULED_TASK);
         }
     }
 
-    @Transactional(propagation = Propagation.NESTED, rollbackFor = CustomizeException.class)
+    @Transactional(propagation = Propagation.NESTED, rollbackFor = CustomizedException.class)
     @Override
-    public void updateArticleToPublish(String articleId) throws CustomizeException {
+    public void updateArticleToPublish(String articleId) throws CustomizedException {
         Article article = new Article();
         article.setId(articleId);
         article.setIsAppoint(ArticleAppointType.IMMEDIATELY.getType());
@@ -180,7 +178,7 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
             try {
                 throw new RuntimeException();
             } catch (Exception e) {
-                throw new CustomizeException(ErrorEnum.FAILED_TO_POST_AN_ARTICLE_LATE);
+                throw new CustomizedException(ErrorEnum.FAILED_TO_POST_AN_ARTICLE_LATE);
             }
         }
     }
@@ -239,9 +237,9 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
         return pagedResult;
     }
 
-    @Transactional(propagation = Propagation.NESTED, rollbackFor = CustomizeException.class)
+    @Transactional(propagation = Propagation.NESTED, rollbackFor = CustomizedException.class)
     @Override
-    public void updateArticleStatus(String articleId, Integer pendingStatus) throws CustomizeException {
+    public void updateArticleStatus(String articleId, Integer pendingStatus) throws CustomizedException {
         Article article = new Article();
         article.setId(articleId);
         article.setArticleStatus(pendingStatus);
@@ -251,14 +249,14 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
             try {
                 throw new RuntimeException();
             } catch (Exception e) {
-                throw new CustomizeException(ErrorEnum.UPDATE_ARTICLE_STATUS_FAILED);
+                throw new CustomizedException(ErrorEnum.UPDATE_ARTICLE_STATUS_FAILED);
             }
         }
     }
 
-    @Transactional(propagation = Propagation.NESTED, rollbackFor = CustomizeException.class)
+    @Transactional(propagation = Propagation.NESTED, rollbackFor = CustomizedException.class)
     @Override
-    public void withdraw(String userId, String articleId) throws CustomizeException {
+    public void withdraw(String userId, String articleId) throws CustomizedException {
         Article article = new Article();
         article.setId(articleId);
         article.setPublishUserId(userId);
@@ -270,14 +268,14 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
             try {
                 throw new RuntimeException();
             } catch (Exception e) {
-                throw new CustomizeException(ErrorEnum.UPDATE_ARTICLE_STATUS_FAILED);
+                throw new CustomizedException(ErrorEnum.UPDATE_ARTICLE_STATUS_FAILED);
             }
         }
     }
 
-    @Transactional(propagation = Propagation.NESTED, rollbackFor = CustomizeException.class)
+    @Transactional(propagation = Propagation.NESTED, rollbackFor = CustomizedException.class)
     @Override
-    public void delete(String userId, String articleId) throws CustomizeException {
+    public void delete(String userId, String articleId) throws CustomizedException {
         Article article = new Article();
         article.setId(articleId);
         article.setPublishUserId(userId);
@@ -289,14 +287,14 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
             try {
                 throw new RuntimeException();
             } catch (Exception e) {
-                throw new CustomizeException(ErrorEnum.UPDATE_ARTICLE_STATUS_FAILED);
+                throw new CustomizedException(ErrorEnum.UPDATE_ARTICLE_STATUS_FAILED);
             }
         }
     }
 
-    @Transactional(propagation = Propagation.NESTED, rollbackFor = CustomizeException.class)
+    @Transactional(propagation = Propagation.NESTED, rollbackFor = CustomizedException.class)
     @Override
-    public void updateArticleToGridFS(String articleId, String articleMongoId) throws CustomizeException {
+    public void updateArticleToGridFS(String articleId, String articleMongoId) throws CustomizedException {
         Article article = new Article();
         article.setId(articleId);
         article.setMongoFileId(articleMongoId);
@@ -306,7 +304,7 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
             try {
                 throw new RuntimeException();
             } catch (Exception e) {
-                throw new CustomizeException(ErrorEnum.UPDATE_ARTICLE_STATUS_FAILED);
+                throw new CustomizedException(ErrorEnum.UPDATE_ARTICLE_STATUS_FAILED);
             }
         }
     }

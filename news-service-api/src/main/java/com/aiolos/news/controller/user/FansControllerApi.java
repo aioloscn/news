@@ -1,6 +1,6 @@
 package com.aiolos.news.controller.user;
 
-import com.aiolos.news.common.exception.CustomizeException;
+import com.aiolos.news.common.exception.CustomizedException;
 import com.aiolos.news.common.response.CommonResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -23,11 +23,11 @@ public interface FansControllerApi {
 
     @ApiOperation(value = "用户关注作家", httpMethod = "POST")
     @PostMapping("/follow")
-    CommonResponse follow(@RequestParam String writerId, @RequestParam String fanId) throws CustomizeException;
+    CommonResponse follow(@RequestParam String writerId, @RequestParam String fanId) throws CustomizedException;
 
     @ApiOperation(value = "用户取消关注", httpMethod = "POST")
     @PostMapping("/unfollow")
-    CommonResponse unfollow(@RequestParam String writerId, @RequestParam String fanId) throws CustomizeException;
+    CommonResponse unfollow(@RequestParam String writerId, @RequestParam String fanId) throws CustomizedException;
 
     @ApiOperation(value = "查询粉丝列表", httpMethod = "POST")
     @PostMapping("/queryAll")

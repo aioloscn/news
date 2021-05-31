@@ -7,11 +7,11 @@ package com.aiolos.news.common.exception;
  * @author Aiolos
  * @date 2020/10/7 10:03 下午
  */
-public class CustomizeException extends Exception implements CommonError {
+public class CustomizedException extends Exception implements CommonError {
 
     private final CommonError commonError;
 
-    public CustomizeException(CommonError commonError) {
+    public CustomizedException(CommonError commonError) {
         super();
         this.commonError = commonError;
     }
@@ -21,7 +21,7 @@ public class CustomizeException extends Exception implements CommonError {
      * @param commonError   公共的异常接口
      * @param errMsg    错误信息
      */
-    public CustomizeException(CommonError commonError, String errMsg) {
+    public CustomizedException(CommonError commonError, String errMsg) {
         super();
         this.commonError = commonError;
         this.commonError.setErrMsg(errMsg);

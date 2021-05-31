@@ -2,7 +2,7 @@ package com.aiolos.news.service.impl;
 
 import com.aiolos.news.common.config.IdGeneratorSnowflake;
 import com.aiolos.news.common.enums.ErrorEnum;
-import com.aiolos.news.common.exception.CustomizeException;
+import com.aiolos.news.common.exception.CustomizedException;
 import com.aiolos.news.common.utils.PagedResult;
 import com.aiolos.news.dao.AdminUserDao;
 import com.aiolos.news.pojo.AdminUser;
@@ -20,7 +20,6 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
-import java.util.List;
 
 /**
  * @author Aiolos
@@ -49,8 +48,8 @@ public class AdminUserServiceImpl extends BaseService implements AdminUserServic
     }
 
     @Override
-    @Transactional(propagation = Propagation.NESTED, rollbackFor = CustomizeException.class)
-    public void createAdminUser(NewAdminBO newAdminBO) throws CustomizeException {
+    @Transactional(propagation = Propagation.NESTED, rollbackFor = CustomizedException.class)
+    public void createAdminUser(NewAdminBO newAdminBO) throws CustomizedException {
 
         AdminUser adminUser = new AdminUser();
         adminUser.setId(snowflake.nextIdStr());
@@ -71,7 +70,7 @@ public class AdminUserServiceImpl extends BaseService implements AdminUserServic
             try {
                 throw new RuntimeException();
             } catch (Exception e) {
-                throw new CustomizeException(ErrorEnum.ADMIN_INSERT_FAILED);
+                throw new CustomizedException(ErrorEnum.ADMIN_INSERT_FAILED);
             }
         }
     }

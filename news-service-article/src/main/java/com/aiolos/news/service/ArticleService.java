@@ -1,6 +1,6 @@
 package com.aiolos.news.service;
 
-import com.aiolos.news.common.exception.CustomizeException;
+import com.aiolos.news.common.exception.CustomizedException;
 import com.aiolos.news.common.utils.PagedResult;
 import com.aiolos.news.pojo.Article;
 import com.aiolos.news.pojo.Category;
@@ -18,21 +18,21 @@ public interface ArticleService {
      * 发布文章
      * @param newArticleBO
      * @param category
-     * @throws CustomizeException
+     * @throws CustomizedException
      */
-    void createArticle(NewArticleBO newArticleBO, Category category) throws CustomizeException;
+    void createArticle(NewArticleBO newArticleBO, Category category) throws CustomizedException;
 
     /**
      * 发布定时文章
-     * @throws CustomizeException
+     * @throws CustomizedException
      */
-    void updateAppointToPublish() throws CustomizeException;
+    void updateAppointToPublish() throws CustomizedException;
 
     /**
      * 修改某篇文章状态为即时发布
      * @param articleId
      */
-    void updateArticleToPublish(String articleId) throws CustomizeException;
+    void updateArticleToPublish(String articleId) throws CustomizedException;
 
     /**
      * 根据条件查询文章列表
@@ -60,30 +60,30 @@ public interface ArticleService {
      * 修改文章审核状态
      * @param articleId
      * @param pendingStatus
-     * @throws CustomizeException
+     * @throws CustomizedException
      */
-    void updateArticleStatus(String articleId, Integer pendingStatus) throws CustomizeException;
+    void updateArticleStatus(String articleId, Integer pendingStatus) throws CustomizedException;
 
     /**
      * 文章撤回
      * @param userId
      * @param articleId
      */
-    void withdraw(String userId, String articleId) throws CustomizeException;
+    void withdraw(String userId, String articleId) throws CustomizedException;
 
     /**
      * 逻辑删除文章
      * @param userId
      * @param articleId
      */
-    void delete(String userId, String articleId) throws CustomizeException;
+    void delete(String userId, String articleId) throws CustomizedException;
 
     /**
      * 关联文章和GridFS的html文件id
      * @param articleId
      * @param articleMongoId
      */
-    void updateArticleToGridFS(String articleId, String articleMongoId) throws CustomizeException;
+    void updateArticleToGridFS(String articleId, String articleMongoId) throws CustomizedException;
 
     /**
      * 根据主键查询文章信息

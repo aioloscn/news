@@ -1,6 +1,6 @@
 package com.aiolos.news.controller.admin;
 
-import com.aiolos.news.common.exception.CustomizeException;
+import com.aiolos.news.common.exception.CustomizedException;
 import com.aiolos.news.common.response.CommonResponse;
 import com.aiolos.news.pojo.bo.SaveCategoryBO;
 import io.swagger.annotations.Api;
@@ -26,5 +26,5 @@ public interface CategoryMngControllerApi {
 
     @ApiOperation(value = "新增或更新分类", httpMethod = "POST")
     @PostMapping("/saveOrUpdateCategory")
-    CommonResponse saveOrUpdateCategory(@Valid @RequestBody SaveCategoryBO saveCategoryBO) throws CustomizeException;
+    CommonResponse saveOrUpdateCategory(@Valid @RequestBody SaveCategoryBO saveCategoryBO) throws CustomizedException;
 }

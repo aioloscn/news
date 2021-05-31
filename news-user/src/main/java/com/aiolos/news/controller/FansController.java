@@ -1,7 +1,7 @@
 package com.aiolos.news.controller;
 
 import com.aiolos.news.common.enums.ErrorEnum;
-import com.aiolos.news.common.exception.CustomizeException;
+import com.aiolos.news.common.exception.CustomizedException;
 import com.aiolos.news.common.response.CommonResponse;
 import com.aiolos.news.controller.user.FansControllerApi;
 import com.aiolos.news.service.FansService;
@@ -36,7 +36,7 @@ public class FansController extends BaseController implements FansControllerApi 
     }
 
     @Override
-    public CommonResponse follow(String writerId, String fanId) throws CustomizeException {
+    public CommonResponse follow(String writerId, String fanId) throws CustomizedException {
         if (StringUtils.isBlank(writerId)) {
             return CommonResponse.error(ErrorEnum.WRITER_ID_NULL_ERROR);
         }
@@ -48,7 +48,7 @@ public class FansController extends BaseController implements FansControllerApi 
     }
 
     @Override
-    public CommonResponse unfollow(String writerId, String fanId) throws CustomizeException {
+    public CommonResponse unfollow(String writerId, String fanId) throws CustomizedException {
         if (StringUtils.isBlank(writerId)) {
             return CommonResponse.error(ErrorEnum.WRITER_ID_NULL_ERROR);
         }

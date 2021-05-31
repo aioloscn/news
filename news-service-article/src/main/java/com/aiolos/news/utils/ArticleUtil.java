@@ -1,7 +1,7 @@
 package com.aiolos.news.utils;
 
 import com.aiolos.news.common.enums.ErrorEnum;
-import com.aiolos.news.common.exception.CustomizeException;
+import com.aiolos.news.common.exception.CustomizedException;
 import com.aiolos.news.common.response.CommonResponse;
 import com.aiolos.news.common.utils.JsonUtils;
 import com.aiolos.news.config.RabbitMQConfig;
@@ -141,12 +141,12 @@ public class ArticleUtil {
      * 从mongodb GridFS中下载静态html
      * @param articleId 文章主键
      * @param articleMongoId    MongoDB文章文件的主键
-     * @throws CustomizeException
+     * @throws CustomizedException
      */
-    public void downloadArticleHtml(String articleId, String articleMongoId) throws CustomizeException {
+    public void downloadArticleHtml(String articleId, String articleMongoId) throws CustomizedException {
         Integer status = articleHtmlMicroservice.download(articleId, articleMongoId);
         if (status != HttpStatus.OK.value()) {
-            throw new CustomizeException(ErrorEnum.ARTICLE_REVIEW_ERROR);
+            throw new CustomizedException(ErrorEnum.ARTICLE_REVIEW_ERROR);
         }
     }
 
@@ -171,12 +171,12 @@ public class ArticleUtil {
     /**
      * 删除服务器或本地的静态文章html
      * @param articleId
-     * @throws CustomizeException
+     * @throws CustomizedException
      */
-    public void deleteArticleHtml(String articleId) throws CustomizeException {
+    public void deleteArticleHtml(String articleId) throws CustomizedException {
         Integer status = articleHtmlMicroservice.delete(articleId);
         if (status != HttpStatus.OK.value()) {
-            throw new CustomizeException(ErrorEnum.FAILED_TO_DELETE_ARTICLE);
+            throw new CustomizedException(ErrorEnum.FAILED_TO_DELETE_ARTICLE);
         }
     }
 

@@ -2,7 +2,7 @@ package com.aiolos.news.controller.user.fallbacks;
 
 import com.aiolos.news.common.response.CommonResponse;
 import com.aiolos.news.common.enums.ErrorEnum;
-import com.aiolos.news.common.exception.CustomizeException;
+import com.aiolos.news.common.exception.CustomizedException;
 import com.aiolos.news.controller.user.UserControllerApi;
 import com.aiolos.news.pojo.bo.UpdateUserInfoBO;
 import com.aiolos.news.pojo.vo.UserBasicInfoVO;
@@ -39,7 +39,7 @@ public class UserControllerFallbackFactory implements FallbackFactory<UserContro
             }
 
             @Override
-            public CommonResponse updateAccountInfo(@Valid UpdateUserInfoBO updateUserInfoBO) throws CustomizeException {
+            public CommonResponse updateAccountInfo(@Valid UpdateUserInfoBO updateUserInfoBO) throws CustomizedException {
                 log.error("Connection refused, enter the degraded method of the service caller");
                 return CommonResponse.error(ErrorEnum.FEIGN_FALLBACK_EXCEPTION);
             }

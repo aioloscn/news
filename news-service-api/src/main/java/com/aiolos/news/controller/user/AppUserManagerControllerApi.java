@@ -1,6 +1,6 @@
 package com.aiolos.news.controller.user;
 
-import com.aiolos.news.common.exception.CustomizeException;
+import com.aiolos.news.common.exception.CustomizedException;
 import com.aiolos.news.common.response.CommonResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -29,5 +29,5 @@ public interface AppUserManagerControllerApi {
 
     @ApiOperation(value = "冻结或解冻用户", httpMethod = "POST")
     @PostMapping("/freezeUserOrNot")
-    CommonResponse freezeUserOrNot(@RequestParam String userId, @RequestParam Integer doStatus) throws CustomizeException;
+    CommonResponse freezeUserOrNot(@RequestParam String userId, @RequestParam Integer doStatus) throws CustomizedException;
 }

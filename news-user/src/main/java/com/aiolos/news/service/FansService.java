@@ -1,6 +1,6 @@
 package com.aiolos.news.service;
 
-import com.aiolos.news.common.exception.CustomizeException;
+import com.aiolos.news.common.exception.CustomizedException;
 import com.aiolos.news.common.utils.PagedResult;
 import com.aiolos.news.pojo.vo.FansCountsVO;
 import com.aiolos.news.pojo.vo.RegionRatioVO;
@@ -24,16 +24,16 @@ public interface FansService {
      * 用户关注作家
      * @param writerId
      * @param fanId
-     * @throws CustomizeException
+     * @throws CustomizedException
      */
-    void follow(String writerId, String fanId) throws CustomizeException;
+    void follow(String writerId, String fanId) throws CustomizedException;
 
     /**
      * 用户取消关注
      * @param writerId
      * @param fanId
      */
-    void unfollow(String writerId, String fanId) throws CustomizeException;
+    void unfollow(String writerId, String fanId) throws CustomizedException;
 
     /**
      * 查询粉丝分页列表

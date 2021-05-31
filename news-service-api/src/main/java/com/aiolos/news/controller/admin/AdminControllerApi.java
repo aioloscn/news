@@ -1,7 +1,7 @@
 package com.aiolos.news.controller.admin;
 
 import com.aiolos.news.common.response.CommonResponse;
-import com.aiolos.news.common.exception.CustomizeException;
+import com.aiolos.news.common.exception.CustomizedException;
 import com.aiolos.news.pojo.bo.AdminLoginBO;
 import com.aiolos.news.pojo.bo.NewAdminBO;
 import io.swagger.annotations.Api;
@@ -26,15 +26,15 @@ public interface AdminControllerApi {
 
     @ApiOperation(value = "admin登录接口", notes = "admin登录接口", httpMethod = "POST")
     @PostMapping("/adminLogin")
-    CommonResponse adminLogin(@Valid @RequestBody AdminLoginBO adminLoginBO, HttpServletRequest request, HttpServletResponse response) throws CustomizeException;
+    CommonResponse adminLogin(@Valid @RequestBody AdminLoginBO adminLoginBO, HttpServletRequest request, HttpServletResponse response) throws CustomizedException;
 
     @ApiOperation(value = "查询admin用户名是否存在", notes = "查询admin用户名是否存在", httpMethod = "POST")
     @PostMapping("/adminIsExist")
-    CommonResponse adminIsExist(@RequestParam String username) throws CustomizeException;
+    CommonResponse adminIsExist(@RequestParam String username) throws CustomizedException;
 
     @ApiOperation(value = "创建admin", notes = "创建admin", httpMethod = "POST")
     @PostMapping("/addNewAdmin")
-    CommonResponse addNewAdmin(@Valid @RequestBody NewAdminBO newAdminBO) throws CustomizeException;
+    CommonResponse addNewAdmin(@Valid @RequestBody NewAdminBO newAdminBO) throws CustomizedException;
 
     @ApiOperation(value = "查询admin列表", notes = "查询admin列表", httpMethod = "POST")
     @PostMapping("/getAdminList")

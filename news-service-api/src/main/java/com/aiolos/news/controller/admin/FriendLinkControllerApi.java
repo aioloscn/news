@@ -1,7 +1,7 @@
 package com.aiolos.news.controller.admin;
 
 import com.aiolos.news.common.response.CommonResponse;
-import com.aiolos.news.common.exception.CustomizeException;
+import com.aiolos.news.common.exception.CustomizedException;
 import com.aiolos.news.pojo.bo.SaveFriendLinkBO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -19,7 +19,7 @@ public interface FriendLinkControllerApi {
 
     @ApiOperation(value = "新增或修改友情链接", notes = "新增或修改友情链接", httpMethod = "POST")
     @PostMapping("/saveOrUpdateFriendLink")
-    CommonResponse saveOrUpdateFriendLink(@Valid @RequestBody SaveFriendLinkBO saveFriendLinkBO) throws CustomizeException;
+    CommonResponse saveOrUpdateFriendLink(@Valid @RequestBody SaveFriendLinkBO saveFriendLinkBO) throws CustomizedException;
 
     @ApiOperation(value = "查询友情链接列表", notes = "查询友情链接列表", httpMethod = "POST")
     @PostMapping("/getFriendLinkList")

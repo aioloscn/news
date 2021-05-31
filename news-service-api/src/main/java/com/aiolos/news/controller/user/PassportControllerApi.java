@@ -1,7 +1,7 @@
 package com.aiolos.news.controller.user;
 
 import com.aiolos.news.common.response.CommonResponse;
-import com.aiolos.news.common.exception.CustomizeException;
+import com.aiolos.news.common.exception.CustomizedException;
 import com.aiolos.news.pojo.bo.RegisterLoginBO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -21,12 +21,12 @@ public interface PassportControllerApi {
 
     @ApiOperation(value = "获得短信验证码接口", notes = "获得短信验证码接口", httpMethod = "GET")
     @GetMapping("/getSMSCode")
-    CommonResponse getSMSCode(@RequestParam String mobile, HttpServletRequest request) throws CustomizeException;
+    CommonResponse getSMSCode(@RequestParam String mobile, HttpServletRequest request) throws CustomizedException;
 
     @ApiOperation(value = "一键注册登录接口", notes = "一键注册登录接口", httpMethod = "POST")
     @PostMapping("/login")
     CommonResponse login(@Valid @RequestBody RegisterLoginBO registerLoginBO,
-                         HttpServletRequest request, HttpServletResponse response) throws CustomizeException;
+                         HttpServletRequest request, HttpServletResponse response) throws CustomizedException;
 
     @ApiOperation(value = "用户退出登录", notes = "用户退出登录", httpMethod = "POST")
     @PostMapping("logout")

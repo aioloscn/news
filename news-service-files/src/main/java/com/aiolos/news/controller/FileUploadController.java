@@ -1,6 +1,6 @@
 package com.aiolos.news.controller;
 
-import com.aiolos.news.common.exception.CustomizeException;
+import com.aiolos.news.common.exception.CustomizedException;
 import com.aiolos.news.common.utils.FileUtils;
 import com.aiolos.news.pojo.bo.NewAdminBO;
 import com.aiolos.news.resources.FileResource;
@@ -159,9 +159,9 @@ public class FileUploadController implements FileUploadControllerApi {
     }
 
     @Override
-    public void readInGridFS(String faceId, HttpServletRequest request, HttpServletResponse response) throws CustomizeException {
+    public void readInGridFS(String faceId, HttpServletRequest request, HttpServletResponse response) throws CustomizedException {
         if (StringUtils.isBlank(faceId) || faceId.equalsIgnoreCase("null")) {
-            throw new CustomizeException(ErrorEnum.FILE_DOES_NOT_EXIST_ERROR);
+            throw new CustomizedException(ErrorEnum.FILE_DOES_NOT_EXIST_ERROR);
         }
         // 从GridFS中获取图片
         File adminFace = readGridFSByFaceId(faceId);
@@ -169,11 +169,11 @@ public class FileUploadController implements FileUploadControllerApi {
         FileUtils.downloadFileByStream(response, adminFace);
     }
 
-    private File readGridFSByFaceId(String faceId) throws CustomizeException {
+    private File readGridFSByFaceId(String faceId) throws CustomizedException {
         GridFSFindIterable gridFSFiles = gridFSBucket.find(Filters.eq("_id", new ObjectId(faceId)));
         GridFSFile gridFSFile = gridFSFiles.first();
         if (gridFSFile == null) {
-            throw new CustomizeException(ErrorEnum.FILE_DOES_NOT_EXIST_ERROR);
+            throw new CustomizedException(ErrorEnum.FILE_DOES_NOT_EXIST_ERROR);
         }
         String filename = gridFSFile.getFilename();
         // 获取文件流，保存文件到本地或服务器临时目录
@@ -189,7 +189,7 @@ public class FileUploadController implements FileUploadControllerApi {
             gridFSBucket.downloadToStream(new ObjectId(faceId), os);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-            throw new CustomizeException(ErrorEnum.FILE_ACQUISITION_FAILED);
+            throw new CustomizedException(ErrorEnum.FILE_ACQUISITION_FAILED);
         }
         return myFile;
     }

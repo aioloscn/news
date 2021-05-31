@@ -4,10 +4,9 @@ import com.aiolos.news.common.config.IdGeneratorSnowflake;
 import com.aiolos.news.common.enums.ErrorEnum;
 import com.aiolos.news.common.enums.Sex;
 import com.aiolos.news.common.enums.UserStatus;
-import com.aiolos.news.common.exception.CustomizeException;
+import com.aiolos.news.common.exception.CustomizedException;
 import com.aiolos.news.common.utils.CommonUtils;
 import com.aiolos.news.common.utils.DateUtils;
-import com.aiolos.news.common.utils.JsonUtils;
 import com.aiolos.news.common.utils.RedisOperator;
 import com.aiolos.news.dao.AppUserDao;
 import com.aiolos.news.pojo.AppUser;
@@ -53,9 +52,9 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
-    @Transactional(propagation = Propagation.NESTED, rollbackFor = CustomizeException.class)
+    @Transactional(propagation = Propagation.NESTED, rollbackFor = CustomizedException.class)
     @Override
-    public AppUser creatUser(String mobile) throws CustomizeException {
+    public AppUser creatUser(String mobile) throws CustomizedException {
 
         /**
          * 互联网项目都要考虑可扩展性
@@ -79,7 +78,7 @@ public class UserServiceImpl implements UserService {
             try {
                 throw new RuntimeException();
             } catch (Exception e) {
-                throw new CustomizeException(ErrorEnum.REGISTER_FAILED);
+                throw new CustomizedException(ErrorEnum.REGISTER_FAILED);
             }
         }
         return user;
@@ -90,9 +89,9 @@ public class UserServiceImpl implements UserService {
         return appUserDao.selectById(userId);
     }
 
-    @Transactional(propagation = Propagation.NESTED, rollbackFor = CustomizeException.class)
+    @Transactional(propagation = Propagation.NESTED, rollbackFor = CustomizedException.class)
     @Override
-    public void updateAccountInfo(UpdateUserInfoBO updateUserInfoBO) throws CustomizeException {
+    public void updateAccountInfo(UpdateUserInfoBO updateUserInfoBO) throws CustomizedException {
 
         String userId = updateUserInfoBO.getId();
 
@@ -109,7 +108,7 @@ public class UserServiceImpl implements UserService {
             try {
                 throw new RuntimeException();
             } catch (Exception e) {
-                throw new CustomizeException(ErrorEnum.USER_UPDATE_FAILED);
+                throw new CustomizedException(ErrorEnum.USER_UPDATE_FAILED);
             }
         }
 
@@ -125,9 +124,9 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    @Transactional(propagation = Propagation.NESTED, rollbackFor = CustomizeException.class)
+    @Transactional(propagation = Propagation.NESTED, rollbackFor = CustomizedException.class)
     @Override
-    public void freezeUserOrNot(String userId, Integer doStatus) throws CustomizeException {
+    public void freezeUserOrNot(String userId, Integer doStatus) throws CustomizedException {
         AppUser user = new AppUser();
         user.setId(userId);
         user.setActiveStatus(doStatus);
@@ -136,7 +135,7 @@ public class UserServiceImpl implements UserService {
             try {
                 throw new RuntimeException();
             } catch (Exception e) {
-                throw new CustomizeException(ErrorEnum.USER_UPDATE_FAILED);
+                throw new CustomizedException(ErrorEnum.USER_UPDATE_FAILED);
             }
         }
     }

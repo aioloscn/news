@@ -1,12 +1,7 @@
 package com.aiolos.news.service;
 
-import com.aiolos.news.TestApplication;
-import com.aiolos.news.common.exception.CustomizeException;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import com.aiolos.news.common.exception.CustomizedException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 /**
  * @author Aiolos
@@ -28,7 +23,7 @@ public class TransactionTest {
     }
 
 //    @Test
-    public void testNotRuntimeExceptionCanNotRollback() throws CustomizeException {
+    public void testNotRuntimeExceptionCanNotRollback() throws CustomizedException {
         springTransactionService.notRuntimeExceptionCanNotRollback();
     }
 
@@ -38,12 +33,12 @@ public class TransactionTest {
     }
 
 //    @Test
-    public void testAssignExceptionCanRollback() throws CustomizeException {
+    public void testAssignExceptionCanRollback() throws CustomizedException {
         springTransactionService.assignExceptionCanRollback();
     }
 
 //    @Test
-    public void testRollbackOnlyCanRollback() throws CustomizeException {
+    public void testRollbackOnlyCanRollback() throws CustomizedException {
         springTransactionService.rollbackOnlyCanRollback();
     }
 

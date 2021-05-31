@@ -1,7 +1,7 @@
 package com.aiolos.news.config;
 
 import com.aiolos.news.common.enums.ErrorEnum;
-import com.aiolos.news.common.exception.CustomizeException;
+import com.aiolos.news.common.exception.CustomizedException;
 import lombok.SneakyThrows;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.converter.Converter;
@@ -44,7 +44,7 @@ public class DateConverterConfig implements Converter<String, Date> {
         }else if(source.matches("^\\d{4}-\\d{1,2}-\\d{1,2} {1}\\d{1,2}:\\d{1,2}:\\d{1,2}$")){
             return parseDate(source, formatterList.get(3));
         }else {
-            throw new CustomizeException(ErrorEnum.SYSTEM_DATE_PARSER_ERROR);
+            throw new CustomizedException(ErrorEnum.SYSTEM_DATE_PARSER_ERROR);
         }
     }
 

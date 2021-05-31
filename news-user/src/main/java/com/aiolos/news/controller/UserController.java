@@ -2,7 +2,7 @@ package com.aiolos.news.controller;
 
 import com.aiolos.news.common.response.CommonResponse;
 import com.aiolos.news.common.enums.ErrorEnum;
-import com.aiolos.news.common.exception.CustomizeException;
+import com.aiolos.news.common.exception.CustomizedException;
 import com.aiolos.news.common.utils.JsonUtils;
 import com.aiolos.news.controller.user.UserControllerApi;
 import com.aiolos.news.pojo.AppUser;
@@ -81,7 +81,7 @@ public class UserController extends BaseController implements UserControllerApi 
     }
 
     @Override
-    public CommonResponse updateAccountInfo(UpdateUserInfoBO updateUserInfoBO) throws CustomizeException {
+    public CommonResponse updateAccountInfo(UpdateUserInfoBO updateUserInfoBO) throws CustomizedException {
 
         log.info("Enter the method updateAccountInfo, parameter updateUserInfoBO: {}", JsonUtils.objectToJson(updateUserInfoBO));
 

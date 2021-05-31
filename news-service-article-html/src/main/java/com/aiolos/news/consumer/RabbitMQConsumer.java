@@ -1,7 +1,7 @@
 package com.aiolos.news.consumer;
 
 import com.aiolos.news.common.enums.ErrorEnum;
-import com.aiolos.news.common.exception.CustomizeException;
+import com.aiolos.news.common.exception.CustomizedException;
 import com.aiolos.news.component.ArticleHtmlComponent;
 import com.aiolos.news.config.RabbitMQConfig;
 import lombok.extern.slf4j.Slf4j;
@@ -26,7 +26,7 @@ public class RabbitMQConsumer {
     }
 
     @RabbitListener(queues = {RabbitMQConfig.QUEUE_DOWNLOAD_HTML})
-    public void watchDownloadQueue(String payload, Message message) throws CustomizeException {
+    public void watchDownloadQueue(String payload, Message message) throws CustomizedException {
         log.info("rabbitmq consumer watchDownloadQueue param: {}", payload);
         String routingKey = message.getMessageProperties().getReceivedRoutingKey();
         if (routingKey.equalsIgnoreCase("article.download")) {
@@ -34,19 +34,19 @@ public class RabbitMQConsumer {
             String articleMongoId = payload.split(",")[1];
             Integer status = articleHtmlComponent.download(articleId, articleMongoId);
             if (status != HttpStatus.OK.value()) {
-                throw new CustomizeException(ErrorEnum.ARTICLE_REVIEW_ERROR);
+                throw new CustomizedException(ErrorEnum.ARTICLE_REVIEW_ERROR);
             }
         }
     }
 
     @RabbitListener(queues = {RabbitMQConfig.QUEUE_DELETE_HTML})
-    public void watchDeleteQueue(String payload, Message message) throws CustomizeException {
+    public void watchDeleteQueue(String payload, Message message) throws CustomizedException {
         log.info("rabbitmq consumer watchDeleteQueue param: {}", payload);
         String routingKey = message.getMessageProperties().getReceivedRoutingKey();
         if (routingKey.equalsIgnoreCase("article.delete")) {
             Integer status = articleHtmlComponent.delete(payload);
             if (status != HttpStatus.OK.value()) {
-                throw new CustomizeException(ErrorEnum.FAILED_TO_DELETE_ARTICLE);
+                throw new CustomizedException(ErrorEnum.FAILED_TO_DELETE_ARTICLE);
             }
         }
     }

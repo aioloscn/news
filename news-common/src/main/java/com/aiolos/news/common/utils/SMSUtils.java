@@ -1,6 +1,6 @@
 package com.aiolos.news.common.utils;
 
-import com.aiolos.news.common.exception.CustomizeException;
+import com.aiolos.news.common.exception.CustomizedException;
 import com.aiolos.news.common.enums.ErrorEnum;
 import com.aiolos.news.common.resources.AliyunResource;
 import com.aliyuncs.CommonRequest;
@@ -29,12 +29,12 @@ public class SMSUtils {
         this.aliyunResource = aliyunResource;
     }
 
-    public void sendSMS(String mobile, String code) throws CustomizeException {
+    public void sendSMS(String mobile, String code) throws CustomizedException {
 
         log.info("Enter the method sendSMS, parameter mobile: {}, code: {}", mobile, code);
 
         if (StringUtils.isBlank(mobile)) {
-            throw new CustomizeException(ErrorEnum.PHONE_INCORRECT);
+            throw new CustomizedException(ErrorEnum.PHONE_INCORRECT);
         }
 
         DefaultProfile profile = DefaultProfile.getProfile("cn-hangzhou",

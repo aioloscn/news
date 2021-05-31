@@ -1,6 +1,6 @@
 package com.aiolos.news.controller;
 
-import com.aiolos.news.common.exception.CustomizeException;
+import com.aiolos.news.common.exception.CustomizedException;
 import com.aiolos.news.common.response.CommonResponse;
 import com.aiolos.news.common.utils.JsonUtils;
 import com.aiolos.news.controller.admin.CategoryMngControllerApi;
@@ -49,7 +49,7 @@ public class CategoryMngController extends BaseController implements CategoryMng
     }
 
     @Override
-    public CommonResponse saveOrUpdateCategory(SaveCategoryBO saveCategoryBO) throws CustomizeException {
+    public CommonResponse saveOrUpdateCategory(SaveCategoryBO saveCategoryBO) throws CustomizedException {
         categoryService.saveOrUpdateCategory(saveCategoryBO);
         return CommonResponse.ok();
     }

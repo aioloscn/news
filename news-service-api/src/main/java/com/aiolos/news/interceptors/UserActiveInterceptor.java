@@ -2,7 +2,7 @@ package com.aiolos.news.interceptors;
 
 import com.aiolos.news.common.enums.ErrorEnum;
 import com.aiolos.news.common.enums.UserStatus;
-import com.aiolos.news.common.exception.CustomizeException;
+import com.aiolos.news.common.exception.CustomizedException;
 import com.aiolos.news.common.utils.JsonUtils;
 import com.aiolos.news.pojo.AppUser;
 import org.apache.commons.lang3.StringUtils;
@@ -40,7 +40,7 @@ public class UserActiveInterceptor extends BaseInterceptor implements HandlerInt
         }
 
         if (user.getActiveStatus() == null || !user.getActiveStatus().equals(UserStatus.ACTIVE.getType())) {
-            throw new CustomizeException(ErrorEnum.USER_INACTIVE_ERROR);
+            throw new CustomizedException(ErrorEnum.USER_INACTIVE_ERROR);
         }
         return true;
     }

@@ -2,7 +2,7 @@ package com.aiolos.news.controller;
 
 import com.aiolos.news.common.response.CommonResponse;
 import com.aiolos.news.common.enums.ErrorEnum;
-import com.aiolos.news.common.exception.CustomizeException;
+import com.aiolos.news.common.exception.CustomizedException;
 import com.aiolos.news.common.utils.PagedResult;
 import com.aiolos.news.common.utils.RedisOperator;
 import com.aiolos.news.controller.admin.AdminControllerApi;
@@ -38,14 +38,14 @@ public class AdminController extends BaseController implements AdminControllerAp
     }
 
     @Override
-    public CommonResponse adminLogin(AdminLoginBO adminLoginBO, HttpServletRequest request, HttpServletResponse response) throws CustomizeException {
+    public CommonResponse adminLogin(AdminLoginBO adminLoginBO, HttpServletRequest request, HttpServletResponse response) throws CustomizedException {
 
         log.info("Enter the method adminLogin, parameter adminLoginBO: {}", adminLoginBO.toString());
 
         AdminUser adminUser = adminUserService.queryAdminByUsername(adminLoginBO.getUsername());
 
         if (adminUser == null) {
-            throw new CustomizeException(ErrorEnum.ADMIN_NOT_EXIST_ERROR);
+            throw new CustomizedException(ErrorEnum.ADMIN_NOT_EXIST_ERROR);
         }
 
         if (BCrypt.checkpw(DigestUtils.md5Hex(adminLoginBO.getPassword()), adminUser.getPassword())) {
@@ -59,7 +59,7 @@ public class AdminController extends BaseController implements AdminControllerAp
     }
 
     @Override
-    public CommonResponse adminIsExist(String username) throws CustomizeException {
+    public CommonResponse adminIsExist(String username) throws CustomizedException {
 
         log.info("Enter the method adminIsExist, parameter username: {}", username);
 
@@ -68,7 +68,7 @@ public class AdminController extends BaseController implements AdminControllerAp
     }
 
     @Override
-    public CommonResponse addNewAdmin(NewAdminBO newAdminBO) throws CustomizeException {
+    public CommonResponse addNewAdmin(NewAdminBO newAdminBO) throws CustomizedException {
 
         log.info("Enter the method addNewAdmin, parameter newAdminBO: {}", newAdminBO);
 
@@ -135,11 +135,11 @@ public class AdminController extends BaseController implements AdminControllerAp
         setCookie("atoken", token, COOKIE_EXPIRE_TIME, request, response);
     }
 
-    private void checkAdminExist(String username) throws CustomizeException {
+    private void checkAdminExist(String username) throws CustomizedException {
 
         AdminUser adminUser = adminUserService.queryAdminByUsername(username);
 
         if (adminUser != null)
-            throw new CustomizeException(ErrorEnum.ADMIN_USERNAME_EXIST_ERROR);
+            throw new CustomizedException(ErrorEnum.ADMIN_USERNAME_EXIST_ERROR);
     }
 }
