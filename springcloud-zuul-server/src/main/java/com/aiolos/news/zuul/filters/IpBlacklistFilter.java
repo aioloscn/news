@@ -57,13 +57,6 @@ public class IpBlacklistFilter extends ZuulFilter {
 
     @Override
     public Object run() throws ZuulException {
-
-        System.out.println("continueCounts: " + continueCounts);
-        System.out.println("timeInterval: " + timeInterval);
-        System.out.println("limitTime: " + limitTime);
-
-        log.info("Enter ip blacklist filter");
-
         // 获得上下文对象
         RequestContext context = RequestContext.getCurrentContext();
         HttpServletRequest request = context.getRequest();

@@ -83,7 +83,7 @@ public class ArticleController extends BaseController implements ArticleControll
     @Override
     public CommonResponse queryMyArticleList(String userId, String keyword, Integer status, Date startDate, Date endDate, Integer pageNum, Integer pageSize) {
         if (StringUtils.isBlank(userId)) {
-            return CommonResponse.error(ErrorEnum.ARTICLE_QUERY_PARAMS_ERROR);
+            return CommonResponse.error(ErrorEnum.TOKEN_INVALID);
         }
 
         if (pageNum == null) {

@@ -207,7 +207,7 @@ public class FansServiceImpl extends BaseService implements FansService {
         updateMap.put("sex", fan.getSex());
         updateMap.put("province", fan.getProvince());
         IndexRequest indexRequest = new IndexRequest();
-        indexRequest.source(indexRequest);
+        indexRequest.source(updateMap);
         UpdateQuery updateQuery = new UpdateQueryBuilder().withClass(FansEO.class).withId(relationId).withIndexRequest(indexRequest).build();
         elasticsearchTemplate.update(updateQuery);
     }
