@@ -25,15 +25,7 @@ public interface ArticlePortalControllerApi {
 
     @ApiOperation(value = "首页查询文章列表", notes = "首页查询文章列表", httpMethod = "GET")
     @GetMapping("/list")
-    CommonResponse list(@RequestParam String keyword, @RequestParam Integer category,
-                        @ApiParam(name = "page", value = "查询第几页", required = false)
-                        @RequestParam Integer page,
-                        @ApiParam(name = "pageSize", value = "每一页显示的条数", required = false)
-                        @RequestParam Integer pageSize);
-
-    @ApiOperation(value = "首页使用ES查询文章列表", notes = "首页使用ES查询文章列表", httpMethod = "GET")
-    @GetMapping("/es/list")
-    CommonResponse esList(@RequestParam String keyword, @RequestParam Integer category,
+    CommonResponse list(@RequestParam(required = false) String keyword, @RequestParam(required = false) Integer category,
                         @ApiParam(name = "page", value = "查询第几页", required = false)
                         @RequestParam Integer page,
                         @ApiParam(name = "pageSize", value = "每一页显示的条数", required = false)

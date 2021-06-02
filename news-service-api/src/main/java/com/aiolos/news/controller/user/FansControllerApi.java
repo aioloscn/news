@@ -42,4 +42,8 @@ public interface FansControllerApi {
     @ApiOperation(value = "根据地域查询粉丝数量", httpMethod = "POST")
     @PostMapping("/queryRatioByRegion")
     CommonResponse queryRatioByRegion(@RequestParam String writerId);
+
+    @ApiOperation(value = "被动更新粉丝信息", httpMethod = "POST")
+    @PostMapping
+    CommonResponse forceUpdateFanInfo(@RequestParam String relationId, @RequestParam String fanId);
 }

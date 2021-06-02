@@ -31,8 +31,7 @@ public class FansController extends BaseController implements FansControllerApi 
         if (StringUtils.isBlank(fanId)) {
             return CommonResponse.error(ErrorEnum.FAN_ID_NULL_ERROR);
         }
-        fansService.isMeFollowThisWriter(writerId, fanId);
-        return CommonResponse.ok();
+        return CommonResponse.ok(fansService.isMeFollowThisWriter(writerId, fanId));
     }
 
     @Override
@@ -63,7 +62,7 @@ public class FansController extends BaseController implements FansControllerApi 
     public CommonResponse queryAll(String writerId, Integer page, Integer pageSize) {
         if (page == null) page = START_PAGE;
         if (pageSize == null) pageSize = PAGE_SIZE;
-        return CommonResponse.ok(fansService.queryFansList(writerId, page, pageSize));
+        return CommonResponse.ok(fansService.queryFansESList(writerId, page, pageSize));
     }
 
     @Override
@@ -74,5 +73,11 @@ public class FansController extends BaseController implements FansControllerApi 
     @Override
     public CommonResponse queryRatioByRegion(String writerId) {
         return CommonResponse.ok(fansService.queryRatioByRegion(writerId));
+    }
+
+    @Override
+    public CommonResponse forceUpdateFanInfo(String relationId, String fanId) {
+        fansService.forceUpdateFanInfo(relationId, fanId);
+        return CommonResponse.ok();
     }
 }

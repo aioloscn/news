@@ -8,6 +8,7 @@ import com.aiolos.news.common.utils.PagedResult;
 import com.aiolos.news.controller.user.UserControllerApi;
 import com.aiolos.news.dao.ArticleDao;
 import com.aiolos.news.pojo.Article;
+import com.aiolos.news.pojo.eo.ArticleEO;
 import com.aiolos.news.pojo.vo.ArticleDetailVO;
 import com.aiolos.news.pojo.vo.IndexArticleVO;
 import com.aiolos.news.pojo.vo.UserBasicInfoVO;
@@ -17,15 +18,26 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.apache.commons.lang3.StringUtils;
+import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.search.SearchHit;
+import org.elasticsearch.search.SearchHits;
+import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
+import org.elasticsearch.search.fetch.subphase.highlight.HighlightField;
 import org.springframework.beans.BeanUtils;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
+import org.springframework.data.elasticsearch.core.SearchResultMapper;
+import org.springframework.data.elasticsearch.core.aggregation.AggregatedPage;
+import org.springframework.data.elasticsearch.core.aggregation.impl.AggregatedPageImpl;
+import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
+import org.springframework.data.elasticsearch.core.query.SearchQuery;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author Aiolos
@@ -41,11 +53,14 @@ public class ArticlePortalServiceImpl extends BaseService implements ArticlePort
 
     private final UserControllerApi userMicroservice;
 
-    public ArticlePortalServiceImpl(ArticleDao articleDao, RestTemplate restTemplate, DiscoveryClient discoveryClient, UserControllerApi userMicroservice) {
+    private final ElasticsearchTemplate elasticsearchTemplate;
+
+    public ArticlePortalServiceImpl(ArticleDao articleDao, RestTemplate restTemplate, DiscoveryClient discoveryClient, UserControllerApi userMicroservice, ElasticsearchTemplate elasticsearchTemplate) {
         this.articleDao = articleDao;
         this.restTemplate = restTemplate;
         this.discoveryClient = discoveryClient;
         this.userMicroservice = userMicroservice;
+        this.elasticsearchTemplate = elasticsearchTemplate;
     }
 
     @Override
@@ -78,7 +93,103 @@ public class ArticlePortalServiceImpl extends BaseService implements ArticlePort
         articleIPage = articleDao.selectPage(articleIPage, queryWrapper);
 
         List<Article> articleList = articleIPage.getRecords();
+        return rebuildArticlePagedResult(articleIPage, articleList);
+    }
 
+    @Override
+    public PagedResult queryIndexArticleESList(String keyword, Integer category, Integer page, Integer pageSize) {
+        /**
+         * 1. 首页默认查询，不带参数
+         * 2. 按照文章分类查询
+         * 3. 按照关键字查询
+         */
+        // es的页面是从0开始计算的，所以在这里page需要-1
+        if (page < 1) return null;
+        page--;
+        // 分页
+        Pageable pageable = PageRequest.of(page, pageSize);
+
+        AggregatedPage<ArticleEO> pagedArticle = null;
+        if (StringUtils.isBlank(keyword) && category == null) {
+            SearchQuery query = new NativeSearchQueryBuilder().withQuery(QueryBuilders.matchAllQuery()).withPageable(pageable).build();
+            pagedArticle = elasticsearchTemplate.queryForPage(query, ArticleEO.class);
+        }
+        if (StringUtils.isBlank(keyword) && category != null) {
+            SearchQuery query = new NativeSearchQueryBuilder().withQuery(QueryBuilders.termQuery("categoryId", category)).build();
+            pagedArticle = elasticsearchTemplate.queryForPage(query, ArticleEO.class);
+        }
+
+        // 关键字搜索高亮展示
+        String searchTitleField = "title";
+        if (StringUtils.isNotBlank(keyword) && category == null) {
+            String preTag = "<font color='red'>";
+            String postTag = "</font>";
+            SearchQuery query = new NativeSearchQueryBuilder()
+                    .withQuery(QueryBuilders.matchQuery(searchTitleField, keyword))
+                    .withHighlightFields(new HighlightBuilder.Field(searchTitleField).preTags(preTag).postTags(postTag))
+                    .withPageable(pageable)
+                    .build();
+
+            pagedArticle = elasticsearchTemplate.queryForPage(query, ArticleEO.class, new SearchResultMapper() {
+                @Override
+                public <T> AggregatedPage<T> mapResults(SearchResponse response, Class<T> clazz, Pageable pageable) {
+                    List<ArticleEO> articleHighlightList = new ArrayList<>();
+                    SearchHits hits = response.getHits();
+                    hits.forEach(h -> {
+                        HighlightField highlightField = h.getHighlightFields().get(searchTitleField);
+                        String title = highlightField.getFragments()[0].toString();
+                        // 获得其他字段数据，并重新封装
+                        String id = h.getSourceAsMap().get("id").toString();
+                        Integer categoryId = (Integer) h.getSourceAsMap().get("categoryId");
+                        Integer articleType = (Integer) h.getSourceAsMap().get("articleType");
+                        String articleCover = h.getSourceAsMap().get("articleCover").toString();
+                        String publishUserId = h.getSourceAsMap().get("publishUserId").toString();
+                        Long longDate = (Long) h.getSourceAsMap().get("publishTime");
+                        Date publishTime = new Date(longDate);
+
+                        ArticleEO articleEO = new ArticleEO();
+                        articleEO.setId(id);
+                        articleEO.setTitle(title);
+                        articleEO.setCategoryId(categoryId);
+                        articleEO.setArticleType(articleType);
+                        articleEO.setArticleCover(articleCover);
+                        articleEO.setPublishUserId(publishUserId);
+                        articleEO.setPublishTime(publishTime);
+                        articleHighlightList.add(articleEO);
+                    });
+                    return new AggregatedPageImpl<>((List<T>) articleHighlightList, pageable, response.getHits().getTotalHits());
+                }
+
+                @Override
+                public <T> T mapSearchHit(SearchHit searchHit, Class<T> type) {
+                    return null;
+                }
+            });
+        }
+
+        List<ArticleEO> articleEOList = pagedArticle.getContent();
+        List<Article> articleList = new ArrayList<>();
+        articleEOList.forEach(a -> {
+            Article article = new Article();
+            BeanUtils.copyProperties(a, article);
+            articleList.add(article);
+        });
+
+        IPage<Article> articleIPage = new Page<>();
+        articleIPage.setRecords(articleList);
+        articleIPage.setCurrent(++page);
+        articleIPage.setPages(pagedArticle.getTotalPages());
+        articleIPage.setTotal(pagedArticle.getTotalElements());
+        return rebuildArticlePagedResult(articleIPage, articleList);
+    }
+
+    /**
+     * 构建PagedResult数据，包含文章发布者信息
+     * @param articleIPage
+     * @param articleList
+     * @return
+     */
+    private PagedResult rebuildArticlePagedResult(IPage articleIPage, List<Article> articleList) {
         // 1. 构建发布者ID列表
         Set<String> idSet = new HashSet<>();
         List<String> idList = new ArrayList<>();
@@ -199,7 +310,6 @@ public class ArticlePortalServiceImpl extends BaseService implements ArticlePort
 
     @Override
     public ArticleDetailVO queryDetail(String articleId) {
-
         Article article = new Article();
         article.setId(articleId);
         article.setIsAppoint(YesOrNo.NO.getType());
@@ -210,11 +320,9 @@ public class ArticlePortalServiceImpl extends BaseService implements ArticlePort
         article = articleDao.selectOne(queryWrapper);
 
         ArticleDetailVO articleDetailVO = new ArticleDetailVO();
-
         if (article != null) {
             BeanUtils.copyProperties(article, articleDetailVO);
         }
-
         return articleDetailVO;
     }
 
@@ -229,11 +337,9 @@ public class ArticlePortalServiceImpl extends BaseService implements ArticlePort
         article = articleDao.selectOne(queryWrapper);
 
         ArticleDetailVO articleDetailVO = new ArticleDetailVO();
-
         if (article != null) {
             BeanUtils.copyProperties(article, articleDetailVO);
         }
-
         return articleDetailVO;
     }
 
@@ -244,13 +350,11 @@ public class ArticlePortalServiceImpl extends BaseService implements ArticlePort
      * @return
      */
     private UserBasicInfoVO getUserIfPublisher(String publisherId, List<UserBasicInfoVO> publisherList) {
-
         for (UserBasicInfoVO userBasicInfoVO : publisherList) {
             if (userBasicInfoVO.getId().equalsIgnoreCase(publisherId)) {
                 return userBasicInfoVO;
             }
         }
-
         return null;
     }
 }

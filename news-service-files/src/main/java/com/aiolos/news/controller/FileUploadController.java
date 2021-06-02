@@ -116,8 +116,8 @@ public class FileUploadController implements FileUploadControllerApi {
                         }
 
                         // 执行上传
-//                        path = uploadService.uploadOSS(file, userId, suffix);
                         path = uploadService.uploadFastDFS(file, suffix);
+//                        path = uploadService.uploadOSS(file, userId, suffix);
                     } else {
                         continue;
                     }
@@ -127,8 +127,8 @@ public class FileUploadController implements FileUploadControllerApi {
 
                 if (StringUtils.isNotBlank(path)) {
                     // TODO 对图片进行审核
-//                    imageUrlList.add(fileResource.getOssHost() + path);
                     imageUrlList.add(fileResource.getHost() + path);
+//                    imageUrlList.add(fileResource.getOssHost() + path);
                 } else {
                     continue;
                 }
