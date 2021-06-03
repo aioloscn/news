@@ -13,13 +13,16 @@ spring:
 #      profile: test
       discovery:
         service-id: springcloud-config
-        enabled: true
+        enabled: true   # bootstrap.yml中已经不适用这个配置了
   servlet:
     multipart:
       max-file-size: 2MB  # 修改最大上传文件限制，默认1MB
 
 # 路由规则：http://[网关地址]:[端口号]/[prefix]/[微服务实例名称]/[请求地址路径]
 zuul:
+  SendErrorFilter:
+    error:
+      disable: true
   sensitive-headers: Access-Control-Allow-Origin
   ignored-headers: Access-Control-Allow-Credentials,Access-Control-Allow-Origin,H-APP-Id,Token,APPToken
   prefix: /api                           # 请求前缀

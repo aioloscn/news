@@ -47,5 +47,6 @@ springcloud-eureka-cluster/src/main/resources/application-server2.yml
 springcloud-eureka-cluster/src/main/resources/application-server3.yml
 
 springcloud-zuul-server/src/main/resources/pending-bootstrap.yml
+springcloud-zuul-server/src/main/resources/bootstrap.yml
 
 log/
