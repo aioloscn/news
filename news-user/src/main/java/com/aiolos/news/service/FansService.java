@@ -38,8 +38,8 @@ public interface FansService {
     /**
      * 查询粉丝分页列表
      * @param writerId 作家Id
-     * @param page
-     * @param pageSize
+     * @param page 第几页
+     * @param pageSize 每页显示数
      * @return
      */
     PagedResult queryFansList(String writerId, Integer page, Integer pageSize);
@@ -61,11 +61,25 @@ public interface FansService {
     FansCountsVO queryFansCounts(String writerId);
 
     /**
+     * 查询ES中男女粉丝数量
+     * @param writerId 作家Id
+     * @return
+     */
+    FansCountsVO queryESFansCounts(String writerId);
+
+    /**
      * 查询作家每个省份的粉丝比例
      * @param writerId 作家Id
      * @return
      */
     List<RegionRatioVO> queryRatioByRegion(String writerId);
+
+    /**
+     * 查询ES中作家每个省份的粉丝比例
+     * @param writerId 作家Id
+     * @return
+     */
+    List<RegionRatioVO> queryESRatioByRegion(String writerId);
 
     /**
      * 更新该作家在ES中的某个粉丝关联关系数据

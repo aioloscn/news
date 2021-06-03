@@ -67,12 +67,12 @@ public class FansController extends BaseController implements FansControllerApi 
 
     @Override
     public CommonResponse queryRatio(String writerId) {
-        return CommonResponse.ok(fansService.queryFansCounts(writerId));
+        return CommonResponse.ok(fansService.queryESFansCounts(writerId));
     }
 
     @Override
     public CommonResponse queryRatioByRegion(String writerId) {
-        return CommonResponse.ok(fansService.queryRatioByRegion(writerId));
+        return CommonResponse.ok(fansService.queryESRatioByRegion(writerId));
     }
 
     @Override

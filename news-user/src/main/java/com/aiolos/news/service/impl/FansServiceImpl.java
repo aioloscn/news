@@ -20,11 +20,19 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.elasticsearch.action.index.IndexRequest;
+import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.search.aggregations.Aggregation;
+import org.elasticsearch.search.aggregations.AggregationBuilders;
+import org.elasticsearch.search.aggregations.Aggregations;
+import org.elasticsearch.search.aggregations.bucket.terms.LongTerms;
+import org.elasticsearch.search.aggregations.bucket.terms.StringTerms;
+import org.elasticsearch.search.aggregations.bucket.terms.TermsAggregationBuilder;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
+import org.springframework.data.elasticsearch.core.ResultsExtractor;
 import org.springframework.data.elasticsearch.core.aggregation.AggregatedPage;
 import org.springframework.data.elasticsearch.core.query.*;
 import org.springframework.stereotype.Service;
@@ -160,8 +168,43 @@ public class FansServiceImpl extends BaseService implements FansService {
         List<Fans> fansList = fansDao.selectList(queryWrapper);
         Map<Integer, Long> fansCountsMap = fansList.stream().collect(Collectors.groupingBy(Fans::getSex, Collectors.counting()));
         FansCountsVO fansCountsVO = new FansCountsVO();
-        fansCountsVO.setManCounts(fansCountsMap.get(Sex.man.getType()).intValue());
-        fansCountsVO.setWomanCounts(fansCountsMap.get(Sex.woman.getType()).intValue());
+        fansCountsVO.setManCounts(fansCountsMap.get(Sex.MAN.getType()).intValue());
+        fansCountsVO.setWomanCounts(fansCountsMap.get(Sex.WOMAN.getType()).intValue());
+        return fansCountsVO;
+    }
+
+    @Override
+    public FansCountsVO queryESFansCounts(String writerId) {
+        TermsAggregationBuilder aggregationBuilder = AggregationBuilders
+                // 拼接命令field + _counts，可以随便取，只要和下面命名保持一致即可
+                .terms("sex_counts").field("sex");
+        SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(QueryBuilders.matchQuery("writerId", writerId))
+                .addAggregation(aggregationBuilder).build();
+        Aggregations aggregations = elasticsearchTemplate.query(searchQuery, new ResultsExtractor<Aggregations>() {
+            @Override
+            public Aggregations extract(SearchResponse response) {
+                return response.getAggregations();
+            }
+        });
+
+        Map<String, Aggregation> aggregationMap = aggregations.getAsMap();
+        LongTerms sex_counts = (LongTerms) aggregationMap.get("sex_counts");
+        List<LongTerms.Bucket> buckets = sex_counts.getBuckets();
+        FansCountsVO fansCountsVO = new FansCountsVO();
+        buckets.forEach(b -> {
+            Long key = (Long) b.getKey();
+            Long docCount = b.getDocCount();
+            if (key.intValue() == Sex.MAN.getType()) {
+                fansCountsVO.setManCounts(docCount.intValue());
+            } else if (key.intValue() == Sex.WOMAN.getType()) {
+                fansCountsVO.setWomanCounts(docCount.intValue());
+            }
+        });
+
+        if (buckets == null || buckets.size() == 0) {
+            fansCountsVO.setManCounts(0);
+            fansCountsVO.setWomanCounts(0);
+        }
         return fansCountsVO;
     }
 
@@ -181,6 +224,31 @@ public class FansServiceImpl extends BaseService implements FansService {
             regionRatioVOs.add(vo);
         });
         return regionRatioVOs;
+    }
+
+    @Override
+    public List<RegionRatioVO> queryESRatioByRegion(String writerId) {
+        TermsAggregationBuilder aggregationBuilder = AggregationBuilders.terms("province_counts").field("province");
+        SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(QueryBuilders.matchQuery("writerId", writerId))
+                .addAggregation(aggregationBuilder).build();
+        Aggregations aggregations = elasticsearchTemplate.query(searchQuery, new ResultsExtractor<Aggregations>() {
+            @Override
+            public Aggregations extract(SearchResponse response) {
+                return response.getAggregations();
+            }
+        });
+
+        Map<String, Aggregation> aggregationMap = aggregations.asMap();
+        StringTerms province_counts = (StringTerms) aggregationMap.get("province_counts");
+        List<StringTerms.Bucket> buckets = province_counts.getBuckets();
+        List<RegionRatioVO> regionRatioVOList = new ArrayList<>();
+        buckets.forEach(b -> {
+            RegionRatioVO regionRatioVO = new RegionRatioVO();
+            regionRatioVO.setName(b.getKeyAsString());
+            regionRatioVO.setValue((int) b.getDocCount());
+            regionRatioVOList.add(regionRatioVO);
+        });
+        return regionRatioVOList;
     }
 
     @Transactional(propagation = Propagation.NESTED, rollbackFor = CustomizedException.class)

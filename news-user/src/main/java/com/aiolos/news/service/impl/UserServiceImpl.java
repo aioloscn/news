@@ -67,7 +67,7 @@ public class UserServiceImpl implements UserService {
         user.setNickname("用户" + CommonUtils.hidePhoneNo(mobile));
         user.setFace("");
         user.setBirthday(DateUtils.strToDate("1970-01-01 00:00:00"));
-        user.setSex(Sex.secret.getType());
+        user.setSex(Sex.SECRET.getType());
         user.setActiveStatus(UserStatus.INACTIVE.getType());
         user.setTotalIncome(0);
         user.setCreatedTime(new Date());
