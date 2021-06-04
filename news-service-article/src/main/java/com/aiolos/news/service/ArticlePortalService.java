@@ -40,6 +40,12 @@ public interface ArticlePortalService {
     List<Article> queryHotList();
 
     /**
+     * 从zset中获取阅读数最高的5篇文章Id，根据Id从ES中获取文章列表
+     * @return
+     */
+    List<Article> queryESHotListByScore();
+
+    /**
      * 根据文章主键查询文章详情
      * @param articleId
      * @return

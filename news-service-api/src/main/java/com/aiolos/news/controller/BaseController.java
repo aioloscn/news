@@ -49,6 +49,8 @@ public class BaseController {
 
     public static final String REDIS_MY_FOLLOW_COUNT = "redis_my_follow_count";
 
+    public static final String ARTICLE_READ_COUNTS_ZSET = "article_read_counts_zset";
+
     public static final Integer COOKIE_EXPIRE_TIME = 7 * 24 * 60 * 60;
 
     public static final Integer START_PAGE = 1;

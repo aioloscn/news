@@ -11,6 +11,7 @@ import com.aiolos.news.pojo.vo.UserBasicInfoVO;
 import com.aiolos.news.service.ArticlePortalService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpStatus;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
@@ -31,10 +32,13 @@ public class ArticlePortalController extends BaseController implements ArticlePo
 
     private final UserControllerApi userMicroservice;
 
-    public ArticlePortalController(ArticlePortalService articlePortalService, RestTemplate restTemplate, UserControllerApi userMicroservice) {
+    private final StringRedisTemplate redisTemplate;
+
+    public ArticlePortalController(ArticlePortalService articlePortalService, RestTemplate restTemplate, UserControllerApi userMicroservice, StringRedisTemplate redisTemplate) {
         this.articlePortalService = articlePortalService;
         this.restTemplate = restTemplate;
         this.userMicroservice = userMicroservice;
+        this.redisTemplate = redisTemplate;
     }
 
     @Override
@@ -55,7 +59,7 @@ public class ArticlePortalController extends BaseController implements ArticlePo
 
     @Override
     public CommonResponse hotList() {
-        return CommonResponse.ok(articlePortalService.queryHotList());
+        return CommonResponse.ok(articlePortalService.queryESHotListByScore());
     }
 
     @Override
@@ -104,8 +108,10 @@ public class ArticlePortalController extends BaseController implements ArticlePo
 
         // 设置针对当前用户ip的永久存在的key，存入到redis，表示该ip的用户已经阅读过了，第二次会被拦截器拦截不会进入这个方法，不再累加阅读量
         redis.setnx(REDIS_ALREADY_READ + ":" + articleId + ":" + userIp, userIp);
-
+        // 阅读数累加，如果key不存在，那么它的值会先被初始化为0，然后再执行INCR命令
         redis.increment(REDIS_ARTICLE_READ_COUNTS + ":" + articleId, 1);
+        // 累加zset中这篇文章的阅读数，当key不存在，或member不是key的成员时，ZINCRBY key increment member等同于ZADD key increment member
+        redisTemplate.opsForZSet().incrementScore(ARTICLE_READ_COUNTS_ZSET, articleId, 1);
         return CommonResponse.ok();
     }
 

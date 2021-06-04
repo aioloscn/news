@@ -19,6 +19,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.apache.commons.lang3.StringUtils;
 import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.index.query.IdsQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
@@ -34,6 +35,7 @@ import org.springframework.data.elasticsearch.core.aggregation.AggregatedPage;
 import org.springframework.data.elasticsearch.core.aggregation.impl.AggregatedPageImpl;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.data.elasticsearch.core.query.SearchQuery;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -55,12 +57,15 @@ public class ArticlePortalServiceImpl extends BaseService implements ArticlePort
 
     private final ElasticsearchTemplate elasticsearchTemplate;
 
-    public ArticlePortalServiceImpl(ArticleDao articleDao, RestTemplate restTemplate, DiscoveryClient discoveryClient, UserControllerApi userMicroservice, ElasticsearchTemplate elasticsearchTemplate) {
+    private final StringRedisTemplate redisTemplate;
+
+    public ArticlePortalServiceImpl(ArticleDao articleDao, RestTemplate restTemplate, DiscoveryClient discoveryClient, UserControllerApi userMicroservice, ElasticsearchTemplate elasticsearchTemplate, StringRedisTemplate redisTemplate) {
         this.articleDao = articleDao;
         this.restTemplate = restTemplate;
         this.discoveryClient = discoveryClient;
         this.userMicroservice = userMicroservice;
         this.elasticsearchTemplate = elasticsearchTemplate;
+        this.redisTemplate = redisTemplate;
     }
 
     @Override
@@ -306,6 +311,29 @@ public class ArticlePortalServiceImpl extends BaseService implements ArticlePort
 
         List<Article> articleList = articleIPage.getRecords();
         return articleList;
+    }
+
+    @Override
+    public List<Article> queryESHotListByScore() {
+        Set<String> articleIds = redisTemplate.opsForZSet().reverseRange(ARTICLE_READ_COUNTS_ZSET, 0, 5);
+        IdsQueryBuilder queryBuilder = QueryBuilders.idsQuery();
+        queryBuilder.ids().addAll(articleIds);
+        SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(queryBuilder).build();
+        List<ArticleEO> articleEOs = elasticsearchTemplate.queryForList(searchQuery, ArticleEO.class);
+        List<Article> articles = new ArrayList<>();
+        // es获得的数据只是按匹配到数据取出来，需要重新排序
+        Iterator<String> iterator = articleIds.iterator();
+        while (iterator.hasNext()) {
+            String articleId = iterator.next();
+            articleEOs.forEach(a -> {
+                if (a.getId().equals(articleId)) {
+                    Article article = new Article();
+                    BeanUtils.copyProperties(a, article);
+                    articles.add(article);
+                }
+            });
+        }
+        return articles;
     }
 
     @Override
