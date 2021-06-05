@@ -284,7 +284,6 @@ public class ArticlePortalServiceImpl extends BaseService implements ArticlePort
          */
         Article article = new Article();
         article.setIsAppoint(YesOrNo.NO.getType());
-        article.setArticleStatus(ArticleReviewStatus.SUCCESS.getType());
         article.setIsDelete(YesOrNo.NO.getType());
         article.setArticleStatus(ArticleReviewStatus.SUCCESS.getType());
 

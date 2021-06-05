@@ -12,6 +12,8 @@
     <link rel="stylesheet" type="text/css" href="../css/detail/comments.css" />
     <link rel="stylesheet" type="text/css" href="../css/detail/middleBar.css" />
     <link rel="stylesheet" type="text/css" href="../libs/JqueryShare/share.min.css" />
+    <link rel="stylesheet" href="../libs/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../libs/summernote/dist/summernote.css">
 	<link rel="stylesheet" type="text/css" href="../../layui/layer.css" />
 
     <!-- 分页css -->
@@ -219,7 +221,9 @@
     <script src="../libs/vue.min.js"></script>
     <script src="../libs/axios.min.js"></script>
 
-    <script src="../libs/jquery.min.js"></script>
+    <script src="../libs/jquery-3.4.1.min.js"></script>
+    <script src="../libs/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../libs/summernote/dist/summernote.js"></script>
     <!-- 中文汉化 -->
     <script src="../libs/summernote/lang/summernote-zh-CN.js"></script>
     <!-- vue 分页 -->
