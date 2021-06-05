@@ -21,11 +21,11 @@ import javax.validation.Valid;
 @FeignClient(value = MyServiceList.NEWS_USER, fallbackFactory = UserControllerFallbackFactory.class)       // 服务提供者
 public interface UserControllerApi {
 
-    @ApiOperation(value = "获取用户基本信息", notes = "获取用户基本信息", httpMethod = "POST")
+    @ApiOperation(value = "获取用户基本信息", notes = "获取用户基本信息，不需要登录", httpMethod = "POST")
     @PostMapping("/getUserBasicInfo")
     CommonResponse getUserBasicInfo(@RequestParam String userId);
 
-    @ApiOperation(value = "获取用户账号信息", notes = "获取用户账号信息", httpMethod = "POST")
+    @ApiOperation(value = "获取用户账号信息", notes = "获取用户账号信息，需要登录，不适于其他服务远程调用", httpMethod = "POST")
     @PostMapping("/getAccountInfo")
     CommonResponse getAccountInfo(@RequestParam String userId);
 
@@ -33,7 +33,7 @@ public interface UserControllerApi {
     @PostMapping("/updateAccountInfo")
     CommonResponse updateAccountInfo(@Valid @RequestBody UpdateUserInfoBO updateUserInfoBO) throws CustomizedException;
 
-    @ApiOperation(value = "根据多个用户的id查询用户列表", notes = "根据多个用户的id查询用户列表", httpMethod = "GET")
+    @ApiOperation(value = "根据多个用户的id查询用户列表", notes = "根据多个用户的id查询用户列表，不需要登录", httpMethod = "GET")
     @GetMapping("/queryByIds")
     CommonResponse queryByIds(@RequestParam String userIds);
 }
