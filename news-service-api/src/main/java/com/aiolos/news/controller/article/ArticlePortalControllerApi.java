@@ -50,4 +50,14 @@ public interface ArticlePortalControllerApi {
     @ApiOperation(value = "阅读文章，文章阅读量增加", notes = "阅读文章，文章阅读量增加", httpMethod = "POST")
     @PostMapping("/readArticle")
     CommonResponse readArticle(@RequestParam String articleId, HttpServletRequest request);
+
+    @ApiOperation(value = "分页查询作家文章", httpMethod = "GET")
+    @GetMapping("/queryArticleListOfWriter")
+    CommonResponse queryArticleListOfWriter(@ApiParam(name = "writerId", value = "作家Id", required = true) @RequestParam String writerId,
+                                            @ApiParam(name = "page", value = "查询第几页", required = false) @RequestParam(required = false) Integer page,
+                                            @ApiParam(name = "pageSize", value = "每一页显示的条数", required = false) @RequestParam(required = false) Integer pageSize);
+
+    @ApiOperation(value = "查询作家近期佳文", httpMethod = "GET")
+    @GetMapping("/queryGoodArticleListOfWriter")
+    CommonResponse queryGoodArticleListOfWriter(@ApiParam(name = "writerId", value = "作家Id", required = true) @RequestParam String writerId);
 }

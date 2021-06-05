@@ -30,7 +30,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author Aiolos
@@ -218,6 +220,19 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
         IPage<Article> articlePage = new Page<>(pageNum, pageSize);
         articlePage = articleDao.selectPage(articlePage, queryWrapper);
         PagedResult pagedResult = setterPagedResult(articlePage);
+
+        // 根据文章ids批量获取文章阅读量
+        List<Article> articles = (List<Article>) pagedResult.getRecords();
+        List<String> idList = new ArrayList<>();
+        articles.forEach(a -> {
+            // 构建文章id的list
+            idList.add(REDIS_ARTICLE_READ_COUNTS + ":" + a.getId());
+        });
+        List<String> readCountsRedisList = redis.mget(idList);
+        for (int i = 0; i < articles.size(); i++) {
+            articles.get(i).setReadCounts(Integer.valueOf(readCountsRedisList.get(i)));
+        }
+        pagedResult.setRecords(articles);
         return pagedResult;
     }
 

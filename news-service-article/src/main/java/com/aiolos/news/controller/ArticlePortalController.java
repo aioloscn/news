@@ -43,9 +43,6 @@ public class ArticlePortalController extends BaseController implements ArticlePo
 
     @Override
     public CommonResponse list(String keyword, Integer category, Integer page, Integer pageSize) {
-
-        log.info("Enter the method article/portal/list, parameter keyword: {}, category: {}, page: {}, pageSize: {}", keyword, category, page, pageSize);
-
         if (page == null) {
             page = START_PAGE;
         }
@@ -113,6 +110,24 @@ public class ArticlePortalController extends BaseController implements ArticlePo
         // 累加zset中这篇文章的阅读数，当key不存在，或member不是key的成员时，ZINCRBY key increment member等同于ZADD key increment member
         redisTemplate.opsForZSet().incrementScore(ARTICLE_READ_COUNTS_ZSET, articleId, 1);
         return CommonResponse.ok();
+    }
+
+    @Override
+    public CommonResponse queryArticleListOfWriter(String writerId, Integer page, Integer pageSize) {
+        if (page == null) {
+            page = START_PAGE;
+        }
+        if (pageSize == null) {
+            pageSize = PAGE_SIZE;
+        }
+
+        PagedResult pagedResult = articlePortalService.queryArticleListOfWriter(writerId, page, pageSize);
+        return CommonResponse.ok(pagedResult);
+    }
+
+    @Override
+    public CommonResponse queryGoodArticleListOfWriter(String writerId) {
+        return CommonResponse.ok(articlePortalService.queryGoodArticleListOfWriter(writerId));
     }
 
     /**

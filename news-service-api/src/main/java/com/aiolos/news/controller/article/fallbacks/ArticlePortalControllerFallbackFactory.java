@@ -55,6 +55,18 @@ public class ArticlePortalControllerFallbackFactory implements FallbackFactory<A
                 log.error("Connection refused, enter the degraded method of the service caller");
                 return CommonResponse.error(ErrorEnum.FEIGN_FALLBACK_EXCEPTION);
             }
+
+            @Override
+            public CommonResponse queryArticleListOfWriter(String writerId, Integer page, Integer pageSize) {
+                log.error("Connection refused, enter the degraded method of the service caller");
+                return CommonResponse.error(ErrorEnum.FEIGN_FALLBACK_EXCEPTION);
+            }
+
+            @Override
+            public CommonResponse queryGoodArticleListOfWriter(String writerId) {
+                log.error("Connection refused, enter the degraded method of the service caller");
+                return CommonResponse.error(ErrorEnum.FEIGN_FALLBACK_EXCEPTION);
+            }
         };
     }
 }

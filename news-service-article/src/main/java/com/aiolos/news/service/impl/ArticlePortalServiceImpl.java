@@ -19,6 +19,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.apache.commons.lang3.StringUtils;
 import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.IdsQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
@@ -96,9 +97,7 @@ public class ArticlePortalServiceImpl extends BaseService implements ArticlePort
 
         IPage<Article> articleIPage = new Page<>(page, pageSize);
         articleIPage = articleDao.selectPage(articleIPage, queryWrapper);
-
-        List<Article> articleList = articleIPage.getRecords();
-        return rebuildArticlePagedResult(articleIPage, articleList);
+        return rebuildArticlePagedResult(articleIPage);
     }
 
     @Override
@@ -185,16 +184,16 @@ public class ArticlePortalServiceImpl extends BaseService implements ArticlePort
         articleIPage.setCurrent(++page);
         articleIPage.setPages(pagedArticle.getTotalPages());
         articleIPage.setTotal(pagedArticle.getTotalElements());
-        return rebuildArticlePagedResult(articleIPage, articleList);
+        return rebuildArticlePagedResult(articleIPage);
     }
 
     /**
-     * 构建PagedResult数据，包含文章发布者信息
+     * 构建PagedResult数据，包含文章发布者信息和文章阅读量
      * @param articleIPage
-     * @param articleList
      * @return
      */
-    private PagedResult rebuildArticlePagedResult(IPage articleIPage, List<Article> articleList) {
+    private PagedResult rebuildArticlePagedResult(IPage<Article> articleIPage) {
+        List<Article> articleList = articleIPage.getRecords();
         // 1. 构建发布者ID列表
         Set<String> idSet = new HashSet<>();
         List<String> idList = new ArrayList<>();
@@ -369,6 +368,55 @@ public class ArticlePortalServiceImpl extends BaseService implements ArticlePort
             BeanUtils.copyProperties(article, articleDetailVO);
         }
         return articleDetailVO;
+    }
+
+    @Override
+    public PagedResult queryArticleListOfWriter(String writerId, Integer page, Integer pageSize) {
+        QueryWrapper<Article> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("publish_user_id", writerId);
+        queryWrapper.eq("is_delete", YesOrNo.NO.getType());
+        queryWrapper.orderByDesc("create_time");
+        IPage<Article> articleIPage = new Page<>(page, pageSize);
+        articleIPage = articleDao.selectPage(articleIPage, queryWrapper);
+        return rebuildArticlePagedResult(articleIPage);
+    }
+
+    @Override
+    public List<Article> queryGoodArticleListOfWriter(String writerId) {
+        Set<String> articleIds = redisTemplate.opsForZSet().reverseRange(ARTICLE_READ_COUNTS_ZSET, 0, 5);
+        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
+        boolQueryBuilder.must(QueryBuilders.termQuery("publishUserId", writerId));
+
+        IdsQueryBuilder idsQueryBuilder = QueryBuilders.idsQuery();
+        idsQueryBuilder.ids().addAll(articleIds);
+        boolQueryBuilder.must(idsQueryBuilder);
+        SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(boolQueryBuilder).build();
+        List<ArticleEO> articleEOs = elasticsearchTemplate.queryForList(searchQuery, ArticleEO.class);
+        List<Article> articles = new ArrayList<>();
+        // es获得的数据只是按匹配到数据取出来，需要重新排序
+        Iterator<String> iterator = articleIds.iterator();
+        while (iterator.hasNext()) {
+            String articleId = iterator.next();
+            articleEOs.forEach(a -> {
+                if (a.getId().equals(articleId)) {
+                    Article article = new Article();
+                    BeanUtils.copyProperties(a, article);
+                    articles.add(article);
+                }
+            });
+        }
+
+        // 根据文章ids批量获取文章阅读量
+        List<String> idList = new ArrayList<>();
+        articles.forEach(a -> {
+            // 构建文章id的list
+            idList.add(REDIS_ARTICLE_READ_COUNTS + ":" + a.getId());
+        });
+        List<String> readCountsRedisList = redis.mget(idList);
+        for (int i = 0; i < articles.size(); i++) {
+            articles.get(i).setReadCounts(Integer.valueOf(readCountsRedisList.get(i)));
+        }
+        return articles;
     }
 
     /**

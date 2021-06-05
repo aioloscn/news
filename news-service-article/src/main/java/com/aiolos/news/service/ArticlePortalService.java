@@ -47,15 +47,31 @@ public interface ArticlePortalService {
 
     /**
      * 根据文章主键查询文章详情
-     * @param articleId
+     * @param articleId 文章Id
      * @return
      */
     ArticleDetailVO queryDetail(String articleId);
 
     /**
      * 文章详情查询，包含定时发布的文章
-     * @param articleId
+     * @param articleId 文章Id
      * @return
      */
     ArticleDetailVO queryDetailContainsRegularlyPublishedArticles(String articleId);
+
+    /**
+     * 分页查询作家文章
+     * @param writerId 作家Id
+     * @param page  查询第几页
+     * @param pageSize 每页显示数量
+     * @return
+     */
+    PagedResult queryArticleListOfWriter(String writerId, Integer page, Integer pageSize);
+
+    /**
+     * 查询作家近期佳文
+     * @param writerId 作家Id
+     * @return
+     */
+    List<Article> queryGoodArticleListOfWriter(String writerId);
 }
