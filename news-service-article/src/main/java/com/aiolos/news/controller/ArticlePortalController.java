@@ -63,9 +63,8 @@ public class ArticlePortalController extends BaseController implements ArticlePo
     public CommonResponse detail(String articleId) {
 
         ArticleDetailVO articleDetailVO = articlePortalService.queryDetail(articleId);
-        Set<String> idSet = new HashSet<>();
-        idSet.add(articleDetailVO.getPublishUserId());
-        List<UserBasicInfoVO> publisherList = getPublisherList(idSet);
+        // 获取用户信息列表
+        List<UserBasicInfoVO> publisherList = getPublisherList(articleDetailVO.getPublishUserId());
 
         if (!publisherList.isEmpty()) {
             articleDetailVO.setPublishUserName(publisherList.get(0).getNickname());
@@ -80,9 +79,7 @@ public class ArticlePortalController extends BaseController implements ArticlePo
     public CommonResponse detailContainsRegularlyPublishedArticles(String articleId) {
 
         ArticleDetailVO articleDetailVO = articlePortalService.queryDetailContainsRegularlyPublishedArticles(articleId);
-        Set<String> idSet = new HashSet<>();
-        idSet.add(articleDetailVO.getPublishUserId());
-        List<UserBasicInfoVO> publisherList = getPublisherList(idSet);
+        List<UserBasicInfoVO> publisherList = getPublisherList(articleDetailVO.getPublishUserId());
 
         if (!publisherList.isEmpty()) {
             articleDetailVO.setPublishUserName(publisherList.get(0).getNickname());
@@ -131,15 +128,17 @@ public class ArticlePortalController extends BaseController implements ArticlePo
     }
 
     /**
-     * 发起restTemplate远程调用，获取用户基本信息
+     * 发起http远程调用，获取用户基本信息
      * @return
      */
-    private List<UserBasicInfoVO> getPublisherList(Set<String> idSet) {
-
+    private List<UserBasicInfoVO> getPublisherList(String... id) {
+        Set<String> idSet = new HashSet<>();
+        for (String s : id) {
+            idSet.add(s);
+        }
         CommonResponse bodyResult = userMicroservice.queryByIds(JsonUtils.objectToJson(idSet));
 
         List<UserBasicInfoVO> publisherList = null;
-
         if (bodyResult.getCode() == HttpStatus.SC_OK) {
 
             String userJson = JsonUtils.objectToJson(bodyResult.getData());

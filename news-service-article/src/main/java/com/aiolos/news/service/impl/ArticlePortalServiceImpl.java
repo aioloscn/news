@@ -37,6 +37,7 @@ import org.springframework.data.elasticsearch.core.aggregation.impl.AggregatedPa
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.data.elasticsearch.core.query.SearchQuery;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -234,7 +235,7 @@ public class ArticlePortalServiceImpl extends BaseService implements ArticlePort
 
         List<UserBasicInfoVO> publisherList = null;
 
-        if (bodyResult.getCode() == 200) {
+        if (bodyResult.getCode().equals(HttpStatus.OK.value())) {
 
             String userJson = JsonUtils.objectToJson(bodyResult.getData());
             publisherList = JsonUtils.jsonToList(userJson, UserBasicInfoVO.class);
@@ -264,21 +265,6 @@ public class ArticlePortalServiceImpl extends BaseService implements ArticlePort
             indexArticleVO.setReadCounts(redisCounts);
             indexArticleVOList.add(indexArticleVO);
         }
-//        for (Article a : articleList) {
-//
-//            IndexArticleVO indexArticleVO = new IndexArticleVO();
-//            BeanUtils.copyProperties(a, indexArticleVO);
-//
-//            // 3.1 从publisherList中获得发布者的基本信息
-//            UserBasicInfoVO publisher = getUserIfPublisher(a.getPublishUserId(), publisherList);
-//            indexArticleVO.setPublisherVO(publisher);
-//
-//            // 3.2 从redis里拿到当前文章的阅读数，赋值
-//            int readCounts = getCountsFromRedis(REDIS_ARTICLE_READ_COUNTS + ":" + a.getId());
-//            indexArticleVO.setReadCounts(readCounts);
-//
-//            indexArticleVOList.add(indexArticleVO);
-//        }
 
         PagedResult pagedResult = setterPagedResult(articleIPage);
 
@@ -298,11 +284,11 @@ public class ArticlePortalServiceImpl extends BaseService implements ArticlePort
          */
         Article article = new Article();
         article.setIsAppoint(YesOrNo.NO.getType());
+        article.setArticleStatus(ArticleReviewStatus.SUCCESS.getType());
         article.setIsDelete(YesOrNo.NO.getType());
         article.setArticleStatus(ArticleReviewStatus.SUCCESS.getType());
 
         QueryWrapper<Article> queryWrapper = new QueryWrapper<>(article);
-
         queryWrapper.orderByDesc("publish_time");
 
         IPage<Article> articleIPage = new Page<>(1, 5);
@@ -319,6 +305,7 @@ public class ArticlePortalServiceImpl extends BaseService implements ArticlePort
         queryBuilder.ids().addAll(articleIds);
         SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(queryBuilder).build();
         List<ArticleEO> articleEOs = elasticsearchTemplate.queryForList(searchQuery, ArticleEO.class);
+        // 撤销和删除的文章会从ES中删除，所以不在热门里显示
         List<Article> articles = new ArrayList<>();
         // es获得的数据只是按匹配到数据取出来，需要重新排序
         Iterator<String> iterator = articleIds.iterator();
@@ -392,7 +379,11 @@ public class ArticlePortalServiceImpl extends BaseService implements ArticlePort
         boolQueryBuilder.must(idsQueryBuilder);
         SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(boolQueryBuilder).build();
         List<ArticleEO> articleEOs = elasticsearchTemplate.queryForList(searchQuery, ArticleEO.class);
+        // 撤销和删除的文章会从ES中删除，所以不在近期佳文里显示
         List<Article> articles = new ArrayList<>();
+        if (articleEOs == null || articleEOs.size() == 0)
+            return articles;
+
         // es获得的数据只是按匹配到数据取出来，需要重新排序
         Iterator<String> iterator = articleIds.iterator();
         while (iterator.hasNext()) {
@@ -414,7 +405,8 @@ public class ArticlePortalServiceImpl extends BaseService implements ArticlePort
         });
         List<String> readCountsRedisList = redis.mget(idList);
         for (int i = 0; i < articles.size(); i++) {
-            articles.get(i).setReadCounts(Integer.valueOf(readCountsRedisList.get(i)));
+            Integer readCounts = readCountsRedisList.get(i) == null ? 0 : Integer.valueOf(readCountsRedisList.get(i));
+            articles.get(i).setReadCounts(readCounts);
         }
         return articles;
     }

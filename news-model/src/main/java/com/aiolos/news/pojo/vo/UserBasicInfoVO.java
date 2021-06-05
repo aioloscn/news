@@ -3,6 +3,7 @@ package com.aiolos.news.pojo.vo;
 import lombok.Data;
 
 /**
+ * 用户基本信息，包含关注数和粉丝数
  * @author Aiolos
  * @date 2020/10/22 7:20 下午
  */

@@ -5,6 +5,7 @@ import lombok.Data;
 import java.util.Date;
 
 /**
+ * 用户详细信息对象
  * @author Aiolos
  * @date 2020/10/21 4:30 下午
  */

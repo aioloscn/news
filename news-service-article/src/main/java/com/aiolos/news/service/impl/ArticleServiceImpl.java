@@ -1,6 +1,5 @@
 package com.aiolos.news.service.impl;
 
-import com.aiolos.news.common.config.IdGeneratorSnowflake;
 import com.aiolos.news.common.enums.*;
 import com.aiolos.news.common.exception.CustomizedException;
 import com.aiolos.news.common.utils.AliTextReviewUtils;
@@ -44,18 +43,14 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
 
     private final ArticleDao articleDao;
 
-    private final IdGeneratorSnowflake snowflake;
-
     private final AliTextReviewUtils aliTextReviewUtils;
 
     private final ArticleUtil articleUtil;
 
     private final ElasticsearchTemplate elasticsearchTemplate;
 
-    public ArticleServiceImpl(ArticleDao articleDao, IdGeneratorSnowflake snowflake,
-                              AliTextReviewUtils aliTextReviewUtils, ArticleUtil articleUtil, ElasticsearchTemplate elasticsearchTemplate) {
+    public ArticleServiceImpl(ArticleDao articleDao, AliTextReviewUtils aliTextReviewUtils, ArticleUtil articleUtil, ElasticsearchTemplate elasticsearchTemplate) {
         this.articleDao = articleDao;
-        this.snowflake = snowflake;
         this.aliTextReviewUtils = aliTextReviewUtils;
         this.articleUtil = articleUtil;
         this.elasticsearchTemplate = elasticsearchTemplate;
@@ -65,7 +60,7 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
     @Override
     public void createArticle(NewArticleBO newArticleBO, Category category) throws CustomizedException {
 
-        String articleId = snowflake.nextIdStr();
+        String articleId = idWorker.nextIdStr();
 
         Article article = new Article();
         BeanUtils.copyProperties(newArticleBO, article);
@@ -230,7 +225,8 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
         });
         List<String> readCountsRedisList = redis.mget(idList);
         for (int i = 0; i < articles.size(); i++) {
-            articles.get(i).setReadCounts(Integer.valueOf(readCountsRedisList.get(i)));
+            Integer readCounts = readCountsRedisList.get(i) == null ? 0 : Integer.valueOf(readCountsRedisList.get(i));
+            articles.get(i).setReadCounts(readCounts);
         }
         pagedResult.setRecords(articles);
         return pagedResult;
