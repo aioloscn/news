@@ -31,4 +31,16 @@ public interface CommentControllerApi {
     CommonResponse list(@ApiParam(name = "articleId", value = "文章主键Id", required = true) @RequestParam String articleId,
                         @ApiParam(name = "page", value = "第几页") @RequestParam(required = false) Integer page,
                         @ApiParam(name = "pageSize", value = "每页显示数") @RequestParam(required = false) Integer pageSize);
+
+    @ApiOperation(value = "查询文章的所有评论", httpMethod = "GET")
+    @GetMapping("/mng")
+    CommonResponse mng(@ApiParam(name = "writerId", value = "作家主键Id", required = true) @RequestParam String writerId,
+                        @ApiParam(name = "page", value = "第几页") @RequestParam(required = false) Integer page,
+                        @ApiParam(name = "pageSize", value = "每页显示数") @RequestParam(required = false) Integer pageSize);
+
+    @ApiOperation(value = "作者删除评论", httpMethod = "POST")
+    @PostMapping("/delete")
+    CommonResponse delete(@ApiParam(name = "writerId", value = "作家主键Id", required = true) @RequestParam String writerId,
+                          @ApiParam(name = "articleId", value = "文章主键Id", required = true) @RequestParam String articleId,
+                          @ApiParam(name = "commentId", value = "评论主键Id", required = true) @RequestParam String commentId) throws CustomizedException;
 }

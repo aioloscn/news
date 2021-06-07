@@ -28,4 +28,20 @@ public interface CommentService {
      * @return
      */
     PagedResult queryArticleComments(String articleId, Integer page, Integer pageSize);
+
+    /**
+     * 分页查询作家所有文章的评论列表
+     * @param writerId  作家主键Id
+     * @param page      第几页
+     * @param pageSize  每页显示数
+     * @return
+     */
+    PagedResult queryWriterCommentsMng(String writerId, Integer page, Integer pageSize);
+
+    /**
+     * 删除评论
+     * @param writerId  作家主键Id
+     * @param commentId 评论主键Id
+     */
+    void deleteComment(String writerId, String commentId) throws CustomizedException;
 }

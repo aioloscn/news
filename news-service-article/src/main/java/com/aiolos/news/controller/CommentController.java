@@ -48,6 +48,9 @@ public class CommentController extends BaseController implements CommentControll
         // 2. 保存评论信息到数据库
         commentService.createComment(commentReplyBO.getArticleId(), commentReplyBO.getFatherId(), commentReplyBO.getContent(), userId, nickname, userFace);
         // TODO 评论保存到ES中
+
+        // 评论数累加
+        redis.increment(REDIS_ARTICLE_COMMENT_COUNTS + ":" + commentReplyBO.getArticleId(), 1);
         return CommonResponse.ok();
     }
 
@@ -62,5 +65,19 @@ public class CommentController extends BaseController implements CommentControll
         if (page == null) page = START_PAGE;
         if (pageSize == null) pageSize = PAGE_SIZE;
         return CommonResponse.ok(commentService.queryArticleComments(articleId, page, pageSize));
+    }
+
+    @Override
+    public CommonResponse mng(String writerId, Integer page, Integer pageSize) {
+        if (page == null) page = START_PAGE;
+        if (pageSize == null) pageSize = PAGE_SIZE;
+        return CommonResponse.ok(commentService.queryWriterCommentsMng(writerId, page, pageSize));
+    }
+
+    @Override
+    public CommonResponse delete(String writerId, String articleId, String commentId) throws CustomizedException {
+        commentService.deleteComment(writerId, commentId);
+        redis.decrement(REDIS_ARTICLE_COMMENT_COUNTS + ":" + articleId, 1);
+        return CommonResponse.ok();
     }
 }

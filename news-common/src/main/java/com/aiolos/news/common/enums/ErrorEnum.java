@@ -88,6 +88,7 @@ public enum ErrorEnum implements CommonError {
     FILE_ACQUISITION_FAILED(30030, "文件获取失败"),
     FAILED_TO_POST_AN_ARTICLE_LATE(30031, "延时发布文章失败"),
     COMMENT_FAILED(30032, "评论失败"),
+    FAILED_TO_DELETE_COMMENT(30033, "删除评论失败"),
 
     // 管理员相关类型错误
     ADMIN_NOT_EXIST_ERROR(40001, "管理员账号不存在或密码错误"),

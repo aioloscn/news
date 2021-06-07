@@ -165,7 +165,7 @@
 
                             <div class="all-comments-list" v-for="(comment,index) in commentList" :key="index">
                                 <div class="single-comment-wrapper">
-                                    <img src="../img/face1.png" class="user-face"/>
+                                    <img :src="comment.commentUserFace" class="user-face"/>
                                 </div>
 
                                 <div class="comment-info-wrapper">

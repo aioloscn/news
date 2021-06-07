@@ -16,6 +16,7 @@ public class CommentsVO {
     private String articleId;
     private String commentUserId;
     private String commentUserNickname;
+    private String commentUserFace;
     private String content;
     private Date createTime;
     private String quoteUserNickname;

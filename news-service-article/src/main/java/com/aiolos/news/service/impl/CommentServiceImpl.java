@@ -10,6 +10,7 @@ import com.aiolos.news.pojo.vo.CommentsVO;
 import com.aiolos.news.service.ArticlePortalService;
 import com.aiolos.news.service.BaseService;
 import com.aiolos.news.service.CommentService;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.extern.slf4j.Slf4j;
@@ -59,8 +60,6 @@ public class CommentServiceImpl extends BaseService implements CommentService {
                 throw new CustomizedException(ErrorEnum.COMMENT_FAILED);
             }
         }
-        // 评论数累加
-        redis.increment(REDIS_ARTICLE_COMMENT_COUNTS + ":" + articleId, 1);
     }
 
     @Override
@@ -68,5 +67,30 @@ public class CommentServiceImpl extends BaseService implements CommentService {
         Page<CommentsVO> commentsVOPage = new Page<>(page, pageSize);
         IPage<CommentsVO> commentsVOIPage = commentsDao.queryArticleCommentList(commentsVOPage, articleId);
         return setterPagedResult(commentsVOIPage);
+    }
+
+    @Override
+    public PagedResult queryWriterCommentsMng(String writerId, Integer page, Integer pageSize) {
+        IPage<Comments> commentsIPage = new Page<>(page, pageSize);
+        QueryWrapper queryWrapper = new QueryWrapper();
+        queryWrapper.eq("writer_id", writerId);
+        commentsIPage = commentsDao.selectPage(commentsIPage, queryWrapper);
+        return setterPagedResult(commentsIPage);
+    }
+
+    @Transactional(propagation = Propagation.NESTED, rollbackFor = CustomizedException.class)
+    @Override
+    public void deleteComment(String writerId, String commentId) throws CustomizedException {
+        QueryWrapper wrapper = new QueryWrapper();
+        wrapper.eq("id", commentId);
+        wrapper.eq("writer_id", writerId);
+        int result = commentsDao.delete(wrapper);
+        if (result != 1) {
+            try {
+                throw new RuntimeException();
+            } catch (Exception e) {
+                throw new CustomizedException(ErrorEnum.FAILED_TO_DELETE_COMMENT);
+            }
+        }
     }
 }
