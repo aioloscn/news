@@ -6,6 +6,8 @@ import com.aiolos.news.common.utils.RedisOperator;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Resource;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Aiolos
@@ -24,6 +26,14 @@ public class BaseInterceptor {
 
     public static final String REDIS_ALREADY_READ = "redis_already_read";
 
+    /**
+     * 验证用户token
+     * @param id
+     * @param token
+     * @param redisKeyPrefix
+     * @return
+     * @throws CustomizedException
+     */
     public boolean verifyUserIdToken(String id, String token, String redisKeyPrefix) throws CustomizedException {
 
         if (StringUtils.isNotBlank(id) && StringUtils.isNotBlank(token)) {
@@ -41,5 +51,23 @@ public class BaseInterceptor {
         }
 
         return true;
+    }
+
+    /**
+     * 从cookie中取值
+     * @param request
+     * @param key
+     * @return
+     */
+    public String getCookie(HttpServletRequest request, String key) {
+        Cookie[] cookies = request.getCookies();
+        if (cookies == null) return null;
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals(key)) {
+                String value = cookie.getValue();
+                return value;
+            }
+        }
+        return null;
     }
 }
