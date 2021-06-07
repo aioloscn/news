@@ -276,9 +276,9 @@
                 this.readArticle(articleId);
 
                 // 获得文章的评论列表
-                // this.getAllComments(1, 10);
+                this.getAllComments(1, 10);
                 // 获得文章评论数
-                // this.getCommentCounts();
+                this.getCommentCounts();
             },
             mounted() {
                 // 初始化编辑器
@@ -384,12 +384,12 @@
 
                         if (res.data.code == 200) {
                             var grid = res.data.data;
-                            var commentList = grid.rows;
+                            var commentList = grid.records;
                             me.commentList = commentList;
 
-                            me.page = grid.page;  // 当前页数累加1，用于后续页面滚动分页
-                            var maxPage = grid.total; // 获得总页数
-                            var total = grid.records; // 获得总记录数
+                            me.page = grid.current;  // 当前页数累加1，用于后续页面滚动分页
+                            var maxPage = grid.pages; // 获得总页数
+                            var total = grid.total; // 获得总记录数
 
                             this.maxPage = maxPage;
                             this.total = total;

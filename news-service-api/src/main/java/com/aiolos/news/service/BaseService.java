@@ -41,6 +41,8 @@ public class BaseService {
 
     public static final String ARTICLE_READ_COUNTS_ZSET = "article_read_counts_zset";
 
+    public static final String REDIS_ARTICLE_COMMENT_COUNTS = "redis_article_comment_counts";
+
     public PagedResult setterPagedResult(IPage<?> page) {
 
         PagedResult pagedResult = new PagedResult();
