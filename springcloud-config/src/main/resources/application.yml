@@ -11,6 +11,8 @@ eureka:
   client:
     service-url:
       defaultZone: http://server-7001:7001/eureka/,http://server-7002:7002/eureka/,http://server-7003:7003/eureka/
+
+# 配置动态刷新git配置的路径终端请求地址
 management:
   endpoints:
     web:
