@@ -17,12 +17,12 @@ import org.apache.commons.lang3.StringUtils;
 import org.bson.types.ObjectId;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import sun.misc.BASE64Decoder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 /**
@@ -143,18 +143,15 @@ public class FileUploadController implements FileUploadControllerApi {
         // 获得图片的base64字符串
         String img64 = newAdminBO.getImg64();
         String fileIdStr = StringUtils.EMPTY;
-        try {
-            // 将base64字符串转换为byte数组
-            byte[] bytes = new BASE64Decoder().decodeBuffer(img64.trim());
-            // 转换为输入流
-            ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bytes);
-            // 上传到gridFS中
-            ObjectId fileId = gridFSBucket.uploadFromStream(newAdminBO.getUsername() + ".png", byteArrayInputStream);
-            // 获得文件在gridFS中的主键id
-            fileIdStr = fileId.toString();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        // 将base64字符串转换为byte数组
+//            byte[] bytes = new BASE64Decoder().decodeBuffer(img64.trim());
+        byte[] bytes = Base64.getDecoder().decode(img64.trim());
+        // 转换为输入流
+        ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bytes);
+        // 上传到gridFS中
+        ObjectId fileId = gridFSBucket.uploadFromStream(newAdminBO.getUsername() + ".png", byteArrayInputStream);
+        // 获得文件在gridFS中的主键id
+        fileIdStr = fileId.toString();
         return CommonResponse.ok("上传成功", fileIdStr);
     }
 

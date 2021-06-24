@@ -2,6 +2,7 @@ package com.aiolos.news.interceptors;
 
 import com.aiolos.news.common.enums.ErrorEnum;
 import com.aiolos.news.common.exception.CustomizedException;
+import com.aiolos.news.common.exception.TokenInvalidException;
 import com.aiolos.news.common.utils.RedisOperator;
 import org.apache.commons.lang3.StringUtils;
 
@@ -44,10 +45,10 @@ public class BaseInterceptor {
                 // token不一致，redis删除token，前端也会删除
                 redis.del(REDIS_USER_TOKEN + ":" + id);
                 redis.del(REDIS_USER_INFO + ":" + id);
-                throw new CustomizedException(ErrorEnum.TOKEN_INVALID);
+                throw new TokenInvalidException(ErrorEnum.TOKEN_INVALID);
             }
         } else {
-            throw new CustomizedException(ErrorEnum.USER_NOT_LOGGED_IN);
+            throw new TokenInvalidException(ErrorEnum.USER_NOT_LOGGED_IN);
         }
 
         return true;

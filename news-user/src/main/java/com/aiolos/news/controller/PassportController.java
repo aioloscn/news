@@ -39,8 +39,6 @@ public class PassportController extends BaseController implements PassportContro
     @Override
     public CommonResponse getSMSCode(String mobile, HttpServletRequest request) throws CustomizedException {
 
-        log.info("Enter the method getSMSCode, parameter mobile: {}", mobile);
-
         if (StringUtils.isBlank(mobile)) {
             return CommonResponse.error(ErrorEnum.PHONE_INCORRECT);
         }
@@ -61,8 +59,6 @@ public class PassportController extends BaseController implements PassportContro
     @Override
     public CommonResponse login(RegisterLoginBO registerLoginBO,
                                 HttpServletRequest request, HttpServletResponse response) throws CustomizedException {
-
-        log.info("Enter the method login, parameter registerLoginBO: {}", registerLoginBO.toString());
 
         String mobile = registerLoginBO.getMobile();
         String smsCode = registerLoginBO.getSmsCode();
@@ -93,9 +89,9 @@ public class PassportController extends BaseController implements PassportContro
             String utoken = UUID.randomUUID().toString();
             log.info("token: {}", utoken);
             // 保存用户的会话信息
-            redis.set(REDIS_USER_TOKEN + ":" + user.getId(), utoken);
+            redis.set(REDIS_USER_TOKEN + ":" + user.getId(), utoken, COOKIE_EXPIRE_TIME);
             // 保存用户账号信息
-            redis.set(REDIS_USER_INFO + ":" + user.getId(), JsonUtils.objectToJson(user));
+            redis.set(REDIS_USER_INFO + ":" + user.getId(), JsonUtils.objectToJson(user), COOKIE_EXPIRE_TIME);
 
             // 保存用户的ID和token到cookie中
             setCookie("uid", user.getId(), COOKIE_EXPIRE_TIME, request, response);
@@ -112,7 +108,6 @@ public class PassportController extends BaseController implements PassportContro
     @Override
     public CommonResponse logout(String userId, HttpServletRequest request, HttpServletResponse response) {
 
-        log.info("Enter the method logout, parameter userId: {}", userId);
         redis.del(REDIS_USER_TOKEN + ":" + userId);
         deleteCookieValue("uid", request, response);
         deleteCookieValue("utoken", request, response);
