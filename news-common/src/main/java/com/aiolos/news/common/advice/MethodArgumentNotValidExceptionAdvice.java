@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 @Order(Ordered.HIGHEST_PRECEDENCE)
 @Slf4j
 @RestControllerAdvice
-public class MethodArgumentNotValidExceptionHandler {
+public class MethodArgumentNotValidExceptionAdvice {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)

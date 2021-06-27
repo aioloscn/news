@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Aiolos
  * @date 2021/6/24 8:33 下午
  */
-@Order(-1)  // TokenInvalidException继承了CustomizedException，必须必它的优先级高
+@Order(-1)  // TokenInvalidException继承了CustomizedException，必须比它的优先级高
 @Slf4j
 @RestControllerAdvice
 public class TokenInvalidExceptionAdvice {
