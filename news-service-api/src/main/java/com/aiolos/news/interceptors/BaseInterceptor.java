@@ -36,20 +36,17 @@ public class BaseInterceptor {
      * @throws CustomizedException
      */
     public boolean verifyUserIdToken(String id, String token, String redisKeyPrefix) throws CustomizedException {
-
         if (StringUtils.isNotBlank(id) && StringUtils.isNotBlank(token)) {
-
             System.out.println(redisKeyPrefix + ":" + id);
             String redisToken = redis.get(redisKeyPrefix + ":" + id);
             if (StringUtils.isBlank(redisToken) || !redisToken.equalsIgnoreCase(token)) {
-                // token不一致，前端也会删除token
+                // token不一致，前端会删除token
                 throw new TokenInvalidException(ErrorEnum.TOKEN_INVALID);
             }
         } else {
             throw new TokenInvalidException(ErrorEnum.USER_NOT_LOGGED_IN);
         }
-
-        return true;
+        return false;
     }
 
     /**
