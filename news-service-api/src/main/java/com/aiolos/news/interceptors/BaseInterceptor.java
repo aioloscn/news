@@ -46,7 +46,7 @@ public class BaseInterceptor {
         } else {
             throw new TokenInvalidException(ErrorEnum.USER_NOT_LOGGED_IN);
         }
-        return false;
+        return true;
     }
 
     /**
