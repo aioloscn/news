@@ -95,7 +95,7 @@
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-captcha</artifactId>
-            <version>5.2.0</version>
+            <version>5.4.7</version>
         </dependency>
 
         <!-- 第三方云厂商相关的依赖 -->
