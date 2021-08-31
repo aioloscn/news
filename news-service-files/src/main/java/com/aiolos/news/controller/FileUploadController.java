@@ -68,9 +68,9 @@ public class FileUploadController implements FileUploadControllerApi {
                 }
 
                 // 上传到FastDFS
-                path = uploadService.uploadFastDFS(file, suffix);
+//                path = uploadService.uploadFastDFS(file, suffix);
                 // 上传到OSS
-//                path = uploadService.uploadOSS(file, userId, suffix);
+                path = uploadService.uploadOSS(file, userId, suffix);
             } else {
                 return CommonResponse.error(ErrorEnum.FILE_UPLOAD_NULL_ERROR);
             }
@@ -81,8 +81,8 @@ public class FileUploadController implements FileUploadControllerApi {
         if (StringUtils.isNotBlank(path)) {
 
             // 返回到前端展示图片的路径
-            path = fileResource.getHost() + path;
-//            path = fileResource.getOssHost() + path;
+//            path = fileResource.getHost() + path;
+            path = fileResource.getOssHost() + path;
         } else {
             return CommonResponse.error(ErrorEnum.FILE_UPLOAD_FAILED);
         }
@@ -116,8 +116,8 @@ public class FileUploadController implements FileUploadControllerApi {
                         }
 
                         // 执行上传
-                        path = uploadService.uploadFastDFS(file, suffix);
-//                        path = uploadService.uploadOSS(file, userId, suffix);
+//                        path = uploadService.uploadFastDFS(file, suffix);
+                        path = uploadService.uploadOSS(file, userId, suffix);
                     } else {
                         continue;
                     }
@@ -127,8 +127,8 @@ public class FileUploadController implements FileUploadControllerApi {
 
                 if (StringUtils.isNotBlank(path)) {
                     // TODO 对图片进行审核
-                    imageUrlList.add(fileResource.getHost() + path);
-//                    imageUrlList.add(fileResource.getOssHost() + path);
+//                    imageUrlList.add(fileResource.getHost() + path);
+                    imageUrlList.add(fileResource.getOssHost() + path);
                 } else {
                     continue;
                 }
