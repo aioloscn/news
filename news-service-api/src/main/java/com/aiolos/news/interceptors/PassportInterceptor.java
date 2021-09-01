@@ -40,6 +40,7 @@ public class PassportInterceptor implements HandlerInterceptor {
 
         // 获得用户IP
         String userIp = IPUtils.getRequestIp(request);
+        log.info("passport get user ip: {}", userIp);
 
         // true: 用户60秒内发送过请求
         boolean keyIsExist = redis.keyIsExist(MOBILE_SMSCODE + ":" + userIp);
