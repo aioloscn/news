@@ -4,6 +4,7 @@ import com.aiolos.news.common.response.CommonResponse;
 import com.aiolos.news.common.exception.CustomizedException;
 import com.aiolos.news.common.enums.ErrorEnum;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Aiolos
  * @date 2020/10/10 4:14 下午
  */
+@Order(-9)  // 在线上环境throw new CustomizedException，throws Exception会被GlobalExceptionAdvice捕获，提高优先级
 @Slf4j
 @RestControllerAdvice
 public class CustomizedExceptionAdvice {
