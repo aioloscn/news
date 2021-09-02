@@ -48,9 +48,6 @@
 							<!-- menu-selected -->
 							<a href="javascript:void(0);" class="white-header-left" style="text-decoration:none;" v-bind:class="{'menu-selected': (cat.id==selectedCatId)}" @click="queryByCategory(cat.id)">{{cat.name}}</a>
 						</div>
-						<div class="single-default">
-                            <a href="https://class.imooc.com/sale/javaarchitect" target="_blank" class="white-header-left">架构师</a>
-                        </div>
 					</div>
                 </div>
 
@@ -94,7 +91,7 @@
                     </div>
 
                     <div class="imooc-words">
-                        <span class="imooc-num">慕课媒体号</span>
+                        <span class="imooc-num">新闻媒体号</span>
                     </div>
 
                     <div class="share-title">
@@ -132,10 +129,6 @@
 
                         <div class="content">
                             ${articleDetail.content}
-                        </div>
-
-                        <div class="declare">
-                            免责声明：本平台所有内容仅供测试，且文章来自互联网，不代表慕课网的观点和立场，如有不妥，请联系后删除。
                         </div>
                     </div>
 
