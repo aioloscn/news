@@ -118,21 +118,28 @@ public class ArticleController extends BaseController implements ArticleControll
         if (pendingStatus.equals(ArticleReviewStatus.SUCCESS.getType())) {
             // 审核成功，生成文章静态html
             String articleMongoId = articleUtil.createArticleHtmlToGridFS(articleId);
-            // 存储到对应的文章，进行关联保存
-            articleService.updateArticleToGridFS(articleId, articleMongoId);
-            // 发送消息到mq队列，让消费者监听并且执行下载html
-            articleUtil.downloadArticleHtmlByMQ(articleId, articleMongoId);
-            // 审核通过，查询article把响应的字段信息存入ES
-            Article article = articleService.queryById(articleId);
-            if (article.getIsAppoint().equals(ArticleAppointType.IMMEDIATELY.getType())) {
-                // 如果是即时发布的文章则直接存入ES，如果是定时发布的文章则在延迟队列消费端去执行
-                ArticleEO articleEO = new ArticleEO();
-                BeanUtils.copyProperties(article, articleEO);
-                IndexQuery indexQuery = new IndexQueryBuilder().withObject(articleEO).build();
-                String index = elasticsearchTemplate.index(indexQuery);
-                log.info("审核文章{}，保存ES索引: {}", articleId, index);
-                if (StringUtils.isBlank(index)) {
-                    log.error("审核文章{}，保存ES索引失败", articleId);
+
+            if (StringUtils.isBlank(articleMongoId) || articleMongoId.equalsIgnoreCase("null")) {
+                articleService.updateArticleStatus(articleId, ArticleReviewStatus.WAITING_MANUAL.getType());
+                log.info(ErrorEnum.GRIDFS_HAS_NO_RESOURCES_ARTICLE_REVIEW_FAILED.getErrMsg());
+                return CommonResponse.error(ErrorEnum.GRIDFS_HAS_NO_RESOURCES_ARTICLE_REVIEW_FAILED);
+            } else {
+                // 存储到对应的文章，进行关联保存
+                articleService.updateArticleToGridFS(articleId, articleMongoId);
+                // 发送消息到mq队列，让消费者监听并且执行下载html
+                articleUtil.downloadArticleHtmlByMQ(articleId, articleMongoId);
+                // 审核通过，查询article把响应的字段信息存入ES
+                Article article = articleService.queryById(articleId);
+                if (article.getIsAppoint().equals(ArticleAppointType.IMMEDIATELY.getType())) {
+                    // 如果是即时发布的文章则直接存入ES，如果是定时发布的文章则在延迟队列消费端去执行
+                    ArticleEO articleEO = new ArticleEO();
+                    BeanUtils.copyProperties(article, articleEO);
+                    IndexQuery indexQuery = new IndexQueryBuilder().withObject(articleEO).build();
+                    String index = elasticsearchTemplate.index(indexQuery);
+                    log.info("审核文章{}，保存ES索引: {}", articleId, index);
+                    if (StringUtils.isBlank(index)) {
+                        log.error("审核文章{}，保存ES索引失败", articleId);
+                    }
                 }
             }
         }

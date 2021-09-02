@@ -32,6 +32,7 @@ public class RabbitMQConsumer {
         if (routingKey.equalsIgnoreCase("article.download")) {
             String articleId = payload.split(",")[0];
             String articleMongoId = payload.split(",")[1];
+            // 从GridFS下载静态文章资源到前端项目
             Integer status = articleHtmlComponent.download(articleId, articleMongoId);
             if (status != HttpStatus.OK.value()) {
                 throw new CustomizedException(ErrorEnum.ARTICLE_REVIEW_ERROR);
@@ -44,6 +45,7 @@ public class RabbitMQConsumer {
         log.info("rabbitmq consumer watchDeleteQueue param: {}", payload);
         String routingKey = message.getMessageProperties().getReceivedRoutingKey();
         if (routingKey.equalsIgnoreCase("article.delete")) {
+            // 删除前端项目中的指定的静态文章
             Integer status = articleHtmlComponent.delete(payload);
             if (status != HttpStatus.OK.value()) {
                 throw new CustomizedException(ErrorEnum.FAILED_TO_DELETE_ARTICLE);

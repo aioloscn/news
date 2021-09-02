@@ -4,6 +4,7 @@ import com.aiolos.news.controller.article.ArticleHtmlControllerApi;
 import com.mongodb.client.gridfs.GridFSBucket;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -34,6 +35,9 @@ public class ArticleHtmlController implements ArticleHtmlControllerApi {
 
     @Override
     public Integer download(String articleId, String articleMongoId) {
+        if (StringUtils.isBlank(articleId) || articleId.equalsIgnoreCase("null")
+                || StringUtils.isBlank(articleMongoId) || articleMongoId.equalsIgnoreCase("null"))
+            return HttpStatus.INTERNAL_SERVER_ERROR.value();
         try {
             File file = new File(articlePath + File.separator + articleId + ".html");
             OutputStream outputStream = new FileOutputStream(file);
@@ -47,6 +51,8 @@ public class ArticleHtmlController implements ArticleHtmlControllerApi {
 
     @Override
     public Integer delete(String articleId) {
+        if (StringUtils.isBlank(articleId) || articleId.equalsIgnoreCase("null"))
+            return HttpStatus.INTERNAL_SERVER_ERROR.value();
         File file = new File(articlePath + File.separator + articleId + ".html");
         boolean deleted = file.delete();
         return deleted ? HttpStatus.OK.value() : HttpStatus.INTERNAL_SERVER_ERROR.value();

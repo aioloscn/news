@@ -146,7 +146,7 @@ public class ArticleUtil {
     public void downloadArticleHtml(String articleId, String articleMongoId) throws CustomizedException {
         Integer status = articleHtmlMicroservice.download(articleId, articleMongoId);
         if (status != HttpStatus.OK.value()) {
-            throw new CustomizedException(ErrorEnum.ARTICLE_REVIEW_ERROR);
+            throw new CustomizedException(ErrorEnum.DOWNLOAD_FOR_GRIDFS_FAILED);
         }
     }
 

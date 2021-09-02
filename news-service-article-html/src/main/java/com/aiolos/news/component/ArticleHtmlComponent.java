@@ -28,6 +28,12 @@ public class ArticleHtmlComponent {
         this.gridFSBucket = gridFSBucket;
     }
 
+    /**
+     * 从GridFS下载静态文章资源到前端项目
+     * @param articleId
+     * @param articleMongoId
+     * @return
+     */
     public Integer download(String articleId, String articleMongoId) {
         if (StringUtils.isBlank(articleId) || articleId.equalsIgnoreCase("null")
                 || StringUtils.isBlank(articleMongoId) || articleMongoId.equalsIgnoreCase("null"))
@@ -43,6 +49,11 @@ public class ArticleHtmlComponent {
         return HttpStatus.OK.value();
     }
 
+    /**
+     * 删除前端项目中的指定的静态文章
+     * @param articleId
+     * @return
+     */
     public Integer delete(String articleId) {
         if (StringUtils.isBlank(articleId) || articleId.equalsIgnoreCase("null"))
             return HttpStatus.INTERNAL_SERVER_ERROR.value();

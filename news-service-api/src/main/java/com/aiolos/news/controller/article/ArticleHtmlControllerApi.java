@@ -18,11 +18,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 @FeignClient(value = MyServiceList.NEWS_SERVICE_ARTICLE_HTML, fallbackFactory = ArticleHtmlControllerFallbackFactory.class)
 public interface ArticleHtmlControllerApi {
 
-    @ApiOperation(value = "下载静态文章html", httpMethod = "GET")
+    @ApiOperation(value = "从GridFS下载静态文章资源到前端项目", httpMethod = "GET")
     @GetMapping("/download")
     Integer download(@RequestParam String articleId, @RequestParam String articleMongoId);
 
-    @ApiOperation(value = "删除服务器中的静态文章html", httpMethod = "GET")
+    @ApiOperation(value = "删除前端项目中的指定的静态文章", httpMethod = "GET")
     @GetMapping("/delete")
     Integer delete(@RequestParam String articleId);
 }
