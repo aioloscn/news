@@ -95,9 +95,8 @@ public class ArticleUtil {
         // 0. 配置freemarker基本环境
         Configuration cfg = new Configuration(Configuration.getVersion());
         // 声明freemarker所需要加载的目录的位置
-        ClassPathResource templates = new ClassPathResource("templates");
         try {
-            cfg.setDirectoryForTemplateLoading(templates.getFile());
+            cfg.setClassForTemplateLoading(this.getClass(), "/templates");
             Template template = cfg.getTemplate("detail.ftl", "utf-8");
 
             // 获得文章详情数据
