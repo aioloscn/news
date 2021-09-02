@@ -13,6 +13,7 @@ import com.aliyuncs.http.FormatType;
 import com.aliyuncs.http.HttpResponse;
 import com.aliyuncs.profile.DefaultProfile;
 import com.aliyuncs.profile.IClientProfile;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -23,6 +24,7 @@ import java.util.*;
  * @author Aiolos
  * @date 2021/5/15 4:39 上午
  */
+@Slf4j
 @Component
 public class AliTextReviewUtils {
 
@@ -60,7 +62,7 @@ public class AliTextReviewUtils {
          **/
         data.put("scenes", Arrays.asList("antispam"));
         data.put("tasks", tasks);
-        System.out.println(JSON.toJSONString(data, true));
+        log.info(JSON.toJSONString(data, true));
         try {
             textScanRequest.setHttpContent(data.toJSONString().getBytes("UTF-8"), "UTF-8", FormatType.JSON);
         } catch (UnsupportedEncodingException e) {
@@ -73,7 +75,7 @@ public class AliTextReviewUtils {
             HttpResponse httpResponse = client.doAction(textScanRequest);
             if(httpResponse.isSuccess()){
                 JSONObject scrResponse = JSON.parseObject(new String(httpResponse.getHttpContent(), "UTF-8"));
-                System.out.println(JSON.toJSONString(scrResponse, true));
+                log.info(JSON.toJSONString(scrResponse, true));
                 if (200 == scrResponse.getInteger("code")) {
                     JSONArray taskResults = scrResponse.getJSONArray("data");
                     for (Object taskResult : taskResults) {
@@ -85,8 +87,8 @@ public class AliTextReviewUtils {
                                 String suggestion = ((JSONObject)sceneResult).getString("suggestion");
                                 // 根据scene和suggetion做相关处理。
                                 // suggestion == pass表示未命中垃圾。suggestion == block表示命中了垃圾，可以通过label字段查看命中的垃圾分类。
-                                System.out.println("args = [" + scene + "]");
-                                System.out.println("args = [" + suggestion + "]");
+                                log.info("args = [" + scene + "]");
+                                log.info("args = [" + suggestion + "]");
 
                                 // pass: 文本正常，文章状态改为发布通过
                                 // review: 需要人工审核，需要在后台管理进行人工审核，大部分平台都采用机审+人工审核的方式
@@ -94,14 +96,14 @@ public class AliTextReviewUtils {
                                 return suggestion;
 //                            }
                         }else{
-                            System.out.println("task process fail:" + ((JSONObject)taskResult).getInteger("code"));
+                            log.error("task process fail:" + ((JSONObject)taskResult).getInteger("code"));
                         }
                     }
                 } else {
-                    System.out.println("detect not success. code:" + scrResponse.getInteger("code"));
+                    log.error("detect not success. code:" + scrResponse.getInteger("code"));
                 }
             }else{
-                System.out.println("response not success. status:" + httpResponse.getStatus());
+                log.error("response not success. status:" + httpResponse.getStatus());
             }
         } catch (ServerException e) {
             e.printStackTrace();

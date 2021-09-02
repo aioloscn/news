@@ -18,6 +18,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.bson.types.ObjectId;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
@@ -61,9 +62,9 @@ public class ArticleUtil {
         // 0. 配置freemarker基本环境
         Configuration cfg = new Configuration(Configuration.getVersion());
         // 声明freemarker所需要加载的目录的位置
-        String classPath = this.getClass().getResource("/").getPath();
+        ClassPathResource templates = new ClassPathResource("templates");
         try {
-            cfg.setDirectoryForTemplateLoading(new File(classPath + "templates"));
+            cfg.setDirectoryForTemplateLoading(templates.getFile());
             Template template = cfg.getTemplate("detail.ftl", "utf-8");
 
             // 获得文章详情数据
@@ -94,9 +95,9 @@ public class ArticleUtil {
         // 0. 配置freemarker基本环境
         Configuration cfg = new Configuration(Configuration.getVersion());
         // 声明freemarker所需要加载的目录的位置
-        String classPath = this.getClass().getResource("/").getPath();
+        ClassPathResource templates = new ClassPathResource("templates");
         try {
-            cfg.setDirectoryForTemplateLoading(new File(classPath + "templates"));
+            cfg.setDirectoryForTemplateLoading(templates.getFile());
             Template template = cfg.getTemplate("detail.ftl", "utf-8");
 
             // 获得文章详情数据
