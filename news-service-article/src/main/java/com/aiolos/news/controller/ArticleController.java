@@ -188,4 +188,10 @@ public class ArticleController extends BaseController implements ArticleControll
         elasticsearchTemplate.delete(ArticleEO.class, articleId);
         return CommonResponse.ok();
     }
+
+    @Override
+    public CommonResponse restoreEs() {
+        articleService.restoreEs();
+        return CommonResponse.ok();
+    }
 }

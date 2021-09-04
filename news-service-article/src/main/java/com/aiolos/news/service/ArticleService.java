@@ -91,4 +91,9 @@ public interface ArticleService {
      * @return
      */
     Article queryById(String articleId);
+
+    /**
+     * 从数据库恢复数据到ES
+     */
+    void restoreEs();
 }

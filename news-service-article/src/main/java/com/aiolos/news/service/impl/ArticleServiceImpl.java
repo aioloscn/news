@@ -324,4 +324,15 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
     public Article queryById(String articleId) {
         return articleDao.selectById(articleId);
     }
+
+    @Override
+    public void restoreEs() {
+        List<Article> articleList = articleDao.selectList(new QueryWrapper<Article>().eq("is_delete", 0));
+        articleList.forEach(article -> {
+            ArticleEO articleEO = new ArticleEO();
+            BeanUtils.copyProperties(article, articleEO);
+            IndexQuery indexQuery = new IndexQueryBuilder().withObject(articleEO).build();
+            String index = elasticsearchTemplate.index(indexQuery);
+        });
+    }
 }

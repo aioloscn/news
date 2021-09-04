@@ -47,4 +47,8 @@ public interface ArticleControllerApi {
     @ApiOperation(value = "用户删除文章", httpMethod = "POST")
     @PostMapping("/delete")
     CommonResponse delete(@RequestParam String userId, @RequestParam String articleId) throws CustomizedException;
+
+    @ApiOperation(value = "从数据库恢复数据到ES", httpMethod = "POST")
+    @PostMapping("/restoreEs")
+    CommonResponse restoreEs();
 }
