@@ -331,7 +331,11 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
 
     @Override
     public void restoreEs() {
-        List<Article> articleList = articleDao.selectList(new QueryWrapper<Article>().eq("is_delete", 0));
+        QueryWrapper wrapper = new QueryWrapper<>();
+        wrapper.eq("is_delete", YesOrNo.NO.getType());
+        wrapper.eq("article_status", ArticleReviewStatus.SUCCESS.getType());
+        wrapper.eq("is_appoint", ArticleAppointType.IMMEDIATELY.getType());
+        List<Article> articleList = articleDao.selectList(wrapper);
         articleList.forEach(article -> {
             ArticleEO articleEO = new ArticleEO();
             BeanUtils.copyProperties(article, articleEO);
