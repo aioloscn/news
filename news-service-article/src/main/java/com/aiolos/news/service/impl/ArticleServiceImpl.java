@@ -103,7 +103,9 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
         }
 
         // 发送延迟消息到mq，计算定时发布时间和当前时间的时间差，为往后延时的时间
-        if (article.getIsAppoint().equals(ArticleAppointType.TIMEING.getType())) {
+        // 机审失败直接打回，不用定时发布和保存ES数据了
+        if (!reviewTextResult.equalsIgnoreCase(ArticleReviewLevel.BLOCK.getType()) &&
+                article.getIsAppoint().equals(ArticleAppointType.TIMEING.getType())) {
 
             Date publishTime = newArticleBO.getPublishTime();
             Date currentTime = new Date();
@@ -119,7 +121,7 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
 
             log.info("exchange: {}, routingKey: {}, message: {}, delayTime: {}",
                     RabbitMQDelayQueueConfig.EXCHANGE_DELAY, "delay.create.article", articleId, DateUtils.fromDeadline(publishTime));
-            // 下载静态html，保存文章数据到ES
+            // 保存文章数据到ES
             rabbitTemplate.convertAndSend(RabbitMQDelayQueueConfig.EXCHANGE_DELAY, "delay.create.article",
                     articleId, messagePostProcessor);
         }
@@ -141,13 +143,15 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
             articleUtil.downloadArticleHtmlByMQ(articleId, articleMongoId);
 
             // 即时发布的文章直接保存文章数据到ES
-            ArticleEO articleEO = new ArticleEO();
-            BeanUtils.copyProperties(article, articleEO);
-            IndexQuery indexQuery = new IndexQueryBuilder().withObject(articleEO).build();
-            String index = elasticsearchTemplate.index(indexQuery);
-            log.info("创建文章{}，保存ES索引: {}", articleId, index);
-            if (StringUtils.isBlank(index)) {
-                log.error("创建文章{}，保存ES索引失败", articleId);
+            if (article.getIsAppoint().equals(ArticleAppointType.IMMEDIATELY.getType())) {
+                ArticleEO articleEO = new ArticleEO();
+                BeanUtils.copyProperties(article, articleEO);
+                IndexQuery indexQuery = new IndexQueryBuilder().withObject(articleEO).build();
+                String index = elasticsearchTemplate.index(indexQuery);
+                log.info("创建文章{}，保存ES索引: {}", articleId, index);
+                if (StringUtils.isBlank(index)) {
+                    log.error("创建文章{}，保存ES索引失败", articleId);
+                }
             }
         }
     }
