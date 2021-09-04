@@ -160,11 +160,11 @@ public class ArticleController extends BaseController implements ArticleControll
         }
         articleService.withdraw(userId, articleId);
         // 删除GridFS存储的关联数据
-        articleUtil.deleteFromGridFS(articleMongoId);
+//        articleUtil.deleteFromGridFS(articleMongoId);
         // 删除对应的静态html
-        articleUtil.deleteArticleHtmlByMQ(articleId);
+//        articleUtil.deleteArticleHtmlByMQ(articleId);
         // 删除ES中的文章数据
-        elasticsearchTemplate.delete(ArticleEO.class, articleId);
+//        elasticsearchTemplate.delete(ArticleEO.class, articleId);
         return CommonResponse.ok();
     }
 
@@ -186,6 +186,12 @@ public class ArticleController extends BaseController implements ArticleControll
         articleUtil.deleteArticleHtmlByMQ(articleId);
         // 删除ES中的文章数据
         elasticsearchTemplate.delete(ArticleEO.class, articleId);
+        return CommonResponse.ok();
+    }
+
+    @Override
+    public CommonResponse restoreEs() {
+        articleService.restoreEs();
         return CommonResponse.ok();
     }
 }
