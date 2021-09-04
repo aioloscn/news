@@ -31,12 +31,6 @@ public class ArticleEO {
     private String articleCover;
 
     @Field
-    private Integer isAppoint;
-
-    @Field
-    private Integer articleStatus;
-
-    @Field
     private String publishUserId;
 
     @Field
