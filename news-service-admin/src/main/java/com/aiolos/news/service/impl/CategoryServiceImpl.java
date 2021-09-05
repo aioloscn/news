@@ -9,6 +9,7 @@ import com.aiolos.news.pojo.bo.SaveCategoryBO;
 import com.aiolos.news.service.BaseService;
 import com.aiolos.news.service.CategoryService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,20 +39,26 @@ public class CategoryServiceImpl extends BaseService implements CategoryService 
     public void saveOrUpdateCategory(SaveCategoryBO saveCategoryBO) throws CustomizedException {
 
         redis.del(REDIS_ALL_CATEGORY);
-        QueryWrapper queryWrapper = new QueryWrapper();
-        queryWrapper.eq("name", saveCategoryBO.getName());
-        Category category = categoryDao.selectOne(queryWrapper);
-        int result = 0;
-        if (category != null) {
-            if (!category.getTagColor().equals(saveCategoryBO.getTagColor())) {
-                category.setTagColor(saveCategoryBO.getTagColor());
-                result = categoryDao.updateById(category);
+        Category category = new Category();
+        BeanUtil.copyProperties(saveCategoryBO, category);
+        int result;
+        if (category.getId() == null) {
+            // 不存在重复名则新增
+            if (!queryCatIsExist(category.getName(), null)) {
+                result = categoryDao.insert(category);
+            } else {
+                throw new CustomizedException(ErrorEnum.ARTICLE_CATEGORY_ALREADY_EXISTS);
             }
         } else {
-            category = new Category();
-            BeanUtil.copyProperties(saveCategoryBO, category);
-            result = categoryDao.insert(category);
+            // 查询修改的分类名称是否已存在
+            if (!queryCatIsExist(category.getName(), saveCategoryBO.getOldName())) {
+                // 根据主键修改名称和颜色
+                result = categoryDao.updateById(category);
+            } else {
+                throw new CustomizedException(ErrorEnum.ARTICLE_CATEGORY_ALREADY_EXISTS);
+            }
         }
+
         if (result != 1) {
             try {
                 throw new RuntimeException();
@@ -60,5 +67,14 @@ public class CategoryServiceImpl extends BaseService implements CategoryService 
             }
         }
         redis.del(REDIS_ALL_CATEGORY);
+    }
+
+    private boolean queryCatIsExist(String name, String oldName) {
+        QueryWrapper<Category> wrapper = new QueryWrapper<>();
+        wrapper.eq("name", name);
+        if (StringUtils.isNotBlank(oldName))
+            wrapper.ne("name", oldName);
+        List<Category> categoryList = categoryDao.selectList(wrapper);
+        return categoryList != null && !categoryList.isEmpty() && categoryList.size() > 0;
     }
 }
