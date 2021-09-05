@@ -91,6 +91,7 @@ public enum ErrorEnum implements CommonError {
     FAILED_TO_DELETE_COMMENT(30033, "删除评论失败"),
     GRIDFS_HAS_NO_RESOURCES_ARTICLE_REVIEW_FAILED(30034, "文章审核异常，GridFs没有相关资源，请联系管理员"),
     DOWNLOAD_FOR_GRIDFS_FAILED(30035, "从GridFS下载资源失败"),
+    ARTICLE_CATEGORY_ALREADY_EXISTS(30036, "文章分类已存在"),
 
     // 管理员相关类型错误
     ADMIN_NOT_EXIST_ERROR(40001, "管理员账号不存在或密码错误"),
