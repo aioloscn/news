@@ -46,6 +46,6 @@ ribbon:
 
 # ip请求限制的参数配置
 ipBlacklist:
-  continueCounts: ${counts:20}    # ip连续请求的次数
+  continueCounts: ${counts:100}    # ip连续请求的次数，一个界面可能就包含十几次request请求
   timeInterval: ${interval:10}    # 判断ip连续请求的时间跨度，单位：秒
   limitTime: ${time:15}           # 限制多长时间内不能在请求，单位：秒
