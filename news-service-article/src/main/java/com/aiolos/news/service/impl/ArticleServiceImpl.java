@@ -222,15 +222,26 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
 
         // 根据文章ids批量获取文章阅读量
         List<Article> articles = (List<Article>) pagedResult.getRecords();
-        List<String> idList = new ArrayList<>();
+        List<String> readCountIdList = new ArrayList<>();
         articles.forEach(a -> {
-            // 构建文章id的list
-            idList.add(REDIS_ARTICLE_READ_COUNTS + ":" + a.getId());
+            // 构建文章id的阅读数list
+            readCountIdList.add(REDIS_ARTICLE_READ_COUNTS + ":" + a.getId());
         });
-        List<String> readCountsRedisList = redis.mget(idList);
+        List<String> readCountsRedisList = redis.mget(readCountIdList);
+
+        List<String> commentIdList = new ArrayList<>();
+        articles.forEach(a -> {
+            // 构建文章id的评论数list
+            commentIdList.add(REDIS_ARTICLE_COMMENT_COUNTS + ":" + a.getId());
+        });
+        List<String> commentsRedisList = redis.mget(commentIdList);
+
         for (int i = 0; i < articles.size(); i++) {
             Integer readCounts = readCountsRedisList.get(i) == null ? 0 : Integer.valueOf(readCountsRedisList.get(i));
             articles.get(i).setReadCounts(readCounts);
+
+            Integer commentCounts = commentsRedisList.get(i) == null ? 0 : Integer.valueOf(commentsRedisList.get(i));
+            articles.get(i).setCommentCounts(commentCounts);
         }
         pagedResult.setRecords(articles);
         return pagedResult;
