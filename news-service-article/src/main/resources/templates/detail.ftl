@@ -46,7 +46,7 @@
 						<!-- single-selected -->
 						<div class="single-default" v-bind:class="{'single-selected': (cat.id==selectedCatId)}" v-for="(cat, index) in catList" v-key="index">
 							<!-- menu-selected -->
-							<a href="javascript:void(0);" class="white-header-left" style="text-decoration:none;" v-bind:class="{'menu-selected': (cat.id==selectedCatId)}" @click="queryByCategory(cat.id)">{{cat.name}}</a>
+							<a href="javascript:void(0);" class="white-header-left" style="text-decoration:none;" v-bind:class="{'menu-selected': (cat.id==selectedCatId)}" @click="queryByCategory(cat.id)"><template>{{cat.name}}</template></a>
 						</div>
 					</div>
                 </div>
@@ -69,7 +69,7 @@
                 ${articleDetail.title}
             </div>
             <div class="read-counts">
-                阅读量：{{readCounts}}
+                阅读量：<template>{{readCounts}}</template>
             </div>
 
             <div class="detail-really">
@@ -140,8 +140,8 @@
                                 <div class="comments-warn">文明上网理性发言</div>
                             </div>
 
-                            <!-- <div class="comments-counts">{{articleDetail.commentCounts}}条评论</div> -->
-                            <div class="comments-counts">{{commentCounts}}条评论</div>
+                            <!-- <div class="comments-counts"><template>{{articleDetail.commentCounts}}</template>条评论</div> -->
+                            <div class="comments-counts"><template>{{commentCounts}}</template>条评论</div>
                             
                         </div>
 
@@ -163,15 +163,15 @@
 
                                 <div class="comment-info-wrapper">
                                     <div class="publish-info">
-                                        <div>{{comment.commentUserNickname}}</div>
-                                        <div class="publish-date">{{formatData(comment.createTime)}}</div>
+                                        <div><template>{{comment.commentUserNickname}}</template></div>
+                                        <div class="publish-date"><template>{{formatData(comment.createTime)}}</template></div>
                                     </div>
 
                                     <!-- 回复的内容，如果判断是回复别人的留言，则再此引用一下 -->
                                     <div class="quote-wrapper" v-show="comment.quoteUserNickname != null">
                                         <span class="quote-content">
                                             <!-- <span>回复“</span> -->
-                                            <span><strong>{{comment.quoteUserNickname}}</strong>：</span><span v-html="comment.quoteContent"></span>
+                                            <span><strong><template>{{comment.quoteUserNickname}}</template></strong>：</span><span v-html="comment.quoteContent"></span>
                                             <!-- <span>”</span> -->
                                         </span>
                                     </div>
