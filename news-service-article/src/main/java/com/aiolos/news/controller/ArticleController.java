@@ -155,7 +155,7 @@ public class ArticleController extends BaseController implements ArticleControll
         }
         String articleMongoId = article.getMongoFileId();
         if (StringUtils.isBlank(articleMongoId)) {
-            log.warn("文章{}撤回，不存在MongoDB数据");
+            log.warn("文章{}撤回，不存在MongoDB数据", articleId);
             return CommonResponse.ok();
         }
         articleService.withdraw(userId, articleId);
@@ -177,7 +177,7 @@ public class ArticleController extends BaseController implements ArticleControll
         }
         String articleMongoId = article.getMongoFileId();
         if (StringUtils.isBlank(articleMongoId)) {
-            log.warn("文章{}删除，不存在MongoDB数据");
+            log.warn("文章{}删除，不存在MongoDB数据", articleId);
         }
         articleService.delete(userId, articleId);
         // 删除GridFS存储的关联数据
