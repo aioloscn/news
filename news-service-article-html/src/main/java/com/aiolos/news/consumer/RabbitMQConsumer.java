@@ -7,6 +7,7 @@ import com.aiolos.news.config.RabbitMQConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.amqp.support.converter.MessageConversionException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
@@ -26,7 +27,7 @@ public class RabbitMQConsumer {
     }
 
     @RabbitListener(queues = {RabbitMQConfig.QUEUE_DOWNLOAD_HTML})
-    public void watchDownloadQueue(String payload, Message message) throws CustomizedException {
+    public void watchDownloadQueue(String payload, Message message) {
         log.info("rabbitmq consumer watchDownloadQueue param: {}", payload);
         String routingKey = message.getMessageProperties().getReceivedRoutingKey();
         if (routingKey.equalsIgnoreCase("article.download")) {
@@ -35,20 +36,22 @@ public class RabbitMQConsumer {
             // 从GridFS下载静态文章资源到前端项目
             Integer status = articleHtmlComponent.download(articleId, articleMongoId);
             if (status != HttpStatus.OK.value()) {
-                throw new CustomizedException(ErrorEnum.ARTICLE_REVIEW_ERROR);
+                log.error("下载静态html{}失败，丢弃消息", articleId);
+                throw new MessageConversionException(ErrorEnum.ARTICLE_REVIEW_ERROR.getErrMsg());
             }
         }
     }
 
     @RabbitListener(queues = {RabbitMQConfig.QUEUE_DELETE_HTML})
-    public void watchDeleteQueue(String payload, Message message) throws CustomizedException {
+    public void watchDeleteQueue(String payload, Message message) {
         log.info("rabbitmq consumer watchDeleteQueue param: {}", payload);
         String routingKey = message.getMessageProperties().getReceivedRoutingKey();
         if (routingKey.equalsIgnoreCase("article.delete")) {
             // 删除前端项目中的指定的静态文章
             Integer status = articleHtmlComponent.delete(payload);
             if (status != HttpStatus.OK.value()) {
-                throw new CustomizedException(ErrorEnum.FAILED_TO_DELETE_ARTICLE);
+                log.error("删除静态html{}失败，丢弃消息", payload);
+                throw new MessageConversionException(ErrorEnum.FAILED_TO_DELETE_ARTICLE.getErrMsg());
             }
         }
     }
