@@ -400,7 +400,8 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
         if (content == null || content.isEmpty())
             return;
 
-        Collections.reverse(content);
+        List<DatingNewsEO> newList = new ArrayList<>(content);
+        Collections.reverse(newList);
 
         NewArticleBO newArticleBO = new NewArticleBO();
         newArticleBO.setArticleCover(StringUtils.EMPTY);
@@ -412,7 +413,7 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
         if (user != null)
             newArticleBO.setPublishUserId(user.getId());
 
-        for (DatingNewsEO eo: content) {
+        for (DatingNewsEO eo: newList) {
             // 保存新闻Id，每次执行进来判断下，已存在直接跳过这篇新闻
             String newId = eo.getId();
             boolean keyIsExist = redis.keyIsExist(ES_NEW_ID + ":" + newId);
