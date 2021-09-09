@@ -50,7 +50,7 @@ public class CategoryMngController extends BaseController implements CategoryMng
 
     @Override
     public CommonResponse saveOrUpdateCategory(SaveCategoryBO saveCategoryBO) throws CustomizedException {
-        categoryService.saveOrUpdateCategory(saveCategoryBO);
-        return CommonResponse.ok();
+        int id = categoryService.saveOrUpdateCategory(saveCategoryBO);
+        return CommonResponse.ok(id);
     }
 }

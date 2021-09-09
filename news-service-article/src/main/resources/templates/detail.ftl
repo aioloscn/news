@@ -27,7 +27,7 @@
         }
 	</style>
 
-	<link rel="shortcut icon" href="../img/mu-toutiao.ico" />
+	<link rel="shortcut icon" href="../img/toutiao.ico" />
 
 	<title id="pageTitle">${articleDetail.title}</title>
 </head>
@@ -39,7 +39,7 @@
             <div class="white-bar">
                 <div class="left-part">
                     <div class="logo-wrapper" @click="goIndex()">
-                        <img src="../img/imooc-news-logo.png" class="big-logo"/>
+                        <img src="../img/news-logo.png" class="big-logo"/>
                     </div>
 
                     <div class="menus">

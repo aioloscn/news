@@ -5,6 +5,7 @@ import com.aiolos.news.common.exception.CustomizedException;
 import com.aiolos.news.config.MyServiceList;
 import com.aiolos.news.controller.user.fallbacks.UserControllerFallbackFactory;
 import com.aiolos.news.pojo.bo.UpdateUserInfoBO;
+import com.aiolos.news.pojo.vo.UserBasicInfoVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -36,4 +37,7 @@ public interface UserControllerApi {
     @ApiOperation(value = "根据多个用户的id查询用户列表", notes = "根据多个用户的id查询用户列表，不需要登录", httpMethod = "GET")
     @GetMapping("/queryByIds")
     CommonResponse queryByIds(@RequestParam String userIds);
+
+    @GetMapping("/getUserByName")
+    UserBasicInfoVO getUserByName(@RequestParam String nickname);
 }

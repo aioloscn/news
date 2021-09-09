@@ -139,4 +139,11 @@ public class UserServiceImpl implements UserService {
             }
         }
     }
+
+    @Override
+    public AppUser getUserByName(String nickname) {
+        QueryWrapper wrapper = new QueryWrapper();
+        wrapper.eq("nickname", nickname);
+        return appUserDao.selectOne(wrapper);
+    }
 }

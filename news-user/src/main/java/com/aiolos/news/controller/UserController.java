@@ -1,5 +1,6 @@
 package com.aiolos.news.controller;
 
+import cn.hutool.core.bean.BeanUtil;
 import com.aiolos.news.common.response.CommonResponse;
 import com.aiolos.news.common.enums.ErrorEnum;
 import com.aiolos.news.common.exception.CustomizedException;
@@ -79,7 +80,7 @@ public class UserController extends BaseController implements UserControllerApi 
             user = JsonUtils.jsonToPojo(userJson, AppUser.class);
         } else {
             user = userService.getUser(userId);
-            // 由于用户信息不怎么变动，对于千万级别的网站这类信息不会直接去查询数据库，可以把查询后的数据存入redis
+            // 由于用户信息不怎么变动，可以把查询后的数据存入redis
             redis.set(REDIS_USER_INFO + ":" + userId, JsonUtils.objectToJson(user));
         }
 
@@ -106,6 +107,14 @@ public class UserController extends BaseController implements UserControllerApi 
             publisherList.add(userBasicInfoVO);
         }
         return CommonResponse.ok(publisherList);
+    }
+
+    @Override
+    public UserBasicInfoVO getUserByName(String nickname) {
+        AppUser user = userService.getUserByName(nickname);
+        UserBasicInfoVO userBasicInfoVO = new UserBasicInfoVO();
+        BeanUtil.copyProperties(user, userBasicInfoVO);
+        return userBasicInfoVO;
     }
 
     private UserBasicInfoVO getUserBasicInfoVO(String userId) {

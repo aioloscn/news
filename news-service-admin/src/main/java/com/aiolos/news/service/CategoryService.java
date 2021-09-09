@@ -22,5 +22,5 @@ public interface CategoryService {
      * 保存或更新分类
      * @param saveCategoryBO
      */
-    void saveOrUpdateCategory(SaveCategoryBO saveCategoryBO) throws CustomizedException;
+    int saveOrUpdateCategory(SaveCategoryBO saveCategoryBO) throws CustomizedException;
 }
