@@ -47,10 +47,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author Aiolos
@@ -393,12 +390,14 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
     @Transactional(propagation = Propagation.NESTED, rollbackFor = CustomizedException.class)
     @Override
     public void publishNewsFromESData() {
-        // 从ES获取数据
+        // 从ES获取数据，拿到最新的500条
         Pageable pageable = PageRequest.of(0, 500);
         SearchQuery query = new NativeSearchQueryBuilder().withQuery(QueryBuilders.matchAllQuery()).withPageable(pageable)
-                .withSort(SortBuilders.fieldSort("_id").order(SortOrder.ASC)).build();
+                .withSort(SortBuilders.fieldSort("_id").order(SortOrder.DESC)).build();
         AggregatedPage<DatingNewsEO> datingNews = elasticsearchTemplate.queryForPage(query, DatingNewsEO.class);
         List<DatingNewsEO> content = datingNews.getContent();
+        // 将有序的集合反转过来，最新发表的新闻最后插入，id越大
+        Collections.reverse(content);
 
         NewArticleBO newArticleBO = new NewArticleBO();
         newArticleBO.setArticleCover(StringUtils.EMPTY);

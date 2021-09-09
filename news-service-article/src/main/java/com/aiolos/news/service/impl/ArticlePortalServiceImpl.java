@@ -422,11 +422,13 @@ public class ArticlePortalServiceImpl extends BaseService implements ArticlePort
      * @return
      */
     private UserBasicInfoVO getUserIfPublisher(String publisherId, List<UserBasicInfoVO> publisherList) {
+        if (StringUtils.isBlank(publisherId) || publisherList == null)
+            return new UserBasicInfoVO();
         for (UserBasicInfoVO userBasicInfoVO : publisherList) {
             if (userBasicInfoVO.getId().equalsIgnoreCase(publisherId)) {
                 return userBasicInfoVO;
             }
         }
-        return null;
+        return new UserBasicInfoVO();
     }
 }
