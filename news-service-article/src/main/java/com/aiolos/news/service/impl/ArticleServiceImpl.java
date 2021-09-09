@@ -396,7 +396,7 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
         // 从ES获取数据
         Pageable pageable = PageRequest.of(0, 500);
         SearchQuery query = new NativeSearchQueryBuilder().withQuery(QueryBuilders.matchAllQuery()).withPageable(pageable)
-                .withSort(SortBuilders.fieldSort("_id").order(SortOrder.DESC)).build();
+                .withSort(SortBuilders.fieldSort("_id").order(SortOrder.ASC)).build();
         AggregatedPage<DatingNewsEO> datingNews = elasticsearchTemplate.queryForPage(query, DatingNewsEO.class);
         List<DatingNewsEO> content = datingNews.getContent();
 
