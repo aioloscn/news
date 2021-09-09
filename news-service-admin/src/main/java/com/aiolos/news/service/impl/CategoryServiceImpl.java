@@ -36,7 +36,7 @@ public class CategoryServiceImpl extends BaseService implements CategoryService 
 
     @Transactional(propagation = Propagation.NESTED, rollbackFor = CustomizedException.class)
     @Override
-    public void saveOrUpdateCategory(SaveCategoryBO saveCategoryBO) throws CustomizedException {
+    public int saveOrUpdateCategory(SaveCategoryBO saveCategoryBO) throws CustomizedException {
 
         redis.del(REDIS_ALL_CATEGORY);
         Category category = new Category();
@@ -67,6 +67,7 @@ public class CategoryServiceImpl extends BaseService implements CategoryService 
             }
         }
         redis.del(REDIS_ALL_CATEGORY);
+        return category.getId();
     }
 
     private boolean queryCatIsExist(String name, String oldName) {

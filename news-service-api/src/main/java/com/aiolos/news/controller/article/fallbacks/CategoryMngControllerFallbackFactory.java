@@ -1,11 +1,10 @@
-package com.aiolos.news.controller.user.fallbacks;
+package com.aiolos.news.controller.article.fallbacks;
 
-import com.aiolos.news.common.response.CommonResponse;
 import com.aiolos.news.common.enums.ErrorEnum;
 import com.aiolos.news.common.exception.CustomizedException;
-import com.aiolos.news.controller.user.UserControllerApi;
-import com.aiolos.news.pojo.bo.UpdateUserInfoBO;
-import com.aiolos.news.pojo.vo.UserBasicInfoVO;
+import com.aiolos.news.common.response.CommonResponse;
+import com.aiolos.news.controller.admin.CategoryMngControllerApi;
+import com.aiolos.news.pojo.bo.SaveCategoryBO;
 import feign.hystrix.FallbackFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -17,17 +16,15 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * 服务提供者熔断降级类，不写这个服务调用者会报500错误
  * @author Aiolos
- * @date 2020/12/11 8:51 下午
+ * @date 2021/9/9 6:49 上午
  */
 @Slf4j
 @Component
-public class UserControllerFallbackFactory implements FallbackFactory<UserControllerApi> {
-
+public class CategoryMngControllerFallbackFactory implements FallbackFactory<CategoryMngControllerApi> {
     @Override
-    public UserControllerApi create(Throwable throwable) {
-        return new UserControllerApi() {
+    public CategoryMngControllerApi create(Throwable throwable) {
+        return new CategoryMngControllerApi() {
 
             private CommonResponse getCause() {
                 log.error(ErrorEnum.FEIGN_FALLBACK_EXCEPTION + ": " + throwable.getMessage());
@@ -42,28 +39,13 @@ public class UserControllerFallbackFactory implements FallbackFactory<UserContro
             }
 
             @Override
-            public CommonResponse getUserBasicInfo(String userId) {
+            public CommonResponse getCatList() {
                 return getCause();
             }
 
             @Override
-            public CommonResponse getAccountInfo(String userId) {
+            public CommonResponse saveOrUpdateCategory(@Valid SaveCategoryBO saveCategoryBO) throws CustomizedException {
                 return getCause();
-            }
-
-            @Override
-            public CommonResponse updateAccountInfo(@Valid UpdateUserInfoBO updateUserInfoBO) throws CustomizedException {
-                return getCause();
-            }
-
-            @Override
-            public CommonResponse queryByIds(String userIds) {
-                return getCause();
-            }
-
-            @Override
-            public UserBasicInfoVO getUserByName(String nickname) {
-                return null;
             }
         };
     }

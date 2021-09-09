@@ -43,6 +43,8 @@ public class BaseService {
 
     public static final String REDIS_ARTICLE_COMMENT_COUNTS = "redis_article_comment_counts";
 
+    public static final String ES_NEW_ID = "es_new_id";
+
     public PagedResult setterPagedResult(IPage<?> page) {
 
         PagedResult pagedResult = new PagedResult();

@@ -53,6 +53,8 @@ public class BaseController {
 
     public static final String REDIS_ARTICLE_COMMENT_COUNTS = "redis_article_comment_counts";
 
+    public static final String ES_NEW_ID = "es_new_id";
+
     public static final Integer COOKIE_EXPIRE_TIME = 7 * 24 * 60 * 60;
 
     public static final Integer START_PAGE = 1;

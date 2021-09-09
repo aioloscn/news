@@ -1,7 +1,6 @@
 package com.aiolos.news.consumer;
 
 import com.aiolos.news.common.enums.ErrorEnum;
-import com.aiolos.news.common.exception.CustomizedException;
 import com.aiolos.news.component.ArticleHtmlComponent;
 import com.aiolos.news.config.RabbitMQConfig;
 import lombok.extern.slf4j.Slf4j;

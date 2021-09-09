@@ -25,6 +25,8 @@ public class RabbitMQConfig {
 
     public static final String QUEUE_DELETE_HTML = "queue_delete_html";
 
+    public static final String QUEUE_INSERT_ARTICLE = "queue_insert_article";
+
     /**
      * 创建交换机
      * @return
@@ -47,6 +49,11 @@ public class RabbitMQConfig {
         return new Queue(QUEUE_DELETE_HTML);
     }
 
+    @Bean(QUEUE_INSERT_ARTICLE)
+    public Queue insert() {
+        return new Queue(QUEUE_INSERT_ARTICLE);
+    }
+
     /**
      * 队列绑定交换机
      */
@@ -58,5 +65,10 @@ public class RabbitMQConfig {
     @Bean
     public Binding bindingDeleteQUEUE(@Qualifier(EXCHANGE_ARTICLE) Exchange exchange, @Qualifier(QUEUE_DELETE_HTML) Queue queue) {
         return BindingBuilder.bind(queue).to(exchange).with("article.delete").noargs();
+    }
+
+    @Bean
+    public Binding bindingInsertQUEUE(@Qualifier(EXCHANGE_ARTICLE) Exchange exchange, @Qualifier(QUEUE_INSERT_ARTICLE) Queue queue) {
+        return BindingBuilder.bind(queue).to(exchange).with("article.insert").noargs();
     }
 }

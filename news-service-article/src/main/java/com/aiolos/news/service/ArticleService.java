@@ -96,4 +96,9 @@ public interface ArticleService {
      * 从数据库恢复数据到ES
      */
     void restoreEs();
+
+    /**
+     * 将爬虫项目保存在ES的新闻数据在本系统发布
+     */
+    void publishNewsFromESData();
 }

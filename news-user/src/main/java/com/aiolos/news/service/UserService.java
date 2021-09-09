@@ -3,6 +3,7 @@ package com.aiolos.news.service;
 import com.aiolos.news.common.exception.CustomizedException;
 import com.aiolos.news.pojo.AppUser;
 import com.aiolos.news.pojo.bo.UpdateUserInfoBO;
+import com.aiolos.news.pojo.vo.UserBasicInfoVO;
 
 /**
  * @author Aiolos
@@ -38,5 +39,18 @@ public interface UserService {
      */
     void updateAccountInfo(UpdateUserInfoBO updateUserInfoBO) throws CustomizedException;
 
+    /**
+     * 冻结或解冻用户
+     * @param userId
+     * @param doStatus
+     * @throws CustomizedException
+     */
     void freezeUserOrNot(String userId, Integer doStatus) throws CustomizedException;
+
+    /**
+     * 根据昵称获取用户基本信息
+     * @param nickname
+     * @return
+     */
+    AppUser getUserByName(String nickname);
 }
