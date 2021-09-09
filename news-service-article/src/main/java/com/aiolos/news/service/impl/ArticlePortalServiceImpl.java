@@ -26,6 +26,8 @@ import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightField;
+import org.elasticsearch.search.sort.SortBuilders;
+import org.elasticsearch.search.sort.SortOrder;
 import org.springframework.beans.BeanUtils;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.data.domain.PageRequest;
@@ -116,11 +118,13 @@ public class ArticlePortalServiceImpl extends BaseService implements ArticlePort
 
         AggregatedPage<ArticleEO> pagedArticle = null;
         if (StringUtils.isBlank(keyword) && category == null) {
-            SearchQuery query = new NativeSearchQueryBuilder().withQuery(QueryBuilders.matchAllQuery()).withPageable(pageable).build();
+            SearchQuery query = new NativeSearchQueryBuilder().withQuery(QueryBuilders.matchAllQuery())
+                    .withPageable(pageable).withSort(SortBuilders.fieldSort("_id").order(SortOrder.DESC)).build();
             pagedArticle = elasticsearchTemplate.queryForPage(query, ArticleEO.class);
         }
         if (StringUtils.isBlank(keyword) && category != null) {
-            SearchQuery query = new NativeSearchQueryBuilder().withQuery(QueryBuilders.termQuery("categoryId", category)).build();
+            SearchQuery query = new NativeSearchQueryBuilder().withQuery(QueryBuilders.termQuery("categoryId", category))
+                    .withSort(SortBuilders.fieldSort("_id").order(SortOrder.DESC)).build();
             pagedArticle = elasticsearchTemplate.queryForPage(query, ArticleEO.class);
         }
 
@@ -133,6 +137,7 @@ public class ArticlePortalServiceImpl extends BaseService implements ArticlePort
                     .withQuery(QueryBuilders.matchQuery(searchTitleField, keyword))
                     .withHighlightFields(new HighlightBuilder.Field(searchTitleField).preTags(preTag).postTags(postTag))
                     .withPageable(pageable)
+                    .withSort(SortBuilders.fieldSort("_id").order(SortOrder.DESC))
                     .build();
 
             pagedArticle = elasticsearchTemplate.queryForPage(query, ArticleEO.class, new SearchResultMapper() {

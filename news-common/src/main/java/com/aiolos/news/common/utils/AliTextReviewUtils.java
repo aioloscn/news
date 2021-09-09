@@ -62,7 +62,7 @@ public class AliTextReviewUtils {
          **/
         data.put("scenes", Arrays.asList("antispam"));
         data.put("tasks", tasks);
-        System.out.println(JSON.toJSONString(data, true));
+//        System.out.println(JSON.toJSONString(data, true));
         try {
             textScanRequest.setHttpContent(data.toJSONString().getBytes("UTF-8"), "UTF-8", FormatType.JSON);
         } catch (UnsupportedEncodingException e) {
@@ -75,7 +75,7 @@ public class AliTextReviewUtils {
             HttpResponse httpResponse = client.doAction(textScanRequest);
             if(httpResponse.isSuccess()){
                 JSONObject scrResponse = JSON.parseObject(new String(httpResponse.getHttpContent(), "UTF-8"));
-                System.out.println(JSON.toJSONString(scrResponse, true));
+//                System.out.println(JSON.toJSONString(scrResponse, true));
                 if (200 == scrResponse.getInteger("code")) {
                     JSONArray taskResults = scrResponse.getJSONArray("data");
                     for (Object taskResult : taskResults) {
