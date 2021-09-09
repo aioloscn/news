@@ -391,7 +391,7 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
     @Override
     public void publishNewsFromESData() {
         // 从ES获取数据，拿到最新的500条
-        Pageable pageable = PageRequest.of(0, 500);
+        Pageable pageable = PageRequest.of(0, 100);
         SearchQuery query = new NativeSearchQueryBuilder().withQuery(QueryBuilders.matchAllQuery()).withPageable(pageable)
                 .withSort(SortBuilders.fieldSort("_id").order(SortOrder.DESC)).build();
         AggregatedPage<DatingNewsEO> datingNews = elasticsearchTemplate.queryForPage(query, DatingNewsEO.class);
