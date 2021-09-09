@@ -49,8 +49,8 @@ public class RabbitMQConsumer extends BaseService {
                     articleService.createArticle(newArticleBO, category);
                     // 保存Id用于新闻去重
                     redis.set(ES_NEW_ID + ":" + bo.getNewId(), bo.getNewId());
-                } catch (CustomizedException e) {
-                    log.error(e.getErrMsg());
+                } catch (Exception e) {
+                    log.error(e.getMessage());
                     throw new MessageConversionException(ErrorEnum.ARTICLE_CREATE_FAILED.getErrMsg());
                 }
             }
