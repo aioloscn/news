@@ -397,6 +397,9 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
         AggregatedPage<DatingNewsEO> datingNews = elasticsearchTemplate.queryForPage(query, DatingNewsEO.class);
         List<DatingNewsEO> content = datingNews.getContent();
         // 将有序的集合反转过来，最新发表的新闻最后插入，id越大
+        if (content == null || content.isEmpty())
+            return;
+
         Collections.reverse(content);
 
         NewArticleBO newArticleBO = new NewArticleBO();
