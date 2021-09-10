@@ -241,7 +241,7 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
             queryWrapper.like("title", "%" + keyword + "%");
         }
 
-        queryWrapper.orderByDesc("create_time");
+        queryWrapper.orderByDesc("publish_time");
 
         IPage<Article> articlePage = new Page<>(pageNum, pageSize);
         articlePage = articleDao.selectPage(articlePage, queryWrapper);
@@ -289,7 +289,7 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
         else if (status != null && status.equals(ArticleReviewStatus.WITHDRAW.getType()))
             queryWrapper.and(wrapper -> wrapper.eq("article_status", ArticleReviewStatus.WITHDRAW.getType()));
         queryWrapper.eq("is_delete", YesOrNo.NO.getType());
-        queryWrapper.orderByDesc("create_time");
+        queryWrapper.orderByDesc("publish_time");
         articlePage = articleDao.selectPage(articlePage, queryWrapper);
         PagedResult pagedResult = setterPagedResult(articlePage);
         return pagedResult;
