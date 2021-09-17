@@ -47,14 +47,26 @@ logging:
 
 # 配置Hystrix
 hystrix:
+  threadpool:
+    default:
+      maxQueueSize: 1000
   command:
     default:
       execution:
+        timeout:
+          enabled: true
         isolation:
           thread:
-            timeoutInMilliseconds: 6000   # 设置Hystrix超时时间，超过2秒触发降级
+            timeoutInMilliseconds: 30000   # 设置Hystrix超时时间，超过2秒触发降级
       circuitBreaker:
         enabled: true
-        requestVolumeThreshold: 10    # 触发断路器打开的滑动窗口中的最小请求数量，那么有9个请求都失败了断路器也不会打开，默认：20
-        sleepWindowInMilliseconds: 15000    # 熔断后过多少秒后尝试半开状态（请求重试），默认：5s
+        requestVolumeThreshold: 1000    # 触发断路器打开的滑动窗口中的最小请求数量，那么有19个请求都失败了断路器也不会打开，默认：20
+        sleepWindowInMilliseconds: 5000    # 熔断后过多少秒后尝试半开状态（请求重试），默认：5s
         errorThresholdPercentage: 50    # 触发熔断的失败率（异常率/阈值），默认：50%
+      fallback:
+        isolation:
+          semaphore:
+            maxConcurrentRequests: 50
+ribbon:
+  ConnectionTimeout: 30000
+  ReadTimeout: 30000
