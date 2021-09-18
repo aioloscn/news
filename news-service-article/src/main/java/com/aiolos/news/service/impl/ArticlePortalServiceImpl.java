@@ -137,7 +137,6 @@ public class ArticlePortalServiceImpl extends BaseService implements ArticlePort
                     .withQuery(QueryBuilders.matchQuery(searchTitleField, keyword))
                     .withHighlightFields(new HighlightBuilder.Field(searchTitleField).preTags(preTag).postTags(postTag))
                     .withPageable(pageable)
-                    .withSort(SortBuilders.fieldSort("_id").order(SortOrder.DESC))
                     .build();
 
             pagedArticle = elasticsearchTemplate.queryForPage(query, ArticleEO.class, new SearchResultMapper() {
