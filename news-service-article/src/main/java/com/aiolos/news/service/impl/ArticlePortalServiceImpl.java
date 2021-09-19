@@ -105,6 +105,8 @@ public class ArticlePortalServiceImpl extends BaseService implements ArticlePort
 
     @Override
     public PagedResult queryIndexArticleESList(String keyword, Integer category, Integer page, Integer pageSize) {
+
+        Integer current = page;
         /**
          * 1. 首页默认查询，不带参数
          * 2. 按照文章分类查询
@@ -189,7 +191,7 @@ public class ArticlePortalServiceImpl extends BaseService implements ArticlePort
             articleList.add(article);
         });
 
-        IPage<Article> articleIPage = new Page<>();
+        IPage<Article> articleIPage = new Page<>(current, pageSize);
         articleIPage.setRecords(articleList);
         articleIPage.setCurrent(++page);
         articleIPage.setPages(pagedArticle.getTotalPages());
