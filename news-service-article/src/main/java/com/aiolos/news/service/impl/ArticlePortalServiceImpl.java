@@ -130,11 +130,16 @@ public class ArticlePortalServiceImpl extends BaseService implements ArticlePort
 
         // 关键字搜索高亮展示
         String searchTitleField = "title";
-        if (StringUtils.isNotBlank(keyword) && category == null) {
+        if (StringUtils.isNotBlank(keyword)) {
             String preTag = "<font color='red'>";
             String postTag = "</font>";
+            BoolQueryBuilder boolQueryBuilder = new BoolQueryBuilder();
+            boolQueryBuilder.must(QueryBuilders.matchQuery(searchTitleField, keyword));
+            if (category != null) {
+                boolQueryBuilder.must(QueryBuilders.termQuery("categoryId", category));
+            }
             SearchQuery query = new NativeSearchQueryBuilder()
-                    .withQuery(QueryBuilders.matchQuery(searchTitleField, keyword))
+                    .withQuery(boolQueryBuilder)
                     .withHighlightFields(new HighlightBuilder.Field(searchTitleField).preTags(preTag).postTags(postTag))
                     .withPageable(pageable)
                     .build();
