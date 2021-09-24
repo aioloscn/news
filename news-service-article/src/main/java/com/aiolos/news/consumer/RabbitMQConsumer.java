@@ -40,6 +40,7 @@ public class RabbitMQConsumer extends BaseService {
             BeanUtil.copyProperties(bo, newArticleBO);
             Category category = new Category();
             BeanUtil.copyProperties(bo, category);
+            log.info("rabbitmq接收到定时任务数据，category id: {}", category.getId());
             if (newArticleBO == null || category == null) {
                 log.error("从ES同步新闻到数据库失败，对象为空，丢弃消息");
                 throw new MessageConversionException(ErrorEnum.ARTICLE_CREATE_FAILED.getErrMsg());

@@ -126,7 +126,7 @@ public class ArticlePortalServiceImpl extends BaseService implements ArticlePort
         }
         if (StringUtils.isBlank(keyword) && category != null) {
             SearchQuery query = new NativeSearchQueryBuilder().withQuery(QueryBuilders.termQuery("categoryId", category))
-                    .withSort(SortBuilders.fieldSort("_id").order(SortOrder.DESC)).build();
+                    .withPageable(pageable).withSort(SortBuilders.fieldSort("_id").order(SortOrder.DESC)).build();
             pagedArticle = elasticsearchTemplate.queryForPage(query, ArticleEO.class);
         }
 
