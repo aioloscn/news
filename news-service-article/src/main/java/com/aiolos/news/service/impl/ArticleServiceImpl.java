@@ -473,6 +473,7 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
             bo.setId(category.getId());
             bo.setName(category.getName());
             bo.setTagColor(category.getTagColor());
+            log.info("组装完数据交给rabbitmq去上传新闻文章，category id: {}", category.getId());
             rabbitTemplate.convertAndSend(RabbitMQConfig.EXCHANGE_ARTICLE, "article.insert", JsonUtils.objectToJson(bo));
         }
     }
