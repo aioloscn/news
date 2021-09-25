@@ -424,8 +424,10 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
             // 从redis查看文章类型是否存在，不存在则创建
             String categoryStr = eo.getPayload().getCategory().trim();
             log.info("categoryStr: {}", categoryStr);
-            if (StringUtils.isBlank(categoryStr))
+            if (StringUtils.isBlank(categoryStr)) {
+                redis.set(ES_NEW_ID + ":" + newId, newId);
                 return;
+            }
 
             Set<String> categorySet = redis.keys(REDIS_ALL_CATEGORY + ":*");
             Category categoryInRedis;
