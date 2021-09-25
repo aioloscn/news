@@ -29,6 +29,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.http.HttpStatus;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.sort.SortBuilders;
 import org.elasticsearch.search.sort.SortOrder;
@@ -422,7 +423,8 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
                 continue;
 
             // 从redis查看文章类型是否存在，不存在则创建
-            String categoryStr = eo.getPayload().getCategory();
+            String categoryStr = eo.getPayload().getCategory().trim();
+            log.info("categoryStr: {}", categoryStr);
             Set<String> categorySet = redis.keys(REDIS_ALL_CATEGORY + ":*");
             Category categoryInRedis;
             // 用于保存到redis和传给rabbitmq
@@ -447,7 +449,7 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
                 try {
                     // 保存文章分类，返回主键，主键保存到redis，下次就不用保存了
                     CommonResponse resp = categoryMicroservice.saveOrUpdateCategory(saveCategoryBO);
-                    if (resp != null && resp.getData() != null) {
+                    if (resp != null && resp.getData() != null && resp.getCode() == HttpStatus.SC_OK) {
                         Integer id = (Integer) resp.getData();
                         newArticleBO.setCategoryId(id);
                         category = new Category();
@@ -455,6 +457,8 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
                         category.setName(categoryStr);
                         category.setTagColor(saveCategoryBO.getTagColor());
                         redis.set(REDIS_ALL_CATEGORY + ":" + id, JsonUtils.objectToJson(category), REDIS_ALL_CATEGORY_TIME_OUT);
+                    } else {
+                        log.info("保存文章分类失败，saveCategoryBO: {}", JsonUtils.objectToJson(saveCategoryBO));
                     }
                 } catch (CustomizedException e) {
                     log.error("保存爬虫数据时新增文章分类失败");
@@ -474,7 +478,7 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
             bo.setId(category.getId());
             bo.setName(category.getName());
             bo.setTagColor(category.getTagColor());
-            log.info("组装完数据交给rabbitmq去上传新闻文章，category id: {}", category.getId());
+            log.info("组装完数据交给rabbitmq去上传新闻文章，category: {}", JsonUtils.objectToJson(category));
             rabbitTemplate.convertAndSend(RabbitMQConfig.EXCHANGE_ARTICLE, "article.insert", JsonUtils.objectToJson(bo));
         }
     }
