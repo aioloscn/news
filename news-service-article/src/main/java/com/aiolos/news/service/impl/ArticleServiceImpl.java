@@ -462,10 +462,12 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
                         category.setTagColor(saveCategoryBO.getTagColor());
                         redis.set(REDIS_ALL_CATEGORY + ":" + id, JsonUtils.objectToJson(category), REDIS_ALL_CATEGORY_TIME_OUT);
                     } else {
-                        log.info("保存文章分类失败，saveCategoryBO: {}", JsonUtils.objectToJson(saveCategoryBO));
+                        log.info("保存文章分类失败，msg: {}，saveCategoryBO: {}", resp.getMsg(), JsonUtils.objectToJson(saveCategoryBO));
+                        redis.set(ES_NEW_ID + ":" + newId, newId);
                     }
                 } catch (CustomizedException e) {
                     log.error("保存爬虫数据时新增文章分类失败");
+                    redis.set(ES_NEW_ID + ":" + newId, newId);
                     e.printStackTrace();
                 }
             }
