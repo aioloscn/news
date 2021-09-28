@@ -4,8 +4,8 @@ import com.aiolos.news.common.response.CommonResponse;
 import com.aiolos.news.common.exception.CustomizedException;
 import com.aiolos.news.config.MyServiceList;
 import com.aiolos.news.controller.user.fallbacks.UserControllerFallbackFactory;
+import com.aiolos.news.pojo.AppUser;
 import com.aiolos.news.pojo.bo.UpdateUserInfoBO;
-import com.aiolos.news.pojo.vo.UserBasicInfoVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -39,5 +39,5 @@ public interface UserControllerApi {
     CommonResponse queryByIds(@RequestParam String userIds);
 
     @GetMapping("/getUserByName")
-    UserBasicInfoVO getUserByName(@RequestParam String nickname);
+    AppUser getUserByName(@RequestParam String nickname);
 }

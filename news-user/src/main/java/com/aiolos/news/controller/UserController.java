@@ -1,6 +1,5 @@
 package com.aiolos.news.controller;
 
-import cn.hutool.core.bean.BeanUtil;
 import com.aiolos.news.common.response.CommonResponse;
 import com.aiolos.news.common.enums.ErrorEnum;
 import com.aiolos.news.common.exception.CustomizedException;
@@ -11,7 +10,6 @@ import com.aiolos.news.pojo.bo.UpdateUserInfoBO;
 import com.aiolos.news.pojo.vo.UserAccountInfoVO;
 import com.aiolos.news.pojo.vo.UserBasicInfoVO;
 import com.aiolos.news.service.UserService;
-import com.netflix.hystrix.contrib.javanica.annotation.DefaultProperties;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -110,11 +108,8 @@ public class UserController extends BaseController implements UserControllerApi 
     }
 
     @Override
-    public UserBasicInfoVO getUserByName(String nickname) {
-        AppUser user = userService.getUserByName(nickname);
-        UserBasicInfoVO userBasicInfoVO = new UserBasicInfoVO();
-        BeanUtil.copyProperties(user, userBasicInfoVO);
-        return userBasicInfoVO;
+    public AppUser getUserByName(String nickname) {
+        return userService.getUserByName(nickname);
     }
 
     private UserBasicInfoVO getUserBasicInfoVO(String userId) {

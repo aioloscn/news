@@ -72,4 +72,39 @@ public class SMSUtils {
             e.printStackTrace();
         }
     }
+
+    public void sendNotice(String mobile, Integer status, String content) throws CustomizedException {
+
+        log.info("Enter the method sendSMS, parameter status: {}, content: {}", status, content);
+
+        if (StringUtils.isBlank(mobile)) {
+            throw new CustomizedException(ErrorEnum.PHONE_INCORRECT);
+        }
+
+        DefaultProfile profile = DefaultProfile.getProfile("cn-hangzhou",
+                aliyunResource.getAccessKeyID(),
+                aliyunResource.getAccessKeySecret());
+        IAcsClient client = new DefaultAcsClient(profile);
+
+        CommonRequest request = new CommonRequest();
+        request.setSysMethod(MethodType.POST);
+        request.setSysDomain("dysmsapi.aliyuncs.com");
+        request.setSysVersion("2017-05-25");
+        request.setSysAction("SendSms");
+        request.putQueryParameter("RegionId", "cn-hangzhou");
+
+        request.putQueryParameter("PhoneNumbers", mobile);
+        request.putQueryParameter("SignName", "i校易点");
+        request.putQueryParameter("TemplateCode", "SMS_225390467");
+        request.putQueryParameter("TemplateParam", "{\"status\":\"" + status + "\", \"content\":\"" + content + "\"}");
+
+        try {
+            CommonResponse response = client.getCommonResponse(request);
+            log.info("aliyun sms response: " + response.getData());
+        } catch (ServerException e) {
+            e.printStackTrace();
+        } catch (ClientException e) {
+            e.printStackTrace();
+        }
+    }
 }

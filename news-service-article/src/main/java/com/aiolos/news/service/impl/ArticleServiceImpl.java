@@ -4,15 +4,13 @@ import cn.hutool.core.bean.BeanUtil;
 import com.aiolos.news.common.enums.*;
 import com.aiolos.news.common.exception.CustomizedException;
 import com.aiolos.news.common.response.CommonResponse;
-import com.aiolos.news.common.utils.AliTextReviewUtils;
-import com.aiolos.news.common.utils.DateUtils;
-import com.aiolos.news.common.utils.JsonUtils;
-import com.aiolos.news.common.utils.PagedResult;
+import com.aiolos.news.common.utils.*;
 import com.aiolos.news.config.RabbitMQConfig;
 import com.aiolos.news.config.RabbitMQDelayQueueConfig;
 import com.aiolos.news.controller.admin.CategoryMngControllerApi;
 import com.aiolos.news.controller.user.UserControllerApi;
 import com.aiolos.news.dao.ArticleDao;
+import com.aiolos.news.pojo.AppUser;
 import com.aiolos.news.pojo.Article;
 import com.aiolos.news.pojo.Category;
 import com.aiolos.news.pojo.bo.NewArticleAndCategoryBO;
@@ -20,7 +18,6 @@ import com.aiolos.news.pojo.bo.NewArticleBO;
 import com.aiolos.news.pojo.bo.SaveCategoryBO;
 import com.aiolos.news.pojo.eo.ArticleEO;
 import com.aiolos.news.pojo.eo.DatingNewsEO;
-import com.aiolos.news.pojo.vo.UserBasicInfoVO;
 import com.aiolos.news.service.ArticleService;
 import com.aiolos.news.service.BaseService;
 import com.aiolos.news.utils.ArticleUtil;
@@ -64,6 +61,8 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
 
     private final ArticleUtil articleUtil;
 
+    private final SMSUtils smsUtils;
+
     private final ElasticsearchTemplate elasticsearchTemplate;
 
     private final CategoryMngControllerApi categoryMicroservice;
@@ -71,10 +70,11 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
     private final UserControllerApi userMicroservice;
 
     public ArticleServiceImpl(ArticleDao articleDao, AliTextReviewUtils aliTextReviewUtils, ArticleUtil articleUtil,
-                              ElasticsearchTemplate elasticsearchTemplate, CategoryMngControllerApi categoryMicroservice, UserControllerApi userMicroservice) {
+                              SMSUtils smsUtils, ElasticsearchTemplate elasticsearchTemplate, CategoryMngControllerApi categoryMicroservice, UserControllerApi userMicroservice) {
         this.articleDao = articleDao;
         this.aliTextReviewUtils = aliTextReviewUtils;
         this.articleUtil = articleUtil;
+        this.smsUtils = smsUtils;
         this.elasticsearchTemplate = elasticsearchTemplate;
         this.categoryMicroservice = categoryMicroservice;
         this.userMicroservice = userMicroservice;
@@ -410,7 +410,7 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
         newArticleBO.setIsAppoint(ArticleAppointType.IMMEDIATELY.getType());
 
         // 获取发布者的Id，这里默认为网站作者
-        UserBasicInfoVO user = userMicroservice.getUserByName("Aiolos");
+        AppUser user = userMicroservice.getUserByName("Aiolos");
         if (user != null)
             newArticleBO.setPublishUserId(user.getId());
 
@@ -464,6 +464,7 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
                     } else {
                         log.info("保存文章分类失败，msg: {}，saveCategoryBO: {}", resp.getMsg(), JsonUtils.objectToJson(saveCategoryBO));
                         redis.set(ES_NEW_ID + ":" + newId, newId);
+                        smsUtils.sendNotice(user.getMobile(), resp.getCode(), resp.getMsg());
                     }
                 } catch (CustomizedException e) {
                     log.error("保存爬虫数据时新增文章分类失败");

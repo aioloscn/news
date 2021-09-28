@@ -4,8 +4,8 @@ import com.aiolos.news.common.response.CommonResponse;
 import com.aiolos.news.common.enums.ErrorEnum;
 import com.aiolos.news.common.exception.CustomizedException;
 import com.aiolos.news.controller.user.UserControllerApi;
+import com.aiolos.news.pojo.AppUser;
 import com.aiolos.news.pojo.bo.UpdateUserInfoBO;
-import com.aiolos.news.pojo.vo.UserBasicInfoVO;
 import feign.hystrix.FallbackFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -62,7 +62,7 @@ public class UserControllerFallbackFactory implements FallbackFactory<UserContro
             }
 
             @Override
-            public UserBasicInfoVO getUserByName(String nickname) {
+            public AppUser getUserByName(String nickname) {
                 return null;
             }
         };
