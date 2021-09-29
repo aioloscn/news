@@ -103,7 +103,7 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
             article.setPublishTime(new Date());
         }
 
-        // 通过阿里智能AI实现对文章文本的自动检测
+        // 通过阿里智能AI实现对文章文本的自动检测，服务欠费停机时会请求失败默认返回空，标记为人工审核
         String reviewTextResult = aliTextReviewUtils.reviewTextContent(newArticleBO.getContent());
         if (StringUtils.isBlank(reviewTextResult)) {
             // 修改标记为需要人工审核
@@ -464,7 +464,12 @@ public class ArticleServiceImpl extends BaseService implements ArticleService {
                     } else {
                         log.info("保存文章分类失败，msg: {}，saveCategoryBO: {}", resp.getMsg(), JsonUtils.objectToJson(saveCategoryBO));
                         redis.set(ES_NEW_ID + ":" + newId, newId);
-                        smsUtils.sendNotice(user.getMobile(), resp.getCode(), resp.getMsg());
+                        // 间隔6小时可以发一次警告
+                        boolean exist = redis.keyIsExist(NEWS_NOTICE);
+                        if (!exist) {
+                            smsUtils.sendNotice(user.getMobile(), resp.getCode(), resp.getMsg());
+                            redis.set(NEWS_NOTICE, resp.getMsg(), 3600 * 6);
+                        }
                     }
                 } catch (CustomizedException e) {
                     log.error("保存爬虫数据时新增文章分类失败");

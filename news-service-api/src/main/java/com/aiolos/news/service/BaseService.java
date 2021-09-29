@@ -45,6 +45,8 @@ public class BaseService {
 
     public static final String ES_NEW_ID = "es_new_id";
 
+    public static final String NEWS_NOTICE = "news_notice";
+
     public PagedResult setterPagedResult(IPage<?> page) {
 
         PagedResult pagedResult = new PagedResult();
