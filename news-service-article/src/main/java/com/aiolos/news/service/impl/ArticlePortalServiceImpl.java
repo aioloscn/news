@@ -336,9 +336,9 @@ public class ArticlePortalServiceImpl extends BaseService implements ArticlePort
     public ArticleDetailVO queryDetail(String articleId) {
         Article article = new Article();
         article.setId(articleId);
-        article.setIsAppoint(YesOrNo.NO.getType());
+//        article.setIsAppoint(YesOrNo.NO.getType());
         article.setIsDelete(YesOrNo.NO.getType());
-        article.setArticleStatus(ArticleReviewStatus.SUCCESS.getType());
+//        article.setArticleStatus(ArticleReviewStatus.SUCCESS.getType());
 
         QueryWrapper<Article> queryWrapper = new QueryWrapper<>(article);
         article = articleDao.selectOne(queryWrapper);
