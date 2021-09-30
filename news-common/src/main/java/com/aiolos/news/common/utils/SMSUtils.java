@@ -94,7 +94,7 @@ public class SMSUtils {
         request.putQueryParameter("RegionId", "cn-hangzhou");
 
         request.putQueryParameter("PhoneNumbers", mobile);
-        request.putQueryParameter("SignName", "i校易点");
+        request.putQueryParameter("SignName", "互联网资讯");
         request.putQueryParameter("TemplateCode", "SMS_225390467");
         request.putQueryParameter("TemplateParam", "{\"status\":\"" + status + "\", \"content\":\"" + content + "\"}");
 
