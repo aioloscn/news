@@ -12,13 +12,14 @@ public interface CommentService {
     /**
      * 保存评论信息
      * @param articleId 文章主键Id
-     * @param fatherId  该条评论的父级评论
+     * @param fatherId  该条评论的父级评论Id
+     * @param replyId   楼中楼评论Id
      * @param content   评论内容
      * @param userId    评论者
      * @param nickname  评论者昵称
      * @param userFace  评论者头像
      */
-    void createComment(String articleId, String fatherId, String content, String userId, String nickname, String userFace) throws CustomizedException;
+    void createComment(String articleId, String fatherId, String replyId, String content, String userId, String nickname, String userFace) throws CustomizedException;
 
     /**
      * 分页查询文章评论列表
