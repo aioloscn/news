@@ -46,7 +46,8 @@ public class CommentController extends BaseController implements CommentControll
         }
 
         // 2. 保存评论信息到数据库
-        commentService.createComment(commentReplyBO.getArticleId(), commentReplyBO.getFatherId(), commentReplyBO.getContent(), userId, nickname, userFace);
+        commentService.createComment(commentReplyBO.getArticleId(), commentReplyBO.getFatherId(), commentReplyBO.getReplyId(),
+                commentReplyBO.getContent(), userId, nickname, userFace);
         // TODO 评论保存到ES中
 
         // 评论数累加

@@ -23,6 +23,10 @@ public class CommentReplyBO {
     @NotBlank(message = "缺少文章相关信息")
     private String fatherId;
 
+    @ApiModelProperty(value = "所回复的评论Id", notes = "如果是一级评论则为0，主要用于记录楼中楼的评论Id", required = true)
+    @NotBlank(message = "缺少文章相关信息")
+    private String replyId;
+
     @ApiModelProperty(value = "评论者主键", required = true)
     @NotBlank(message = "当前用户信息不正确，请尝试重新登录")
     private String commentUserId;

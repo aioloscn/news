@@ -4,9 +4,10 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.io.Serializable;
 import java.util.Date;
 
-public class Comments {
+public class Comments implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "SELECT LAST_INSERT_ID()")
     private String id;
@@ -22,6 +23,12 @@ public class Comments {
      */
     @Column(name = "father_id")
     private String fatherId;
+
+    /**
+     * 所回复的评论id
+     */
+    @Column(name = "reply_id")
+    private String replyId;
 
     /**
      * 回复的那个文章id
@@ -69,6 +76,8 @@ public class Comments {
      */
     @Column(name = "create_time")
     private Date createTime;
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * @return id
@@ -118,6 +127,24 @@ public class Comments {
      */
     public void setFatherId(String fatherId) {
         this.fatherId = fatherId == null ? null : fatherId.trim();
+    }
+
+    /**
+     * 获取所回复的评论id
+     *
+     * @return reply_id - 所回复的评论id
+     */
+    public String getReplyId() {
+        return replyId;
+    }
+
+    /**
+     * 设置所回复的评论id
+     *
+     * @param replyId 所回复的评论id
+     */
+    public void setReplyId(String replyId) {
+        this.replyId = replyId == null ? null : replyId.trim();
     }
 
     /**
@@ -262,5 +289,28 @@ public class Comments {
      */
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", id=").append(id);
+        sb.append(", writerId=").append(writerId);
+        sb.append(", fatherId=").append(fatherId);
+        sb.append(", replyId=").append(replyId);
+        sb.append(", articleId=").append(articleId);
+        sb.append(", articleTitle=").append(articleTitle);
+        sb.append(", articleCover=").append(articleCover);
+        sb.append(", commentUserId=").append(commentUserId);
+        sb.append(", commentUserNickname=").append(commentUserNickname);
+        sb.append(", commentUserFace=").append(commentUserFace);
+        sb.append(", content=").append(content);
+        sb.append(", createTime=").append(createTime);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append("]");
+        return sb.toString();
     }
 }

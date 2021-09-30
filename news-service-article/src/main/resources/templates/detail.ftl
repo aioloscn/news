@@ -163,34 +163,51 @@
 
                                 <div class="comment-info-wrapper">
                                     <div class="publish-info">
-                                        <div><template>{{comment.commentUserNickname}}</template></div>
+                                        <div><a href="javascript:;"><template>{{comment.commentUserNickname}}</template></a></div>
                                         <div class="publish-date"><template>{{formatData(comment.createTime)}}</template></div>
                                     </div>
 
-                                    <!-- 回复的内容，如果判断是回复别人的留言，则再此引用一下 -->
-                                    <div class="quote-wrapper" v-show="comment.quoteUserNickname != null">
-                                        <span class="quote-content">
-                                            <!-- <span>回复“</span> -->
-                                            <span><strong><template>{{comment.quoteUserNickname}}</template></strong>：</span><span v-html="comment.quoteContent"></span>
-                                            <!-- <span>”</span> -->
-                                        </span>
-                                    </div>
-
-                                    <div class="blank-wrapper" v-show="comment.quoteUserNickname == null">
+                                    <div class="blank-wrapper" v-show="comment.commentSubVOs == ''">
                                     </div>
 
                                     <div class="publish-content" v-html="comment.content">
                                     </div>
-                                    
-                                    <div class="reply-wrapper" @click="doReply(comment.commentId)">
+
+                                    <!-- 回复的内容，如果判断是回复别人的留言，则再此引用一下 -->
+                                    <div class="quote-wrapper" v-show="comment.commentSubVOs != ''">
+                                        <div class="sub-comments-list" v-for="(subComment, idx) in comment.commentSubVOs" :key="idx">
+                                            <div class="single-comment-wrapper">
+                                                <img :src="subComment.commentUserFace" class="reply-user-face"/>
+                                            </div>
+                                            <div class="quote-content-wrapper">
+												<span class="quote-content">
+													<!-- <span>回复“</span> -->
+													<span><a href="javascript:;"><template>{{subComment.commentUserNickname}}</template></a>&nbsp;</span>
+													<span v-show="subComment.replyId != subComment.fatherId">回复&nbsp;<a href="javascript:;">@{{subComment.quoteUserNickname}}</a>&nbsp;:&nbsp;</span>
+													<span v-html="subComment.content"></span>
+                                                    <!-- <span>”</span> -->
+												</span>
+                                                <div class="quote-content-bottom" @click="doReply(comment.id, subComment.commentId, subComment.commentUserNickname)">
+                                                    <div class="reply-date"><template>{{formatData(subComment.createTime)}}</template></div>
+                                                    <div class="reply-wrapper">
+                                                        <img class="icon-reply"/>
+                                                        <!-- src="./img/icon-reply.png"  -->
+                                                        <div class="reply-words">回复</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="reply-wrapper" @click="doReply(comment.id, comment.id, comment.commentUserNickname)">
                                         <img class="icon-reply"/>
                                         <div class="reply-words">回复</div>
                                     </div>
 
                                     <!-- nowReplyingFatherCommentId: 根据当前用户正在回复的父commentId进行页面的留言看展示或隐藏 -->
-                                    <div class="reply-content-wrapper" v-show="nowReplyingFatherCommentId==comment.commentId">
-                                        <textarea :id="'reply-to-' + comment.commentId" class="reply-content"></textarea>
-                                        <button class="reply-btn" @click="replyToComment(comment.commentId)">回复</button>
+                                    <div class="reply-content-wrapper" v-show="nowReplyingFatherCommentId==comment.id">
+                                        <textarea :id="'reply-to-' + comment.id" class="reply-content" :placeholder="' 回复 @' + replyUserNickname + ' :'"></textarea>
+                                        <button class="reply-btn" @click="replyToComment(comment.id)">回复</button>
                                     </div>
                                 </div>
                             </div>
@@ -232,6 +249,8 @@
             el: "#detailContainer",
             data: {
                 nowReplyingFatherCommentId: 0,  // 根据当前用户正在回复的父commentId进行页面的留言看展示或隐藏
+                nowReplyingCommentId: 0,		// 楼中楼所回复的评论Id
+                replyUserNickname: "",			// 当前所要回复的用户昵称
                 userInfo: null,
 
                 articleId: "",
@@ -373,8 +392,6 @@
                                                                     "&page=" + page + 
                                                                     "&pageSize=" + pageSize)
                     .then(res => {
-                        console.log(JSON.stringify(res.data));
-
                         if (res.data.code == 200) {
                             var grid = res.data.data;
                             var commentList = grid.records;
@@ -394,12 +411,16 @@
                 },
 
                 // 点击回复出现回复框
-                doReply(fatherCommentId) {
+                doReply(fatherCommentId, replyCommentId, replyUserNickname) {
+                    console.log(fatherCommentId, replyCommentId)
                     // 如果用户点击的当前的评论回复id和nowReplyingFatherCommentId一致，则隐藏，如果不一致，则显示
-                    if (fatherCommentId == this.nowReplyingFatherCommentId) {
+                    if (fatherCommentId == this.nowReplyingFatherCommentId && replyCommentId == this.nowReplyingCommentId) {
                         this.nowReplyingFatherCommentId = 0;
+                        this.nowReplyingCommentId = 0;
                     } else {
                         this.nowReplyingFatherCommentId = fatherCommentId;
+                        this.nowReplyingCommentId = replyCommentId;
+                        this.replyUserNickname = replyUserNickname;
                     }
                 },
 
@@ -407,10 +428,13 @@
                 doComment(fatherCommentId) {
                     console.log(fatherCommentId);
                     var articleContent = $('#summernote').summernote('code');
-                    this.commentDisplay(fatherCommentId, articleContent);
+                    this.commentDisplay(fatherCommentId, 0, articleContent);
                 },
                 // 调用后端，留言保存
-                commentDisplay(fatherCommentId, articleContent) {
+                commentDisplay(fatherCommentId, replyCommentId, articleContent) {
+
+                    if (articleContent == '' || articleContent == '<p><br></p>')
+                        return;
                     
                     var me = this;
                     var utoken = app.getCookie("utoken");
@@ -419,6 +443,7 @@
                     var commentReplyBO = {
                         articleId: me.articleId,
                         fatherId: fatherCommentId,
+                        replyId: replyCommentId,
                         commentUserId: uid,
                         content: articleContent
                     };
@@ -441,14 +466,19 @@
                             // 清空评论框中内容
                             $('#summernote').summernote('reset');
                             $("#reply-to-" + fatherCommentId).val("");
+                            this.nowReplyingFatherCommentId = 0;
+                            this.nowReplyingCommentId = 0;
 
                             // 重新查询评论与评论数
-                            me.getAllComments(1, 10);
+                            me.getAllComments(this.page, this.pageSize);
                             me.getCommentCounts();
                         } else {
                             // layer.msg(res.data.msg);
                             layer.msg(JSON.stringify(res.data.data));
                         }
+                    })
+                    .catch(error => {
+                        layer.msg(error.response.data.msg)
                     });
                 },
                 // 用户回复其他用户的评论，点击后保存到后端
@@ -459,7 +489,7 @@
                     var content = $("#reply-to-" + fatherCommentId).val();
 
                     // console.log(content);
-                    this.commentDisplay(fatherCommentId, content);
+                    this.commentDisplay(this.nowReplyingFatherCommentId, this.nowReplyingCommentId, content);
                 },
 
                 // 获得所有文章领域

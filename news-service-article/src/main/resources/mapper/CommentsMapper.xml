@@ -8,6 +8,7 @@
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="writer_id" jdbcType="VARCHAR" property="writerId" />
     <result column="father_id" jdbcType="VARCHAR" property="fatherId" />
+      <result column="reply_id" jdbcType="VARCHAR" property="replyId" />
     <result column="article_id" jdbcType="VARCHAR" property="articleId" />
     <result column="article_title" jdbcType="VARCHAR" property="articleTitle" />
     <result column="article_cover" jdbcType="VARCHAR" property="articleCover" />
@@ -20,26 +21,43 @@
 
   <select id="queryArticleCommentList" resultType="com.aiolos.news.pojo.vo.CommentsVO">
     SELECT
+        c.id,
+        c.father_id as fatherId,
+        c.reply_id as replyId,
+        c.comment_user_id as commentUserId,
+        c.comment_user_nickname as commentUserNickname,
+        c.comment_user_face as commentUserFace,
+        c.article_id as articleId,
+        c.content as content,
+        c.create_time as createTime
+    FROM
+        comments c
+    WHERE
+        c.article_id = #{articleId}
+    ORDER BY
+        c.create_time
+    DESC
+  </select>
+
+    <select id="querySubCommentList" resultType="com.aiolos.news.pojo.vo.CommentSubVO">
+    SELECT
         c.id as commentId,
         c.father_id as fatherId,
+        c.reply_id as replyId,
         c.comment_user_id as commentUserId,
         c.comment_user_nickname as commentUserNickname,
         c.comment_user_face as commentUserFace,
         c.article_id as articleId,
         c.content as content,
         c.create_time as createTime,
-        f.comment_user_nickname as quoteUserNickname,
-        f.content as quoteContent
+        f.comment_user_nickname as quoteUserNickname
     FROM
         comments c
     LEFT JOIN
         comments f
     ON
-        c.father_id = f.id
+        c.reply_id = f.id
     WHERE
-        c.article_id = #{articleId}
-    ORDER BY
-        c.create_time
-    DESC
+        c.father_id = #{fatherId}
   </select>
 </mapper>
