@@ -31,7 +31,7 @@ public class BaseService {
     public RabbitTemplate rabbitTemplate;
 
     public static final String REDIS_ALL_CATEGORY = "redis_all_category";
-    public static final long REDIS_ALL_CATEGORY_TIME_OUT = 24 * 60 * 60;
+    public static final long REDIS_ALL_CATEGORY_TIME_OUT = 24 * 3600 * 7;
 
     public static final String REDIS_ARTICLE_READ_COUNTS = "redis_article_read_counts";
 
