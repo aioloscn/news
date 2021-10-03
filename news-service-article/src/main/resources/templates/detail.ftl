@@ -41,23 +41,15 @@
                     <div class="logo-wrapper" @click="goIndex()">
                         <img src="../img/news-logo.png" class="big-logo"/>
                     </div>
-
-                    <div class="menus">
-						<!-- single-selected -->
-						<div class="single-default" v-bind:class="{'single-selected': (cat.id==selectedCatId)}" v-for="(cat, index) in catList" v-key="index">
-							<!-- menu-selected -->
-							<a href="javascript:void(0);" class="white-header-left" style="text-decoration:none;" v-bind:class="{'menu-selected': (cat.id==selectedCatId)}" @click="queryByCategory(cat.id)"><template>{{cat.name}}</template></a>
-						</div>
-					</div>
                 </div>
 
                 <div class="right-part">
-					<!-- 如果登录则不显示 -->
-					<block v-if="userInfo == null">
-						<a href="javascript:(0);" @click="doLogin()" target="_blank" class="white-header-right-start">登录 | 注册</a>
-					</block>
+                    <a href="javascript:(0);" @click="goAdminCenter()" target="_blank" class="white-header-right">管理平台</a>
 					<a href="javascript:(0);" @click="goWriterCenter()" target="_blank" class="white-header-right">作家中心</a>
-					<a href="javascript:(0);" @click="goAdminCenter()" target="_blank" class="white-header-right" style="margin-right: 20px;">管理平台</a>
+                    <!-- 如果登录则不显示 -->
+                    <block v-if="userInfo == null">
+                        <a href="javascript:(0);" @click="doLogin()" target="_blank" class="white-header-right-start">登录 | 注册</a>
+                    </block>
 				</div>
             </div>
         </div>
