@@ -31,8 +31,8 @@ public class CommentReplyBO {
     @NotBlank(message = "当前用户信息不正确，请尝试重新登录")
     private String commentUserId;
 
-    @ApiModelProperty(value = "留言内容", notes = "内容长度不能超过100字", required = true)
+    @ApiModelProperty(value = "留言内容", notes = "内容长度不宜过长", required = true)
     @NotBlank(message = "留言内容不能为空")
-    @Length(max = 100, message = "留言内容不能超过100字")
+    @Length(max = 20000, message = "留言内容过长")
     private String content;
 }
