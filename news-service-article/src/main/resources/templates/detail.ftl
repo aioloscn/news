@@ -465,8 +465,8 @@
                             me.getAllComments(this.page, this.pageSize);
                             me.getCommentCounts();
                         } else {
-                            // layer.msg(res.data.msg);
-                            layer.msg(JSON.stringify(res.data.data));
+                            layer.msg(res.data.msg);
+                            // layer.msg(JSON.stringify(res.data.data));
                         }
                     })
                     .catch(error => {
