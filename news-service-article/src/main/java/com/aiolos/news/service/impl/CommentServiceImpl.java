@@ -92,6 +92,7 @@ public class CommentServiceImpl extends BaseService implements CommentService {
         IPage<Comments> commentsIPage = new Page<>(page, pageSize);
         QueryWrapper queryWrapper = new QueryWrapper();
         queryWrapper.eq("writer_id", writerId);
+        queryWrapper.orderByDesc("create_time");
         commentsIPage = commentsDao.selectPage(commentsIPage, queryWrapper);
         return setterPagedResult(commentsIPage);
     }
