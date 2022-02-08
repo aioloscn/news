@@ -37,5 +37,5 @@ public interface FriendLinkControllerApi {
 
     @ApiOperation(value = "接收woocommerce的消息")
     @PostMapping("/receive")
-    void productsReceive(@RequestBody JSONObject data, HttpServletRequest request);
+    void productsReceive(JSONObject data, HttpServletRequest request);
 }
