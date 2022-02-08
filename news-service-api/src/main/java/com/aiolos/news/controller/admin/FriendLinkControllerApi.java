@@ -35,7 +35,11 @@ public interface FriendLinkControllerApi {
     @GetMapping("/portal/list")
     CommonResponse queryPortalAllFriendLinkList();
 
-    @ApiOperation(value = "接收woocommerce的消息")
-    @PostMapping("/receive")
-    void productsReceive(JSONObject data, HttpServletRequest request);
+    @ApiOperation(value = "接收woocommerce product webhook的消息")
+    @PostMapping("/receive/product")
+    void productsReceive(@RequestBody JSONObject data, HttpServletRequest request);
+
+    @ApiOperation(value = "接收woocommerce order webhook的消息")
+    @PostMapping("/receive/order")
+    void ordersReceive(Integer webhookId, HttpServletRequest request);
 }
