@@ -6,12 +6,16 @@ import com.aiolos.news.controller.admin.FriendLinkControllerApi;
 import com.aiolos.news.pojo.bo.SaveFriendLinkBO;
 import com.aiolos.news.pojo.mo.FriendLinkMO;
 import com.aiolos.news.service.FriendLinkService;
+import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.Date;
+import java.util.Enumeration;
 
 /**
  * @author Aiolos
@@ -63,5 +67,18 @@ public class FriendLinkController extends BaseController implements FriendLinkCo
 
         log.info("Enter the method admin/friendLinkMng/portal/list");
         return CommonResponse.ok(friendLinkService.queryPortalAllFriendLinkList());
+    }
+
+    @Override
+    public void productsReceive(@RequestBody JSONObject data, HttpServletRequest request) {
+        log.info("woocommerce data: {}", data);
+        System.out.println("woocommerce data: " + data);
+        Enumeration<String> headerNames = request.getHeaderNames();
+        while (headerNames.hasMoreElements()) {
+            String key = headerNames.nextElement();
+            String value = request.getHeader(key);
+            System.out.println(key + ": " + value);
+            log.info("{}: {}", key, value);
+        }
     }
 }

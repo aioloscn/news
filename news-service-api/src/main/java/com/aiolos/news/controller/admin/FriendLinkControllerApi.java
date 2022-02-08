@@ -3,10 +3,12 @@ package com.aiolos.news.controller.admin;
 import com.aiolos.news.common.response.CommonResponse;
 import com.aiolos.news.common.exception.CustomizedException;
 import com.aiolos.news.pojo.bo.SaveFriendLinkBO;
+import com.alibaba.fastjson.JSONObject;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 /**
@@ -32,4 +34,8 @@ public interface FriendLinkControllerApi {
     @ApiOperation(value = "门户端查询友情链接列表", notes = "门户端查询友情链接列表", httpMethod = "GET")
     @GetMapping("/portal/list")
     CommonResponse queryPortalAllFriendLinkList();
+
+    @ApiOperation(value = "接收woocommerce的消息")
+    @PostMapping("/receive")
+    void productsReceive(@RequestBody JSONObject data, HttpServletRequest request);
 }
