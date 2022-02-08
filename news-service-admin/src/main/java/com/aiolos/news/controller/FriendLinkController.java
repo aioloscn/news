@@ -79,15 +79,4 @@ public class FriendLinkController extends BaseController implements FriendLinkCo
             log.info("{}: {}", key, value);
         }
     }
-
-    @Override
-    public void ordersReceive(Integer webhookId, HttpServletRequest request) {
-        log.info("woocommerce data: {}", webhookId);
-        Enumeration<String> headerNames = request.getHeaderNames();
-        while (headerNames.hasMoreElements()) {
-            String key = headerNames.nextElement();
-            String value = request.getHeader(key);
-            log.info("{}: {}", key, value);
-        } 
-    }
 }
