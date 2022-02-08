@@ -70,14 +70,12 @@ public class FriendLinkController extends BaseController implements FriendLinkCo
     }
 
     @Override
-    public void productsReceive(@RequestBody JSONObject data, HttpServletRequest request) {
+    public void productsReceive(JSONObject data, HttpServletRequest request) {
         log.info("woocommerce data: {}", data);
-        System.out.println("woocommerce data: " + data);
         Enumeration<String> headerNames = request.getHeaderNames();
         while (headerNames.hasMoreElements()) {
             String key = headerNames.nextElement();
             String value = request.getHeader(key);
-            System.out.println(key + ": " + value);
             log.info("{}: {}", key, value);
         }
     }
