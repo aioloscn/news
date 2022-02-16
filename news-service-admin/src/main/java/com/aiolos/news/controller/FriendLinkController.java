@@ -4,6 +4,7 @@ import com.aiolos.news.common.response.CommonResponse;
 import com.aiolos.news.common.exception.CustomizedException;
 import com.aiolos.news.controller.admin.FriendLinkControllerApi;
 import com.aiolos.news.pojo.bo.SaveFriendLinkBO;
+import com.aiolos.news.pojo.bo.WooCommerceShopAuthBO;
 import com.aiolos.news.pojo.mo.FriendLinkMO;
 import com.aiolos.news.service.FriendLinkService;
 import com.alibaba.fastjson.JSONObject;
@@ -72,6 +73,17 @@ public class FriendLinkController extends BaseController implements FriendLinkCo
     @Override
     public void productsReceive(JSONObject data, HttpServletRequest request) {
         log.info("woocommerce data: {}", data);
+        Enumeration<String> headerNames = request.getHeaderNames();
+        while (headerNames.hasMoreElements()) {
+            String key = headerNames.nextElement();
+            String value = request.getHeader(key);
+            log.info("{}: {}", key, value);
+        }
+    }
+
+    @Override
+    public void callback(WooCommerceShopAuthBO shopAuthBO, HttpServletRequest request) {
+        log.info("woocommerce data: {}", shopAuthBO);
         Enumeration<String> headerNames = request.getHeaderNames();
         while (headerNames.hasMoreElements()) {
             String key = headerNames.nextElement();

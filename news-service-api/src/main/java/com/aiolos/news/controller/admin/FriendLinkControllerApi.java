@@ -3,6 +3,7 @@ package com.aiolos.news.controller.admin;
 import com.aiolos.news.common.response.CommonResponse;
 import com.aiolos.news.common.exception.CustomizedException;
 import com.aiolos.news.pojo.bo.SaveFriendLinkBO;
+import com.aiolos.news.pojo.bo.WooCommerceShopAuthBO;
 import com.alibaba.fastjson.JSONObject;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -38,4 +39,8 @@ public interface FriendLinkControllerApi {
     @ApiOperation(value = "接收woocommerce的消息")
     @PostMapping("/receive")
     void productsReceive(@RequestBody JSONObject data, HttpServletRequest request);
+
+    @ApiOperation(value = "接收woocommerce回调消息")
+    @PostMapping("/callback")
+    void callback(@RequestBody WooCommerceShopAuthBO shopAuthBO, HttpServletRequest request);
 }
