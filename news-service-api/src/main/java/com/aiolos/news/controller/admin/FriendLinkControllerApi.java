@@ -42,5 +42,5 @@ public interface FriendLinkControllerApi {
 
     @ApiOperation(value = "接收woocommerce回调消息")
     @PostMapping("/callback")
-    void callback(@RequestBody WooCommerceShopAuthBO shopAuthBO, HttpServletRequest request);
+    void callback(@RequestBody JSONObject data, HttpServletRequest request);
 }

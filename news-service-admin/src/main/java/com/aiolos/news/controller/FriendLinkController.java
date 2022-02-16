@@ -7,10 +7,10 @@ import com.aiolos.news.pojo.bo.SaveFriendLinkBO;
 import com.aiolos.news.pojo.bo.WooCommerceShopAuthBO;
 import com.aiolos.news.pojo.mo.FriendLinkMO;
 import com.aiolos.news.service.FriendLinkService;
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -82,8 +82,10 @@ public class FriendLinkController extends BaseController implements FriendLinkCo
     }
 
     @Override
-    public void callback(WooCommerceShopAuthBO shopAuthBO, HttpServletRequest request) {
-        log.info("woocommerce data: {}", shopAuthBO);
+    public void callback(JSONObject data, HttpServletRequest request) {
+        log.info("woocommerce data: {}", data);
+        WooCommerceShopAuthBO wooCommerceShopAuthBO = data.toJavaObject(WooCommerceShopAuthBO.class);
+        log.info("woocommerce data to json string: {}", JSON.toJSONString(wooCommerceShopAuthBO));
         Enumeration<String> headerNames = request.getHeaderNames();
         while (headerNames.hasMoreElements()) {
             String key = headerNames.nextElement();
